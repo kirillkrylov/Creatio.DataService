@@ -13,12 +13,16 @@ namespace TestDataService
         {
             Utils utils = Utils.Instance;
             utils.SetCredentials("Kirill", "111", "https://023879-studio.creatio.com");
+
             if (await utils.LoginAsync()) {
 
                 Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
 
                 var ContactId = utils.CurrentUser.Contact.Value;
                 Console.WriteLine($"Your ContactId is: {ContactId}");
+
+                utils.WebSocketMessageReceived += WebSocketMessageReceived;
+
 
                 SelectQuery select = BuildContactQuery();
                 string jsonRequest = JsonConvert.SerializeObject(select);
@@ -39,6 +43,15 @@ namespace TestDataService
             }
 
         }
+
+        private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"You've got message: { e.MessageBody}");
+            Console.ResetColor();
+        }
+
         private static SelectQuery BuildContactQuery() {
             SelectQuery contactQuery = new SelectQuery()
             {
