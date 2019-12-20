@@ -10,34 +10,45 @@ Install-Package Creatio.DataService
 ## Usage
 ```C#
 static async Task Main()
-    {
-        Utils utils = Utils.Instance;
-        utils.SetCredentials("Kirill", "111", "https://023879-studio.creatio.com");
-        if (await utils.LoginAsync()) {
+{
+    Utils utils = Utils.Instance;
+    utils.SetCredentials("Kirill", "111", "https://023879-studio.creatio.com");
+    if (await utils.LoginAsync()) {
 
-            Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
+        Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
 
-            var ContactId = utils.CurrentUser.Contact.Value;
-            Console.WriteLine($"Your ContactId is: {ContactId}");
+        var ContactId = utils.CurrentUser.Contact.Value;
+        Console.WriteLine($"Your ContactId is: {ContactId}");
 
-            SelectQuery select = BuildContactQuery();
-            string jsonRequest = JsonConvert.SerializeObject(select);
-            RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
-            DataTable dt = utils.ConvertResponseToDataTable(result.Result);
+        utils.WebSocketMessageReceived += WebSocketMessageReceived;
 
-            Guid.TryParse(ContactId, out Guid contactIdGuid);
+        SelectQuery select = BuildContactQuery();
+        string jsonRequest = JsonConvert.SerializeObject(select);
+        RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
+        DataTable dt = utils.ConvertResponseToDataTable(result.Result);
 
-            string expression = $"Id = '{contactIdGuid}'";
-            DataRow[] row = dt.Select(expression);
-            if (row.Length > 0)
-                Console.WriteLine($"\tYour Name is: \t{row[0]["Name"]}");
-                Console.WriteLine($"\tYour Email is: \t{row[0]["Email"]}");
-                Console.WriteLine($"\tYour Phone is: \t{row[0]["Phone"]}");
-                Console.WriteLine($"\tYour Account is: {row[0]["Account"]}");
+        Guid.TryParse(ContactId, out Guid contactIdGuid);
 
-            Console.ReadLine();
-        }
+        string expression = $"Id = '{contactIdGuid}'";
+        DataRow[] row = dt.Select(expression);
+        if (row.Length > 0)
+            Console.WriteLine($"\tYour Name is: \t{row[0]["Name"]}");
+            Console.WriteLine($"\tYour Email is: \t{row[0]["Email"]}");
+            Console.WriteLine($"\tYour Phone is: \t{row[0]["Phone"]}");
+            Console.WriteLine($"\tYour Account is: {row[0]["Account"]}");
+
+        Console.ReadLine();
     }
+}
+
+private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
+{
+    Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine($"You've got message: { e.MessageBody}");
+    Console.ResetColor();
+}
+
 ```
 ### Build Select Query
 ```C#
