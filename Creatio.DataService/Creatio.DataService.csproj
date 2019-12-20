@@ -9,14 +9,24 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>accelerate blue.png</PackageIcon>
     <PackageIconUrl />
-    <RepositoryUrl>kirillkrylov/Creatio.DataService</RepositoryUrl>
+    <RepositoryUrl>https://github.com/kirillkrylov/Creatio.DataService/blob/master/README.md</RepositoryUrl>
+    <PackageTags>Creatio, DataService</PackageTags>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <NeutralLanguage>aa-ET</NeutralLanguage>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.17" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Include="readme.txt">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Pictures\accelerate blue.png">
       <Pack>True</Pack>
