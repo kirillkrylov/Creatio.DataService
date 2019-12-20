@@ -7,14 +7,14 @@
     <Company>Creatio</Company>
     <Description>Allows CRUD operation via DataService</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageIcon>accelerate blue.png</PackageIcon>
+    <PackageIcon>Accelerate.png</PackageIcon>
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/kirillkrylov/Creatio.DataService/blob/master/README.md</RepositoryUrl>
     <PackageTags>Creatio, DataService</PackageTags>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
     <FileVersion>1.0.1.0</FileVersion>
     <NeutralLanguage>aa-ET</NeutralLanguage>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +28,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Pictures\accelerate blue.png">
+    <None Include="..\..\..\..\Pictures\Accelerate.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
