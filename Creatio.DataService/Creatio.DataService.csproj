@@ -9,6 +9,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>accelerate blue.png</PackageIcon>
     <PackageIconUrl />
+    <RepositoryUrl>kirillkrylov/Creatio.DataService</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
