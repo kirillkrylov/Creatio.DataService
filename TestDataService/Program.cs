@@ -39,7 +39,6 @@ namespace TestDataService
             }
 
         }
-
         private static SelectQuery BuildContactQuery() {
             SelectQuery contactQuery = new SelectQuery()
             {
