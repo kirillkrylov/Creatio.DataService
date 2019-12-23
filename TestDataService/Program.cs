@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Creatio.DataService;
-using Creatio.DataService.Attributes;
 using Newtonsoft.Json;
 using TestDataService.Model;
 
@@ -16,19 +15,13 @@ namespace TestDataService
             Utils utils = Utils.Instance;
             utils.SetCredentials("Kirill", "111", "https://023879-studio.creatio.com");
 
-            //Contact contact = new Contact();
-            //List<Contact> contacts = utils.Select<Contact>();
-
             if (await utils.LoginAsync()) {
 
                 Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
                 var ContactId = utils.CurrentUser.Contact.Value;
-                //Console.WriteLine($"Your ContactId is: {ContactId}");
-
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
                 
                 await ContactById(ContactId);
-
                 //await AllContacts();
                 //await AdHocQuery();
             }
@@ -55,7 +48,8 @@ namespace TestDataService
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine();
             Console.WriteLine("----------- Ad Hoc Select Query-----------");
-            foreach (DataRow dr in dt.Rows) {
+            foreach (DataRow dr in dt.Rows) 
+            {
                 Console.WriteLine($"Id: {dr["Id"]}");
                 Console.WriteLine($"Name: {dr["Name"]}");
                 Console.WriteLine($"Email: {dr["Email"]}");
@@ -63,9 +57,6 @@ namespace TestDataService
                 Console.WriteLine($"Account: {dr["Account"]}");
                 Console.WriteLine();
             }
-
-            Console.ReadLine();
-
         }
         private static async Task ContactById(string ContactId) {
 
