@@ -25,7 +25,7 @@ static async Task Main()
     }
 }
 
-[Output](/Img/Out.png)
+[Output](Img/Out.png)
 
 
 
