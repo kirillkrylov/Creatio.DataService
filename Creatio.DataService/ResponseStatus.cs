@@ -26,8 +26,10 @@ namespace Creatio.DataService
         //     Holds the custom ErrorCode enum if provided in ValidationException otherwise
         //     will hold the name of the Exception type, e.g. typeof(Exception).Name A value
         //     of non-null means the service encountered an error while processing the request.
+        
         [DataMember(Order = 1)]
         public string ErrorCode { get; set; }
+       
         //
         // Summary:
         //     A human friendly error message
@@ -36,6 +38,7 @@ namespace Creatio.DataService
         
         [DataMember(Order = 3)]
         public string StackTrace { get; set; }
+        
         //
         // Summary:
         //     For multiple detailed validation errors. Can hold a specific error message for

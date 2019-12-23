@@ -7,8 +7,10 @@ namespace Creatio.DataService
     {
         [DataMember(Name = "responseStatus")]
         public ResponseStatus ResponseStatus { get; set; }
+        
         [DataMember(Name = "rowsAffected")]
         public int RowsAffected { get; set; }
+        
         [DataMember(Name = "nextPrcElReady")]
         public bool NextPrcElReady { get; set; }
 

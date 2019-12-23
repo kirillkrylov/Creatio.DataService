@@ -10,6 +10,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net.WebSockets;
+using System.Reflection;
+using Creatio.DataService.Attributes;
+using Creatio.DataService.Parameters;
 
 namespace Creatio.DataService
 {
@@ -67,7 +70,7 @@ namespace Creatio.DataService
                 return _instance;
             }
         }
-       
+
         #endregion
 
         #region Events
@@ -75,7 +78,7 @@ namespace Creatio.DataService
         #endregion
 
         #region Methods
-        
+
         #region Methods : Private
         private async void ConectWebSocket()
         {
@@ -273,8 +276,114 @@ namespace Creatio.DataService
             }
             return currentUser;
         }
+        private SelectQuery BuildSelectRequest(QueryParameters queryParameters, List<QueryColumn> queryColumns)
+        {
+            SelectQuery selectQuery = new SelectQuery()
+            {
+                RootSchemaName = queryParameters.RootSchemaName,
+                UseLocalization = queryParameters.UseLocalization,
+                AllColumns = queryParameters.AllColumns,
+                QuerySource = Enums.QuerySource.Filter
+            };
+            SelectQueryColumns Columns = new SelectQueryColumns();
+            Dictionary<string, SelectQueryColumn> Items = new Dictionary<string, SelectQueryColumn>();
+            foreach (QueryColumn qc in queryColumns) {
+                SelectQueryColumn col = new SelectQueryColumn()
+                {
+                    OrderDirection = qc.OrderDirection,
+                    OrderPosition = qc.OrderPosition,
+                    Expression = new ColumnExpression()
+                    {
+                        ExpressionType = qc.ExpressionType,
+                        ColumnPath = qc.ColumnPath
+                    }
+                };
+                Items.Add(qc.Caption, col);
+            }
+            Columns.Items = Items;
+            selectQuery.Columns = Columns;
+
+
+            return selectQuery;
+        }
+
+        private Filters BuildFilterById(Guid id) {
+
+            Filters filter = new Filters()
+            {
+                // Filter type is group.
+                FilterType = Enums.FilterType.FilterGroup,
+                // Filters collection.
+                LogicalOperation = Enums.LogicalOperationStrict.And,
+                Items = new Dictionary<string, Filter>()
+                {
+                    {
+                        "Id", new Filter
+                        {
+                            FilterType = Enums.FilterType.CompareFilter,
+                            ComparisonType = Enums.FilterComparisonType.Equal,
+                            LeftExpression = new BaseExpression()
+                            {
+                                ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+                                ColumnPath = "Id"
+                            },
+                            RightExpression = new BaseExpression()
+                            {
+                                ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
+                                Parameter = new Parameter()
+                                {
+                                    DataValueType = Enums.DataValueType.Date,
+                                    Value = id
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            return filter;
+        }
+                
+        private Filters BuildFilterByParentId(Guid id, string parentReference)
+        {
+
+            Filters filter = new Filters()
+            {
+                // Filter type is group.
+                FilterType = Enums.FilterType.FilterGroup,
+                // Filters collection.
+                LogicalOperation = Enums.LogicalOperationStrict.And,
+                Items = new Dictionary<string, Filter>()
+                {
+                    {
+                        "Id", new Filter
+                        {
+                            FilterType = Enums.FilterType.CompareFilter,
+                            ComparisonType = Enums.FilterComparisonType.Equal,
+                            LeftExpression = new BaseExpression()
+                            {
+                                ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+                                ColumnPath = parentReference
+                            },
+                            RightExpression = new BaseExpression()
+                            {
+                                ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
+                                Parameter = new Parameter()
+                                {
+                                    DataValueType = Enums.DataValueType.Guid,
+                                    Value = id
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            return filter;
+        }
+
+
         #endregion
-        
+
+
         #region Methods : Public
         /// <summary>
         /// Sets credentials to use for initial Authentication
@@ -288,7 +397,7 @@ namespace Creatio.DataService
             Instance.password = (!string.IsNullOrEmpty(Password)) ? Password : "Supervisor";
             Instance.domain = (!string.IsNullOrEmpty(Domain)) ? Domain : "https://work.creatio.com";
         }
-        
+
         /// <summary>
         /// Logs in and requests Current User info
         /// </summary>
@@ -625,7 +734,7 @@ namespace Creatio.DataService
 
                             case Enums.DataValueType.ImageLookup:
                             case Enums.DataValueType.Lookup:
-                                dr[PropName] = (!String.IsNullOrEmpty(PropValue)) ? JsonConvert.DeserializeObject<LookupColumnValue>(PropValue).DisplayValue : "";
+                                dr[PropName] = (!string.IsNullOrEmpty(PropValue)) ? JsonConvert.DeserializeObject<LookupColumnValue>(PropValue).Value : "";
                                 break;
                             case Enums.DataValueType.Enum:
 
@@ -678,7 +787,177 @@ namespace Creatio.DataService
             }
             return dt;
         }
+
         #endregion
+
+        public async Task<List<Entity>> Select<Entity>(string id = "") where Entity : new()
+        {
+            Entity entity = new Entity();
+            RootSchemaNameAttribute rootSchemaNameAttribute = entity.GetType().GetCustomAttribute<RootSchemaNameAttribute>(true);
+
+            #region QueryParameters
+
+            bool useLocalization = rootSchemaNameAttribute.UseLocalization;
+            bool allColumns = rootSchemaNameAttribute.AllColumns;
+            string rootSchemaName = rootSchemaNameAttribute.RootSchemaName;
+
+            QueryParameters queryParameters = new QueryParameters()
+            {
+
+                RootSchemaName = rootSchemaName,
+                AllColumns = allColumns,
+                UseLocalization = useLocalization
+            };
+
+            #endregion
+
+            #region QueryColumns
+
+            Dictionary<string, string> nestedObjects = new Dictionary<string, string>();
+
+            List<QueryColumn> QueryColumns = new List<QueryColumn>();
+            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
+            {
+                string caption = propInfo.Name;
+                QueryColumnAttribute qca = propInfo.GetCustomAttribute<QueryColumnAttribute>(true);
+
+                if (qca != null) { 
+                    QueryColumn qc = new QueryColumn()
+                    {
+                        Caption = caption,
+                        ColumnPath = qca.ColumnPath,
+                        ExpressionType = qca.ExpressionType,
+                        OrderDirection = qca.OrderDirection,
+                        OrderPosition = qca.OrderPosition,
+                    };
+                    QueryColumns.Add(qc);
+                }
+                
+                RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
+                if (ra != null) {
+                    nestedObjects.Add(caption, ra.RootSchemaName);
+                    
+                    QueryColumn qc = new QueryColumn()
+                    {
+                        Caption = caption,
+                        ColumnPath = caption,
+                        ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+                    };
+                    QueryColumns.Add(qc);
+                }
+            }
+            #endregion
+
+            SelectQuery selectQ = BuildSelectRequest(queryParameters, QueryColumns);
+            if (!string.IsNullOrEmpty(id)) {
+                Filters filterById = BuildFilterById(Guid.Parse(id));
+                selectQ.Filters = filterById;
+            }
+
+            string json = string.Empty;
+            json = JsonConvert.SerializeObject(selectQ);
+            RequestResponse requestResponse = await GetResponseAsync(json, ActionEnum.SELECT);
+
+            List<Entity> result =  BuildEntity<Entity>(requestResponse);
+            foreach (Entity res in result) {
+
+                Guid parentId = (Guid)res.GetType().GetProperty("Id").GetValue(res, null);
+            }
+            return result;
+        }
+
+        private List<Entity> BuildEntity<Entity>(RequestResponse requestResponse) where Entity : new()
+        {
+            List<Entity> result = new List<Entity>();
+
+            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
+            foreach (DataRow dr in dt.Rows)
+            {
+                Entity entity = new Entity();
+                foreach (PropertyInfo prop in entity.GetType().GetProperties()) {
+
+                    string strValue = string.Empty;
+                    try
+                    {
+                        strValue = dr[prop.Name]?.ToString();
+                    }
+                    catch (Exception e) {
+                        Console.WriteLine(e.Message);
+                    }
+
+                    QueryColumnAttribute attr = prop.GetCustomAttribute<QueryColumnAttribute>(true);
+                    if (attr != null) {
+                        switch (prop.PropertyType.Name)
+                        {
+                            case (nameof(Guid)):
+                                Guid.TryParse(strValue, out Guid val);
+                                prop.SetValue(entity, val);
+                                break;
+
+                            case (nameof(Decimal)):
+                                decimal.TryParse(strValue, out decimal decVal);
+                                prop.SetValue(entity, val);
+                                break;
+
+                            case (nameof(Int16)):
+                            case (nameof(Int32)):
+                            case (nameof(Int64)):
+                                int.TryParse(strValue, out int intVal);
+                                prop.SetValue(entity, val);
+                                break;
+
+                            case (nameof(DateTime)):
+                                DateTime.TryParse(strValue, out DateTime dateTimeVal);
+                                prop.SetValue(entity, dateTimeVal);
+                                break;
+
+                            case (nameof(String)):
+                                prop.SetValue(entity, strValue);
+                                break;
+
+                        }
+                    }
+
+
+                    RootSchemaNameAttribute attrRoot = prop.GetCustomAttribute<RootSchemaNameAttribute>(true);
+                    if (attrRoot != null) {
+
+                        //prop.PropertyType.Name;
+                        //Console.WriteLine($"Need to get nested Object {attrRoot.RootSchemaName} by Id:  {dr[prop.Name]?.ToString()}");
+
+                        object[] para = new object[0];
+                        var subEntity = Activator.CreateInstance(prop.PropertyType, para);
+
+                        Guid.TryParse(dr[prop.Name].ToString(), out Guid subId);
+                        subEntity.GetType().GetProperty("Id").SetValue(subEntity, subId);
+                        prop.SetValue(entity, subEntity);
+                    }
+
+                }
+                result.Add(entity);
+
+            }
+            return result;
+        }
+
+
+        private async Task<SubEntity> SelectSub<SubEntity>() where SubEntity : new()
+        {
+            var subEntity = new SubEntity();
+
+            List<SubEntity> list = await Select<SubEntity>();
+            return list[0];
+
+
+            //Guid.TryParse(dr[prop.Name].ToString(), out Guid accountId);
+            //account.GetType().GetProperty("Id").SetValue(accountId, null);
+
+            //Console.WriteLine(account);
+
+
+            
+        }
+
 
         #endregion
     }
