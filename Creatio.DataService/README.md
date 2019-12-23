@@ -19,8 +19,10 @@ static async Task Main()
         var ContactId = utils.CurrentUser.Contact.Value;
         Console.WriteLine($"Your ContactId is: {ContactId}");
 
+        //Subscribe to WebSocket messages
         utils.WebSocketMessageReceived += WebSocketMessageReceived;
         
+        //Get CurrentUser Contact
         await ContactById(ContactId);
         var ContactId = utils.CurrentUser.Contact.Value;               
         await ContactById(ContactId);
