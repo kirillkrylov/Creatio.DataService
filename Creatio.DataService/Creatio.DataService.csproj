@@ -5,9 +5,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Kirill Krylov, CPA</Authors>
     <Company>Creatio</Company>
-    <Description>Allows cRud operation via DataService 
+    <Description>Allows cRud operation via DataService
 - CREATE not implemented
-- READpartialy implemented
+- READ partialy implemented
 - UPDATE not implemented
 - DELETE not implemented
 
