@@ -11,7 +11,7 @@ Install-Package Creatio.DataService
 static async Task Main()
 {
     Utils utils = Utils.Instance;
-    utils.SetCredentials("Kirill", "111", "https://023879-studio.creatio.com");
+    utils.SetCredentials("yourUserNameHere", "yourPasswordHere", "https://domain.creatio.com");
     if (await utils.LoginAsync()) {
 
         Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
