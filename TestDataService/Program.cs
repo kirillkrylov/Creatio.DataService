@@ -22,7 +22,6 @@ namespace TestDataService
             if (await utils.LoginAsync()) {
 
                 Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
-
                 var ContactId = utils.CurrentUser.Contact.Value;
                 //Console.WriteLine($"Your ContactId is: {ContactId}");
 

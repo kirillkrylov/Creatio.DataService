@@ -21,23 +21,14 @@ static async Task Main()
         Console.WriteLine($"Your ContactId is: {ContactId}");
 
         utils.WebSocketMessageReceived += WebSocketMessageReceived;
+        
+        await ContactById(ContactId);
+        var ContactId = utils.CurrentUser.Contact.Value;               
+        await ContactById(ContactId);
 
-        SelectQuery select = BuildContactQuery();
-        string jsonRequest = JsonConvert.SerializeObject(select);
-        RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
-        DataTable dt = utils.ConvertResponseToDataTable(result.Result);
+        //await AllContacts();
+        //await AdHocQuery();
 
-        Guid.TryParse(ContactId, out Guid contactIdGuid);
-
-        string expression = $"Id = '{contactIdGuid}'";
-        DataRow[] row = dt.Select(expression);
-        if (row.Length > 0)
-            Console.WriteLine($"\tYour Name is: \t{row[0]["Name"]}");
-            Console.WriteLine($"\tYour Email is: \t{row[0]["Email"]}");
-            Console.WriteLine($"\tYour Phone is: \t{row[0]["Phone"]}");
-            Console.WriteLine($"\tYour Account is: {row[0]["Account"]}");
-
-        Console.ReadLine();
     }
 }
 
@@ -257,5 +248,4 @@ private static async Task ContactById(string ContactId)
     Console.WriteLine("----------- END OF CURRENT USER  / Account / PrimaryContact-----------");
     Console.ResetColor();
 }
-
 ```
