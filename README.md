@@ -106,7 +106,7 @@ namespace TestDataService.Model
 }
 ```
 
-### Get Entity
+### Get Entity by Id
 ```C#
 private static async Task ContactById(string ContactId) 
 {
