@@ -13,23 +13,22 @@ static async Task Main()
     Utils utils = Utils.Instance;
     utils.SetCredentials("yourUserNameHere", "yourPasswordHere", "https://domain.creatio.com");
     if (await utils.LoginAsync()) {
-
         Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
-
-        var ContactId = utils.CurrentUser.Contact.Value;
+        Guid ContactId = utils.CurrentUser.Contact.Value;
         Console.WriteLine($"Your ContactId is: {ContactId}");
-
         utils.WebSocketMessageReceived += WebSocketMessageReceived;
         
-        await ContactById(ContactId);
-        var ContactId = utils.CurrentUser.Contact.Value;               
         await ContactById(ContactId);
 
         //await AllContacts();
         //await AdHocQuery();
-
     }
 }
+
+[Output](Img/Out.png)
+
+
+
 
 private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
 {
