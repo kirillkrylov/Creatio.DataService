@@ -38,7 +38,6 @@ private static void WebSocketMessageReceived(object sender, WebSocketMessageRece
     Console.WriteLine($"You've got message: { e.MessageBody}");
     Console.ResetColor();
 }
-
 ```
 
 ### Define Contact Model
