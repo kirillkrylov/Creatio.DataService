@@ -67,10 +67,8 @@ namespace TestDataService.Model
 
         [QueryColumn("ModifiedOn")]
         public DateTime ModifiedOn { get; set; }
-
         [RootSchemaName("Account")]
         public Account Account { get; set; }
-
     }
 }
 ```

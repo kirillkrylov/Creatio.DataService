@@ -5,7 +5,13 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Kirill Krylov, CPA</Authors>
     <Company>Creatio</Company>
-    <Description>Allows CRUD operation via DataService</Description>
+    <Description>Allows cRud operation via DataService 
+- CREATE not implemented
+- READpartialy implemented
+- UPDATE not implemented
+- DELETE not implemented
+
+Active development will change almost daily for now</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>Accelerate.png</PackageIcon>
     <PackageIconUrl />
@@ -14,7 +20,7 @@
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
     <FileVersion>1.0.1.0</FileVersion>
     <NeutralLanguage>aa-ET</NeutralLanguage>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>

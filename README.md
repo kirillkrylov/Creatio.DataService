@@ -68,7 +68,6 @@ namespace TestDataService.Model
 
         [RootSchemaName("Account")]
         public Account Account { get; set; }
-
     }
 }
 ```
@@ -89,19 +88,14 @@ namespace TestDataService.Model
         [QueryColumn("Name")]
         public string Name { get; set; }
 
-
         [QueryColumn("Phone")]
         public string Phone { get; set; }
-
 
         [QueryColumn("Web")]
         public string Web { get; set; }
 
-
         [RootSchemaName("PrimaryContact")]
         public Contact PrimaryContact { get; set; }
-
-
     }
 }
 ```
@@ -191,7 +185,6 @@ private static async Task AllContacts()
     Console.WriteLine("----------- END OF ALL CONTACTS -----------");
 }
 ```
-
 
 ### Build Select Query
 ```C#
