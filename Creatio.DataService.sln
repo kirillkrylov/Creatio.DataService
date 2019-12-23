@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatio.DataService", "Creatio.DataService\Creatio.DataService.csproj", "{4F0EAC1C-DF89-4295-893F-95264188E2F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Creatio.DataService", "Creatio.DataService\Creatio.DataService.csproj", "{4F0EAC1C-DF89-4295-893F-95264188E2F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataService", "TestDataService\TestDataService.csproj", "{F43A6391-F231-45AD-BB93-6D599E392716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDataService", "TestDataService\TestDataService.csproj", "{F43A6391-F231-45AD-BB93-6D599E392716}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21EC3414-5534-4E66-9B83-3A1D08B3D940}"
 	ProjectSection(SolutionItems) = preProject
