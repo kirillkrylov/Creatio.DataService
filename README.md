@@ -25,11 +25,6 @@ static async Task Main()
     }
 }
 
-[Output](Img/Out.png)
-
-
-
-
 private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
 {
     Console.WriteLine();
@@ -39,6 +34,7 @@ private static void WebSocketMessageReceived(object sender, WebSocketMessageRece
 }
 ```
 
+![Output](Img/Out.png)
 ### Define Contact Model
 ```C#
 using Creatio.DataService.Attributes;
