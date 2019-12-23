@@ -18,24 +18,6 @@ namespace Creatio.DataService
 {
     public class Utils
     {
-        #region Enum
-        #endregion
-
-        #region Delegates
-        #endregion
-
-        #region Interface
-        #endregion
-
-        #region Struct
-        #endregion
-
-        #region Class
-        #endregion
-
-        #region Constants
-        #endregion
-
         #region Fields
         private static volatile Utils _instance;
         private static readonly object _syncLock = new object();
@@ -379,10 +361,92 @@ namespace Creatio.DataService
             };
             return filter;
         }
+        
+        private List<Entity> BuildEntity<Entity>(RequestResponse requestResponse) where Entity : new()
+        {
+            List<Entity> result = new List<Entity>();
+
+            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
+            foreach (DataRow dr in dt.Rows)
+            {
+                Entity entity = new Entity();
+                foreach (PropertyInfo prop in entity.GetType().GetProperties())
+                {
+
+                    string strValue = string.Empty;
+                    try
+                    {
+                        strValue = dr[prop.Name]?.ToString();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+                    QueryColumnAttribute attr = prop.GetCustomAttribute<QueryColumnAttribute>(true);
+                    if (attr != null)
+                    {
+                        switch (prop.PropertyType.Name)
+                        {
+                            case (nameof(Guid)):
+                                Guid.TryParse(strValue, out Guid val);
+                                prop.SetValue(entity, val);
+                                break;
+
+                            case (nameof(Decimal)):
+                                decimal.TryParse(strValue, out decimal decVal);
+                                prop.SetValue(entity, val);
+                                break;
+
+                            case (nameof(Int16)):
+                            case (nameof(Int32)):
+                            case (nameof(Int64)):
+                                int.TryParse(strValue, out int intVal);
+                                prop.SetValue(entity, val);
+                                break;
+
+                            case (nameof(DateTime)):
+                                DateTime.TryParse(strValue, out DateTime dateTimeVal);
+                                prop.SetValue(entity, dateTimeVal);
+                                break;
+
+                            case (nameof(String)):
+                                prop.SetValue(entity, strValue);
+                                break;
+
+                        }
+                    }
 
 
+                    RootSchemaNameAttribute attrRoot = prop.GetCustomAttribute<RootSchemaNameAttribute>(true);
+                    if (attrRoot != null)
+                    {
+
+                        //prop.PropertyType.Name;
+                        //Console.WriteLine($"Need to get nested Object {attrRoot.RootSchemaName} by Id:  {dr[prop.Name]?.ToString()}");
+
+                        object[] para = new object[0];
+                        var subEntity = Activator.CreateInstance(prop.PropertyType, para);
+
+                        Guid.TryParse(dr[prop.Name].ToString(), out Guid subId);
+                        subEntity.GetType().GetProperty("Id").SetValue(subEntity, subId);
+                        prop.SetValue(entity, subEntity);
+                    }
+
+                }
+                result.Add(entity);
+
+            }
+            return result;
+        }
+        private async Task<SubEntity> SelectSub<SubEntity>() where SubEntity : new()
+        {
+            var subEntity = new SubEntity();
+
+            List<SubEntity> list = await Select<SubEntity>();
+            return list[0];
+        }
         #endregion
-
 
         #region Methods : Public
         /// <summary>
@@ -787,9 +851,6 @@ namespace Creatio.DataService
             }
             return dt;
         }
-
-        #endregion
-
         public async Task<List<Entity>> Select<Entity>(string id = "") where Entity : new()
         {
             Entity entity = new Entity();
@@ -866,98 +927,7 @@ namespace Creatio.DataService
             return result;
         }
 
-        private List<Entity> BuildEntity<Entity>(RequestResponse requestResponse) where Entity : new()
-        {
-            List<Entity> result = new List<Entity>();
-
-            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
-            foreach (DataRow dr in dt.Rows)
-            {
-                Entity entity = new Entity();
-                foreach (PropertyInfo prop in entity.GetType().GetProperties()) {
-
-                    string strValue = string.Empty;
-                    try
-                    {
-                        strValue = dr[prop.Name]?.ToString();
-                    }
-                    catch (Exception e) {
-                        Console.WriteLine(e.Message);
-                    }
-
-                    QueryColumnAttribute attr = prop.GetCustomAttribute<QueryColumnAttribute>(true);
-                    if (attr != null) {
-                        switch (prop.PropertyType.Name)
-                        {
-                            case (nameof(Guid)):
-                                Guid.TryParse(strValue, out Guid val);
-                                prop.SetValue(entity, val);
-                                break;
-
-                            case (nameof(Decimal)):
-                                decimal.TryParse(strValue, out decimal decVal);
-                                prop.SetValue(entity, val);
-                                break;
-
-                            case (nameof(Int16)):
-                            case (nameof(Int32)):
-                            case (nameof(Int64)):
-                                int.TryParse(strValue, out int intVal);
-                                prop.SetValue(entity, val);
-                                break;
-
-                            case (nameof(DateTime)):
-                                DateTime.TryParse(strValue, out DateTime dateTimeVal);
-                                prop.SetValue(entity, dateTimeVal);
-                                break;
-
-                            case (nameof(String)):
-                                prop.SetValue(entity, strValue);
-                                break;
-
-                        }
-                    }
-
-
-                    RootSchemaNameAttribute attrRoot = prop.GetCustomAttribute<RootSchemaNameAttribute>(true);
-                    if (attrRoot != null) {
-
-                        //prop.PropertyType.Name;
-                        //Console.WriteLine($"Need to get nested Object {attrRoot.RootSchemaName} by Id:  {dr[prop.Name]?.ToString()}");
-
-                        object[] para = new object[0];
-                        var subEntity = Activator.CreateInstance(prop.PropertyType, para);
-
-                        Guid.TryParse(dr[prop.Name].ToString(), out Guid subId);
-                        subEntity.GetType().GetProperty("Id").SetValue(subEntity, subId);
-                        prop.SetValue(entity, subEntity);
-                    }
-
-                }
-                result.Add(entity);
-
-            }
-            return result;
-        }
-
-
-        private async Task<SubEntity> SelectSub<SubEntity>() where SubEntity : new()
-        {
-            var subEntity = new SubEntity();
-
-            List<SubEntity> list = await Select<SubEntity>();
-            return list[0];
-
-
-            //Guid.TryParse(dr[prop.Name].ToString(), out Guid accountId);
-            //account.GetType().GetProperty("Id").SetValue(accountId, null);
-
-            //Console.WriteLine(account);
-
-
-            
-        }
-
+        #endregion
 
         #endregion
     }
