@@ -17,8 +17,5 @@ namespace Creatio.DataService
             List<Entity> baseEntity = await utils.Select<Entity>(Id.ToString());
             return baseEntity[0];
         }
-
-
-
     }
 }

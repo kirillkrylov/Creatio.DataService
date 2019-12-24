@@ -49,8 +49,19 @@ namespace TestDataService
             Console.WriteLine($"Email: {currentUser.Email}");
             Console.WriteLine($"CreatedOn: {currentUser.CreatedOn}");
             Console.WriteLine($"Account: {currentUser.Account.Id}");
+            
+            Utils utils = Utils.Instance;
+            currentUser.Activities = await utils.SelectList<Activity>(currentUser.Id);
+            foreach (Activity activity in currentUser.Activities) {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("");
+                Console.WriteLine($"\tTitle:{activity.Title} Start:{activity.StartDate} Ends:{activity.DueDate}");
+                Console.WriteLine($"Count of Activities: {currentUser.Activities.Count}");
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("----------- END OF CURRENT USER -----------");
             Console.ResetColor();
+            
 
             Account account = await currentUser.Account.Expnad<Account>(currentUser.Account.Id);
             Console.ForegroundColor = ConsoleColor.Red;

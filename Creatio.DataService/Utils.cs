@@ -314,7 +314,7 @@ namespace Creatio.DataService
                                 ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
                                 Parameter = new Parameter()
                                 {
-                                    DataValueType = Enums.DataValueType.Date,
+                                    DataValueType = Enums.DataValueType.Guid,
                                     Value = id
                                 }
                             }
@@ -324,7 +324,41 @@ namespace Creatio.DataService
             };
             return filter;
         }
-                
+        private Filters BuildFilterByParent(Guid parentId, string parentColumnName)
+        {
+            Filters filter = new Filters()
+            {
+                // Filter type is group.
+                FilterType = Enums.FilterType.FilterGroup,
+                // Filters collection.
+                LogicalOperation = Enums.LogicalOperationStrict.And,
+                Items = new Dictionary<string, Filter>()
+                {
+                    {
+                        "Id", new Filter
+                        {
+                            FilterType = Enums.FilterType.CompareFilter,
+                            ComparisonType = Enums.FilterComparisonType.Equal,
+                            LeftExpression = new BaseExpression()
+                            {
+                                ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+                                ColumnPath = parentColumnName
+                            },
+                            RightExpression = new BaseExpression()
+                            {
+                                ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
+                                Parameter = new Parameter()
+                                {
+                                    DataValueType = Enums.DataValueType.Guid,
+                                    Value = parentId
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            return filter;
+        }
         private Filters BuildFilterByParentId(Guid id, string parentReference)
         {
 
@@ -337,7 +371,7 @@ namespace Creatio.DataService
                 Items = new Dictionary<string, Filter>()
                 {
                     {
-                        "Id", new Filter
+                        "ByParentId", new Filter
                         {
                             FilterType = Enums.FilterType.CompareFilter,
                             ComparisonType = Enums.FilterComparisonType.Equal,
@@ -372,7 +406,6 @@ namespace Creatio.DataService
                 Entity entity = new Entity();
                 foreach (PropertyInfo prop in entity.GetType().GetProperties())
                 {
-
                     string strValue = string.Empty;
                     try
                     {
@@ -380,7 +413,7 @@ namespace Creatio.DataService
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        Console.WriteLine($"Utils.cs Line 416: {e.Message}");
                     }
 
                     QueryColumnAttribute attr = prop.GetCustomAttribute<QueryColumnAttribute>(true);
@@ -421,21 +454,20 @@ namespace Creatio.DataService
                     RootSchemaNameAttribute attrRoot = prop.GetCustomAttribute<RootSchemaNameAttribute>(true);
                     if (attrRoot != null)
                     {
+                        Type[] types = prop.PropertyType.GetInterfaces();
+                        var index = Array.FindIndex(types, x => x.Name == "IEnumerable");
 
-                        //prop.PropertyType.Name;
-                        //Console.WriteLine($"Need to get nested Object {attrRoot.RootSchemaName} by Id:  {dr[prop.Name]?.ToString()}");
-
-                        object[] para = new object[0];
-                        var subEntity = Activator.CreateInstance(prop.PropertyType, para);
-
-                        Guid.TryParse(dr[prop.Name].ToString(), out Guid subId);
-                        subEntity.GetType().GetProperty("Id").SetValue(subEntity, subId);
-                        prop.SetValue(entity, subEntity);
+                        if (index == -1)
+                        {
+                            object[] para = new object[0];
+                            var subEntity = Activator.CreateInstance(prop.PropertyType, para);
+                            Guid.TryParse(dr[prop.Name].ToString(), out Guid subId);
+                            subEntity.GetType().GetProperty("Id").SetValue(subEntity, subId);
+                            prop.SetValue(entity, subEntity);
+                        }
                     }
-
                 }
                 result.Add(entity);
-
             }
             return result;
         }
@@ -870,7 +902,6 @@ namespace Creatio.DataService
 
             QueryParameters queryParameters = new QueryParameters()
             {
-
                 RootSchemaName = rootSchemaName,
                 AllColumns = allColumns,
                 UseLocalization = useLocalization
@@ -902,15 +933,18 @@ namespace Creatio.DataService
                 
                 RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
                 if (ra != null) {
-                    nestedObjects.Add(caption, ra.RootSchemaName);
-                    
-                    QueryColumn qc = new QueryColumn()
+                    Type[] types = propInfo.PropertyType.GetInterfaces();
+                    var index = Array.FindIndex(types, x=>x.Name == "IEnumerable");
+                    if (index == -1)//Not a list
                     {
-                        Caption = caption,
-                        ColumnPath = caption,
-                        ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
-                    };
-                    QueryColumns.Add(qc);
+                        QueryColumn qc = new QueryColumn()
+                        {
+                            Caption = caption,
+                            ColumnPath = caption,
+                            ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+                        };
+                        QueryColumns.Add(qc);
+                    }
                 }
             }
             #endregion
@@ -924,14 +958,83 @@ namespace Creatio.DataService
             //string json = string.Empty;
             string json = JsonConvert.SerializeObject(selectQ);
             RequestResponse requestResponse = await GetResponseAsync(json, ActionEnum.SELECT);
-
             List<Entity> result =  BuildEntity<Entity>(requestResponse);
-            //foreach (Entity res in result) {
-
-            //    Guid parentId = (Guid)res.GetType().GetProperty("Id").GetValue(res, null);
-            //}
             return result;
         }
+        
+        public async Task<List<Entity>> SelectList<Entity>(Guid parentId = new Guid()) where Entity : BaseEntity, new()
+        {
+            Entity entity = new Entity();
+
+            #region QueryParameters
+            RootSchemaNameAttribute rootSchemaNameAttribute = entity.GetType().GetCustomAttribute<RootSchemaNameAttribute>(true);
+            bool useLocalization = rootSchemaNameAttribute.UseLocalization;
+            bool allColumns = rootSchemaNameAttribute.AllColumns;
+            string rootSchemaName = rootSchemaNameAttribute.RootSchemaName;
+            QueryParameters queryParameters = new QueryParameters()
+            {
+                RootSchemaName = rootSchemaName,
+                AllColumns = allColumns,
+                UseLocalization = useLocalization
+            };
+            #endregion
+            
+            #region QueryColumns
+
+            Dictionary<string, string> nestedObjects = new Dictionary<string, string>();
+
+            List<QueryColumn> QueryColumns = new List<QueryColumn>();
+            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
+            {
+                string caption = propInfo.Name;
+                QueryColumnAttribute qca = propInfo.GetCustomAttribute<QueryColumnAttribute>(true);
+
+                if (qca != null)
+                {
+                    QueryColumn qc = new QueryColumn()
+                    {
+                        Caption = caption,
+                        ColumnPath = qca.ColumnPath,
+                        ExpressionType = qca.ExpressionType,
+                        OrderDirection = qca.OrderDirection,
+                        OrderPosition = qca.OrderPosition,
+                    };
+                    QueryColumns.Add(qc);
+                }
+
+                RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
+                if (ra != null)
+                {
+                    nestedObjects.Add(caption, ra.RootSchemaName);
+
+                    QueryColumn qc = new QueryColumn()
+                    {
+                        Caption = caption,
+                        ColumnPath = caption,
+                        ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+                    };
+                    QueryColumns.Add(qc);
+                }
+            }
+            #endregion
+
+            SelectQuery selectQ = BuildSelectRequest(queryParameters, QueryColumns);
+            if (parentId!=Guid.Empty)
+            {
+                Filters filterById = BuildFilterByParent(parentId, "Owner");
+                selectQ.Filters = filterById;
+            }
+
+            string json = string.Empty;
+            json = JsonConvert.SerializeObject(selectQ);
+            RequestResponse requestResponse = await GetResponseAsync(json, ActionEnum.SELECT);
+
+            List<Entity> result = BuildEntity<Entity>(requestResponse);
+
+            return result;
+        }
+
+
 
         #endregion
 

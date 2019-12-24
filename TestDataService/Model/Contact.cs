@@ -1,6 +1,7 @@
 ﻿using Creatio.DataService;
 using Creatio.DataService.Attributes;
 using System;
+using System.Collections.Generic;
 
 namespace TestDataService.Model
 {
@@ -19,9 +20,11 @@ namespace TestDataService.Model
 
         [QueryColumn("ModifiedOn")]
         public DateTime ModifiedOn { get; set; }
-
+        
         [RootSchemaName("Account")]
         public Account Account { get; set; }
 
+        [RootSchemaName("Activity")]
+        public List<Activity> Activities { get; set; }
     }
 }
