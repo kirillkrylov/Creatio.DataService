@@ -16,7 +16,7 @@ using Creatio.DataService.Parameters;
 
 namespace Creatio.DataService
 {
-    public class Utils
+    public class Utils : IDisposable
     {
         #region Fields
         private static volatile Utils _instance;
@@ -439,22 +439,16 @@ namespace Creatio.DataService
             }
             return result;
         }
-        private async Task<SubEntity> SelectSub<SubEntity>() where SubEntity : new()
-        {
-            var subEntity = new SubEntity();
-
-            List<SubEntity> list = await Select<SubEntity>();
-            return list[0];
-        }
+        
         #endregion
 
         #region Methods : Public
         /// <summary>
         /// Sets credentials to use for initial Authentication
         /// </summary>
-        /// <param name="UserName">Username to Login</param>
-        /// <param name="Password">Password to Login</param>
-        /// <param name="Domain">Application url</param>
+        /// <param name="UserName">Username to Login with</param>
+        /// <param name="Password">Password to Login with</param>
+        /// <param name="Domain">Application Url i.e. (https://0123456-studio.creatio.com)</param>
         public void SetCredentials(string UserName, string Password, string Domain)
         {
             Instance.userName = (!string.IsNullOrEmpty(UserName)) ? UserName : "Supervisor";
@@ -476,6 +470,12 @@ namespace Creatio.DataService
             }
             return Instance._IsLoginSuccess;
         }
+        
+        
+        /// <summary>
+        /// TODO: Implement IDisposable to make sure I logout if Logout is not called
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> LogoutAsync()
         {
             var logout = await GetResponseAsync("{}", ActionEnum.LOGOUT).ConfigureAwait(false);
@@ -851,6 +851,12 @@ namespace Creatio.DataService
             }
             return dt;
         }
+
+        /// <summary></summary>
+        /// <code>List<Contact> CurrentUser = await utils.Select<Contact>(ContactId)</code>
+        /// <typeparam name="Entity">Entity Model</typeparam>
+        /// <param name="id">Entity.Id</param>
+        /// <returns>List of entities</returns>
         public async Task<List<Entity>> Select<Entity>(string id = "") where Entity : new()
         {
             Entity entity = new Entity();
@@ -915,20 +921,69 @@ namespace Creatio.DataService
                 selectQ.Filters = filterById;
             }
 
-            string json = string.Empty;
-            json = JsonConvert.SerializeObject(selectQ);
+            //string json = string.Empty;
+            string json = JsonConvert.SerializeObject(selectQ);
             RequestResponse requestResponse = await GetResponseAsync(json, ActionEnum.SELECT);
 
             List<Entity> result =  BuildEntity<Entity>(requestResponse);
-            foreach (Entity res in result) {
+            //foreach (Entity res in result) {
 
-                Guid parentId = (Guid)res.GetType().GetProperty("Id").GetValue(res, null);
-            }
+            //    Guid parentId = (Guid)res.GetType().GetProperty("Id").GetValue(res, null);
+            //}
             return result;
         }
 
         #endregion
 
         #endregion
+
+        #region IDisposable
+
+        // Flag: Has Dispose already been called?
+        bool disposed = false;
+
+        // Public implementation of Dispose pattern callable by consumers.
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                Task.Run(async()=> {
+                    await LogoutAsync();
+                });
+                
+                CurrentUser = null;
+                _instance = null;
+                disposed = true;
+            }
+
+            // Free any unmanaged objects here.
+            //
+            Task.Run(async() => {
+                await LogoutAsync();
+            });
+
+            Auth = null;
+            CurrentUser = null;
+            _instance = null;
+            disposed = true;
+        }
+
+        ~Utils()
+        {
+            Dispose(false);
+        }
+
+        #endregion
+
     }
 }

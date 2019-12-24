@@ -1,14 +1,12 @@
-﻿using Creatio.DataService.Attributes;
+﻿using Creatio.DataService;
+using Creatio.DataService.Attributes;
 using System;
 
 namespace TestDataService.Model
 {
     [RootSchemaName("Account")]
-    class Account
+    class Account: BaseEntity
     {
-        [QueryColumn("Id")]
-        public Guid Id { get; set; }
-
         [QueryColumn("Name")]
         public string Name { get; set; }
 
@@ -20,7 +18,5 @@ namespace TestDataService.Model
 
         [RootSchemaName("PrimaryContact")]
         public Contact PrimaryContact { get; set; }
-
-
     }
 }

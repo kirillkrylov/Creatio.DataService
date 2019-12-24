@@ -16,26 +16,67 @@ namespace TestDataService
             utils.SetCredentials("Kirill", "111", "https://023879-studio.creatio.com");
 
             if (await utils.LoginAsync()) {
+                utils.WebSocketMessageReceived += WebSocketMessageReceived;
 
                 Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
                 var ContactId = utils.CurrentUser.Contact.Value;
-                utils.WebSocketMessageReceived += WebSocketMessageReceived;
-                
                 await ContactById(ContactId);
                 //await AllContacts();
                 //await AdHocQuery();
             }
             Console.ReadLine();
+            utils.Dispose();
         }
 
         private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
         {
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"You've got message: { e.MessageBody}");
             Console.ResetColor();
         }
 
+        private static async Task ContactById(string ContactId) {
+
+            Contact currentUser = new Contact() { Id = Guid.Parse(ContactId) };
+            currentUser = await currentUser.Expnad<Contact>(currentUser.Id);
+            
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
+            Console.WriteLine("----------- CURRENT USER SelectById -----------");
+            Console.WriteLine($"Id: {currentUser.Id}");
+            Console.WriteLine($"Name: {currentUser.Name}");
+            Console.WriteLine($"Email: {currentUser.Email}");
+            Console.WriteLine($"CreatedOn: {currentUser.CreatedOn}");
+            Console.WriteLine($"Account: {currentUser.Account.Id}");
+            Console.WriteLine("----------- END OF CURRENT USER -----------");
+            Console.ResetColor();
+
+            Account account = await currentUser.Account.Expnad<Account>(currentUser.Account.Id);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine();
+            Console.WriteLine("----------- CURRENT USER / Account -----------");
+            Console.WriteLine($"Id: {account.Id}");
+            Console.WriteLine($"Name: {account.Name}");
+            Console.WriteLine($"Phone: {account.Phone}");
+            Console.WriteLine($"Web: {account.Web}");
+            Console.WriteLine($"PrimaryContact: {account.PrimaryContact.Id}");
+            Console.WriteLine("----------- END OF CURRENT USER / Account-----------");
+            Console.ResetColor();
+
+            
+            Contact primaryContact = await account.Expnad<Contact>(account.PrimaryContact.Id);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine();
+            Console.WriteLine("----------- CURRENT USER / Account / PrimaryContact -----------");
+            Console.WriteLine($"Id: {primaryContact.Id}");
+            Console.WriteLine($"Name: {primaryContact.Name}");
+            Console.WriteLine($"Phone: {primaryContact.Email}");
+            Console.WriteLine("----------- END OF CURRENT USER  / Account / PrimaryContact-----------");
+            Console.ResetColor();
+        }
+
+        /* Unused Methods
         private static async Task AdHocQuery() {
 
             Utils utils = Utils.Instance;
@@ -58,44 +99,6 @@ namespace TestDataService
                 Console.WriteLine();
             }
         }
-        private static async Task ContactById(string ContactId) {
-
-            Utils utils = Utils.Instance;
-            List<Contact> CurrentUser = await utils.Select<Contact>(ContactId);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine();
-            Console.WriteLine("----------- CURRENT USER SelectById -----------");
-            Console.WriteLine($"Id: {CurrentUser[0].Id}");
-            Console.WriteLine($"Name: {CurrentUser[0].Name}");
-            Console.WriteLine($"Email: {CurrentUser[0].Email}");
-            Console.WriteLine($"CreatedOn: {CurrentUser[0].CreatedOn}");
-            Console.WriteLine($"Account: {CurrentUser[0].Account.Id}");
-            Console.WriteLine("----------- END OF CURRENT USER -----------");
-            Console.ResetColor();
-
-            List<Account> accounts = await utils.Select<Account>(CurrentUser[0].Account.Id.ToString());
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine();
-            Console.WriteLine("----------- CURRENT USER / Account -----------");
-            Console.WriteLine($"Id: {accounts[0].Id}");
-            Console.WriteLine($"Name: {accounts[0].Name}");
-            Console.WriteLine($"Phone: {accounts[0].Phone}");
-            Console.WriteLine($"Web: {accounts[0].Web}");
-            Console.WriteLine($"Web: {accounts[0].PrimaryContact.Id}");
-            Console.WriteLine("----------- END OF CURRENT USER / Account-----------");
-            Console.ResetColor();
-
-            List<Contact> primaryContact = await utils.Select<Contact>(accounts[0].PrimaryContact.Id.ToString());
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine();
-            Console.WriteLine("----------- CURRENT USER / Account / PrimaryContact -----------");
-            Console.WriteLine($"Id: {primaryContact[0].Id}");
-            Console.WriteLine($"Name: {primaryContact[0].Name}");
-            Console.WriteLine($"Phone: {primaryContact[0].Email}");
-            Console.WriteLine("----------- END OF CURRENT USER  / Account / PrimaryContact-----------");
-            Console.ResetColor();
-        }
-
         private static async Task AllContacts()
         {
             Utils utils = Utils.Instance;
@@ -209,5 +212,6 @@ namespace TestDataService
             };
             return contactQuery;
         }
+        */
     }
 }
