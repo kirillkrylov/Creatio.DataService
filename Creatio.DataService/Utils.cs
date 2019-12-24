@@ -962,7 +962,7 @@ namespace Creatio.DataService
             return result;
         }
         
-        public async Task<List<Entity>> SelectList<Entity>(Guid parentId = new Guid()) where Entity : BaseEntity, new()
+        public async Task<List<Entity>> SelectList<Entity>(Guid parentId = new Guid(), string childColumnName) where Entity : BaseEntity, new()
         {
             Entity entity = new Entity();
 
@@ -1021,7 +1021,7 @@ namespace Creatio.DataService
             SelectQuery selectQ = BuildSelectRequest(queryParameters, QueryColumns);
             if (parentId!=Guid.Empty)
             {
-                Filters filterById = BuildFilterByParent(parentId, "Owner");
+                Filters filterById = BuildFilterByParent(parentId, childColumnName);
                 selectQ.Filters = filterById;
             }
 

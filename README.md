@@ -36,6 +36,7 @@ private static void WebSocketMessageReceived(object sender, WebSocketMessageRece
 ![Output](Img/Out.png)
 
 ### Define Contact Model
+- Note  **Activities** is a List<Activity>
 ```C#
 using Creatio.DataService.Attributes;
 using System;
@@ -59,6 +60,9 @@ namespace TestDataService.Model
 
         [RootSchemaName("Account")]
         public Account Account { get; set; }
+
+        [RootSchemaName("Activity")]
+        public List<Activity> Activities { get; set; }
     }
 }
 ```
@@ -88,7 +92,35 @@ namespace TestDataService.Model
 }
 ```
 
+### Define Activity Model
+Activity model is a list of Entities
+```C#
+using Creatio.DataService;
+using Creatio.DataService.Attributes;
+
+namespace TestDataService.Model
+{
+    [RootSchemaName("Activity")]
+    class Activity : BaseEntity
+    {
+        [QueryColumn("Title")]
+        public string Title { get; set; }
+
+        [QueryColumn("StartDate")]
+        public string StartDate { get; set; }
+
+        [QueryColumn("DueDate")]
+        public string DueDate { get; set; }
+
+        [RootSchemaName("Owner")]
+        public string Owner { get; set; }
+    }
+}
+
+```
+
 ### Get Entity by Id
+- Note that I need **SelectList** method to bring list of activities
 ```C#
 private static async Task ContactById(string ContactId) 
 {
@@ -103,6 +135,17 @@ private static async Task ContactById(string ContactId)
     Console.WriteLine($"Email: {currentUser.Email}");
     Console.WriteLine($"CreatedOn: {currentUser.CreatedOn}");
     Console.WriteLine($"Account: {currentUser.Account.Id}");
+    
+    Utils utils = Utils.Instance;
+    currentUser.Activities = await utils.SelectList<Activity>(currentUser.Id, "Owner");
+    foreach (Activity activity in currentUser.Activities) {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("");
+        Console.WriteLine($"\tTitle:{activity.Title} Start:{activity.StartDate} Ends:{activity.DueDate}");
+        Console.WriteLine($"Count of Activities: {currentUser.Activities.Count}");
+    }
+    Console.ForegroundColor = ConsoleColor.Green;
+
     Console.WriteLine("----------- END OF CURRENT USER -----------");
     Console.ResetColor();
 
