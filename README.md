@@ -43,11 +43,8 @@ using System;
 namespace TestDataService.Model
 {
     [RootSchemaName("Contact")]
-    class Contact
+    class Contact : BaseEntity
     {
-        [QueryColumn("Id")]
-        public Guid Id { get; set; }
-
         [QueryColumn("Name")]
         public string Name { get; set; }
         
@@ -74,11 +71,8 @@ using System;
 namespace TestDataService.Model
 {
     [RootSchemaName("Account")]
-    class Account
+    class Account : BaseEntity
     {
-        [QueryColumn("Id")]
-        public Guid Id { get; set; }
-
         [QueryColumn("Name")]
         public string Name { get; set; }
 
@@ -98,38 +92,40 @@ namespace TestDataService.Model
 ```C#
 private static async Task ContactById(string ContactId) 
 {
-    Utils utils = Utils.Instance;
-    List<Contact> CurrentUser = await utils.Select<Contact>(ContactId);
+    Contact currentUser = new Contact() { Id = Guid.Parse(ContactId) };
+    currentUser = await currentUser.Expnad<Contact>(currentUser.Id);
+            
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine();
     Console.WriteLine("----------- CURRENT USER SelectById -----------");
-    Console.WriteLine($"Id: {CurrentUser[0].Id}");
-    Console.WriteLine($"Name: {CurrentUser[0].Name}");
-    Console.WriteLine($"Email: {CurrentUser[0].Email}");
-    Console.WriteLine($"CreatedOn: {CurrentUser[0].CreatedOn}");
-    Console.WriteLine($"Account: {CurrentUser[0].Account.Id}");
+    Console.WriteLine($"Id: {currentUser.Id}");
+    Console.WriteLine($"Name: {currentUser.Name}");
+    Console.WriteLine($"Email: {currentUser.Email}");
+    Console.WriteLine($"CreatedOn: {currentUser.CreatedOn}");
+    Console.WriteLine($"Account: {currentUser.Account.Id}");
     Console.WriteLine("----------- END OF CURRENT USER -----------");
     Console.ResetColor();
 
-    List<Account> accounts = await utils.Select<Account>(CurrentUser[0].Account.Id.ToString());
+    Account account = await currentUser.Account.Expnad<Account>(currentUser.Account.Id);
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine();
     Console.WriteLine("----------- CURRENT USER / Account -----------");
-    Console.WriteLine($"Id: {accounts[0].Id}");
-    Console.WriteLine($"Name: {accounts[0].Name}");
-    Console.WriteLine($"Phone: {accounts[0].Phone}");
-    Console.WriteLine($"Web: {accounts[0].Web}");
-    Console.WriteLine($"Web: {accounts[0].PrimaryContact.Id}");
+    Console.WriteLine($"Id: {account.Id}");
+    Console.WriteLine($"Name: {account.Name}");
+    Console.WriteLine($"Phone: {account.Phone}");
+    Console.WriteLine($"Web: {account.Web}");
+    Console.WriteLine($"PrimaryContact: {account.PrimaryContact.Id}");
     Console.WriteLine("----------- END OF CURRENT USER / Account-----------");
     Console.ResetColor();
 
-    List<Contact> primaryContact = await utils.Select<Contact>(accounts[0].PrimaryContact.Id.ToString());
+            
+    Contact primaryContact = await account.Expnad<Contact>(account.PrimaryContact.Id);
     Console.ForegroundColor = ConsoleColor.Blue;
     Console.WriteLine();
     Console.WriteLine("----------- CURRENT USER / Account / PrimaryContact -----------");
-    Console.WriteLine($"Id: {primaryContact[0].Id}");
-    Console.WriteLine($"Name: {primaryContact[0].Name}");
-    Console.WriteLine($"Phone: {primaryContact[0].Email}");
+    Console.WriteLine($"Id: {primaryContact.Id}");
+    Console.WriteLine($"Name: {primaryContact.Name}");
+    Console.WriteLine($"Phone: {primaryContact.Email}");
     Console.WriteLine("----------- END OF CURRENT USER  / Account / PrimaryContact-----------");
     Console.ResetColor();
 }
