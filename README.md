@@ -35,7 +35,6 @@ private static void WebSocketMessageReceived(object sender, WebSocketMessageRece
 ```
 ![Output](Img/Out.png)
 
-![Output](Img/Out.png)
 ### Define Contact Model
 ```C#
 using Creatio.DataService.Attributes;
