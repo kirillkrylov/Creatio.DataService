@@ -962,7 +962,7 @@ namespace Creatio.DataService
             return result;
         }
         
-        public async Task<List<Entity>> SelectList<Entity>(Guid parentId = new Guid(), string childColumnName) where Entity : BaseEntity, new()
+        public async Task<List<Entity>> SelectList<Entity>(string childColumnName, Guid parentId = new Guid()) where Entity : BaseEntity, new()
         {
             Entity entity = new Entity();
 
@@ -1025,8 +1025,8 @@ namespace Creatio.DataService
                 selectQ.Filters = filterById;
             }
 
-            string json = string.Empty;
-            json = JsonConvert.SerializeObject(selectQ);
+            //string json = string.Empty;
+            string json = JsonConvert.SerializeObject(selectQ);
             RequestResponse requestResponse = await GetResponseAsync(json, ActionEnum.SELECT);
 
             List<Entity> result = BuildEntity<Entity>(requestResponse);

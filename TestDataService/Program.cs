@@ -51,7 +51,7 @@ namespace TestDataService
             Console.WriteLine($"Account: {currentUser.Account.Id}");
             
             Utils utils = Utils.Instance;
-            currentUser.Activities = await utils.SelectList<Activity>(currentUser.Id, "Owner");
+            currentUser.Activities = await utils.SelectList<Activity>("Owner", currentUser.Id);
             foreach (Activity activity in currentUser.Activities) {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("");
