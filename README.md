@@ -33,6 +33,7 @@ private static void WebSocketMessageReceived(object sender, WebSocketMessageRece
     Console.ResetColor();
 }
 ```
+![Output](Img/Out.png)
 
 ![Output](Img/Out.png)
 ### Define Contact Model
