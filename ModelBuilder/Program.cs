@@ -18,15 +18,6 @@ namespace ModelBuilder
         {
             if(args.Length >0) ReadArguments(args);
 
-            //RequestResponse rrr = Factory.Create<RequestResponse>();
-            //rrr.ErrorMessage = "";
-            //rrr.HttpStatusCode = HttpStatusCode.OK;
-            //rrr.Result = File.ReadAllText(@"C:\metadata.xml");
-
-            //await BuildModels(rrr.Result).ConfigureAwait(false);
-            //return;
-
-
             Utils utils = Utils.Instance;
             ConsoleWriter.WriteMessage(MessageType.Try, Properties.Resources.buildingMessage);
             try
