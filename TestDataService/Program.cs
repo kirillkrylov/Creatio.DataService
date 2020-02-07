@@ -12,9 +12,9 @@ namespace TestDataService
         static async Task Main()
         {
             Utils utils = Utils.Instance;
-            utils.SetCredentials("K.Krylov", "Zarelon01", "https://workacademy.creatio.com");
-            //utils.SetCredentials("Supervisor", "Supervisor", "http://k_krylov_nb:8070");
-            //utils.SetCredentials("Supervisor", "Supervisor", "https://work.creatio.com");
+            
+            utils.SetCredentials(Properties.Resources.UserName, Properties.Resources.Password,
+                Properties.Resources.Domain);
 
             if (await utils.LoginAsync()) {
                 
