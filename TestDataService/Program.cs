@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Creatio.DataService;
+using System;
 using System.Threading.Tasks;
-using Creatio.DataService;
-using Newtonsoft.Json;
-using TestDataService.Model;
+//using TestDataService.Model;
+using Creatio.DataService.Models;
+using System.Collections.Generic;
 
 namespace TestDataService
 {
@@ -13,12 +12,18 @@ namespace TestDataService
         static async Task Main()
         {
             Utils utils = Utils.Instance;
-            utils.SetCredentials("Kirill", "111", "https://023879-studio.creatio.com");
+            utils.SetCredentials("K.Krylov", "Zarelon01", "https://workacademy.creatio.com");
+            //utils.SetCredentials("Supervisor", "Supervisor", "http://k_krylov_nb:8070");
+            //utils.SetCredentials("Supervisor", "Supervisor", "https://work.creatio.com");
 
             if (await utils.LoginAsync()) {
-                utils.WebSocketMessageReceived += WebSocketMessageReceived;
-
+                
                 Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
+
+                utils.WebSocketMessageReceived += WebSocketMessageReceived;
+                Console.WriteLine("I have subscribed to WebSoketMessages");
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine();
                 var ContactId = utils.CurrentUser.Contact.Value;
                 await ContactById(ContactId);
                 //await AllContacts();
@@ -38,7 +43,7 @@ namespace TestDataService
 
         private static async Task ContactById(string ContactId) {
 
-            Contact currentUser = new Contact() { Id = Guid.Parse(ContactId) };
+            Contact currentUser = new Contact() { Id = Guid.Parse(ContactId)};
             currentUser = await currentUser.Expnad<Contact>(currentUser.Id);
             
             Console.ForegroundColor = ConsoleColor.Green;
@@ -48,43 +53,54 @@ namespace TestDataService
             Console.WriteLine($"Name: {currentUser.Name}");
             Console.WriteLine($"Email: {currentUser.Email}");
             Console.WriteLine($"CreatedOn: {currentUser.CreatedOn}");
-            Console.WriteLine($"Account: {currentUser.Account.Id}");
-            
-            Utils utils = Utils.Instance;
-            currentUser.Activities = await utils.SelectList<Activity>("Owner", currentUser.Id);
-            foreach (Activity activity in currentUser.Activities) {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("");
-                Console.WriteLine($"\tTitle:{activity.Title} Start:{activity.StartDate} Ends:{activity.DueDate}");
-                Console.WriteLine($"Count of Activities: {currentUser.Activities.Count}");
-            }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("----------- END OF CURRENT USER -----------");
             Console.ResetColor();
-            
-
-            Account account = await currentUser.Account.Expnad<Account>(currentUser.Account.Id);
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine();
-            Console.WriteLine("----------- CURRENT USER / Account -----------");
-            Console.WriteLine($"Id: {account.Id}");
-            Console.WriteLine($"Name: {account.Name}");
-            Console.WriteLine($"Phone: {account.Phone}");
-            Console.WriteLine($"Web: {account.Web}");
-            Console.WriteLine($"PrimaryContact: {account.PrimaryContact.Id}");
-            Console.WriteLine("----------- END OF CURRENT USER / Account-----------");
-            Console.ResetColor();
 
-            
-            Contact primaryContact = await account.Expnad<Contact>(account.PrimaryContact.Id);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine();
-            Console.WriteLine("----------- CURRENT USER / Account / PrimaryContact -----------");
-            Console.WriteLine($"Id: {primaryContact.Id}");
-            Console.WriteLine($"Name: {primaryContact.Name}");
-            Console.WriteLine($"Phone: {primaryContact.Email}");
-            Console.WriteLine("----------- END OF CURRENT USER  / Account / PrimaryContact-----------");
-            Console.ResetColor();
+
+            //List<ContactAddress> ca = await Utils.Instance.SelectAssociation<ContactAddress>(currentUser.Id.ToString(), currentUser.GetType().Name);
+
+            //currentUser.ContactAddressByContact = ca;
+            //currentUser.ExpandAllAssociations(nameof(currentUser.ContactAddressByContact));
+            currentUser.ExpandAllAssociations();
+            currentUser.ExpandAllNav();
+            //currentUser.ExpandAllNav(nameof(currentUser.Account), nameof(currentUser.Owner), 
+            //    nameof(currentUser.Country), nameof(currentUser.City));
+          
+            //Utils utils = Utils.Instance;
+            //currentUser.Activities = await utils.SelectList<Activity>("Owner", currentUser.Id);
+            //foreach (Activity activity in currentUser.Activities) {
+            //    Console.ForegroundColor = ConsoleColor.Yellow;
+            //    Console.WriteLine("");
+            //    Console.WriteLine($"\tTitle:{activity.Title} Start:{activity.StartDate} Ends:{activity.DueDate}");
+            //    Console.WriteLine($"Count of Activities: {currentUser.Activities.Count}");
+            //}
+            //Console.ForegroundColor = ConsoleColor.Green;
+            //Console.WriteLine("----------- END OF CURRENT USER -----------");
+            //Console.ResetColor();
+
+
+            //Account account = await currentUser.Account.Expnad<Account>(currentUser.Account.Id);
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.WriteLine();
+            //Console.WriteLine("----------- CURRENT USER / Account -----------");
+            //Console.WriteLine($"Id: {account.Id}");
+            //Console.WriteLine($"Name: {account.Name}");
+            //Console.WriteLine($"Phone: {account.Phone}");
+            //Console.WriteLine($"Web: {account.Web}");
+            //Console.WriteLine($"PrimaryContact: {account.PrimaryContact.Id}");
+            //Console.WriteLine("----------- END OF CURRENT USER / Account-----------");
+            //Console.ResetColor();
+
+
+            //Contact primaryContact = await account.Expnad<Contact>(account.PrimaryContact.Id);
+            //Console.ForegroundColor = ConsoleColor.Blue;
+            //Console.WriteLine();
+            //Console.WriteLine("----------- CURRENT USER / Account / PrimaryContact -----------");
+            //Console.WriteLine($"Id: {primaryContact.Id}");
+            //Console.WriteLine($"Name: {primaryContact.Name}");
+            //Console.WriteLine($"Phone: {primaryContact.Email}");
+            //Console.WriteLine("----------- END OF CURRENT USER  / Account / PrimaryContact-----------");
+            //Console.ResetColor();
         }
 
         /* Unused Methods

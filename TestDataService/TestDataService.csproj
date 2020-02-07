@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Creatio.DataService\Creatio.DataService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="GeneratedModels\" />
+  </ItemGroup>
+
 </Project>

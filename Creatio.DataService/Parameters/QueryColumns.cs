@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Creatio.DataService.Parameters
 {
+
+    [DebuggerDisplay("Path: {ColumnPath} Caption:{Caption}")]
     class QueryColumn
     {
 

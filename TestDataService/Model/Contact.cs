@@ -8,7 +8,6 @@ namespace TestDataService.Model
     [RootSchemaName("Contact")]
     class Contact : BaseEntity
     {
-
         [QueryColumn("Name")]
         public string Name { get; set; }
         
