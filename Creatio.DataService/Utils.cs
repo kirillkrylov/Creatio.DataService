@@ -1059,7 +1059,6 @@ namespace Creatio.DataService
             return result;
         }
 
-
         public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName="") where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();

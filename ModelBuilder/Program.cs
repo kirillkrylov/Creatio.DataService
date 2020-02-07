@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,6 +14,7 @@ namespace ModelBuilder
     class Program
     {
         const string clioJson = @"\creatio\clio\appsettings.json";
+        public static string requestedEnvironment = string.Empty;
 
         static async Task Main(string[] args)
         {
@@ -69,7 +71,6 @@ namespace ModelBuilder
                 if (keyInfo.Key == ConsoleKey.Escape)
                 {
                     ConsoleWriter.WriteMessage(MessageType.Info, Properties.Resources.exitMessage);
-                    
                 }
                 else {
                     ConsoleWriter.WriteMessage(MessageType.Info, Properties.Resources.waitMessage);
@@ -83,18 +84,16 @@ namespace ModelBuilder
             }
         }
 
-
         private static void ReadArguments(string[] args) {
 
             if (args.Contains("-e"))
             {
                 int eIndex = Array.IndexOf(args, "-e");
-
-                //if (args.Length > eIndex) defaultEnvironemnt = args[eIndex + 1];
+                if (args.Length - 1 >= eIndex+1) {
+                    requestedEnvironment = args[eIndex + 1].ToString(CultureInfo.InvariantCulture);
+                }
             }
         }
-
-
 
         /// <summary>
         /// Get UserName, Password and URI for Clio ActiveEnvironment
@@ -104,15 +103,17 @@ namespace ModelBuilder
             IConnectionString cs = Factory.Create<ConnectionString>();
 
             string appdata = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}{clioJson}";
-
             if (!File.Exists(appdata)) {
                 throw new FileNotFoundException(Properties.Resources.fileNotFoundMessage, appdata);
             }
 
             string jsonFile = File.ReadAllText(appdata);
-            JObject j = JsonConvert.DeserializeObject<JObject>(jsonFile);
+            JObject j = JsonConvert.DeserializeObject<JObject>(jsonFile);          
             JToken activeEnvironmentKey = j.SelectToken("ActiveEnvironmentKey");
             string env = activeEnvironmentKey.Value<string>();
+
+            if (!string.IsNullOrEmpty(requestedEnvironment) || !string.IsNullOrWhiteSpace(requestedEnvironment))
+                env = requestedEnvironment;
 
             cs.Username = j.SelectToken($"Environments.{env}.Login").Value<string>();
             cs.Password = j.SelectToken($"Environments.{env}.Password").Value<string>();

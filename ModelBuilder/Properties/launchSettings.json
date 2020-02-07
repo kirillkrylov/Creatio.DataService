@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ModelBuilder": {
+      "commandName": "Project",
+      "commandLineArgs": "-e work"
+    }
+  }
+}
