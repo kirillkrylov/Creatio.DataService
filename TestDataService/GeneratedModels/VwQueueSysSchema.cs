@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Queue:QueueEntitySchemaId")]
 		public virtual ICollection<Queue> QueueByQueueEntitySchema { get; set; }
+		[CProperty(Association ="VwQueueItemSuper:QueueEntitySchemaId")]
+		public virtual ICollection<VwQueueItemSuper> VwQueueItemSuperByQueueEntitySchema { get; set; }
 		#endregion
 	}
 }

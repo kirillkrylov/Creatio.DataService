@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="PRMTransaction:TransactionTypeId")]
 		public virtual ICollection<PRMTransaction> PRMTransactionByTransactionType { get; set; }
+		[CProperty(Association ="PRMTransactionHistory:TransactionTypeId")]
+		public virtual ICollection<PRMTransactionHistory> PRMTransactionHistoryByTransactionType { get; set; }
 		#endregion
 	}
 }

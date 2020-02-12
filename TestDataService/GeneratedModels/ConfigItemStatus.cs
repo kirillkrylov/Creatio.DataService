@@ -9,6 +9,8 @@ namespace Creatio.DataService.Models
 		#region Values
 		[CProperty(ColumnPath ="Active")]
 		public bool Active { get; set; }
+		[CProperty(ColumnPath ="Code")]
+		public string Code { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
@@ -17,6 +19,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsEnabled")]
+		public bool IsEnabled { get; set; }
 		[CProperty(ColumnPath ="IsFinal")]
 		public bool IsFinal { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

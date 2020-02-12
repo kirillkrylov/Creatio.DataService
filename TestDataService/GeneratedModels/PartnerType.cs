@@ -35,10 +35,14 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Lead:PartnerTypeId")]
 		public virtual ICollection<Lead> LeadByPartnerType { get; set; }
+		[CProperty(Association ="Opportunity:PartnerTypeId")]
+		public virtual ICollection<Opportunity> OpportunityByPartnerType { get; set; }
 		[CProperty(Association ="PartnerLevel:PartnerTypeId")]
 		public virtual ICollection<PartnerLevel> PartnerLevelByPartnerType { get; set; }
 		[CProperty(Association ="Partnership:PartnerTypeId")]
 		public virtual ICollection<Partnership> PartnershipByPartnerType { get; set; }
+		[CProperty(Association ="VwLead:PartnerTypeId")]
+		public virtual ICollection<VwLead> VwLeadByPartnerType { get; set; }
 		#endregion
 	}
 }

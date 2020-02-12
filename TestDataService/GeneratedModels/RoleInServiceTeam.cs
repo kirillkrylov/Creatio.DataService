@@ -41,6 +41,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<CaseLifecycle> CaseLifecycleBySupportLevel { get; set; }
 		[CProperty(Association ="ServiceEngineer:SupportLevelId")]
 		public virtual ICollection<ServiceEngineer> ServiceEngineerBySupportLevel { get; set; }
+		[CProperty(Association ="SupCloudCaseDefValue:SupSupportLevelId")]
+		public virtual ICollection<SupCloudCaseDefValue> SupCloudCaseDefValueBySupSupportLevel { get; set; }
 		#endregion
 	}
 }

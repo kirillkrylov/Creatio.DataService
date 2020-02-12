@@ -15,6 +15,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsActive")]
+		public bool IsActive { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -41,6 +43,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Lead> LeadByDecisionRole { get; set; }
 		[CProperty(Association ="LeadQualification:DecisionRoleId")]
 		public virtual ICollection<LeadQualification> LeadQualificationByDecisionRole { get; set; }
+		[CProperty(Association ="VwEventInContact:DecisionRoleId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByDecisionRole { get; set; }
+		[CProperty(Association ="VwLead:DecisionRoleId")]
+		public virtual ICollection<VwLead> VwLeadByDecisionRole { get; set; }
 		#endregion
 	}
 }

@@ -23,6 +23,8 @@ namespace Creatio.DataService.Models
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsCreatedBySynchronization")]
 		public bool IsCreatedBySynchronization { get; set; }
+		[CProperty(ColumnPath ="IsPrimary")]
+		public bool IsPrimary { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]

@@ -21,6 +21,8 @@ namespace Creatio.DataService.Models
 		public int FirePeriod { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="INFLUSync")]
+		public bool INFLUSync { get; set; }
 		[CProperty(ColumnPath ="InProgress")]
 		public bool InProgress { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
@@ -115,6 +117,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Event> EventByCampaign { get; set; }
 		[CProperty(Association ="Lead:CampaignId")]
 		public virtual ICollection<Lead> LeadByCampaign { get; set; }
+		[CProperty(Association ="Opportunity:CampaignId")]
+		public virtual ICollection<Opportunity> OpportunityByCampaign { get; set; }
 		[CProperty(Association ="VwBulkEmailInCampaign:CampaignId")]
 		public virtual ICollection<VwBulkEmailInCampaign> VwBulkEmailInCampaignByCampaign { get; set; }
 		[CProperty(Association ="VwCampaignLog:CampaignId")]
@@ -125,6 +129,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<VwFolderInCampaign> VwFolderInCampaignByCampaign { get; set; }
 		[CProperty(Association ="VwLandingInCampaign:CampaignId")]
 		public virtual ICollection<VwLandingInCampaign> VwLandingInCampaignByCampaign { get; set; }
+		[CProperty(Association ="VwLead:CampaignId")]
+		public virtual ICollection<VwLead> VwLeadByCampaign { get; set; }
 		#endregion
 	}
 }

@@ -11,6 +11,8 @@ namespace Creatio.DataService.Models
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
+		[CProperty(ColumnPath ="FileData")]
+		public byte[] FileData { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="ImportEntities")]
@@ -23,6 +25,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="Size")]
+		public int Size { get; set; }
 		[CProperty(ColumnPath ="Stage")]
 		public int Stage { get; set; }
 		#endregion

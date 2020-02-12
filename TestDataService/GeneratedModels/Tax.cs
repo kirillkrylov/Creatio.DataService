@@ -37,6 +37,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="DocumentProduct:TaxId")]
 		public virtual ICollection<DocumentProduct> DocumentProductByTax { get; set; }
+		[CProperty(Association ="ExesInRequest:TaxId")]
+		public virtual ICollection<ExesInRequest> ExesInRequestByTax { get; set; }
 		[CProperty(Association ="InvoiceProduct:TaxId")]
 		public virtual ICollection<InvoiceProduct> InvoiceProductByTax { get; set; }
 		[CProperty(Association ="OrderProduct:TaxId")]
@@ -47,6 +49,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ProductPrice> ProductPriceByTax { get; set; }
 		[CProperty(Association ="ProjectProduct:TaxId")]
 		public virtual ICollection<ProjectProduct> ProjectProductByTax { get; set; }
+		[CProperty(Association ="SupplyPaymentElement:TaxId")]
+		public virtual ICollection<SupplyPaymentElement> SupplyPaymentElementByTax { get; set; }
+		[CProperty(Association ="TaxByCountry:TaxId")]
+		public virtual ICollection<TaxByCountry> TaxByCountryByTax { get; set; }
 		[CProperty(Association ="VwDocumentProduct:TaxId")]
 		public virtual ICollection<VwDocumentProduct> VwDocumentProductByTax { get; set; }
 		[CProperty(Association ="VwInvoiceProduct:TaxId")]

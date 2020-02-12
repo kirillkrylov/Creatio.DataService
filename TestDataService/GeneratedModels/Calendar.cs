@@ -57,12 +57,16 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<DayInCalendar> DayInCalendarByCalendar { get; set; }
 		[CProperty(Association ="DayOff:CalendarId")]
 		public virtual ICollection<DayOff> DayOffByCalendar { get; set; }
+		[CProperty(Association ="ServiceCalendar:CalendarId")]
+		public virtual ICollection<ServiceCalendar> ServiceCalendarByCalendar { get; set; }
 		[CProperty(Association ="ServiceInServicePact:CalendarId")]
 		public virtual ICollection<ServiceInServicePact> ServiceInServicePactByCalendar { get; set; }
 		[CProperty(Association ="ServiceItem:CalendarId")]
 		public virtual ICollection<ServiceItem> ServiceItemByCalendar { get; set; }
 		[CProperty(Association ="ServicePact:CalendarId")]
 		public virtual ICollection<ServicePact> ServicePactByCalendar { get; set; }
+		[CProperty(Association ="VwProductSLA:CalendarId")]
+		public virtual ICollection<VwProductSLA> VwProductSLAByCalendar { get; set; }
 		#endregion
 	}
 }

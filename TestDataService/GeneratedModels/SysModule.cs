@@ -87,12 +87,16 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="DefaultReport:SysModuleId")]
+		public virtual ICollection<DefaultReport> DefaultReportBySysModule { get; set; }
 		[CProperty(Association ="MessageNotifierBySection:SectionId")]
 		public virtual ICollection<MessageNotifierBySection> MessageNotifierBySectionBySection { get; set; }
 		[CProperty(Association ="MessagePublisherBySection:SectionId")]
 		public virtual ICollection<MessagePublisherBySection> MessagePublisherBySectionBySection { get; set; }
 		[CProperty(Association ="ProcessInModules:SysModuleId")]
 		public virtual ICollection<ProcessInModules> ProcessInModulesBySysModule { get; set; }
+		[CProperty(Association ="PtGanttSetting:SectionId")]
+		public virtual ICollection<PtGanttSetting> PtGanttSettingBySection { get; set; }
 		[CProperty(Association ="SysAdminUnit:HomePageId")]
 		public virtual ICollection<SysAdminUnit> SysAdminUnitByHomePage { get; set; }
 		[CProperty(Association ="SysDashboard:SectionId")]

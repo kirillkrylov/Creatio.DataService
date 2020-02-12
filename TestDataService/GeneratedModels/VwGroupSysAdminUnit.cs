@@ -11,6 +11,8 @@ namespace Creatio.DataService.Models
 		public Guid AccountId { get; set; }
 		[CProperty(ColumnPath ="Active")]
 		public bool Active { get; set; }
+		[CProperty(ColumnPath ="AdminUnitCategoryId")]
+		public Guid AdminUnitCategoryId { get; set; }
 		[CProperty(ColumnPath ="ConnectionType")]
 		public int ConnectionType { get; set; }
 		[CProperty(ColumnPath ="ContactId")]
@@ -88,6 +90,8 @@ namespace Creatio.DataService.Models
 		public Contact Contact { get; set; }
 		[CProperty(Navigation ="LDAPElement:LDAPElementId")]
 		public LDAPElement LDAPElement { get; set; }
+		[CProperty(Navigation ="SysAdminUnitCategory:AdminUnitCategoryId")]
+		public SysAdminUnitCategory AdminUnitCategory { get; set; }
 		[CProperty(Navigation ="SysCulture:SysCultureId")]
 		public SysCulture SysCulture { get; set; }
 		[CProperty(Navigation ="SysLanguage:DateTimeFormatId")]

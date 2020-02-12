@@ -25,6 +25,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="SysEditPageSchemaUId")]
@@ -47,6 +49,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="BonusScheme:SysLookupId")]
+		public virtual ICollection<BonusScheme> BonusSchemeBySysLookup { get; set; }
 		[CProperty(Association ="CampaignLogItemType:SysLookupId")]
 		public virtual ICollection<CampaignLogItemType> CampaignLogItemTypeBySysLookup { get; set; }
 		[CProperty(Association ="ContentBuilderFontSet:SysLookupId")]
@@ -55,6 +59,20 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<DeduplicateOperation> DeduplicateOperationBySysLookup { get; set; }
 		[CProperty(Association ="Lookup:SysLookupId")]
 		public virtual ICollection<Lookup> LookupBySysLookup { get; set; }
+		[CProperty(Association ="MarketplaceDeveloperCategory:SysLookupId")]
+		public virtual ICollection<MarketplaceDeveloperCategory> MarketplaceDeveloperCategoryBySysLookup { get; set; }
+		[CProperty(Association ="MarketplaceProductCategory:SysLookupId")]
+		public virtual ICollection<MarketplaceProductCategory> MarketplaceProductCategoryBySysLookup { get; set; }
+		[CProperty(Association ="MarketplaceSite:SysLookupId")]
+		public virtual ICollection<MarketplaceSite> MarketplaceSiteBySysLookup { get; set; }
+		[CProperty(Association ="MkpFunctionalDomain:SysLookupId")]
+		public virtual ICollection<MkpFunctionalDomain> MkpFunctionalDomainBySysLookup { get; set; }
+		[CProperty(Association ="OrderPayer:SysLookupId")]
+		public virtual ICollection<OrderPayer> OrderPayerBySysLookup { get; set; }
+		[CProperty(Association ="PartnerProjectRole:SysLookupId")]
+		public virtual ICollection<PartnerProjectRole> PartnerProjectRoleBySysLookup { get; set; }
+		[CProperty(Association ="PartnerSegment:SysLookupId")]
+		public virtual ICollection<PartnerSegment> PartnerSegmentBySysLookup { get; set; }
 		[CProperty(Association ="RuleRelationSections:SysLookupId")]
 		public virtual ICollection<RuleRelationSections> RuleRelationSectionsBySysLookup { get; set; }
 		[CProperty(Association ="SysLookupColumn:SysLookupId")]

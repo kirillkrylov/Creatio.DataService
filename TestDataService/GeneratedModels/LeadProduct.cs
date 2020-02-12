@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class LeadProduct : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="Cost")]
+		public decimal Cost { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
@@ -19,10 +21,14 @@ namespace Creatio.DataService.Models
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
 		public DateTime ModifiedOn { get; set; }
+		[CProperty(ColumnPath ="Period")]
+		public int Period { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="ProductId")]
 		public Guid ProductId { get; set; }
+		[CProperty(ColumnPath ="Quantity")]
+		public int Quantity { get; set; }
 		#endregion
 
 		#region Navigation

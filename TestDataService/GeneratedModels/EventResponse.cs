@@ -21,6 +21,10 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
+		[CProperty(ColumnPath ="Position")]
+		public int Position { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		#endregion
@@ -33,8 +37,12 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="EventResponseChangeLog:EventResponseId")]
+		public virtual ICollection<EventResponseChangeLog> EventResponseChangeLogByEventResponse { get; set; }
 		[CProperty(Association ="EventTarget:EventResponseId")]
 		public virtual ICollection<EventTarget> EventTargetByEventResponse { get; set; }
+		[CProperty(Association ="VwEventInContact:EventResponseId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByEventResponse { get; set; }
 		#endregion
 	}
 }

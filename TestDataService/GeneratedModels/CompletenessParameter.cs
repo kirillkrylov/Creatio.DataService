@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="Percentage")]
 		public int Percentage { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]

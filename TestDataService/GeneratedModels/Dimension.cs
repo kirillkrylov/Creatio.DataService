@@ -37,6 +37,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="ForecastDimension:DimensionId")]
 		public virtual ICollection<ForecastDimension> ForecastDimensionByDimension { get; set; }
+		[CProperty(Association ="VwForecastDashboarData:DimensionId")]
+		public virtual ICollection<VwForecastDashboarData> VwForecastDashboarDataByDimension { get; set; }
 		#endregion
 	}
 }

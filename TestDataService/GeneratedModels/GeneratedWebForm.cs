@@ -25,6 +25,8 @@ namespace Creatio.DataService.Models
 		public string FormFields { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="LendingCategoryId")]
+		public Guid LendingCategoryId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -54,11 +56,15 @@ namespace Creatio.DataService.Models
 		public Contact Owner { get; set; }
 		[CProperty(Navigation ="LandingType:TypeId")]
 		public LandingType Type { get; set; }
+		[CProperty(Navigation ="LendingCategory:LendingCategoryId")]
+		public LendingCategory LendingCategory { get; set; }
 		[CProperty(Navigation ="LendingState:StateId")]
 		public LendingState State { get; set; }
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="BpmPreferences:BpmLandingId")]
+		public virtual ICollection<BpmPreferences> BpmPreferencesByBpmLanding { get; set; }
 		[CProperty(Association ="EventTarget:GeneratedWebFormId")]
 		public virtual ICollection<EventTarget> EventTargetByGeneratedWebForm { get; set; }
 		[CProperty(Association ="GeneratedWebFormFile:GeneratedWebFormId")]
@@ -75,6 +81,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Lead> LeadByWebForm { get; set; }
 		[CProperty(Association ="VwLandingInCampaign:LandingId")]
 		public virtual ICollection<VwLandingInCampaign> VwLandingInCampaignByLanding { get; set; }
+		[CProperty(Association ="VwLead:WebFormId")]
+		public virtual ICollection<VwLead> VwLeadByWebForm { get; set; }
 		#endregion
 	}
 }

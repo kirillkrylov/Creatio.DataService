@@ -23,10 +23,14 @@ namespace Creatio.DataService.Models
 		public Guid FundId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="InvoiceId")]
+		public Guid InvoiceId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
 		public DateTime ModifiedOn { get; set; }
+		[CProperty(ColumnPath ="PartnerAccountId")]
+		public Guid PartnerAccountId { get; set; }
 		[CProperty(ColumnPath ="PartnershipId")]
 		public Guid PartnershipId { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
@@ -38,12 +42,16 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Navigation
+		[CProperty(Navigation ="Account:PartnerAccountId")]
+		public Account PartnerAccount { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
 		[CProperty(Navigation ="Fund:FundId")]
 		public Fund Fund { get; set; }
+		[CProperty(Navigation ="Invoice:InvoiceId")]
+		public Invoice Invoice { get; set; }
 		[CProperty(Navigation ="Partnership:PartnershipId")]
 		public Partnership Partnership { get; set; }
 		[CProperty(Navigation ="PRMTransactionType:TransactionTypeId")]

@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="EducationActivity:EducationActivityResultId")]
 		public virtual ICollection<EducationActivity> EducationActivityByEducationActivityResult { get; set; }
+		[CProperty(Association ="Employee:ExamResultId")]
+		public virtual ICollection<Employee> EmployeeByExamResult { get; set; }
 		#endregion
 	}
 }

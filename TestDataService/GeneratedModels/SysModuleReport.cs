@@ -61,6 +61,12 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="Contract:PrintableId")]
+		public virtual ICollection<Contract> ContractByPrintable { get; set; }
+		[CProperty(Association ="DefaultReport:SysModuleReportId")]
+		public virtual ICollection<DefaultReport> DefaultReportBySysModuleReport { get; set; }
+		[CProperty(Association ="Invoice:PrintableId")]
+		public virtual ICollection<Invoice> InvoiceByPrintable { get; set; }
 		[CProperty(Association ="SysModuleReportInPackage:SysModuleReportId")]
 		public virtual ICollection<SysModuleReportInPackage> SysModuleReportInPackageBySysModuleReport { get; set; }
 		[CProperty(Association ="SysModuleReportLczOld:RecordId")]

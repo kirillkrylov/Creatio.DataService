@@ -15,6 +15,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsActive")]
+		public bool IsActive { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -33,8 +35,12 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="AccountType:ContactTypeId")]
+		public virtual ICollection<AccountType> AccountTypeByContactType { get; set; }
 		[CProperty(Association ="Contact:TypeId")]
 		public virtual ICollection<Contact> ContactByType { get; set; }
+		[CProperty(Association ="VwEventInContact:TypeId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByType { get; set; }
 		#endregion
 	}
 }

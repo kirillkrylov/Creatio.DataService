@@ -47,6 +47,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SpecificationInObject> SpecificationInObjectByListItemValue { get; set; }
 		[CProperty(Association ="SpecificationInProduct:ListItemValueId")]
 		public virtual ICollection<SpecificationInProduct> SpecificationInProductByListItemValue { get; set; }
+		[CProperty(Association ="SpecInContract:ListItemValueId")]
+		public virtual ICollection<SpecInContract> SpecInContractByListItemValue { get; set; }
 		#endregion
 	}
 }

@@ -73,8 +73,14 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<EmailTemplate> EmailTemplateByObject { get; set; }
 		[CProperty(Association ="LandingType:SchemaUidId")]
 		public virtual ICollection<LandingType> LandingTypeBySchemaUid { get; set; }
+		[CProperty(Association ="PaymentRule:PayForSchemaId")]
+		public virtual ICollection<PaymentRule> PaymentRuleByPayForSchema { get; set; }
 		[CProperty(Association ="SearchSetting:SearchEntityId")]
 		public virtual ICollection<SearchSetting> SearchSettingBySearchEntity { get; set; }
+		[CProperty(Association ="SupPreCreatePageSetting:SupPreCreateEditPageId")]
+		public virtual ICollection<SupPreCreatePageSetting> SupPreCreatePageSettingBySupPreCreateEditPage { get; set; }
+		[CProperty(Association ="SupPreCreatePageSetting:SupEntitySchemaId")]
+		public virtual ICollection<SupPreCreatePageSetting> SupPreCreatePageSettingBySupEntitySchema { get; set; }
 		[CProperty(Association ="VwIsolatedRecord:EntitySchemaId")]
 		public virtual ICollection<VwIsolatedRecord> VwIsolatedRecordByEntitySchema { get; set; }
 		[CProperty(Association ="VwSysLookup:SysGridPageSchemaUId")]

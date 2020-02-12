@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class EducationActivity : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="CategoryId")]
+		public Guid CategoryId { get; set; }
 		[CProperty(ColumnPath ="ContactId")]
 		public Guid ContactId { get; set; }
 		[CProperty(ColumnPath ="Cost")]
@@ -46,6 +48,8 @@ namespace Creatio.DataService.Models
 		public Contact ModifiedBy { get; set; }
 		[CProperty(Navigation ="Contact:ContactId")]
 		public Contact Contact { get; set; }
+		[CProperty(Navigation ="EduActivityCategory:CategoryId")]
+		public EduActivityCategory Category { get; set; }
 		[CProperty(Navigation ="EduActivityResult:EducationActivityResultId")]
 		public EduActivityResult EducationActivityResult { get; set; }
 		[CProperty(Navigation ="EduActivityStatus:StatusOfActivityId")]

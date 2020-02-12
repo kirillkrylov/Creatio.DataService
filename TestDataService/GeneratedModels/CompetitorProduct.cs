@@ -23,6 +23,8 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		[CProperty(ColumnPath ="Strengths")]
 		public string Strengths { get; set; }
 		[CProperty(ColumnPath ="Weakness")]
@@ -39,10 +41,12 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="LeadCompetitor:CompetitorProductId")]
+		public virtual ICollection<LeadCompetitor> LeadCompetitorByCompetitorProduct { get; set; }
 		[CProperty(Association ="OpportunityCompetitor:CompetitorProductId")]
 		public virtual ICollection<OpportunityCompetitor> OpportunityCompetitorByCompetitorProduct { get; set; }
-		[CProperty(Association ="tsaTermVariant:tsaCompetitorId")]
-		public virtual ICollection<tsaTermVariant> tsaTermVariantBytsaCompetitor { get; set; }
+		[CProperty(Association ="PDEClientCaseMigration:PDECompetitorProductId")]
+		public virtual ICollection<PDEClientCaseMigration> PDEClientCaseMigrationByPDECompetitorProduct { get; set; }
 		#endregion
 	}
 }

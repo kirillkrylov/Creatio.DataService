@@ -11,6 +11,8 @@ namespace Creatio.DataService.Models
 		public Guid CalendarId { get; set; }
 		[CProperty(ColumnPath ="CaseCategoryId")]
 		public Guid CaseCategoryId { get; set; }
+		[CProperty(ColumnPath ="CaseSourceId")]
+		public Guid CaseSourceId { get; set; }
 		[CProperty(ColumnPath ="CategoryId")]
 		public Guid CategoryId { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
@@ -52,6 +54,8 @@ namespace Creatio.DataService.Models
 		public Calendar Calendar { get; set; }
 		[CProperty(Navigation ="CaseCategory:CaseCategoryId")]
 		public CaseCategory CaseCategory { get; set; }
+		[CProperty(Navigation ="CaseOrigin:CaseSourceId")]
+		public CaseOrigin CaseSource { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
@@ -73,12 +77,16 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Case> CaseByServiceItem { get; set; }
 		[CProperty(Association ="CaseLifecycle:ServiceItemId")]
 		public virtual ICollection<CaseLifecycle> CaseLifecycleByServiceItem { get; set; }
+		[CProperty(Association ="CaseSourceInService:ServiceItemId")]
+		public virtual ICollection<CaseSourceInService> CaseSourceInServiceByServiceItem { get; set; }
 		[CProperty(Association ="ChangeServiceItem:ServiceItemId")]
 		public virtual ICollection<ChangeServiceItem> ChangeServiceItemByServiceItem { get; set; }
 		[CProperty(Association ="Problem:ServiceItemId")]
 		public virtual ICollection<Problem> ProblemByServiceItem { get; set; }
 		[CProperty(Association ="ReleaseServiceItem:ServiceItemId")]
 		public virtual ICollection<ReleaseServiceItem> ReleaseServiceItemByServiceItem { get; set; }
+		[CProperty(Association ="ServiceCategoryInService:ServiceItemId")]
+		public virtual ICollection<ServiceCategoryInService> ServiceCategoryInServiceByServiceItem { get; set; }
 		[CProperty(Association ="ServiceEngineer:ServiceItemId")]
 		public virtual ICollection<ServiceEngineer> ServiceEngineerByServiceItem { get; set; }
 		[CProperty(Association ="ServiceInConfItem:ServiceItemId")]
@@ -95,6 +103,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ServiceRelationship> ServiceRelationshipByServiceItemA { get; set; }
 		[CProperty(Association ="ServiceRelationship:ServiceItemBId")]
 		public virtual ICollection<ServiceRelationship> ServiceRelationshipByServiceItemB { get; set; }
+		[CProperty(Association ="SupCloudCaseDefValue:SupServiceItemId")]
+		public virtual ICollection<SupCloudCaseDefValue> SupCloudCaseDefValueBySupServiceItem { get; set; }
+		[CProperty(Association ="VwCaseDashboard:ServiceItemId")]
+		public virtual ICollection<VwCaseDashboard> VwCaseDashboardByServiceItem { get; set; }
 		[CProperty(Association ="VwServiceInConfItem:ServiceItemId")]
 		public virtual ICollection<VwServiceInConfItem> VwServiceInConfItemByServiceItem { get; set; }
 		[CProperty(Association ="VwServiceRecepients:ServiceId")]
@@ -103,6 +115,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<VwServiceRelationship> VwServiceRelationshipByServiceItemA { get; set; }
 		[CProperty(Association ="VwServiceRelationship:ServiceItemBId")]
 		public virtual ICollection<VwServiceRelationship> VwServiceRelationshipByServiceItemB { get; set; }
+		[CProperty(Association ="WorkTeamCityBuild:ServiceItemId")]
+		public virtual ICollection<WorkTeamCityBuild> WorkTeamCityBuildByServiceItem { get; set; }
 		#endregion
 	}
 }

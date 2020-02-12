@@ -17,6 +17,10 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="ISOCode")]
+		public string ISOCode { get; set; }
+		[CProperty(ColumnPath ="IsRestricted")]
+		public bool IsRestricted { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -25,6 +29,8 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		[CProperty(ColumnPath ="TimeZoneId")]
 		public Guid TimeZoneId { get; set; }
 		#endregion
@@ -45,6 +51,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Account> AccountByRegion { get; set; }
 		[CProperty(Association ="AccountAddress:RegionId")]
 		public virtual ICollection<AccountAddress> AccountAddressByRegion { get; set; }
+		[CProperty(Association ="AccountBillingInfo:RegionId")]
+		public virtual ICollection<AccountBillingInfo> AccountBillingInfoByRegion { get; set; }
 		[CProperty(Association ="City:RegionId")]
 		public virtual ICollection<City> CityByRegion { get; set; }
 		[CProperty(Association ="ConfItem:RegionId")]
@@ -63,8 +71,18 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<LeadQualification> LeadQualificationByLeadContactRegion { get; set; }
 		[CProperty(Association ="LeadQualification:LeadAccountRegionId")]
 		public virtual ICollection<LeadQualification> LeadQualificationByLeadAccountRegion { get; set; }
+		[CProperty(Association ="ScreenResult:RegionId")]
+		public virtual ICollection<ScreenResult> ScreenResultByRegion { get; set; }
+		[CProperty(Association ="TaxByCountry:SupplierRegionId")]
+		public virtual ICollection<TaxByCountry> TaxByCountryBySupplierRegion { get; set; }
+		[CProperty(Association ="TaxByCountry:CustomerRegionId")]
+		public virtual ICollection<TaxByCountry> TaxByCountryByCustomerRegion { get; set; }
 		[CProperty(Association ="VwClientAddress:RegionId")]
 		public virtual ICollection<VwClientAddress> VwClientAddressByRegion { get; set; }
+		[CProperty(Association ="VwEventInContact:RegionId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByRegion { get; set; }
+		[CProperty(Association ="VwLead:RegionId")]
+		public virtual ICollection<VwLead> VwLeadByRegion { get; set; }
 		#endregion
 	}
 }

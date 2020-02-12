@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class ConfigItemType : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="Code")]
+		public string Code { get; set; }
 		[CProperty(ColumnPath ="ConfItemCategoryId")]
 		public Guid ConfItemCategoryId { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
@@ -17,6 +19,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsEnabled")]
+		public bool IsEnabled { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]

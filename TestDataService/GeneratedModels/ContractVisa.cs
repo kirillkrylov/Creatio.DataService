@@ -61,6 +61,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="ContractVisasList:ContractVisaId")]
+		public virtual ICollection<ContractVisasList> ContractVisasListByContractVisa { get; set; }
 		#endregion
 	}
 }

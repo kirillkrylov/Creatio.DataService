@@ -113,6 +113,8 @@ namespace Creatio.DataService.Models
 		public DateTime CreatedOn { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="ImportExcelRowIndex")]
+		public int ImportExcelRowIndex { get; set; }
 		[CProperty(ColumnPath ="ImportSessionId")]
 		public Guid ImportSessionId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

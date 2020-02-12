@@ -47,6 +47,12 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Case:SatisfactionLevelId")]
 		public virtual ICollection<Case> CaseBySatisfactionLevel { get; set; }
+		[CProperty(Association ="CaseLifecycle:SatisfactionLevelId")]
+		public virtual ICollection<CaseLifecycle> CaseLifecycleBySatisfactionLevel { get; set; }
+		[CProperty(Association ="Change:SatisfactionLevelId")]
+		public virtual ICollection<Change> ChangeBySatisfactionLevel { get; set; }
+		[CProperty(Association ="VwChange:SatisfactionLevelId")]
+		public virtual ICollection<VwChange> VwChangeBySatisfactionLevel { get; set; }
 		#endregion
 	}
 }

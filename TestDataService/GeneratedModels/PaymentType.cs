@@ -21,8 +21,12 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="UseInFinanceRequest")]
+		public bool UseInFinanceRequest { get; set; }
 		#endregion
 
 		#region Navigation
@@ -33,8 +37,14 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="ExesInRequest:PaymentTypeId")]
+		public virtual ICollection<ExesInRequest> ExesInRequestByPaymentType { get; set; }
+		[CProperty(Association ="Invoice:PaymentTypeId")]
+		public virtual ICollection<Invoice> InvoiceByPaymentType { get; set; }
 		[CProperty(Association ="Order:PaymentTypeId")]
 		public virtual ICollection<Order> OrderByPaymentType { get; set; }
+		[CProperty(Association ="RequestExes:PaymentTypeId")]
+		public virtual ICollection<RequestExes> RequestExesByPaymentType { get; set; }
 		#endregion
 	}
 }

@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class AccountType : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="ContactTypeId")]
+		public Guid ContactTypeId { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
@@ -21,6 +23,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		#endregion
@@ -30,6 +34,8 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="ContactType:ContactTypeId")]
+		public ContactType ContactType { get; set; }
 		#endregion
 
 		#region Associations

@@ -15,6 +15,16 @@ namespace Creatio.DataService.Models
 		public int ActualLabor { get; set; }
 		[CProperty(ColumnPath ="ActualTestingLabor")]
 		public int ActualTestingLabor { get; set; }
+		[CProperty(ColumnPath ="BPMInstallationPackageId")]
+		public Guid BPMInstallationPackageId { get; set; }
+		[CProperty(ColumnPath ="BpmonlineBuildId")]
+		public Guid BpmonlineBuildId { get; set; }
+		[CProperty(ColumnPath ="BpmonlineLczId")]
+		public Guid BpmonlineLczId { get; set; }
+		[CProperty(ColumnPath ="BpmonlineProductId")]
+		public Guid BpmonlineProductId { get; set; }
+		[CProperty(ColumnPath ="BpmonlineVersionId")]
+		public Guid BpmonlineVersionId { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
@@ -56,6 +66,16 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Navigation
+		[CProperty(Navigation ="BpmonlineBuild:BpmonlineBuildId")]
+		public BpmonlineBuild BpmonlineBuild { get; set; }
+		[CProperty(Navigation ="BpmonlineLcz:BpmonlineLczId")]
+		public BpmonlineLcz BpmonlineLcz { get; set; }
+		[CProperty(Navigation ="BpmonlineProduct:BpmonlineProductId")]
+		public BpmonlineProduct BpmonlineProduct { get; set; }
+		[CProperty(Navigation ="BpmonlineVersion:BpmonlineVersionId")]
+		public BpmonlineVersion BpmonlineVersion { get; set; }
+		[CProperty(Navigation ="ConfItem:BPMInstallationPackageId")]
+		public ConfItem BPMInstallationPackage { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
@@ -71,6 +91,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Activity:ReleaseId")]
 		public virtual ICollection<Activity> ActivityByRelease { get; set; }
+		[CProperty(Association ="Case:ReleaseId")]
+		public virtual ICollection<Case> CaseByRelease { get; set; }
 		[CProperty(Association ="Change:ReleaseId")]
 		public virtual ICollection<Change> ChangeByRelease { get; set; }
 		[CProperty(Association ="ReleaseConfItem:ReleaseId")]
@@ -87,6 +109,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ReleaseTeam> ReleaseTeamByRelease { get; set; }
 		[CProperty(Association ="ScheduledDate:ReleaseId")]
 		public virtual ICollection<ScheduledDate> ScheduledDateByRelease { get; set; }
+		[CProperty(Association ="VwChange:ReleaseId")]
+		public virtual ICollection<VwChange> VwChangeByRelease { get; set; }
 		#endregion
 	}
 }

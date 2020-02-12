@@ -59,6 +59,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="QuickAddMenuItem:SysModuleEditId")]
 		public virtual ICollection<QuickAddMenuItem> QuickAddMenuItemBySysModuleEdit { get; set; }
+		[CProperty(Association ="SupPreCreatePageSetting:SupEntitySchemaEditPageId")]
+		public virtual ICollection<SupPreCreatePageSetting> SupPreCreatePageSettingBySupEntitySchemaEditPage { get; set; }
 		[CProperty(Association ="SysModuleEditDetail:SysModuleEditId")]
 		public virtual ICollection<SysModuleEditDetail> SysModuleEditDetailBySysModuleEdit { get; set; }
 		[CProperty(Association ="SysModuleEditLczOld:RecordId")]

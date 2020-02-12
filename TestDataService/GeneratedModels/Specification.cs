@@ -15,6 +15,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsForContract")]
+		public bool IsForContract { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -53,6 +55,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SpecificationInProduct> SpecificationInProductBySpecification { get; set; }
 		[CProperty(Association ="SpecificationListItem:SpecificationId")]
 		public virtual ICollection<SpecificationListItem> SpecificationListItemBySpecification { get; set; }
+		[CProperty(Association ="SpecInContract:SpecificationId")]
+		public virtual ICollection<SpecInContract> SpecInContractBySpecification { get; set; }
 		#endregion
 	}
 }

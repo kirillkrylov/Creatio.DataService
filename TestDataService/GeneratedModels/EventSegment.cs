@@ -13,6 +13,8 @@ namespace Creatio.DataService.Models
 		public DateTime CreatedOn { get; set; }
 		[CProperty(ColumnPath ="EventId")]
 		public Guid EventId { get; set; }
+		[CProperty(ColumnPath ="FromLanding")]
+		public bool FromLanding { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

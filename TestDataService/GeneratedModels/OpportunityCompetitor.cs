@@ -21,6 +21,8 @@ namespace Creatio.DataService.Models
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsWinner")]
 		public bool IsWinner { get; set; }
+		[CProperty(ColumnPath ="LeadId")]
+		public Guid LeadId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -48,6 +50,8 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="Lead:LeadId")]
+		public Lead Lead { get; set; }
 		[CProperty(Navigation ="Opportunity:OpportunityId")]
 		public Opportunity Opportunity { get; set; }
 		#endregion

@@ -37,8 +37,16 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="QueueItem:StatusId")]
 		public virtual ICollection<QueueItem> QueueItemByStatus { get; set; }
+		[CProperty(Association ="VwLeadInQueue:ElementStatusId")]
+		public virtual ICollection<VwLeadInQueue> VwLeadInQueueByElementStatus { get; set; }
 		[CProperty(Association ="VwQueueItem:StatusId")]
 		public virtual ICollection<VwQueueItem> VwQueueItemByStatus { get; set; }
+		[CProperty(Association ="VwQueueItemDashboard:QueueItemStatusId")]
+		public virtual ICollection<VwQueueItemDashboard> VwQueueItemDashboardByQueueItemStatus { get; set; }
+		[CProperty(Association ="VwQueueItemDashboardC:QueueItemStatusId")]
+		public virtual ICollection<VwQueueItemDashboardC> VwQueueItemDashboardCByQueueItemStatus { get; set; }
+		[CProperty(Association ="VwQueueItemSuper:StatusId")]
+		public virtual ICollection<VwQueueItemSuper> VwQueueItemSuperByStatus { get; set; }
 		#endregion
 	}
 }

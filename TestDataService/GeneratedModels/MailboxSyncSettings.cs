@@ -125,6 +125,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<MailboxForIncidentRegistration> MailboxForIncidentRegistrationByMailboxSyncSettings { get; set; }
 		[CProperty(Association ="MailboxSettingsFile:MailboxSyncSettingsId")]
 		public virtual ICollection<MailboxSettingsFile> MailboxSettingsFileByMailboxSyncSettings { get; set; }
+		[CProperty(Association ="PartnershipServiceEmail:EmailId")]
+		public virtual ICollection<PartnershipServiceEmail> PartnershipServiceEmailByEmail { get; set; }
 		#endregion
 	}
 }

@@ -33,8 +33,20 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="CostCenter:TerritoryId")]
+		public virtual ICollection<CostCenter> CostCenterByTerritory { get; set; }
+		[CProperty(Association ="CountryCodes:TerritoryId")]
+		public virtual ICollection<CountryCodes> CountryCodesByTerritory { get; set; }
 		[CProperty(Association ="Event:TerritoryId")]
 		public virtual ICollection<Event> EventByTerritory { get; set; }
+		[CProperty(Association ="ExesInRequest:PayerTerritoryId")]
+		public virtual ICollection<ExesInRequest> ExesInRequestByPayerTerritory { get; set; }
+		[CProperty(Association ="InternalRequest:TerrId")]
+		public virtual ICollection<InternalRequest> InternalRequestByTerr { get; set; }
+		[CProperty(Association ="RequestBudgetHolderByExesType:BudgetTerritoryId")]
+		public virtual ICollection<RequestBudgetHolderByExesType> RequestBudgetHolderByExesTypeByBudgetTerritory { get; set; }
+		[CProperty(Association ="TripsDailyAllowance:TerritoryId")]
+		public virtual ICollection<TripsDailyAllowance> TripsDailyAllowanceByTerritory { get; set; }
 		#endregion
 	}
 }

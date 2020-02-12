@@ -13,12 +13,16 @@ namespace Creatio.DataService.Models
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
+		[CProperty(ColumnPath ="DismissalInitiatorId")]
+		public Guid DismissalInitiatorId { get; set; }
 		[CProperty(ColumnPath ="DueDate")]
 		public DateTime DueDate { get; set; }
 		[CProperty(ColumnPath ="EmployeeId")]
 		public Guid EmployeeId { get; set; }
 		[CProperty(ColumnPath ="EmployeeJobId")]
 		public Guid EmployeeJobId { get; set; }
+		[CProperty(ColumnPath ="EndInCompany")]
+		public bool EndInCompany { get; set; }
 		[CProperty(ColumnPath ="FullJobTitle")]
 		public string FullJobTitle { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
@@ -37,8 +41,12 @@ namespace Creatio.DataService.Models
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="ReasonForDismissalId")]
 		public Guid ReasonForDismissalId { get; set; }
+		[CProperty(ColumnPath ="StaffUnitId")]
+		public Guid StaffUnitId { get; set; }
 		[CProperty(ColumnPath ="StartDate")]
 		public DateTime StartDate { get; set; }
+		[CProperty(ColumnPath ="StartInCompany")]
+		public bool StartInCompany { get; set; }
 		#endregion
 
 		#region Navigation
@@ -48,12 +56,16 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="DismissalInitiator:DismissalInitiatorId")]
+		public DismissalInitiator DismissalInitiator { get; set; }
 		[CProperty(Navigation ="Employee:EmployeeId")]
 		public Employee Employee { get; set; }
 		[CProperty(Navigation ="EmployeeJob:EmployeeJobId")]
 		public EmployeeJob EmployeeJob { get; set; }
 		[CProperty(Navigation ="OrgStructureUnit:OrgStructureUnitId")]
 		public OrgStructureUnit OrgStructureUnit { get; set; }
+		[CProperty(Navigation ="OrgStructureUnit:StaffUnitId")]
+		public OrgStructureUnit StaffUnit { get; set; }
 		[CProperty(Navigation ="ReasonForLeaving:ReasonForDismissalId")]
 		public ReasonForLeaving ReasonForDismissal { get; set; }
 		#endregion

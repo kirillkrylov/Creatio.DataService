@@ -9,6 +9,10 @@ namespace Creatio.DataService.Models
 		#region Values
 		[CProperty(ColumnPath ="AuthorId")]
 		public Guid AuthorId { get; set; }
+		[CProperty(ColumnPath ="CaseSubtypeId")]
+		public Guid CaseSubtypeId { get; set; }
+		[CProperty(ColumnPath ="CaseTypeId")]
+		public Guid CaseTypeId { get; set; }
 		[CProperty(ColumnPath ="ChangeId")]
 		public Guid ChangeId { get; set; }
 		[CProperty(ColumnPath ="ClosureDate")]
@@ -19,10 +23,14 @@ namespace Creatio.DataService.Models
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
+		[CProperty(ColumnPath ="FoundInVersionId")]
+		public Guid FoundInVersionId { get; set; }
 		[CProperty(ColumnPath ="GroupId")]
 		public Guid GroupId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="JiraURL")]
+		public string JiraURL { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -39,6 +47,10 @@ namespace Creatio.DataService.Models
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="RegisteredOn")]
 		public DateTime RegisteredOn { get; set; }
+		[CProperty(ColumnPath ="ResolvedInVersionId")]
+		public Guid ResolvedInVersionId { get; set; }
+		[CProperty(ColumnPath ="ResolvedOnCommunity")]
+		public bool ResolvedOnCommunity { get; set; }
 		[CProperty(ColumnPath ="ServiceItemId")]
 		public Guid ServiceItemId { get; set; }
 		[CProperty(ColumnPath ="Solution")]
@@ -56,6 +68,14 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Navigation
+		[CProperty(Navigation ="BpmonlineVersion:FoundInVersionId")]
+		public BpmonlineVersion FoundInVersion { get; set; }
+		[CProperty(Navigation ="BpmonlineVersion:ResolvedInVersionId")]
+		public BpmonlineVersion ResolvedInVersion { get; set; }
+		[CProperty(Navigation ="CaseSubtype:CaseSubtypeId")]
+		public CaseSubtype CaseSubtype { get; set; }
+		[CProperty(Navigation ="CaseType:CaseTypeId")]
+		public CaseType CaseType { get; set; }
 		[CProperty(Navigation ="Change:ChangeId")]
 		public Change Change { get; set; }
 		[CProperty(Navigation ="ConfItem:ConfItemId")]
@@ -85,6 +105,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Activity> ActivityByProblem { get; set; }
 		[CProperty(Association ="Case:ProblemId")]
 		public virtual ICollection<Case> CaseByProblem { get; set; }
+		[CProperty(Association ="CaseLifecycle:ProblemId")]
+		public virtual ICollection<CaseLifecycle> CaseLifecycleByProblem { get; set; }
 		[CProperty(Association ="ProblemFile:ProblemId")]
 		public virtual ICollection<ProblemFile> ProblemFileByProblem { get; set; }
 		[CProperty(Association ="ProblemInCase:ProblemId")]

@@ -101,10 +101,22 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<EventTarget> EventTargetByEvent { get; set; }
 		[CProperty(Association ="EventTeam:EventId")]
 		public virtual ICollection<EventTeam> EventTeamByEvent { get; set; }
+		[CProperty(Association ="InternalRequest:EventId")]
+		public virtual ICollection<InternalRequest> InternalRequestByEvent { get; set; }
+		[CProperty(Association ="Invoice:EventId")]
+		public virtual ICollection<Invoice> InvoiceByEvent { get; set; }
 		[CProperty(Association ="Lead:EventId")]
 		public virtual ICollection<Lead> LeadByEvent { get; set; }
+		[CProperty(Association ="Order:EventId")]
+		public virtual ICollection<Order> OrderByEvent { get; set; }
+		[CProperty(Association ="Queue:EventId")]
+		public virtual ICollection<Queue> QueueByEvent { get; set; }
 		[CProperty(Association ="VwEventInCampaign:EventId")]
 		public virtual ICollection<VwEventInCampaign> VwEventInCampaignByEvent { get; set; }
+		[CProperty(Association ="VwEventInContact:EventId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByEvent { get; set; }
+		[CProperty(Association ="VwLead:EventId")]
+		public virtual ICollection<VwLead> VwLeadByEvent { get; set; }
 		#endregion
 	}
 }

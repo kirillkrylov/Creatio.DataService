@@ -45,6 +45,20 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<AccountFolder> AccountFolderByFolderType { get; set; }
 		[CProperty(Association ="ActivityFolder:FolderTypeId")]
 		public virtual ICollection<ActivityFolder> ActivityFolderByFolderType { get; set; }
+		[CProperty(Association ="ApplicantFolder:FolderTypeId")]
+		public virtual ICollection<ApplicantFolder> ApplicantFolderByFolderType { get; set; }
+		[CProperty(Association ="BeesenderChatFolder:FolderTypeId")]
+		public virtual ICollection<BeesenderChatFolder> BeesenderChatFolderByFolderType { get; set; }
+		[CProperty(Association ="BonusFolder:FolderTypeId")]
+		public virtual ICollection<BonusFolder> BonusFolderByFolderType { get; set; }
+		[CProperty(Association ="BpmGDPRFolder:FolderTypeId")]
+		public virtual ICollection<BpmGDPRFolder> BpmGDPRFolderByFolderType { get; set; }
+		[CProperty(Association ="BpmonlineBuildFolder:FolderTypeId")]
+		public virtual ICollection<BpmonlineBuildFolder> BpmonlineBuildFolderByFolderType { get; set; }
+		[CProperty(Association ="BsoChatsFolder:FolderTypeId")]
+		public virtual ICollection<BsoChatsFolder> BsoChatsFolderByFolderType { get; set; }
+		[CProperty(Association ="BudgetFolder:FolderTypeId")]
+		public virtual ICollection<BudgetFolder> BudgetFolderByFolderType { get; set; }
 		[CProperty(Association ="BulkEmailFolder:FolderTypeId")]
 		public virtual ICollection<BulkEmailFolder> BulkEmailFolderByFolderType { get; set; }
 		[CProperty(Association ="BulkEmailSplitFolder:FolderTypeId")]
@@ -57,10 +71,14 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<CampaignPlannerFolder> CampaignPlannerFolderByFolderType { get; set; }
 		[CProperty(Association ="CaseFolder:FolderTypeId")]
 		public virtual ICollection<CaseFolder> CaseFolderByFolderType { get; set; }
-		[CProperty(Association ="CertificationFolder:FolderTypeId")]
-		public virtual ICollection<CertificationFolder> CertificationFolderByFolderType { get; set; }
+		[CProperty(Association ="CaseTypeFolder:FolderTypeId")]
+		public virtual ICollection<CaseTypeFolder> CaseTypeFolderByFolderType { get; set; }
 		[CProperty(Association ="ChangeFolder:FolderTypeId")]
 		public virtual ICollection<ChangeFolder> ChangeFolderByFolderType { get; set; }
+		[CProperty(Association ="CIFolder:FolderTypeId")]
+		public virtual ICollection<CIFolder> CIFolderByFolderType { get; set; }
+		[CProperty(Association ="CompetenceFolder:FolderTypeId")]
+		public virtual ICollection<CompetenceFolder> CompetenceFolderByFolderType { get; set; }
 		[CProperty(Association ="ConfItemFolder:FolderTypeId")]
 		public virtual ICollection<ConfItemFolder> ConfItemFolderByFolderType { get; set; }
 		[CProperty(Association ="ContactFolder:FolderTypeId")]
@@ -73,24 +91,46 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<DuplicatesRuleFolder> DuplicatesRuleFolderByFolderType { get; set; }
 		[CProperty(Association ="EmployeeFolder:FolderTypeId")]
 		public virtual ICollection<EmployeeFolder> EmployeeFolderByFolderType { get; set; }
+		[CProperty(Association ="EmployeeScoreFolder:FolderTypeId")]
+		public virtual ICollection<EmployeeScoreFolder> EmployeeScoreFolderByFolderType { get; set; }
 		[CProperty(Association ="EventFolder:FolderTypeId")]
 		public virtual ICollection<EventFolder> EventFolderByFolderType { get; set; }
+		[CProperty(Association ="ExesInRequestFolder:FolderTypeId")]
+		public virtual ICollection<ExesInRequestFolder> ExesInRequestFolderByFolderType { get; set; }
 		[CProperty(Association ="ExternalAccessFolder:FolderTypeId")]
 		public virtual ICollection<ExternalAccessFolder> ExternalAccessFolderByFolderType { get; set; }
 		[CProperty(Association ="FileFolder:FolderTypeId")]
 		public virtual ICollection<FileFolder> FileFolderByFolderType { get; set; }
 		[CProperty(Association ="GeneratedWebFormFolder:FolderTypeId")]
 		public virtual ICollection<GeneratedWebFormFolder> GeneratedWebFormFolderByFolderType { get; set; }
-		[CProperty(Association ="GuidedLearningFolder:FolderTypeId")]
-		public virtual ICollection<GuidedLearningFolder> GuidedLearningFolderByFolderType { get; set; }
+		[CProperty(Association ="GiftFolder:FolderTypeId")]
+		public virtual ICollection<GiftFolder> GiftFolderByFolderType { get; set; }
+		[CProperty(Association ="GlbCustomerFolder:FolderTypeId")]
+		public virtual ICollection<GlbCustomerFolder> GlbCustomerFolderByFolderType { get; set; }
+		[CProperty(Association ="GlbCustomerGiftFolder:FolderTypeId")]
+		public virtual ICollection<GlbCustomerGiftFolder> GlbCustomerGiftFolderByFolderType { get; set; }
+		[CProperty(Association ="GlbCustomerKeyPlayerListFolder:FolderTypeId")]
+		public virtual ICollection<GlbCustomerKeyPlayerListFolder> GlbCustomerKeyPlayerListFolderByFolderType { get; set; }
+		[CProperty(Association ="GlbReferenceableFolder:FolderTypeId")]
+		public virtual ICollection<GlbReferenceableFolder> GlbReferenceableFolderByFolderType { get; set; }
+		[CProperty(Association ="INFLUwebFolder:FolderTypeId")]
+		public virtual ICollection<INFLUwebFolder> INFLUwebFolderByFolderType { get; set; }
+		[CProperty(Association ="InternalRequestFolder:FolderTypeId")]
+		public virtual ICollection<InternalRequestFolder> InternalRequestFolderByFolderType { get; set; }
+		[CProperty(Association ="InvestorFolder:FolderTypeId")]
+		public virtual ICollection<InvestorFolder> InvestorFolderByFolderType { get; set; }
 		[CProperty(Association ="InvoiceFolder:FolderTypeId")]
 		public virtual ICollection<InvoiceFolder> InvoiceFolderByFolderType { get; set; }
+		[CProperty(Association ="IQSetRightsFolder:FolderTypeId")]
+		public virtual ICollection<IQSetRightsFolder> IQSetRightsFolderByFolderType { get; set; }
 		[CProperty(Association ="KnowledgeBaseFolder:FolderTypeId")]
 		public virtual ICollection<KnowledgeBaseFolder> KnowledgeBaseFolderByFolderType { get; set; }
 		[CProperty(Association ="LeadFolder:FolderTypeId")]
 		public virtual ICollection<LeadFolder> LeadFolderByFolderType { get; set; }
 		[CProperty(Association ="LookupFolder:FolderTypeId")]
 		public virtual ICollection<LookupFolder> LookupFolderByFolderType { get; set; }
+		[CProperty(Association ="MarketplaceApplicationFolder:FolderTypeId")]
+		public virtual ICollection<MarketplaceApplicationFolder> MarketplaceApplicationFolderByFolderType { get; set; }
 		[CProperty(Association ="MktgActivityFolder:FolderTypeId")]
 		public virtual ICollection<MktgActivityFolder> MktgActivityFolderByFolderType { get; set; }
 		[CProperty(Association ="MLModelFolder:FolderTypeId")]
@@ -101,16 +141,22 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<OpportunityFolder> OpportunityFolderByFolderType { get; set; }
 		[CProperty(Association ="OrderFolder:FolderTypeId")]
 		public virtual ICollection<OrderFolder> OrderFolderByFolderType { get; set; }
+		[CProperty(Association ="OrgStructureUnitFolder:FolderTypeId")]
+		public virtual ICollection<OrgStructureUnitFolder> OrgStructureUnitFolderByFolderType { get; set; }
 		[CProperty(Association ="PartnershipFolder:FolderTypeId")]
 		public virtual ICollection<PartnershipFolder> PartnershipFolderByFolderType { get; set; }
+		[CProperty(Association ="PaymentRuleFolder:FolderTypeId")]
+		public virtual ICollection<PaymentRuleFolder> PaymentRuleFolderByFolderType { get; set; }
+		[CProperty(Association ="PaymentsFolder:FolderTypeId")]
+		public virtual ICollection<PaymentsFolder> PaymentsFolderByFolderType { get; set; }
 		[CProperty(Association ="ProblemFolder:FolderTypeId")]
 		public virtual ICollection<ProblemFolder> ProblemFolderByFolderType { get; set; }
 		[CProperty(Association ="ProductFolder:FolderTypeId")]
 		public virtual ICollection<ProductFolder> ProductFolderByFolderType { get; set; }
 		[CProperty(Association ="ProjectFolder:FolderTypeId")]
 		public virtual ICollection<ProjectFolder> ProjectFolderByFolderType { get; set; }
-		[CProperty(Association ="QandAFolder:FolderTypeId")]
-		public virtual ICollection<QandAFolder> QandAFolderByFolderType { get; set; }
+		[CProperty(Association ="ProjectSolutionFolder:FolderTypeId")]
+		public virtual ICollection<ProjectSolutionFolder> ProjectSolutionFolderByFolderType { get; set; }
 		[CProperty(Association ="QueueFolder:FolderTypeId")]
 		public virtual ICollection<QueueFolder> QueueFolderByFolderType { get; set; }
 		[CProperty(Association ="QueueItemFolder:FolderTypeId")]
@@ -119,6 +165,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ReleaseFolder> ReleaseFolderByFolderType { get; set; }
 		[CProperty(Association ="ReportFolder:FolderTypeId")]
 		public virtual ICollection<ReportFolder> ReportFolderByFolderType { get; set; }
+		[CProperty(Association ="ScreenResultFolder:FolderTypeId")]
+		public virtual ICollection<ScreenResultFolder> ScreenResultFolderByFolderType { get; set; }
 		[CProperty(Association ="ServiceItemFolder:FolderTypeId")]
 		public virtual ICollection<ServiceItemFolder> ServiceItemFolderByFolderType { get; set; }
 		[CProperty(Association ="ServicePactFolder:FolderTypeId")]
@@ -127,6 +175,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SiteEventTypeFolder> SiteEventTypeFolderByFolderType { get; set; }
 		[CProperty(Association ="SocialChannelFolder:FolderTypeId")]
 		public virtual ICollection<SocialChannelFolder> SocialChannelFolderByFolderType { get; set; }
+		[CProperty(Association ="SubscriptionFolder:FolderTypeId")]
+		public virtual ICollection<SubscriptionFolder> SubscriptionFolderByFolderType { get; set; }
 		[CProperty(Association ="SysAdminOperationFolder:FolderTypeId")]
 		public virtual ICollection<SysAdminOperationFolder> SysAdminOperationFolderByFolderType { get; set; }
 		[CProperty(Association ="SysAdminUnitFolder:FolderTypeId")]
@@ -141,10 +191,12 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SysSettingsFolder> SysSettingsFolderByFolderType { get; set; }
 		[CProperty(Association ="SysTranslationFolder:FolderTypeId")]
 		public virtual ICollection<SysTranslationFolder> SysTranslationFolderByFolderType { get; set; }
-		[CProperty(Association ="tsaTermFolder:FolderTypeId")]
-		public virtual ICollection<tsaTermFolder> tsaTermFolderByFolderType { get; set; }
-		[CProperty(Association ="tsaTermTranslationFolder:FolderTypeId")]
-		public virtual ICollection<tsaTermTranslationFolder> tsaTermTranslationFolderByFolderType { get; set; }
+		[CProperty(Association ="TeamOnDutyFolder:FolderTypeId")]
+		public virtual ICollection<TeamOnDutyFolder> TeamOnDutyFolderByFolderType { get; set; }
+		[CProperty(Association ="TransactionFolder:FolderTypeId")]
+		public virtual ICollection<TransactionFolder> TransactionFolderByFolderType { get; set; }
+		[CProperty(Association ="TsOrderExpenseFolder:FolderTypeId")]
+		public virtual ICollection<TsOrderExpenseFolder> TsOrderExpenseFolderByFolderType { get; set; }
 		[CProperty(Association ="VwFolderInCampaign:FolderTypeId")]
 		public virtual ICollection<VwFolderInCampaign> VwFolderInCampaignByFolderType { get; set; }
 		[CProperty(Association ="VwProcessLibFolder:FolderTypeId")]
@@ -155,6 +207,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<VwSysProcessFolder> VwSysProcessFolderByFolderType { get; set; }
 		[CProperty(Association ="WebServiceV2Folder:FolderTypeId")]
 		public virtual ICollection<WebServiceV2Folder> WebServiceV2FolderByFolderType { get; set; }
+		[CProperty(Association ="WorkDeployLogFolder:FolderTypeId")]
+		public virtual ICollection<WorkDeployLogFolder> WorkDeployLogFolderByFolderType { get; set; }
 		#endregion
 	}
 }

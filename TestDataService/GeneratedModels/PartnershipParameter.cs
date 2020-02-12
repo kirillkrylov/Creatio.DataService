@@ -17,6 +17,8 @@ namespace Creatio.DataService.Models
 		public string CurrentValue { get; set; }
 		[CProperty(ColumnPath ="FloatValue")]
 		public decimal FloatValue { get; set; }
+		[CProperty(ColumnPath ="GuidValue")]
+		public Guid GuidValue { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntValue")]

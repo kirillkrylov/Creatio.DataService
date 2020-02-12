@@ -23,6 +23,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		#endregion
@@ -39,6 +41,16 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Case:OriginId")]
 		public virtual ICollection<Case> CaseByOrigin { get; set; }
+		[CProperty(Association ="CaseOriginInCategory:CaseOriginId")]
+		public virtual ICollection<CaseOriginInCategory> CaseOriginInCategoryByCaseOrigin { get; set; }
+		[CProperty(Association ="CaseSourceInService:CaseSourceId")]
+		public virtual ICollection<CaseSourceInService> CaseSourceInServiceByCaseSource { get; set; }
+		[CProperty(Association ="ServiceItem:CaseSourceId")]
+		public virtual ICollection<ServiceItem> ServiceItemByCaseSource { get; set; }
+		[CProperty(Association ="SupCloudCaseDefValue:SupOriginId")]
+		public virtual ICollection<SupCloudCaseDefValue> SupCloudCaseDefValueBySupOrigin { get; set; }
+		[CProperty(Association ="VwCaseDashboard:OriginId")]
+		public virtual ICollection<VwCaseDashboard> VwCaseDashboardByOrigin { get; set; }
 		#endregion
 	}
 }

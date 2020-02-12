@@ -21,8 +21,12 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		#endregion
 
 		#region Navigation
@@ -33,8 +37,12 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="GlbCustomerKeyPlayerList:GlbRoleId")]
+		public virtual ICollection<GlbCustomerKeyPlayerList> GlbCustomerKeyPlayerListByGlbRole { get; set; }
 		[CProperty(Association ="OpportunityContact:RoleId")]
 		public virtual ICollection<OpportunityContact> OpportunityContactByRole { get; set; }
+		[CProperty(Association ="PainChain:RoleId")]
+		public virtual ICollection<PainChain> PainChainByRole { get; set; }
 		#endregion
 	}
 }

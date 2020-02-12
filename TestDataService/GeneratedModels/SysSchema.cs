@@ -83,6 +83,14 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Attribute> AttributeByReferenceSchema { get; set; }
 		[CProperty(Association ="AttributeReferenceSchema:ReferenceSchemaId")]
 		public virtual ICollection<AttributeReferenceSchema> AttributeReferenceSchemaByReferenceSchema { get; set; }
+		[CProperty(Association ="GameRewardType:RewardProcessId")]
+		public virtual ICollection<GameRewardType> GameRewardTypeByRewardProcess { get; set; }
+		[CProperty(Association ="ProcessInIntegration:BusinessProcessId")]
+		public virtual ICollection<ProcessInIntegration> ProcessInIntegrationByBusinessProcess { get; set; }
+		[CProperty(Association ="RecruitmentInStage:SysSchemaId")]
+		public virtual ICollection<RecruitmentInStage> RecruitmentInStageBySysSchema { get; set; }
+		[CProperty(Association ="SupCaseScoringGroup:SupSysSchemaId")]
+		public virtual ICollection<SupCaseScoringGroup> SupCaseScoringGroupBySupSysSchema { get; set; }
 		[CProperty(Association ="SysClientUnitSchemaDependency:SysSchemaId")]
 		public virtual ICollection<SysClientUnitSchemaDependency> SysClientUnitSchemaDependencyBySysSchema { get; set; }
 		[CProperty(Association ="SysClientUnitSchemaSource:SysSchemaId")]

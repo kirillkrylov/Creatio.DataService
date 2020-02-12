@@ -41,6 +41,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="CurrencyRateError:CurrencyRateId")]
+		public virtual ICollection<CurrencyRateError> CurrencyRateErrorByCurrencyRate { get; set; }
 		#endregion
 	}
 }

@@ -39,6 +39,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Fund:FundTypeId")]
 		public virtual ICollection<Fund> FundByFundType { get; set; }
+		[CProperty(Association ="Invoice:FundTypeId")]
+		public virtual ICollection<Invoice> InvoiceByFundType { get; set; }
 		#endregion
 	}
 }

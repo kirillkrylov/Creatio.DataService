@@ -47,8 +47,14 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="DefaultReport:CultureId")]
+		public virtual ICollection<DefaultReport> DefaultReportByCulture { get; set; }
 		[CProperty(Association ="MainParamLczOld:SysCultureId")]
 		public virtual ICollection<MainParamLczOld> MainParamLczOldBySysCulture { get; set; }
+		[CProperty(Association ="OpportunityTerritory:CultureId")]
+		public virtual ICollection<OpportunityTerritory> OpportunityTerritoryByCulture { get; set; }
+		[CProperty(Association ="SupCommunityPostAddress:SupCultureId")]
+		public virtual ICollection<SupCommunityPostAddress> SupCommunityPostAddressBySupCulture { get; set; }
 		[CProperty(Association ="SysAdminUnit:SysCultureId")]
 		public virtual ICollection<SysAdminUnit> SysAdminUnitBySysCulture { get; set; }
 		[CProperty(Association ="SysClientUnitSchemaSource:SysCultureId")]
@@ -75,6 +81,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SysPackageResourceChecksum> SysPackageResourceChecksumBySysCulture { get; set; }
 		[CProperty(Association ="SysProfileData:SysCultureId")]
 		public virtual ICollection<SysProfileData> SysProfileDataBySysCulture { get; set; }
+		[CProperty(Association ="TsMailNotificationValue:CultureId")]
+		public virtual ICollection<TsMailNotificationValue> TsMailNotificationValueByCulture { get; set; }
 		[CProperty(Association ="VwGroupSysAdminUnit:SysCultureId")]
 		public virtual ICollection<VwGroupSysAdminUnit> VwGroupSysAdminUnitBySysCulture { get; set; }
 		[CProperty(Association ="VwSspAdminUnit:SysCultureId")]

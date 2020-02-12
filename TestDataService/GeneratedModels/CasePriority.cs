@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class CasePriority : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="Color")]
+		public string Color { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
@@ -23,6 +25,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="Priority")]
 		public int Priority { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
@@ -57,6 +61,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<CaseLifecycle> CaseLifecycleByPriority { get; set; }
 		[CProperty(Association ="PriorityInSupportLevel:CasePriorityId")]
 		public virtual ICollection<PriorityInSupportLevel> PriorityInSupportLevelByCasePriority { get; set; }
+		[CProperty(Association ="ServiceInServicePact:PriorityId")]
+		public virtual ICollection<ServiceInServicePact> ServiceInServicePactByPriority { get; set; }
 		[CProperty(Association ="TimeToPrioritize:CasePriorityId")]
 		public virtual ICollection<TimeToPrioritize> TimeToPrioritizeByCasePriority { get; set; }
 		#endregion

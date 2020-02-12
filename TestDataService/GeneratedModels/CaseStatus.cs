@@ -39,6 +39,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="StageNumber")]
@@ -69,6 +71,14 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<CaseNotificationRule> CaseNotificationRuleByCaseStatus { get; set; }
 		[CProperty(Association ="SatisfactionLevel:StatusId")]
 		public virtual ICollection<SatisfactionLevel> SatisfactionLevelByStatus { get; set; }
+		[CProperty(Association ="TsEmailNotification:CaseStatusId")]
+		public virtual ICollection<TsEmailNotification> TsEmailNotificationByCaseStatus { get; set; }
+		[CProperty(Association ="VwCaseDashboard:StatusId")]
+		public virtual ICollection<VwCaseDashboard> VwCaseDashboardByStatus { get; set; }
+		[CProperty(Association ="VwCaseStatusHistory:OldStatusId")]
+		public virtual ICollection<VwCaseStatusHistory> VwCaseStatusHistoryByOldStatus { get; set; }
+		[CProperty(Association ="VwCaseStatusHistory:NewStatusId")]
+		public virtual ICollection<VwCaseStatusHistory> VwCaseStatusHistoryByNewStatus { get; set; }
 		#endregion
 	}
 }

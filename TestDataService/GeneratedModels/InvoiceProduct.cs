@@ -29,6 +29,10 @@ namespace Creatio.DataService.Models
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="InvoiceId")]
 		public Guid InvoiceId { get; set; }
+		[CProperty(ColumnPath ="IsRecordLocked")]
+		public bool IsRecordLocked { get; set; }
+		[CProperty(ColumnPath ="Margin")]
+		public decimal Margin { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -37,14 +41,22 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="Notes")]
 		public string Notes { get; set; }
+		[CProperty(ColumnPath ="OrderProductId")]
+		public Guid OrderProductId { get; set; }
+		[CProperty(ColumnPath ="PeriodId")]
+		public Guid PeriodId { get; set; }
 		[CProperty(ColumnPath ="Price")]
 		public decimal Price { get; set; }
 		[CProperty(ColumnPath ="PriceListId")]
 		public Guid PriceListId { get; set; }
+		[CProperty(ColumnPath ="PriceWithDiscount")]
+		public decimal PriceWithDiscount { get; set; }
 		[CProperty(ColumnPath ="PrimaryAmount")]
 		public decimal PrimaryAmount { get; set; }
 		[CProperty(ColumnPath ="PrimaryDiscountAmount")]
 		public decimal PrimaryDiscountAmount { get; set; }
+		[CProperty(ColumnPath ="PrimaryPaymentAmount")]
+		public decimal PrimaryPaymentAmount { get; set; }
 		[CProperty(ColumnPath ="PrimaryPrice")]
 		public decimal PrimaryPrice { get; set; }
 		[CProperty(ColumnPath ="PrimaryTaxAmount")]
@@ -57,6 +69,12 @@ namespace Creatio.DataService.Models
 		public Guid ProductId { get; set; }
 		[CProperty(ColumnPath ="Quantity")]
 		public decimal Quantity { get; set; }
+		[CProperty(ColumnPath ="RenewalDate")]
+		public DateTime RenewalDate { get; set; }
+		[CProperty(ColumnPath ="SaleTypeId")]
+		public Guid SaleTypeId { get; set; }
+		[CProperty(ColumnPath ="StartDate")]
+		public DateTime StartDate { get; set; }
 		[CProperty(ColumnPath ="SupplyPaymentProductId")]
 		public Guid SupplyPaymentProductId { get; set; }
 		[CProperty(ColumnPath ="TaxAmount")]
@@ -65,6 +83,8 @@ namespace Creatio.DataService.Models
 		public Guid TaxId { get; set; }
 		[CProperty(ColumnPath ="TotalAmount")]
 		public decimal TotalAmount { get; set; }
+		[CProperty(ColumnPath ="TotalAmountWithoutTax")]
+		public decimal TotalAmountWithoutTax { get; set; }
 		[CProperty(ColumnPath ="UnitId")]
 		public Guid UnitId { get; set; }
 		#endregion
@@ -76,10 +96,16 @@ namespace Creatio.DataService.Models
 		public Contact ModifiedBy { get; set; }
 		[CProperty(Navigation ="Invoice:InvoiceId")]
 		public Invoice Invoice { get; set; }
+		[CProperty(Navigation ="OrderProduct:OrderProductId")]
+		public OrderProduct OrderProduct { get; set; }
+		[CProperty(Navigation ="OrderProductPeriod:PeriodId")]
+		public OrderProductPeriod Period { get; set; }
 		[CProperty(Navigation ="Pricelist:PriceListId")]
 		public Pricelist PriceList { get; set; }
 		[CProperty(Navigation ="Product:ProductId")]
 		public Product Product { get; set; }
+		[CProperty(Navigation ="SaleType:SaleTypeId")]
+		public SaleType SaleType { get; set; }
 		[CProperty(Navigation ="SupplyPaymentProduct:SupplyPaymentProductId")]
 		public SupplyPaymentProduct SupplyPaymentProduct { get; set; }
 		[CProperty(Navigation ="Tax:TaxId")]
@@ -89,6 +115,14 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="Bonus:InvoiceProductId")]
+		public virtual ICollection<Bonus> BonusByInvoiceProduct { get; set; }
+		[CProperty(Association ="BonusProduct:InvoiceProductId")]
+		public virtual ICollection<BonusProduct> BonusProductByInvoiceProduct { get; set; }
+		[CProperty(Association ="InvoiceProductHistory:InvoiceProductId")]
+		public virtual ICollection<InvoiceProductHistory> InvoiceProductHistoryByInvoiceProduct { get; set; }
+		[CProperty(Association ="TsOrderExpenseProduct:InvoiceProductId")]
+		public virtual ICollection<TsOrderExpenseProduct> TsOrderExpenseProductByInvoiceProduct { get; set; }
 		#endregion
 	}
 }

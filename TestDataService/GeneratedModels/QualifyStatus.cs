@@ -49,12 +49,24 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Lead:QualifyStatusId")]
 		public virtual ICollection<Lead> LeadByQualifyStatus { get; set; }
+		[CProperty(Association ="LeadDisqualifyReason:LeadStageId")]
+		public virtual ICollection<LeadDisqualifyReason> LeadDisqualifyReasonByLeadStage { get; set; }
 		[CProperty(Association ="LeadInQualifyStatus:QualifyStatusId")]
 		public virtual ICollection<LeadInQualifyStatus> LeadInQualifyStatusByQualifyStatus { get; set; }
+		[CProperty(Association ="LeadInStage:StatusId")]
+		public virtual ICollection<LeadInStage> LeadInStageByStatus { get; set; }
 		[CProperty(Association ="QualifyStatusDecoupling:CurrentStatusId")]
 		public virtual ICollection<QualifyStatusDecoupling> QualifyStatusDecouplingByCurrentStatus { get; set; }
 		[CProperty(Association ="QualifyStatusDecoupling:AvailableStatusId")]
 		public virtual ICollection<QualifyStatusDecoupling> QualifyStatusDecouplingByAvailableStatus { get; set; }
+		[CProperty(Association ="VwDisqualifyReasonMPP:LeadStageId")]
+		public virtual ICollection<VwDisqualifyReasonMPP> VwDisqualifyReasonMPPByLeadStage { get; set; }
+		[CProperty(Association ="VwDisqualifyReasonMRK:LeadStageId")]
+		public virtual ICollection<VwDisqualifyReasonMRK> VwDisqualifyReasonMRKByLeadStage { get; set; }
+		[CProperty(Association ="VwDisqualifyReasonPAM:LeadStageId")]
+		public virtual ICollection<VwDisqualifyReasonPAM> VwDisqualifyReasonPAMByLeadStage { get; set; }
+		[CProperty(Association ="VwLead:QualifyStatusId")]
+		public virtual ICollection<VwLead> VwLeadByQualifyStatus { get; set; }
 		#endregion
 	}
 }

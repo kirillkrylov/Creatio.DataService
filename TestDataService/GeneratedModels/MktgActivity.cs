@@ -7,6 +7,10 @@ namespace Creatio.DataService.Models
 	public class MktgActivity : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="AccountId")]
+		public Guid AccountId { get; set; }
+		[CProperty(ColumnPath ="Approval")]
+		public bool Approval { get; set; }
 		[CProperty(ColumnPath ="CampaignPlannerId")]
 		public Guid CampaignPlannerId { get; set; }
 		[CProperty(ColumnPath ="ChannelId")]
@@ -19,10 +23,16 @@ namespace Creatio.DataService.Models
 		public Guid CurrencyId { get; set; }
 		[CProperty(ColumnPath ="CurrencyRate")]
 		public decimal CurrencyRate { get; set; }
+		[CProperty(ColumnPath ="Description")]
+		public string Description { get; set; }
 		[CProperty(ColumnPath ="DueDate")]
 		public DateTime DueDate { get; set; }
+		[CProperty(ColumnPath ="FundId")]
+		public Guid FundId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="MktgActivityTypeId")]
+		public Guid MktgActivityTypeId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -33,6 +43,8 @@ namespace Creatio.DataService.Models
 		public string Notes { get; set; }
 		[CProperty(ColumnPath ="OwnerId")]
 		public Guid OwnerId { get; set; }
+		[CProperty(ColumnPath ="PartnershipId")]
+		public Guid PartnershipId { get; set; }
 		[CProperty(ColumnPath ="PlannedBudget")]
 		public decimal PlannedBudget { get; set; }
 		[CProperty(ColumnPath ="PrimaryPlannedBudget")]
@@ -47,9 +59,13 @@ namespace Creatio.DataService.Models
 		public DateTime StartDate { get; set; }
 		[CProperty(ColumnPath ="StatusId")]
 		public Guid StatusId { get; set; }
+		[CProperty(ColumnPath ="Url")]
+		public string Url { get; set; }
 		#endregion
 
 		#region Navigation
+		[CProperty(Navigation ="Account:AccountId")]
+		public Account Account { get; set; }
 		[CProperty(Navigation ="CampaignPlanner:CampaignPlannerId")]
 		public CampaignPlanner CampaignPlanner { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
@@ -60,10 +76,16 @@ namespace Creatio.DataService.Models
 		public Contact Owner { get; set; }
 		[CProperty(Navigation ="Currency:CurrencyId")]
 		public Currency Currency { get; set; }
+		[CProperty(Navigation ="Fund:FundId")]
+		public Fund Fund { get; set; }
 		[CProperty(Navigation ="LeadMedium:ChannelId")]
 		public LeadMedium Channel { get; set; }
 		[CProperty(Navigation ="MktgActivityStatus:StatusId")]
 		public MktgActivityStatus Status { get; set; }
+		[CProperty(Navigation ="MktgActivityType:MktgActivityTypeId")]
+		public MktgActivityType MktgActivityType { get; set; }
+		[CProperty(Navigation ="Partnership:PartnershipId")]
+		public Partnership Partnership { get; set; }
 		#endregion
 
 		#region Associations
@@ -73,6 +95,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<MktgActivityInFolder> MktgActivityInFolderByMktgActivity { get; set; }
 		[CProperty(Association ="MktgActivityInTag:EntityId")]
 		public virtual ICollection<MktgActivityInTag> MktgActivityInTagByEntity { get; set; }
+		[CProperty(Association ="MktgActivityMessageHistory:MktgActivityId")]
+		public virtual ICollection<MktgActivityMessageHistory> MktgActivityMessageHistoryByMktgActivity { get; set; }
 		#endregion
 	}
 }

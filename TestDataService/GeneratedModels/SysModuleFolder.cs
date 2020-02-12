@@ -41,6 +41,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="BpmPreferences:BpmObjectId")]
+		public virtual ICollection<BpmPreferences> BpmPreferencesByBpmObject { get; set; }
 		[CProperty(Association ="SysModuleFolderLczOld:RecordId")]
 		public virtual ICollection<SysModuleFolderLczOld> SysModuleFolderLczOldByRecord { get; set; }
 		[CProperty(Association ="SysModuleInSysModuleFolder:SubSysModuleFolderId")]

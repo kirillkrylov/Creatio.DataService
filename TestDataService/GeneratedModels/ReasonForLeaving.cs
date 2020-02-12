@@ -37,6 +37,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Employee> EmployeeByReasonForDismissal { get; set; }
 		[CProperty(Association ="EmployeeCareer:ReasonForDismissalId")]
 		public virtual ICollection<EmployeeCareer> EmployeeCareerByReasonForDismissal { get; set; }
+		[CProperty(Association ="InteractionWithManager:DissatisfactionReasonsId")]
+		public virtual ICollection<InteractionWithManager> InteractionWithManagerByDissatisfactionReasons { get; set; }
+		[CProperty(Association ="InteractionWithManager:ReasonForDismissalId")]
+		public virtual ICollection<InteractionWithManager> InteractionWithManagerByReasonForDismissal { get; set; }
 		#endregion
 	}
 }

@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class VwMandrillRecipient : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="AccountId")]
+		public Guid AccountId { get; set; }
 		[CProperty(ColumnPath ="BulkEmailId")]
 		public Guid BulkEmailId { get; set; }
 		[CProperty(ColumnPath ="ContactId")]
@@ -19,6 +21,10 @@ namespace Creatio.DataService.Models
 		public string EmailAddress { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsEmailDuplicate")]
+		public bool IsEmailDuplicate { get; set; }
+		[CProperty(ColumnPath ="IsInvalidSalutation")]
+		public bool IsInvalidSalutation { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -30,6 +36,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Navigation
+		[CProperty(Navigation ="Account:AccountId")]
+		public Account Account { get; set; }
 		[CProperty(Navigation ="BulkEmail:BulkEmailId")]
 		public BulkEmail BulkEmail { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]

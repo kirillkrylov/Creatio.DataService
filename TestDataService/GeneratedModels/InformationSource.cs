@@ -37,6 +37,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Lead> LeadByInformationSource { get; set; }
 		[CProperty(Association ="LeadQualification:LeadSourceId")]
 		public virtual ICollection<LeadQualification> LeadQualificationByLeadSource { get; set; }
+		[CProperty(Association ="VwLead:InformationSourceId")]
+		public virtual ICollection<VwLead> VwLeadByInformationSource { get; set; }
 		#endregion
 	}
 }

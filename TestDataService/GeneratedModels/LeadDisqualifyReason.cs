@@ -15,6 +15,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="LeadStageId")]
+		public Guid LeadStageId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -23,6 +25,8 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		#endregion
 
 		#region Navigation
@@ -30,11 +34,19 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="QualifyStatus:LeadStageId")]
+		public QualifyStatus LeadStage { get; set; }
 		#endregion
 
 		#region Associations
 		[CProperty(Association ="Lead:LeadDisqualifyReasonId")]
 		public virtual ICollection<Lead> LeadByLeadDisqualifyReason { get; set; }
+		[CProperty(Association ="RoleInDisqualifyReason:DisqualifyReasonId")]
+		public virtual ICollection<RoleInDisqualifyReason> RoleInDisqualifyReasonByDisqualifyReason { get; set; }
+		[CProperty(Association ="SalesProcessEvent:LeadDisqualifyReasonId")]
+		public virtual ICollection<SalesProcessEvent> SalesProcessEventByLeadDisqualifyReason { get; set; }
+		[CProperty(Association ="VwLead:LeadDisqualifyReasonId")]
+		public virtual ICollection<VwLead> VwLeadByLeadDisqualifyReason { get; set; }
 		#endregion
 	}
 }

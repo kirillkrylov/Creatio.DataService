@@ -79,8 +79,14 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<EmailTemplateFile> EmailTemplateFileByEmailTemplate { get; set; }
 		[CProperty(Association ="EmailTemplateLang:EmailTemplateId")]
 		public virtual ICollection<EmailTemplateLang> EmailTemplateLangByEmailTemplate { get; set; }
+		[CProperty(Association ="FavoriteEmailTemplate:EmailTemplateId")]
+		public virtual ICollection<FavoriteEmailTemplate> FavoriteEmailTemplateByEmailTemplate { get; set; }
+		[CProperty(Association ="labActualizeRule:labEmailTemplateId")]
+		public virtual ICollection<labActualizeRule> labActualizeRuleBylabEmailTemplate { get; set; }
 		[CProperty(Association ="SocialFeedFavoriteTpl:EmailTemplateId")]
 		public virtual ICollection<SocialFeedFavoriteTpl> SocialFeedFavoriteTplByEmailTemplate { get; set; }
+		[CProperty(Association ="TsMailNotificationValue:EmailTemplateId")]
+		public virtual ICollection<TsMailNotificationValue> TsMailNotificationValueByEmailTemplate { get; set; }
 		#endregion
 	}
 }

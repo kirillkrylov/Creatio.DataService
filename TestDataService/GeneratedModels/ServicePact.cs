@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class ServicePact : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="AccountId")]
+		public Guid AccountId { get; set; }
 		[CProperty(ColumnPath ="CalendarId")]
 		public Guid CalendarId { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
@@ -48,6 +50,8 @@ namespace Creatio.DataService.Models
 		#region Navigation
 		[CProperty(Navigation ="Account:ServiceProviderId")]
 		public Account ServiceProvider { get; set; }
+		[CProperty(Navigation ="Account:AccountId")]
+		public Account Account { get; set; }
 		[CProperty(Navigation ="Calendar:CalendarId")]
 		public Calendar Calendar { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
@@ -69,6 +73,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Case:ServicePactId")]
 		public virtual ICollection<Case> CaseByServicePact { get; set; }
+		[CProperty(Association ="CaseLifecycle:ServicePactId")]
+		public virtual ICollection<CaseLifecycle> CaseLifecycleByServicePact { get; set; }
 		[CProperty(Association ="ServiceInServicePact:ServicePactId")]
 		public virtual ICollection<ServiceInServicePact> ServiceInServicePactByServicePact { get; set; }
 		[CProperty(Association ="ServiceObject:ServicePactId")]
@@ -79,6 +85,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ServicePactInFolder> ServicePactInFolderByServicePact { get; set; }
 		[CProperty(Association ="ServicePactInTag:EntityId")]
 		public virtual ICollection<ServicePactInTag> ServicePactInTagByEntity { get; set; }
+		[CProperty(Association ="SupplyPaymentElement:ServicePactId")]
+		public virtual ICollection<SupplyPaymentElement> SupplyPaymentElementByServicePact { get; set; }
 		[CProperty(Association ="VwServiceRecepients:ServicePactId")]
 		public virtual ICollection<VwServiceRecepients> VwServiceRecepientsByServicePact { get; set; }
 		#endregion

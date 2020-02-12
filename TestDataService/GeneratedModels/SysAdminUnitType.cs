@@ -37,6 +37,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="SysAdminUnitCategory:AdminUnitTypeId")]
+		public virtual ICollection<SysAdminUnitCategory> SysAdminUnitCategoryByAdminUnitType { get; set; }
 		[CProperty(Association ="VwSspAdminUnit:SysAdminUnitTypeId")]
 		public virtual ICollection<VwSspAdminUnit> VwSspAdminUnitBySysAdminUnitType { get; set; }
 		[CProperty(Association ="VwSysAdminUnit:SysAdminUnitTypeId")]

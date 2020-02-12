@@ -7,6 +7,10 @@ namespace Creatio.DataService.Models
 	public class ProductPrice : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="APPPrice")]
+		public decimal APPPrice { get; set; }
+		[CProperty(ColumnPath ="BPMPrice")]
+		public decimal BPMPrice { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
@@ -15,6 +19,8 @@ namespace Creatio.DataService.Models
 		public Guid CurrencyId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="MinPrice")]
+		public decimal MinPrice { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -23,6 +29,8 @@ namespace Creatio.DataService.Models
 		public decimal Price { get; set; }
 		[CProperty(ColumnPath ="PriceListId")]
 		public Guid PriceListId { get; set; }
+		[CProperty(ColumnPath ="PricePercent")]
+		public decimal PricePercent { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="ProductId")]

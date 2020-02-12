@@ -37,6 +37,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Lead:StatusId")]
 		public virtual ICollection<Lead> LeadByStatus { get; set; }
+		[CProperty(Association ="VwLead:StatusId")]
+		public virtual ICollection<VwLead> VwLeadByStatus { get; set; }
 		#endregion
 	}
 }

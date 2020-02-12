@@ -35,6 +35,10 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="EvaluationPeriod:PeriodId")]
+		public virtual ICollection<EvaluationPeriod> EvaluationPeriodByPeriod { get; set; }
+		[CProperty(Association ="RecruitmentTargetValue:PeriodId")]
+		public virtual ICollection<RecruitmentTargetValue> RecruitmentTargetValueByPeriod { get; set; }
 		#endregion
 	}
 }

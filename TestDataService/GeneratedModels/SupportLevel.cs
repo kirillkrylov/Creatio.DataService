@@ -33,10 +33,18 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="ManualSupportLevel:SupportLevelId")]
+		public virtual ICollection<ManualSupportLevel> ManualSupportLevelBySupportLevel { get; set; }
 		[CProperty(Association ="PriorityInSupportLevel:SupportLevelId")]
 		public virtual ICollection<PriorityInSupportLevel> PriorityInSupportLevelBySupportLevel { get; set; }
+		[CProperty(Association ="Product:SupportLevelId")]
+		public virtual ICollection<Product> ProductBySupportLevel { get; set; }
+		[CProperty(Association ="ProductInServicePact:SupportLevelId")]
+		public virtual ICollection<ProductInServicePact> ProductInServicePactBySupportLevel { get; set; }
 		[CProperty(Association ="ServicePact:SupportLevelId")]
 		public virtual ICollection<ServicePact> ServicePactBySupportLevel { get; set; }
+		[CProperty(Association ="VwProductSLA:SupportLevelId")]
+		public virtual ICollection<VwProductSLA> VwProductSLABySupportLevel { get; set; }
 		#endregion
 	}
 }

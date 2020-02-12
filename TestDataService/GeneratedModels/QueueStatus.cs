@@ -39,6 +39,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Queue:StatusId")]
 		public virtual ICollection<Queue> QueueByStatus { get; set; }
+		[CProperty(Association ="VwLeadInQueue:QueueStatusId")]
+		public virtual ICollection<VwLeadInQueue> VwLeadInQueueByQueueStatus { get; set; }
 		#endregion
 	}
 }

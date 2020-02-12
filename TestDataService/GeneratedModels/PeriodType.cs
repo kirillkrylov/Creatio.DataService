@@ -37,6 +37,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Forecast> ForecastByPeriodType { get; set; }
 		[CProperty(Association ="ForecastSheet:PeriodTypeId")]
 		public virtual ICollection<ForecastSheet> ForecastSheetByPeriodType { get; set; }
+		[CProperty(Association ="PaymentRule:PeriodTypeId")]
+		public virtual ICollection<PaymentRule> PaymentRuleByPeriodType { get; set; }
 		[CProperty(Association ="Period:PeriodTypeId")]
 		public virtual ICollection<Period> PeriodByPeriodType { get; set; }
 		#endregion

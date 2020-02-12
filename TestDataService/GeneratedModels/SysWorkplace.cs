@@ -23,12 +23,16 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="Position")]
 		public int Position { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="SysApplicationClientTypeId")]
 		public Guid SysApplicationClientTypeId { get; set; }
+		[CProperty(ColumnPath ="TypeId")]
+		public Guid TypeId { get; set; }
 		#endregion
 
 		#region Navigation
@@ -38,6 +42,8 @@ namespace Creatio.DataService.Models
 		public Contact ModifiedBy { get; set; }
 		[CProperty(Navigation ="SysApplicationClientType:SysApplicationClientTypeId")]
 		public SysApplicationClientType SysApplicationClientType { get; set; }
+		[CProperty(Navigation ="SysWorkplaceType:TypeId")]
+		public SysWorkplaceType Type { get; set; }
 		#endregion
 
 		#region Associations

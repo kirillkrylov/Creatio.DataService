@@ -40,11 +40,13 @@ namespace Creatio.DataService.Models
 		public Contact ModifiedBy { get; set; }
 		[CProperty(Navigation ="FolderType:FolderTypeId")]
 		public FolderType FolderType { get; set; }
-		[CProperty(Navigation ="VwQueueItem:ParentId")]
-		public VwQueueItem Parent { get; set; }
+		[CProperty(Navigation ="QueueItemFolder:ParentId")]
+		public QueueItemFolder Parent { get; set; }
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="QueueItemFolder:ParentId")]
+		public virtual ICollection<QueueItemFolder> QueueItemFolderByParent { get; set; }
 		#endregion
 	}
 }

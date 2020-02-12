@@ -51,6 +51,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<VwDocumentProduct> VwDocumentProductByUnit { get; set; }
 		[CProperty(Association ="VwInvoiceProduct:UnitId")]
 		public virtual ICollection<VwInvoiceProduct> VwInvoiceProductByUnit { get; set; }
+		[CProperty(Association ="VwOrderProduct:UnitId")]
+		public virtual ICollection<VwOrderProduct> VwOrderProductByUnit { get; set; }
 		[CProperty(Association ="VwProjectProduct:UnitId")]
 		public virtual ICollection<VwProjectProduct> VwProjectProductByUnit { get; set; }
 		#endregion

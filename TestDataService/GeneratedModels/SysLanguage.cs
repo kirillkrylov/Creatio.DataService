@@ -37,24 +37,22 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
-		[CProperty(Association ="Certification:LanguageId")]
-		public virtual ICollection<Certification> CertificationByLanguage { get; set; }
 		[CProperty(Association ="Contact:LanguageId")]
 		public virtual ICollection<Contact> ContactByLanguage { get; set; }
 		[CProperty(Association ="EmailTemplateLang:LanguageId")]
 		public virtual ICollection<EmailTemplateLang> EmailTemplateLangByLanguage { get; set; }
-		[CProperty(Association ="GuidedLearning:LanguageId")]
-		public virtual ICollection<GuidedLearning> GuidedLearningByLanguage { get; set; }
 		[CProperty(Association ="MailboxSyncSettings:MessageLanguageId")]
 		public virtual ICollection<MailboxSyncSettings> MailboxSyncSettingsByMessageLanguage { get; set; }
-		[CProperty(Association ="QandA:LanguageId")]
-		public virtual ICollection<QandA> QandAByLanguage { get; set; }
+		[CProperty(Association ="RegionalLanguagePartner:LanguageId")]
+		public virtual ICollection<RegionalLanguagePartner> RegionalLanguagePartnerByLanguage { get; set; }
+		[CProperty(Association ="SubscriptionExpirationEmailByLanguage:SysLanguageId")]
+		public virtual ICollection<SubscriptionExpirationEmailByLanguage> SubscriptionExpirationEmailByLanguageBySysLanguage { get; set; }
 		[CProperty(Association ="SysAdminUnit:DateTimeFormatId")]
 		public virtual ICollection<SysAdminUnit> SysAdminUnitByDateTimeFormat { get; set; }
 		[CProperty(Association ="SysCulture:LanguageId")]
 		public virtual ICollection<SysCulture> SysCultureByLanguage { get; set; }
-		[CProperty(Association ="tsaTermCulture:tsaTermCultureLanguageId")]
-		public virtual ICollection<tsaTermCulture> tsaTermCultureBytsaTermCultureLanguage { get; set; }
+		[CProperty(Association ="VwEventInContact:LanguageId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByLanguage { get; set; }
 		[CProperty(Association ="VwGroupSysAdminUnit:DateTimeFormatId")]
 		public virtual ICollection<VwGroupSysAdminUnit> VwGroupSysAdminUnitByDateTimeFormat { get; set; }
 		[CProperty(Association ="VwSysAdminUnit:DateTimeFormatId")]

@@ -55,6 +55,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SocialMessage> SocialMessageByParent { get; set; }
 		[CProperty(Association ="SocialMessageEntity:SocialMessageId")]
 		public virtual ICollection<SocialMessageEntity> SocialMessageEntityBySocialMessage { get; set; }
+		[CProperty(Association ="VwInternalRequestSM:SocialMessageId")]
+		public virtual ICollection<VwInternalRequestSM> VwInternalRequestSMBySocialMessage { get; set; }
+		[CProperty(Association ="VwInvoiceLastComment:SocialMessageId")]
+		public virtual ICollection<VwInvoiceLastComment> VwInvoiceLastCommentBySocialMessage { get; set; }
 		[CProperty(Association ="VwSocialSubscription:SocialMessageId")]
 		public virtual ICollection<VwSocialSubscription> VwSocialSubscriptionBySocialMessage { get; set; }
 		[CProperty(Association ="VwSocialUnsubscription:SocialMessageId")]

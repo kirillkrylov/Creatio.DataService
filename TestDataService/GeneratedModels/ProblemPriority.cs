@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="InternalRequest:PriorityId")]
+		public virtual ICollection<InternalRequest> InternalRequestByPriority { get; set; }
 		[CProperty(Association ="Problem:PriorityId")]
 		public virtual ICollection<Problem> ProblemByPriority { get; set; }
 		#endregion

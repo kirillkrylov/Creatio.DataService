@@ -23,8 +23,6 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
-		[CProperty(ColumnPath ="WorkId")]
-		public string WorkId { get; set; }
 		#endregion
 
 		#region Navigation

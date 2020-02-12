@@ -53,6 +53,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<MessageNotifier> MessageNotifierByAliasNotifier { get; set; }
 		[CProperty(Association ="MessageNotifierBySection:MessageNotifierId")]
 		public virtual ICollection<MessageNotifierBySection> MessageNotifierBySectionByMessageNotifier { get; set; }
+		[CProperty(Association ="MktgActivityMessageHistory:MessageNotifierId")]
+		public virtual ICollection<MktgActivityMessageHistory> MktgActivityMessageHistoryByMessageNotifier { get; set; }
+		[CProperty(Association ="OpportunityMessageHistory:MessageNotifierId")]
+		public virtual ICollection<OpportunityMessageHistory> OpportunityMessageHistoryByMessageNotifier { get; set; }
 		[CProperty(Association ="VwMobileCaseMessageHistory:MessageNotifierId")]
 		public virtual ICollection<VwMobileCaseMessageHistory> VwMobileCaseMessageHistoryByMessageNotifier { get; set; }
 		#endregion

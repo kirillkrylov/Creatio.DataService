@@ -15,8 +15,14 @@ namespace Creatio.DataService.Models
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
+		[CProperty(ColumnPath ="CurrencyId")]
+		public Guid CurrencyId { get; set; }
+		[CProperty(ColumnPath ="CurrencyRate")]
+		public decimal CurrencyRate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsRecordLocked")]
+		public bool IsRecordLocked { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -36,6 +42,8 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="Currency:CurrencyId")]
+		public Currency Currency { get; set; }
 		[CProperty(Navigation ="OrderProduct:ProductId")]
 		public OrderProduct Product { get; set; }
 		[CProperty(Navigation ="SupplyPaymentElement:SupplyPaymentElementId")]

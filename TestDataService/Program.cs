@@ -1,34 +1,28 @@
 ﻿using Creatio.DataService;
+using Creatio.DataService.Models;
 using System;
 using System.Threading.Tasks;
-//using TestDataService.Model;
-using Creatio.DataService.Models;
-using System.Collections.Generic;
+using TestDataService.Properties;
 
 namespace TestDataService
 {
-    class Program
+    public sealed class Program
     {
-        static async Task Main()
+        public static async Task Main()
         {
             Utils utils = Utils.Instance;
-            
-            utils.SetCredentials(Properties.Resources.UserName, Properties.Resources.Password,
-                Properties.Resources.Domain);
+            utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
 
             if (await utils.LoginAsync()) {
-                
                 Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
-
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
                 Console.WriteLine("I have subscribed to WebSoketMessages");
                 Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
                 var ContactId = utils.CurrentUser.Contact.Value;
                 await ContactById(ContactId);
-                //await AllContacts();
-                //await AdHocQuery();
             }
+
             Console.ReadLine();
             utils.Dispose();
         }
@@ -37,70 +31,33 @@ namespace TestDataService
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"You've got message: { e.MessageBody}");
+            Console.WriteLine($"You've got message: {e.MessageId}\n{e.MessageHeader.Sender}\n{ e.MessageBody}");
             Console.ResetColor();
         }
 
         private static async Task ContactById(string ContactId) {
-
             Contact currentUser = new Contact() { Id = Guid.Parse(ContactId)};
             currentUser = await currentUser.Expnad<Contact>(currentUser.Id);
             
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
-            Console.WriteLine("----------- CURRENT USER SelectById -----------");
-            Console.WriteLine($"Id: {currentUser.Id}");
-            Console.WriteLine($"Name: {currentUser.Name}");
-            Console.WriteLine($"Email: {currentUser.Email}");
-            Console.WriteLine($"CreatedOn: {currentUser.CreatedOn}");
+            Console.WriteLine("-------------- CURRENT USER SelectById --------------");
+            Console.WriteLine($"Id:\t\t {currentUser.Id.ToString().Trim()}");
+            Console.WriteLine($"Name:\t\t {currentUser.Name.Trim()}");
+            Console.WriteLine($"Email:\t\t {currentUser.Email.Trim()}");
+            Console.WriteLine($"CreatedOn:\t {currentUser.CreatedOn.ToString("dd-MMM-yyyy").Trim()}");
             Console.ResetColor();
             Console.WriteLine();
 
+            currentUser.ExpandAllAssociations(nameof(currentUser.ContactCommunicationByContact));
 
-            //List<ContactAddress> ca = await Utils.Instance.SelectAssociation<ContactAddress>(currentUser.Id.ToString(), currentUser.GetType().Name);
-
-            //currentUser.ContactAddressByContact = ca;
-            //currentUser.ExpandAllAssociations(nameof(currentUser.ContactAddressByContact));
-            currentUser.ExpandAllAssociations();
-            currentUser.ExpandAllNav();
-            //currentUser.ExpandAllNav(nameof(currentUser.Account), nameof(currentUser.Owner), 
-            //    nameof(currentUser.Country), nameof(currentUser.City));
-          
-            //Utils utils = Utils.Instance;
-            //currentUser.Activities = await utils.SelectList<Activity>("Owner", currentUser.Id);
-            //foreach (Activity activity in currentUser.Activities) {
-            //    Console.ForegroundColor = ConsoleColor.Yellow;
-            //    Console.WriteLine("");
-            //    Console.WriteLine($"\tTitle:{activity.Title} Start:{activity.StartDate} Ends:{activity.DueDate}");
-            //    Console.WriteLine($"Count of Activities: {currentUser.Activities.Count}");
-            //}
-            //Console.ForegroundColor = ConsoleColor.Green;
-            //Console.WriteLine("----------- END OF CURRENT USER -----------");
-            //Console.ResetColor();
-
-
-            //Account account = await currentUser.Account.Expnad<Account>(currentUser.Account.Id);
-            //Console.ForegroundColor = ConsoleColor.Red;
-            //Console.WriteLine();
-            //Console.WriteLine("----------- CURRENT USER / Account -----------");
-            //Console.WriteLine($"Id: {account.Id}");
-            //Console.WriteLine($"Name: {account.Name}");
-            //Console.WriteLine($"Phone: {account.Phone}");
-            //Console.WriteLine($"Web: {account.Web}");
-            //Console.WriteLine($"PrimaryContact: {account.PrimaryContact.Id}");
-            //Console.WriteLine("----------- END OF CURRENT USER / Account-----------");
-            //Console.ResetColor();
-
-
-            //Contact primaryContact = await account.Expnad<Contact>(account.PrimaryContact.Id);
-            //Console.ForegroundColor = ConsoleColor.Blue;
-            //Console.WriteLine();
-            //Console.WriteLine("----------- CURRENT USER / Account / PrimaryContact -----------");
-            //Console.WriteLine($"Id: {primaryContact.Id}");
-            //Console.WriteLine($"Name: {primaryContact.Name}");
-            //Console.WriteLine($"Phone: {primaryContact.Email}");
-            //Console.WriteLine("----------- END OF CURRENT USER  / Account / PrimaryContact-----------");
-            //Console.ResetColor();
+            Console.WriteLine("Contact Communication Options");
+            Parallel.ForEach(currentUser.ContactCommunicationByContact, i =>
+            {
+                i.ExpandAllNav(nameof(CommunicationType));
+                string line = $"{i.CommunicationType.Name}\t : {i.Number}";
+                Console.WriteLine(line);
+            });
         }
 
         /* Unused Methods

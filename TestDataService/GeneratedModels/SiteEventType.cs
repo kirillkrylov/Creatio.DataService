@@ -27,6 +27,8 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="ScoringEventTypeId")]
+		public Guid ScoringEventTypeId { get; set; }
 		[CProperty(ColumnPath ="SelectorTypeId")]
 		public Guid SelectorTypeId { get; set; }
 		[CProperty(ColumnPath ="WebsiteEventTypeId")]
@@ -38,6 +40,8 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="ScoringEventType:ScoringEventTypeId")]
+		public ScoringEventType ScoringEventType { get; set; }
 		[CProperty(Navigation ="SelectorType:SelectorTypeId")]
 		public SelectorType SelectorType { get; set; }
 		[CProperty(Navigation ="WebsiteEventType:WebsiteEventTypeId")]

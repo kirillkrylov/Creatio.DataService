@@ -23,6 +23,8 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="TsIsForModalBox")]
+		public bool TsIsForModalBox { get; set; }
 		#endregion
 
 		#region Navigation
@@ -33,6 +35,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="ProductDeliveryType:SupplyPaymentTypeId")]
+		public virtual ICollection<ProductDeliveryType> ProductDeliveryTypeBySupplyPaymentType { get; set; }
 		[CProperty(Association ="SupplyPaymentElement:TypeId")]
 		public virtual ICollection<SupplyPaymentElement> SupplyPaymentElementByType { get; set; }
 		[CProperty(Association ="SupplyPaymentTemplateItem:TypeId")]

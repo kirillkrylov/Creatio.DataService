@@ -21,6 +21,8 @@ namespace Creatio.DataService.Models
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
+		[CProperty(ColumnPath ="GlobalAreaId")]
+		public Guid GlobalAreaId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
@@ -50,6 +52,8 @@ namespace Creatio.DataService.Models
 		public Contact Contact { get; set; }
 		[CProperty(Navigation ="Country:CountryId")]
 		public Country Country { get; set; }
+		[CProperty(Navigation ="GlobalArea:GlobalAreaId")]
+		public GlobalArea GlobalArea { get; set; }
 		[CProperty(Navigation ="Region:RegionId")]
 		public Region Region { get; set; }
 		#endregion

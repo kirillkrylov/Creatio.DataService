@@ -65,6 +65,12 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Contact> ContactByLinkedInAFDA { get; set; }
 		[CProperty(Association ="ContactCorrespondence:SourceAccountId")]
 		public virtual ICollection<ContactCorrespondence> ContactCorrespondenceBySourceAccount { get; set; }
+		[CProperty(Association ="VwEventInContact:TwitterAFDAId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByTwitterAFDA { get; set; }
+		[CProperty(Association ="VwEventInContact:FacebookAFDAId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByFacebookAFDA { get; set; }
+		[CProperty(Association ="VwEventInContact:LinkedInAFDAId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByLinkedInAFDA { get; set; }
 		#endregion
 	}
 }

@@ -51,8 +51,6 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Region> RegionByTimeZone { get; set; }
 		[CProperty(Association ="VwSysAdminUnit:TimeZoneId")]
 		public virtual ICollection<VwSysAdminUnit> VwSysAdminUnitByTimeZone { get; set; }
-		[CProperty(Association ="ZoomTimeZone:TimeZoneId")]
-		public virtual ICollection<ZoomTimeZone> ZoomTimeZoneByTimeZone { get; set; }
 		#endregion
 	}
 }

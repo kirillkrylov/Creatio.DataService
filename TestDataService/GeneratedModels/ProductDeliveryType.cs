@@ -15,6 +15,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsUpdatedAutomatically")]
+		public bool IsUpdatedAutomatically { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -23,8 +25,10 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
-		[CProperty(ColumnPath ="WorkId")]
-		public string WorkId { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
+		[CProperty(ColumnPath ="SupplyPaymentTypeId")]
+		public Guid SupplyPaymentTypeId { get; set; }
 		#endregion
 
 		#region Navigation
@@ -32,11 +36,19 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="SupplyPaymentType:SupplyPaymentTypeId")]
+		public SupplyPaymentType SupplyPaymentType { get; set; }
 		#endregion
 
 		#region Associations
-		[CProperty(Association ="Product:ProductDeliveryTypeId")]
-		public virtual ICollection<Product> ProductByProductDeliveryType { get; set; }
+		[CProperty(Association ="Product:DeliveryTypeId")]
+		public virtual ICollection<Product> ProductByDeliveryType { get; set; }
+		[CProperty(Association ="SupplyPaymentElement:DeliveryTypeId")]
+		public virtual ICollection<SupplyPaymentElement> SupplyPaymentElementByDeliveryType { get; set; }
+		[CProperty(Association ="Transaction:IncomeTypeId")]
+		public virtual ICollection<Transaction> TransactionByIncomeType { get; set; }
+		[CProperty(Association ="VwTransaction:IncomeTypeId")]
+		public virtual ICollection<VwTransaction> VwTransactionByIncomeType { get; set; }
 		#endregion
 	}
 }

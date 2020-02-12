@@ -9,6 +9,8 @@ namespace Creatio.DataService.Models
 		#region Values
 		[CProperty(ColumnPath ="AliasAddress")]
 		public string AliasAddress { get; set; }
+		[CProperty(ColumnPath ="CaseCategoryId")]
+		public Guid CaseCategoryId { get; set; }
 		[CProperty(ColumnPath ="CategoryId")]
 		public Guid CategoryId { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
@@ -29,17 +31,23 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="TerritoryId")]
+		public Guid TerritoryId { get; set; }
 		#endregion
 
 		#region Navigation
 		[CProperty(Navigation ="CaseCategory:CategoryId")]
 		public CaseCategory Category { get; set; }
+		[CProperty(Navigation ="CaseCategory:CaseCategoryId")]
+		public CaseCategory CaseCategory { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
 		[CProperty(Navigation ="MailboxSyncSettings:MailboxSyncSettingsId")]
 		public MailboxSyncSettings MailboxSyncSettings { get; set; }
+		[CProperty(Navigation ="OpportunityTerritory:TerritoryId")]
+		public OpportunityTerritory Territory { get; set; }
 		#endregion
 
 		#region Associations

@@ -27,6 +27,8 @@ namespace Creatio.DataService.Models
 		public Guid OfferResultId { get; set; }
 		[CProperty(ColumnPath ="OpportunityId")]
 		public Guid OpportunityId { get; set; }
+		[CProperty(ColumnPath ="PartnerProduct")]
+		public bool PartnerProduct { get; set; }
 		[CProperty(ColumnPath ="Price")]
 		public decimal Price { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]

@@ -21,6 +21,8 @@ namespace Creatio.DataService.Models
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
 		public DateTime ModifiedOn { get; set; }
+		[CProperty(ColumnPath ="Priority")]
+		public bool Priority { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		#endregion

@@ -17,6 +17,8 @@ namespace Creatio.DataService.Models
 		public Guid EntitySchemaUId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsForReport")]
+		public bool IsForReport { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -43,6 +45,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ForecastDimension> ForecastDimensionByForecast { get; set; }
 		[CProperty(Association ="ForecastItem:ForecastId")]
 		public virtual ICollection<ForecastItem> ForecastItemByForecast { get; set; }
+		[CProperty(Association ="VwForecastDashboarData:ForecastId")]
+		public virtual ICollection<VwForecastDashboarData> VwForecastDashboarDataByForecast { get; set; }
 		#endregion
 	}
 }

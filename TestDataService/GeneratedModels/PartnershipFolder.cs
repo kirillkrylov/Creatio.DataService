@@ -29,6 +29,8 @@ namespace Creatio.DataService.Models
 		public Guid ParentId { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		[CProperty(ColumnPath ="SearchData")]
 		public byte[] SearchData { get; set; }
 		#endregion

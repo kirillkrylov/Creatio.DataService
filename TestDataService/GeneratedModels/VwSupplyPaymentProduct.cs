@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class VwSupplyPaymentProduct : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="AvailableAmount")]
+		public decimal AvailableAmount { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
@@ -29,10 +31,16 @@ namespace Creatio.DataService.Models
 		public decimal Price { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RenewalDate")]
+		public DateTime RenewalDate { get; set; }
+		[CProperty(ColumnPath ="StartDate")]
+		public DateTime StartDate { get; set; }
 		[CProperty(ColumnPath ="SupplyPaymentElementId")]
 		public Guid SupplyPaymentElementId { get; set; }
 		[CProperty(ColumnPath ="SupplyPaymentProductId")]
 		public Guid SupplyPaymentProductId { get; set; }
+		[CProperty(ColumnPath ="TotalPrice")]
+		public decimal TotalPrice { get; set; }
 		[CProperty(ColumnPath ="UsedAmount")]
 		public decimal UsedAmount { get; set; }
 		[CProperty(ColumnPath ="UsedQuantity")]

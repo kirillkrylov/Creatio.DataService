@@ -23,6 +23,8 @@ namespace Creatio.DataService.Models
 		public Guid ModuleUId { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="Position")]
 		public int Position { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]

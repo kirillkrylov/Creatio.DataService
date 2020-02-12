@@ -21,6 +21,8 @@ namespace Creatio.DataService.Models
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
 		public DateTime ModifiedOn { get; set; }
+		[CProperty(ColumnPath ="PriorityId")]
+		public Guid PriorityId { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="ReactionTime")]
@@ -46,6 +48,8 @@ namespace Creatio.DataService.Models
 		#region Navigation
 		[CProperty(Navigation ="Calendar:CalendarId")]
 		public Calendar Calendar { get; set; }
+		[CProperty(Navigation ="CasePriority:PriorityId")]
+		public CasePriority Priority { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]

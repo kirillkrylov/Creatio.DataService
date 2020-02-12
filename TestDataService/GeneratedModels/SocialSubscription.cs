@@ -41,6 +41,10 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="Sites:SubscribeId")]
+		public virtual ICollection<Sites> SitesBySubscribe { get; set; }
+		[CProperty(Association ="VwActiveProduct:SubscriptionId")]
+		public virtual ICollection<VwActiveProduct> VwActiveProductBySubscription { get; set; }
 		#endregion
 	}
 }

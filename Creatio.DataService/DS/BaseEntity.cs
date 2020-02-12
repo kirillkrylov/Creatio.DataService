@@ -53,6 +53,7 @@ namespace Creatio.DataService
                 }
             }
 
+#if DEBUG
             Console.ForegroundColor = ConsoleColor.Green;
             string propsList = string.Join(", ", properties);
 
@@ -63,7 +64,7 @@ namespace Creatio.DataService
             Console.WriteLine($"I will attempt to execute requests in parallel ... Total to Expand: {props.Count}");
             Console.WriteLine();
             Console.ResetColor();
-            
+#endif            
             //Assembly assembly = Assembly.GetCallingAssembly();
             MethodInfo select = typeof(Utils).GetMethod("Select");
             Type tThis = this.GetType();
@@ -139,75 +140,85 @@ namespace Creatio.DataService
                 MethodInfo generic = select.MakeGenericMethod(entityType);
                 object[] args = { id };
 
+#if DEBUG
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"\tExpanding {prop.Name} of Type {entityType} by Id: {id}");
                 Stopwatch propStopWatch = new Stopwatch();
 
                 propStopWatch.Start();
+#endif
+
                 //select return List<Entity>
                 //Invoking Select Method on Utils.Instance with args as arguments
                 object selectReturn = generic.Invoke(Utils.Instance, args);
 
                 //Select method returns TASK.Resut,  thus "a" is a Task.Result or List<Entity>
                 var taskResult = selectReturn.GetType().GetProperty("Result").GetValue(selectReturn); //a is a Task.Result or List<Entity>
+#if DEBUG
                 propStopWatch.Stop();
+#endif
 
                 IList elements = (IList)taskResult;
                 if (elements.Count > 0)
                 {
+#if DEBUG
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"\tSetting value for {prop.Name}, it took me: {propStopWatch.Elapsed.TotalSeconds} seconds.");
                     Console.ResetColor();
+#endif
                     prop.SetValue(this, elements[0]);
                 }
             });
-            
 
-            #region hidden
-            //foreach (PropertyInfo prop in props)
-            //{
-            //    if (prop.GetCustomAttribute<CPropertyAttribute>()?.Navigation != null) {
 
-            //        var val = this.GetType().GetProperty(prop.Name).GetValue(this, null);
-            //        string id = val.GetType().GetProperty("Id").GetValue(val, null).ToString(); //assume id is the Key
+#region hidden
+//foreach (PropertyInfo prop in props)
+//{
+//    if (prop.GetCustomAttribute<CPropertyAttribute>()?.Navigation != null) {
 
-            //        //I want to invoke Select method
-            //        //Select<Entity>(string id = "")
-            //        MethodInfo select = typeof(Utils).GetMethod("Select");
-            //        MethodInfo generic = select.MakeGenericMethod(val.GetType());
+//        var val = this.GetType().GetProperty(prop.Name).GetValue(this, null);
+//        string id = val.GetType().GetProperty("Id").GetValue(val, null).ToString(); //assume id is the Key
 
-            //        Console.ForegroundColor = ConsoleColor.Yellow;
-            //        Console.WriteLine($"\tExpanding {val.GetType()} by Id: {id}");
-            //        Console.ResetColor();
+//        //I want to invoke Select method
+//        //Select<Entity>(string id = "")
+//        MethodInfo select = typeof(Utils).GetMethod("Select");
+//        MethodInfo generic = select.MakeGenericMethod(val.GetType());
 
-            //        object[] args = { id };
+//        Console.ForegroundColor = ConsoleColor.Yellow;
+//        Console.WriteLine($"\tExpanding {val.GetType()} by Id: {id}");
+//        Console.ResetColor();
 
-            //        Stopwatch propStopWatch = new Stopwatch();
-            //        propStopWatch.Reset();
-            //        propStopWatch.Start();
-            //        //select return List<Entity>
-            //        object selectReturn = generic.Invoke(Utils.Instance, args);
-            //        var a = selectReturn.GetType().GetProperty("Result").GetValue(selectReturn);
-            //        propStopWatch.Stop();
+//        object[] args = { id };
 
-            //        IList elements = (IList)a;
+//        Stopwatch propStopWatch = new Stopwatch();
+//        propStopWatch.Reset();
+//        propStopWatch.Start();
+//        //select return List<Entity>
+//        object selectReturn = generic.Invoke(Utils.Instance, args);
+//        var a = selectReturn.GetType().GetProperty("Result").GetValue(selectReturn);
+//        propStopWatch.Stop();
 
-            //        if (elements.Count > 0) {
+//        IList elements = (IList)a;
 
-            //            Console.ForegroundColor = ConsoleColor.Green;
-            //            Console.WriteLine($"\tSetting value for {prop.Name}, it took me: {propStopWatch.Elapsed.TotalSeconds} seconds.");
-            //            Console.ResetColor();
-            //            Console.WriteLine();
-            //            prop.SetValue(this, elements[0]);               
-            //        }
-            //    }
-            //}
-            #endregion
+//        if (elements.Count > 0) {
 
+//            Console.ForegroundColor = ConsoleColor.Green;
+//            Console.WriteLine($"\tSetting value for {prop.Name}, it took me: {propStopWatch.Elapsed.TotalSeconds} seconds.");
+//            Console.ResetColor();
+//            Console.WriteLine();
+//            prop.SetValue(this, elements[0]);               
+//        }
+//    }
+//}
+#endregion
+
+#if DEBUG
             stopwatch.Stop();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"I am done expanding properties of {this.GetType().Name}, it took me {stopwatch.Elapsed.TotalSeconds} seconds.");
             Console.ResetColor();
+#endif
+
         }
 
         /// <summary>
@@ -236,7 +247,7 @@ namespace Creatio.DataService
                     }
                 }
             }
-
+#if DEBUG
             Console.ForegroundColor = ConsoleColor.Green;
             string propsList = string.Join(", ", properties);
 
@@ -247,7 +258,7 @@ namespace Creatio.DataService
             Console.WriteLine("I will attempt to execute requests in parallel ...");
             Console.WriteLine();
             Console.ResetColor();
-
+#endif
             //Assembly assembly = Assembly.GetCallingAssembly();
             MethodInfo select = typeof(Utils).GetMethod("SelectAssociation");
             Type tThis = this.GetType();
@@ -304,8 +315,6 @@ namespace Creatio.DataService
 
             }
             */
-
-
             
             Parallel.ForEach(props, (prop) =>
             {
@@ -315,7 +324,6 @@ namespace Creatio.DataService
                     entityType = this.GetType().GetProperty(prop.Name).PropertyType.GetGenericArguments().FirstOrDefault().UnderlyingSystemType;
                 }
                 else return;
-
 
                 string id = tThis.GetProperty("Id").GetValue(this, null).ToString();
                 if (id == Guid.Empty.ToString())
@@ -332,14 +340,16 @@ namespace Creatio.DataService
                 //Select<Entity>(string id = "")
                 MethodInfo generic = select.MakeGenericMethod(entityType);
 
+#if DEBUG
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"\tExpanding {prop.Name} of Type {entityType} by Id: {id}");
+#endif
+
                 object[] args = { id, parentColumnName };
 
                 Stopwatch propStopWatch = new Stopwatch();
                 propStopWatch.Start();
                 object selectReturn = generic.Invoke(Utils.Instance, args);
-
 
                 var taskResult = selectReturn?.GetType().GetProperty("Result")?.GetValue(selectReturn); //a is a Task.Result or List<Entity>
                 propStopWatch.Stop();
@@ -347,21 +357,22 @@ namespace Creatio.DataService
 
                 if (elements.Count > 0)
                 {
+#if DEBUG
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"\tSetting value for {prop.Name}, it took me: {propStopWatch.Elapsed.TotalSeconds} seconds.");
                     Console.ResetColor();
+#endif
                     prop.SetValue(this, elements);
                 }
-
             });
 
-            
 
+#if DEBUG
             stopwatch.Stop();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"I am done expanding properties of {this.GetType().Name}, it took me {stopwatch.Elapsed.TotalSeconds} seconds.");
             Console.ResetColor();
-
+#endif
         }
     }
 }

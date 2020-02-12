@@ -27,6 +27,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="OrderProductId")]
+		public Guid OrderProductId { get; set; }
 		[CProperty(ColumnPath ="PlanningWork")]
 		public decimal PlanningWork { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
@@ -42,6 +44,8 @@ namespace Creatio.DataService.Models
 		public Contact ModifiedBy { get; set; }
 		[CProperty(Navigation ="Contact:ContactId")]
 		public Contact Contact { get; set; }
+		[CProperty(Navigation ="OrderProduct:OrderProductId")]
+		public OrderProduct OrderProduct { get; set; }
 		[CProperty(Navigation ="Project:ProjectId")]
 		public Project Project { get; set; }
 		#endregion

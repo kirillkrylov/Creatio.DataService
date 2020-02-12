@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Case:ServiceCategoryId")]
 		public virtual ICollection<Case> CaseByServiceCategory { get; set; }
+		[CProperty(Association ="ServiceCategoryInService:ServiceCategoryId")]
+		public virtual ICollection<ServiceCategoryInService> ServiceCategoryInServiceByServiceCategory { get; set; }
 		[CProperty(Association ="ServiceItem:CategoryId")]
 		public virtual ICollection<ServiceItem> ServiceItemByCategory { get; set; }
 		#endregion

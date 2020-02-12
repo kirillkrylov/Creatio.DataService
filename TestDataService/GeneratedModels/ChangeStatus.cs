@@ -25,6 +25,8 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		#endregion
 
 		#region Navigation
@@ -37,6 +39,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Change:StatusId")]
 		public virtual ICollection<Change> ChangeByStatus { get; set; }
+		[CProperty(Association ="VwChange:StatusId")]
+		public virtual ICollection<VwChange> VwChangeByStatus { get; set; }
 		#endregion
 	}
 }

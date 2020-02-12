@@ -43,6 +43,8 @@ namespace Creatio.DataService.Models
 		public int HardBounceCount { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IgnoreSendingRestriction")]
+		public bool IgnoreSendingRestriction { get; set; }
 		[CProperty(ColumnPath ="IncorrectEmailCount")]
 		public int IncorrectEmailCount { get; set; }
 		[CProperty(ColumnPath ="InQueueCount")]
@@ -197,10 +199,16 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Lead> LeadByBulkEmail { get; set; }
 		[CProperty(Association ="VwBulkEmailInCampaign:BulkEmailId")]
 		public virtual ICollection<VwBulkEmailInCampaign> VwBulkEmailInCampaignByBulkEmail { get; set; }
+		[CProperty(Association ="VwLead:BulkEmailId")]
+		public virtual ICollection<VwLead> VwLeadByBulkEmail { get; set; }
 		[CProperty(Association ="VwMandrillRecipient:BulkEmailId")]
 		public virtual ICollection<VwMandrillRecipient> VwMandrillRecipientByBulkEmail { get; set; }
+		[CProperty(Association ="VwMandrillRecipientFilter:BulkEmailId")]
+		public virtual ICollection<VwMandrillRecipientFilter> VwMandrillRecipientFilterByBulkEmail { get; set; }
 		[CProperty(Association ="VwMandrillRecipientV2:BulkEmailId")]
 		public virtual ICollection<VwMandrillRecipientV2> VwMandrillRecipientV2ByBulkEmail { get; set; }
+		[CProperty(Association ="VwWorkMandrillRecip:BulkEmailId")]
+		public virtual ICollection<VwWorkMandrillRecip> VwWorkMandrillRecipByBulkEmail { get; set; }
 		#endregion
 	}
 }

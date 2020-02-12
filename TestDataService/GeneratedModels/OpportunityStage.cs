@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class OpportunityStage : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="CloseReasonVisible")]
+		public bool CloseReasonVisible { get; set; }
 		[CProperty(ColumnPath ="Color")]
 		public string Color { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
@@ -27,8 +29,12 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="NextStepTerm")]
 		public int NextStepTerm { get; set; }
+		[CProperty(ColumnPath ="NotUse")]
+		public bool NotUse { get; set; }
 		[CProperty(ColumnPath ="Number")]
 		public int Number { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
@@ -39,6 +45,8 @@ namespace Creatio.DataService.Models
 		public bool ShowInProgressBar { get; set; }
 		[CProperty(ColumnPath ="Successful")]
 		public bool Successful { get; set; }
+		[CProperty(ColumnPath ="UseInOpportunityFunnel")]
+		public bool UseInOpportunityFunnel { get; set; }
 		#endregion
 
 		#region Navigation
@@ -49,14 +57,24 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="Lead:OpportunityStageId")]
+		public virtual ICollection<Lead> LeadByOpportunityStage { get; set; }
 		[CProperty(Association ="Opportunity:StageId")]
 		public virtual ICollection<Opportunity> OpportunityByStage { get; set; }
+		[CProperty(Association ="OpportunityCloseReason:OpportunityStageId")]
+		public virtual ICollection<OpportunityCloseReason> OpportunityCloseReasonByOpportunityStage { get; set; }
 		[CProperty(Association ="OpportunityInStage:StageId")]
 		public virtual ICollection<OpportunityInStage> OpportunityInStageByStage { get; set; }
+		[CProperty(Association ="OpportunitySignal:NexStageId")]
+		public virtual ICollection<OpportunitySignal> OpportunitySignalByNexStage { get; set; }
 		[CProperty(Association ="OppStageDecoupling:CurrentStageId")]
 		public virtual ICollection<OppStageDecoupling> OppStageDecouplingByCurrentStage { get; set; }
 		[CProperty(Association ="OppStageDecoupling:AvailableStageId")]
 		public virtual ICollection<OppStageDecoupling> OppStageDecouplingByAvailableStage { get; set; }
+		[CProperty(Association ="OppSubProcessHistory:StageId")]
+		public virtual ICollection<OppSubProcessHistory> OppSubProcessHistoryByStage { get; set; }
+		[CProperty(Association ="VwLead:OpportunityStageId")]
+		public virtual ICollection<VwLead> VwLeadByOpportunityStage { get; set; }
 		[CProperty(Association ="VwOpportFunnelData:fStageId")]
 		public virtual ICollection<VwOpportFunnelData> VwOpportFunnelDataByfStage { get; set; }
 		[CProperty(Association ="VwOpportFunnelData:lStageId")]

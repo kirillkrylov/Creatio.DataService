@@ -7,16 +7,28 @@ namespace Creatio.DataService.Models
 	public class QueueItem : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="AttemptsToCall")]
+		public int AttemptsToCall { get; set; }
+		[CProperty(ColumnPath ="CallPurpose")]
+		public string CallPurpose { get; set; }
 		[CProperty(ColumnPath ="Caption")]
 		public string Caption { get; set; }
+		[CProperty(ColumnPath ="CloseReasonId")]
+		public Guid CloseReasonId { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
+		[CProperty(ColumnPath ="CurrentActivityId")]
+		public Guid CurrentActivityId { get; set; }
 		[CProperty(ColumnPath ="EntityRecordId")]
 		public Guid EntityRecordId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IgnoreQueuePriority")]
+		public bool IgnoreQueuePriority { get; set; }
+		[CProperty(ColumnPath ="IsSentEmailToOperator")]
+		public bool IsSentEmailToOperator { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -40,6 +52,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Navigation
+		[CProperty(Navigation ="Activity:CurrentActivityId")]
+		public Activity CurrentActivity { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
@@ -48,6 +62,8 @@ namespace Creatio.DataService.Models
 		public Contact Operator { get; set; }
 		[CProperty(Navigation ="Queue:QueueId")]
 		public Queue Queue { get; set; }
+		[CProperty(Navigation ="QueueItemCloseReason:CloseReasonId")]
+		public QueueItemCloseReason CloseReason { get; set; }
 		[CProperty(Navigation ="QueueItemStatus:StatusId")]
 		public QueueItemStatus Status { get; set; }
 		#endregion

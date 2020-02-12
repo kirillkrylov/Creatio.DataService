@@ -39,6 +39,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Lead> LeadByLeadTypeStatus { get; set; }
 		[CProperty(Association ="LeadQualification:LeadTypeRipenessId")]
 		public virtual ICollection<LeadQualification> LeadQualificationByLeadTypeRipeness { get; set; }
+		[CProperty(Association ="VwLead:LeadTypeStatusId")]
+		public virtual ICollection<VwLead> VwLeadByLeadTypeStatus { get; set; }
 		#endregion
 	}
 }

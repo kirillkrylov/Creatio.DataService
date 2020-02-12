@@ -21,6 +21,8 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		#endregion
@@ -37,6 +39,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<AccountAnniversary> AccountAnniversaryByAnniversaryType { get; set; }
 		[CProperty(Association ="ContactAnniversary:AnniversaryTypeId")]
 		public virtual ICollection<ContactAnniversary> ContactAnniversaryByAnniversaryType { get; set; }
+		[CProperty(Association ="GlbCustomerGift:GlbNoteworthyEventId")]
+		public virtual ICollection<GlbCustomerGift> GlbCustomerGiftByGlbNoteworthyEvent { get; set; }
 		[CProperty(Association ="VwAnniversary:AnniversaryTypeId")]
 		public virtual ICollection<VwAnniversary> VwAnniversaryByAnniversaryType { get; set; }
 		#endregion

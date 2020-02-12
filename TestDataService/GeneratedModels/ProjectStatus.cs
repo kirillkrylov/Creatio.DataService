@@ -17,6 +17,8 @@ namespace Creatio.DataService.Models
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsFinal")]
 		public bool IsFinal { get; set; }
+		[CProperty(ColumnPath ="IsReject")]
+		public bool IsReject { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -37,6 +39,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Project:StatusId")]
 		public virtual ICollection<Project> ProjectByStatus { get; set; }
+		[CProperty(Association ="ProjectInStatus:StatusId")]
+		public virtual ICollection<ProjectInStatus> ProjectInStatusByStatus { get; set; }
 		#endregion
 	}
 }

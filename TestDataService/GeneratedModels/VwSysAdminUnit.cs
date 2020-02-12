@@ -101,6 +101,14 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="IQAddRight:IQUserRoleId")]
+		public virtual ICollection<IQAddRight> IQAddRightByIQUserRole { get; set; }
+		[CProperty(Association ="IQGrantedRight:IQGrantorSysAdminUnitId")]
+		public virtual ICollection<IQGrantedRight> IQGrantedRightByIQGrantorSysAdminUnit { get; set; }
+		[CProperty(Association ="IQGrantedRight:IQGranteeSysAdminUnitId")]
+		public virtual ICollection<IQGrantedRight> IQGrantedRightByIQGranteeSysAdminUnit { get; set; }
+		[CProperty(Association ="IQLimitRight:IQUserRoleId")]
+		public virtual ICollection<IQLimitRight> IQLimitRightByIQUserRole { get; set; }
 		[CProperty(Association ="SysAdminUnitGrantedRight:GrantorSysAdminUnitId")]
 		public virtual ICollection<SysAdminUnitGrantedRight> SysAdminUnitGrantedRightByGrantorSysAdminUnit { get; set; }
 		[CProperty(Association ="SysAdminUnitGrantedRight:GranteeSysAdminUnitId")]

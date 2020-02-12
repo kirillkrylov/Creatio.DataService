@@ -33,8 +33,14 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="ProductInServicePact:ServicePactTypeId")]
+		public virtual ICollection<ProductInServicePact> ProductInServicePactByServicePactType { get; set; }
+		[CProperty(Association ="ServiceCalendar:SLATypeId")]
+		public virtual ICollection<ServiceCalendar> ServiceCalendarBySLAType { get; set; }
 		[CProperty(Association ="ServicePact:TypeId")]
 		public virtual ICollection<ServicePact> ServicePactByType { get; set; }
+		[CProperty(Association ="VwProductSLA:ServicePactTypeId")]
+		public virtual ICollection<VwProductSLA> VwProductSLAByServicePactType { get; set; }
 		#endregion
 	}
 }

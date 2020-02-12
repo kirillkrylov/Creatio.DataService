@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Change:PurposeId")]
 		public virtual ICollection<Change> ChangeByPurpose { get; set; }
+		[CProperty(Association ="VwChange:PurposeId")]
+		public virtual ICollection<VwChange> VwChangeByPurpose { get; set; }
 		#endregion
 	}
 }

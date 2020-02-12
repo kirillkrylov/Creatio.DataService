@@ -63,6 +63,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ESNNotificationType> ESNNotificationTypeByIcon { get; set; }
 		[CProperty(Association ="FolderType:ImageId")]
 		public virtual ICollection<FolderType> FolderTypeByImage { get; set; }
+		[CProperty(Association ="GameAchievement:ImageId")]
+		public virtual ICollection<GameAchievement> GameAchievementByImage { get; set; }
+		[CProperty(Association ="GameTitle:ImageId")]
+		public virtual ICollection<GameTitle> GameTitleByImage { get; set; }
 		[CProperty(Association ="LeadType:ImageId")]
 		public virtual ICollection<LeadType> LeadTypeByImage { get; set; }
 		[CProperty(Association ="MailServer:LogoId")]
@@ -87,6 +91,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Product> ProductByPicture { get; set; }
 		[CProperty(Association ="SatisfactionLevel:ImageId")]
 		public virtual ICollection<SatisfactionLevel> SatisfactionLevelByImage { get; set; }
+		[CProperty(Association ="ServicePriority:ImageId")]
+		public virtual ICollection<ServicePriority> ServicePriorityByImage { get; set; }
 		[CProperty(Association ="SocialChannel:ImageId")]
 		public virtual ICollection<SocialChannel> SocialChannelByImage { get; set; }
 		[CProperty(Association ="SysChartSeriesKind:ImageId")]
@@ -107,6 +113,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SysOperationResult> SysOperationResultByImage { get; set; }
 		[CProperty(Association ="SysProcessUserTask:SysImageId")]
 		public virtual ICollection<SysProcessUserTask> SysProcessUserTaskBySysImage { get; set; }
+		[CProperty(Association ="VwEventInContact:PhotoId")]
+		public virtual ICollection<VwEventInContact> VwEventInContactByPhoto { get; set; }
 		[CProperty(Association ="VwMobileCaseMessageHistory:OwnerPhotoId")]
 		public virtual ICollection<VwMobileCaseMessageHistory> VwMobileCaseMessageHistoryByOwnerPhoto { get; set; }
 		[CProperty(Association ="VwPageTemplate:PreviewImageId")]

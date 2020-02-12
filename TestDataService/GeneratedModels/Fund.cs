@@ -49,8 +49,12 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="MktgActivity:FundId")]
+		public virtual ICollection<MktgActivity> MktgActivityByFund { get; set; }
 		[CProperty(Association ="PRMTransaction:FundId")]
 		public virtual ICollection<PRMTransaction> PRMTransactionByFund { get; set; }
+		[CProperty(Association ="PRMTransactionHistory:FundId")]
+		public virtual ICollection<PRMTransactionHistory> PRMTransactionHistoryByFund { get; set; }
 		#endregion
 	}
 }

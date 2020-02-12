@@ -17,6 +17,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IntegratedOn")]
+		public DateTime IntegratedOn { get; set; }
 		[CProperty(ColumnPath ="IsService")]
 		public bool IsService { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
@@ -27,6 +29,10 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="Uid1C")]
+		public Guid Uid1C { get; set; }
+		[CProperty(ColumnPath ="UseMinimumMargin")]
+		public bool UseMinimumMargin { get; set; }
 		#endregion
 
 		#region Navigation
@@ -41,6 +47,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="AttributeInSiteEvent:ProductTypeValueId")]
 		public virtual ICollection<AttributeInSiteEvent> AttributeInSiteEventByProductTypeValue { get; set; }
+		[CProperty(Association ="ContractByProductType:ProductTypeId")]
+		public virtual ICollection<ContractByProductType> ContractByProductTypeByProductType { get; set; }
 		[CProperty(Association ="Product:TypeId")]
 		public virtual ICollection<Product> ProductByType { get; set; }
 		[CProperty(Association ="ProductFilter:ProductTypeId")]

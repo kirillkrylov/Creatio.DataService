@@ -41,6 +41,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<DayInCalendar> DayInCalendarByDayOfWeek { get; set; }
 		[CProperty(Association ="MaintenanceWindow:DayOfWeekId")]
 		public virtual ICollection<MaintenanceWindow> MaintenanceWindowByDayOfWeek { get; set; }
+		[CProperty(Association ="SiteTechnologicalPeriod:DayOfWeekId")]
+		public virtual ICollection<SiteTechnologicalPeriod> SiteTechnologicalPeriodByDayOfWeek { get; set; }
 		#endregion
 	}
 }

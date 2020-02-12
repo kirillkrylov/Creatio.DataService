@@ -17,6 +17,8 @@ namespace Creatio.DataService.Models
 		public int DaysInStage { get; set; }
 		[CProperty(ColumnPath ="DueDate")]
 		public DateTime DueDate { get; set; }
+		[CProperty(ColumnPath ="Duration")]
+		public int Duration { get; set; }
 		[CProperty(ColumnPath ="Historical")]
 		public bool Historical { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]

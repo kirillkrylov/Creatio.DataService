@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
 		[CProperty(ColumnPath ="FromBaseCurrency")]
-		public int FromBaseCurrency { get; set; }
+		public decimal FromBaseCurrency { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
@@ -23,10 +23,14 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		[CProperty(ColumnPath ="ToBaseCurrency")]
-		public int ToBaseCurrency { get; set; }
+		public decimal ToBaseCurrency { get; set; }
 		#endregion
 
 		#region Navigation
@@ -39,10 +43,16 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Account:AnnualRevenueId")]
 		public virtual ICollection<Account> AccountByAnnualRevenue { get; set; }
+		[CProperty(Association ="AccountStageHistory:AnnualRevenueId")]
+		public virtual ICollection<AccountStageHistory> AccountStageHistoryByAnnualRevenue { get; set; }
+		[CProperty(Association ="GlbCustomer:GlbAnnualRevenueRangeId")]
+		public virtual ICollection<GlbCustomer> GlbCustomerByGlbAnnualRevenueRange { get; set; }
 		[CProperty(Association ="Lead:AnnualRevenueId")]
 		public virtual ICollection<Lead> LeadByAnnualRevenue { get; set; }
 		[CProperty(Association ="LeadQualification:AnnualRevenueId")]
 		public virtual ICollection<LeadQualification> LeadQualificationByAnnualRevenue { get; set; }
+		[CProperty(Association ="VwLead:AnnualRevenueId")]
+		public virtual ICollection<VwLead> VwLeadByAnnualRevenue { get; set; }
 		#endregion
 	}
 }

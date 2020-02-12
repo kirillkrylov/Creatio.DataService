@@ -29,6 +29,8 @@ namespace Creatio.DataService.Models
 		public Guid OverlimitResponseId { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="TerritoryId")]
+		public Guid TerritoryId { get; set; }
 		[CProperty(ColumnPath ="Title")]
 		public string Title { get; set; }
 		#endregion
@@ -44,6 +46,8 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="OpportunityTerritory:TerritoryId")]
+		public OpportunityTerritory Territory { get; set; }
 		#endregion
 
 		#region Associations

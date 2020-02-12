@@ -11,6 +11,8 @@ namespace Creatio.DataService.Models
 		public DateTime fCreatedOn { get; set; }
 		[CProperty(ColumnPath ="fDueDate")]
 		public DateTime fDueDate { get; set; }
+		[CProperty(ColumnPath ="fEnd")]
+		public bool fEnd { get; set; }
 		[CProperty(ColumnPath ="fStageId")]
 		public Guid fStageId { get; set; }
 		[CProperty(ColumnPath ="fStageNumber")]

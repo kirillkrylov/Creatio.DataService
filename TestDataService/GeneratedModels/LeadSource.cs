@@ -37,12 +37,26 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="BpmRefRule:LeadSourceId")]
+		public virtual ICollection<BpmRefRule> BpmRefRuleByLeadSource { get; set; }
+		[CProperty(Association ="ExesInRequest:LeadSourceId")]
+		public virtual ICollection<ExesInRequest> ExesInRequestByLeadSource { get; set; }
 		[CProperty(Association ="Lead:LeadSourceId")]
 		public virtual ICollection<Lead> LeadByLeadSource { get; set; }
+		[CProperty(Association ="Lead:ClientLeadSourceId")]
+		public virtual ICollection<Lead> LeadByClientLeadSource { get; set; }
 		[CProperty(Association ="LeadSourceCode:LeadSourceId")]
 		public virtual ICollection<LeadSourceCode> LeadSourceCodeByLeadSource { get; set; }
 		[CProperty(Association ="LeadSourceUrl:LeadSourceId")]
 		public virtual ICollection<LeadSourceUrl> LeadSourceUrlByLeadSource { get; set; }
+		[CProperty(Association ="MktgActivityRule:LeadSourceId")]
+		public virtual ICollection<MktgActivityRule> MktgActivityRuleByLeadSource { get; set; }
+		[CProperty(Association ="Opportunity:LeadSourceId")]
+		public virtual ICollection<Opportunity> OpportunityByLeadSource { get; set; }
+		[CProperty(Association ="VwLead:LeadSourceId")]
+		public virtual ICollection<VwLead> VwLeadByLeadSource { get; set; }
+		[CProperty(Association ="VwLead:ClientLeadSourceId")]
+		public virtual ICollection<VwLead> VwLeadByClientLeadSource { get; set; }
 		#endregion
 	}
 }

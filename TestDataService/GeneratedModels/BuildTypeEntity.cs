@@ -33,6 +33,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="BpmonlineBuild:BuildTypeEntityId")]
+		public virtual ICollection<BpmonlineBuild> BpmonlineBuildByBuildTypeEntity { get; set; }
 		#endregion
 	}
 }

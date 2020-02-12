@@ -33,6 +33,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="BpmRefRule:LeadMediumId")]
+		public virtual ICollection<BpmRefRule> BpmRefRuleByLeadMedium { get; set; }
 		[CProperty(Association ="Lead:LeadMediumId")]
 		public virtual ICollection<Lead> LeadByLeadMedium { get; set; }
 		[CProperty(Association ="LeadMediumCode:LeadMediumId")]
@@ -41,6 +43,12 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<LeadSource> LeadSourceByLeadMedium { get; set; }
 		[CProperty(Association ="MktgActivity:ChannelId")]
 		public virtual ICollection<MktgActivity> MktgActivityByChannel { get; set; }
+		[CProperty(Association ="MktgActivityRule:LeadMediumId")]
+		public virtual ICollection<MktgActivityRule> MktgActivityRuleByLeadMedium { get; set; }
+		[CProperty(Association ="Opportunity:LeadChannelId")]
+		public virtual ICollection<Opportunity> OpportunityByLeadChannel { get; set; }
+		[CProperty(Association ="VwLead:LeadMediumId")]
+		public virtual ICollection<VwLead> VwLeadByLeadMedium { get; set; }
 		#endregion
 	}
 }

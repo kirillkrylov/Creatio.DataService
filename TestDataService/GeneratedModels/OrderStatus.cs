@@ -17,12 +17,18 @@ namespace Creatio.DataService.Models
 		public bool FinalStatus { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="LockOrder")]
+		public bool LockOrder { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
+		[CProperty(ColumnPath ="NotUse")]
+		public bool NotUse { get; set; }
 		[CProperty(ColumnPath ="Position")]
 		public int Position { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]

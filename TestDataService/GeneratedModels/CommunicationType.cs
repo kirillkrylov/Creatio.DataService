@@ -25,15 +25,29 @@ namespace Creatio.DataService.Models
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
+		[CProperty(ColumnPath ="NameEN")]
+		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="SyncToAccountFieldId")]
+		public Guid SyncToAccountFieldId { get; set; }
+		[CProperty(ColumnPath ="SyncToContactFieldId")]
+		public Guid SyncToContactFieldId { get; set; }
 		[CProperty(ColumnPath ="UseforAccounts")]
 		public bool UseforAccounts { get; set; }
 		[CProperty(ColumnPath ="UseforContacts")]
 		public bool UseforContacts { get; set; }
+		[CProperty(ColumnPath ="UseforLeads")]
+		public bool UseforLeads { get; set; }
+		[CProperty(ColumnPath ="UseOnPortalForLead")]
+		public bool UseOnPortalForLead { get; set; }
 		#endregion
 
 		#region Navigation
+		[CProperty(Navigation ="CommunicationType:SyncToContactFieldId")]
+		public CommunicationType SyncToContactField { get; set; }
+		[CProperty(Navigation ="CommunicationType:SyncToAccountFieldId")]
+		public CommunicationType SyncToAccountField { get; set; }
 		[CProperty(Navigation="Contact:CreatedById")]
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
@@ -43,6 +57,10 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="AccountCommunication:CommunicationTypeId")]
 		public virtual ICollection<AccountCommunication> AccountCommunicationByCommunicationType { get; set; }
+		[CProperty(Association ="CommunicationType:SyncToContactFieldId")]
+		public virtual ICollection<CommunicationType> CommunicationTypeBySyncToContactField { get; set; }
+		[CProperty(Association ="CommunicationType:SyncToAccountFieldId")]
+		public virtual ICollection<CommunicationType> CommunicationTypeBySyncToAccountField { get; set; }
 		[CProperty(Association ="ComTypebyCommunication:CommunicationTypeId")]
 		public virtual ICollection<ComTypebyCommunication> ComTypebyCommunicationByCommunicationType { get; set; }
 		[CProperty(Association ="ContactCommunication:CommunicationTypeId")]
@@ -55,6 +73,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<EmailTemplateMacros> EmailTemplateMacrosByAccountCommunicationType { get; set; }
 		[CProperty(Association ="EnrchTypeMapping:CommunicationTypeId")]
 		public virtual ICollection<EnrchTypeMapping> EnrchTypeMappingByCommunicationType { get; set; }
+		[CProperty(Association ="LeadCommunication:CommunicationTypeId")]
+		public virtual ICollection<LeadCommunication> LeadCommunicationByCommunicationType { get; set; }
 		[CProperty(Association ="SocialAccount:TypeId")]
 		public virtual ICollection<SocialAccount> SocialAccountByType { get; set; }
 		#endregion
