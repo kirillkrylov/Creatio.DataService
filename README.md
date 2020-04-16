@@ -14,181 +14,74 @@ $ clio modes -e ENV -d C:\Models;
 ```
 
 -<details>
-<symmary></summary>
+<symmary>Simple Query</summary>
 
+```C#
+    using Creatio.DataService;
+    using Creatio.DataService.Models;
 
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Threading.Tasks;
+
+    namespace TestDataService
+    {
+        public sealed class Program
+        {
+            public static async Task Main(string[] args)
+            {
+                Utils utils = Utils.Instance;
+                utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
+                if (await utils.LoginAsync())
+                {
+                    utils.WebSocketMessageReceived += WebSocketMessageReceived;
+                    ContactById(utils.CurrentUser.Contact.Value);
+                }
+                await utils.LoginAsync();
+                utils.Dispose();
+            }
+        }
+
+        private static void ContactById(string ContactId) 
+        {
+            Contact currentUser = new Contact() { Id = Guid.Parse(ContactId) };
+            
+            currentUser.ExpandValues();
+            
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
+            Console.WriteLine("-------------- CURRENT USER SelectById --------------");
+            Console.WriteLine($"Id:\t\t {currentUser.Id.ToString().Trim()}");
+            Console.WriteLine($"Name:\t\t {currentUser.Name ?? currentUser.NameEng}");
+            Console.WriteLine($"Email:\t\t {currentUser.Email}");
+            Console.WriteLine($"CreatedOn:\t {currentUser.CreatedOn.ToString("dd-MMM-yyyy").Trim()}");
+            Console.ResetColor();
+            Console.WriteLine();
+
+            currentUser.ExpandAllAssociations(nameof(currentUser.ContactAddressByContact));
+
+            foreach (ContactAddress address in currentUser.ContactAddressByContact) 
+            {
+                Console.WriteLine(address.Address);
+            }
+        }
+
+        private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"You've got message: {e.MessageId}\n{e.MessageHeader.Sender}\n{ e.MessageBody}");
+            Console.ResetColor();
+        }
+    }
+
+```
 </details>
 
 
 
 
-
-```C#
-static async Task Main()
-{
-    Utils utils = Utils.Instance;
-    utils.SetCredentials("yourUserNameHere", "yourPasswordHere", "https://domain.creatio.com");
-    if (await utils.LoginAsync()) {
-        Console.WriteLine($"You Logged In as: {utils.CurrentUser.Contact.DisplayValue}");
-        Guid ContactId = utils.CurrentUser.Contact.Value;
-        Console.WriteLine($"Your ContactId is: {ContactId}");
-        utils.WebSocketMessageReceived += WebSocketMessageReceived;
-        
-        await ContactById(ContactId);
-
-        //await AllContacts();
-        //await AdHocQuery();
-    }
-}
-
-private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
-{
-    Console.WriteLine();
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine($"You've got message: { e.MessageBody}");
-    Console.ResetColor();
-}
-```
-![Output](Img/OutActv.png)
-
-### Define Contact Model
-- Note  **Activities** is a List<Activity>
-```C#
-using Creatio.DataService.Attributes;
-using System;
-
-namespace TestDataService.Model
-{
-    [RootSchemaName("Contact")]
-    class Contact : BaseEntity
-    {
-        [QueryColumn("Name")]
-        public string Name { get; set; }
-        
-        [QueryColumn("Email")]
-        public string Email { get; set; }
-        
-        [QueryColumn("CreatedOn")]
-        public DateTime CreatedOn { get; set; }
-
-        [QueryColumn("ModifiedOn")]
-        public DateTime ModifiedOn { get; set; }
-
-        [RootSchemaName("Account")]
-        public Account Account { get; set; }
-
-        [RootSchemaName("Activity")]
-        public List<Activity> Activities { get; set; }
-    }
-}
-```
-
-### Define Account Model
-```C#
-using Creatio.DataService.Attributes;
-using System;
-
-namespace TestDataService.Model
-{
-    [RootSchemaName("Account")]
-    class Account : BaseEntity
-    {
-        [QueryColumn("Name")]
-        public string Name { get; set; }
-
-        [QueryColumn("Phone")]
-        public string Phone { get; set; }
-
-        [QueryColumn("Web")]
-        public string Web { get; set; }
-
-        [RootSchemaName("PrimaryContact")]
-        public Contact PrimaryContact { get; set; }
-    }
-}
-```
-
-### Define Activity Model
-Activity model is a list of Entities
-```C#
-using Creatio.DataService;
-using Creatio.DataService.Attributes;
-
-namespace TestDataService.Model
-{
-    [RootSchemaName("Activity")]
-    class Activity : BaseEntity
-    {
-        [QueryColumn("Title")]
-        public string Title { get; set; }
-
-        [QueryColumn("StartDate")]
-        public string StartDate { get; set; }
-
-        [QueryColumn("DueDate")]
-        public string DueDate { get; set; }
-
-        [RootSchemaName("Owner")]
-        public string Owner { get; set; }
-    }
-}
-
-```
-
-### Get Entity by Id
-- Note that I need **SelectList** method to bring list of activities
-```C#
-private static async Task ContactById(string ContactId) 
-{
-    Contact currentUser = new Contact() { Id = Guid.Parse(ContactId) };
-    currentUser = await currentUser.Expnad<Contact>(currentUser.Id);
-            
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine();
-    Console.WriteLine("----------- CURRENT USER SelectById -----------");
-    Console.WriteLine($"Id: {currentUser.Id}");
-    Console.WriteLine($"Name: {currentUser.Name}");
-    Console.WriteLine($"Email: {currentUser.Email}");
-    Console.WriteLine($"CreatedOn: {currentUser.CreatedOn}");
-    Console.WriteLine($"Account: {currentUser.Account.Id}");
-    
-    Utils utils = Utils.Instance;
-    currentUser.Activities = await utils.SelectList<Activity>("Owner", currentUser.Id);
-    foreach (Activity activity in currentUser.Activities) {
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("");
-        Console.WriteLine($"\tTitle:{activity.Title} Start:{activity.StartDate} Ends:{activity.DueDate}");
-        Console.WriteLine($"Count of Activities: {currentUser.Activities.Count}");
-    }
-    Console.ForegroundColor = ConsoleColor.Green;
-
-    Console.WriteLine("----------- END OF CURRENT USER -----------");
-    Console.ResetColor();
-
-    Account account = await currentUser.Account.Expnad<Account>(currentUser.Account.Id);
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine();
-    Console.WriteLine("----------- CURRENT USER / Account -----------");
-    Console.WriteLine($"Id: {account.Id}");
-    Console.WriteLine($"Name: {account.Name}");
-    Console.WriteLine($"Phone: {account.Phone}");
-    Console.WriteLine($"Web: {account.Web}");
-    Console.WriteLine($"PrimaryContact: {account.PrimaryContact.Id}");
-    Console.WriteLine("----------- END OF CURRENT USER / Account-----------");
-    Console.ResetColor();
-
-            
-    Contact primaryContact = await account.Expnad<Contact>(account.PrimaryContact.Id);
-    Console.ForegroundColor = ConsoleColor.Blue;
-    Console.WriteLine();
-    Console.WriteLine("----------- CURRENT USER / Account / PrimaryContact -----------");
-    Console.WriteLine($"Id: {primaryContact.Id}");
-    Console.WriteLine($"Name: {primaryContact.Name}");
-    Console.WriteLine($"Phone: {primaryContact.Email}");
-    Console.WriteLine("----------- END OF CURRENT USER  / Account / PrimaryContact-----------");
-    Console.ResetColor();
-}
-```
 
 ### Ad hoc Query
 ```C#
@@ -223,7 +116,7 @@ private static async Task AllContacts()
     Utils utils = Utils.Instance;
     Console.WriteLine("----------- ALL CONTACTS -----------");
     List<Contact> contacts = await utils.Select<Contact>();
-    foreach (Contact ccontact in contacts)
+    foreach (Contact contact in contacts)
     {
         Console.WriteLine();
         Console.WriteLine($"Id: {ccontact.Id}");

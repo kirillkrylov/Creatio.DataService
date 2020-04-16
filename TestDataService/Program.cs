@@ -18,14 +18,10 @@ namespace TestDataService
         {
             Utils utils = Utils.Instance;
             utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
-            
             if (await utils.LoginAsync())
             {
-
-                await ContactById(utils.CurrentUser.Contact.Value);
-
-
-               
+                utils.WebSocketMessageReceived += WebSocketMessageReceived;
+                ContactById(utils.CurrentUser.Contact.Value);
             }
             await utils.LoginAsync();
             utils.Dispose();
@@ -214,9 +210,8 @@ namespace TestDataService
 
             return ZipCode;
         }
-        private static async Task ContactById(string ContactId) {
-            Contact currentUser = new Contact();
-            currentUser.Id = Guid.Parse(ContactId);
+        private static void ContactById(string ContactId) {
+            Contact currentUser = new Contact() { Id = Guid.Parse(ContactId) };
             
             currentUser.ExpandValues();
             
@@ -236,8 +231,6 @@ namespace TestDataService
             {
                 Console.WriteLine(address.Address);
             }
-
-
             
         }
         public static string GetAvalaraTaxCode(string category = "", string deployment = "", string kind = "", string type = "", string name = "")
