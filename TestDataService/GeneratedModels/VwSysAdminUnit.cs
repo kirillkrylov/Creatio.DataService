@@ -67,8 +67,6 @@ namespace Creatio.DataService.Models
 		public Guid TimeZoneId { get; set; }
 		[CProperty(ColumnPath ="UserConnectionTypeId")]
 		public Guid UserConnectionTypeId { get; set; }
-		[CProperty(ColumnPath ="UserPassword")]
-		public string UserPassword { get; set; }
 		#endregion
 
 		#region Navigation

@@ -15,6 +15,8 @@ namespace Creatio.DataService.Models
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="IsUsedForForecast")]
+		public bool IsUsedForForecast { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -33,6 +35,12 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="OppForecastWizDeliveryPlan:PaymentModelId")]
+		public virtual ICollection<OppForecastWizDeliveryPlan> OppForecastWizDeliveryPlanByPaymentModel { get; set; }
+		[CProperty(Association ="OpportunityForecast:PaymentModelId")]
+		public virtual ICollection<OpportunityForecast> OpportunityForecastByPaymentModel { get; set; }
+		[CProperty(Association ="OpportunityForecastHistory:PaymentModelId")]
+		public virtual ICollection<OpportunityForecastHistory> OpportunityForecastHistoryByPaymentModel { get; set; }
 		[CProperty(Association ="Product:PaymentModelId")]
 		public virtual ICollection<Product> ProductByPaymentModel { get; set; }
 		#endregion

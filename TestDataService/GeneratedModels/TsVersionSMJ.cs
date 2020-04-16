@@ -23,6 +23,8 @@ namespace Creatio.DataService.Models
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		[CProperty(ColumnPath ="TerritoryId")]
 		public Guid TerritoryId { get; set; }
 		#endregion

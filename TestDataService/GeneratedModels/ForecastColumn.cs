@@ -57,6 +57,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<LeadTypeForecast> LeadTypeForecastByForecastColumn { get; set; }
 		[CProperty(Association ="OppDepartmentForecast:ForecastColumnId")]
 		public virtual ICollection<OppDepartmentForecast> OppDepartmentForecastByForecastColumn { get; set; }
+		[CProperty(Association ="ProductForecast:ForecastColumnId")]
+		public virtual ICollection<ProductForecast> ProductForecastByForecastColumn { get; set; }
 		#endregion
 	}
 }

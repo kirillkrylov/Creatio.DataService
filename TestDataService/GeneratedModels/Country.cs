@@ -43,8 +43,6 @@ namespace Creatio.DataService.Models
 		public string NameEN { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
-		[CProperty(ColumnPath ="RecordInactive")]
-		public bool RecordInactive { get; set; }
 		[CProperty(ColumnPath ="TimeZoneId")]
 		public Guid TimeZoneId { get; set; }
 		#endregion

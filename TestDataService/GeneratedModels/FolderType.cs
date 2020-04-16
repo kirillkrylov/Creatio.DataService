@@ -139,6 +139,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<OAuth20AppFolder> OAuth20AppFolderByFolderType { get; set; }
 		[CProperty(Association ="OpportunityFolder:FolderTypeId")]
 		public virtual ICollection<OpportunityFolder> OpportunityFolderByFolderType { get; set; }
+		[CProperty(Association ="OpportunityForecastFolder:FolderTypeId")]
+		public virtual ICollection<OpportunityForecastFolder> OpportunityForecastFolderByFolderType { get; set; }
 		[CProperty(Association ="OrderFolder:FolderTypeId")]
 		public virtual ICollection<OrderFolder> OrderFolderByFolderType { get; set; }
 		[CProperty(Association ="OrgStructureUnitFolder:FolderTypeId")]
@@ -177,6 +179,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SocialChannelFolder> SocialChannelFolderByFolderType { get; set; }
 		[CProperty(Association ="SubscriptionFolder:FolderTypeId")]
 		public virtual ICollection<SubscriptionFolder> SubscriptionFolderByFolderType { get; set; }
+		[CProperty(Association ="SupportUnitFolder:FolderTypeId")]
+		public virtual ICollection<SupportUnitFolder> SupportUnitFolderByFolderType { get; set; }
 		[CProperty(Association ="SysAdminOperationFolder:FolderTypeId")]
 		public virtual ICollection<SysAdminOperationFolder> SysAdminOperationFolderByFolderType { get; set; }
 		[CProperty(Association ="SysAdminUnitFolder:FolderTypeId")]

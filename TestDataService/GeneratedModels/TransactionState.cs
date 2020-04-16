@@ -37,6 +37,8 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Transaction:StateId")]
 		public virtual ICollection<Transaction> TransactionByState { get; set; }
+		[CProperty(Association ="TransactionForecast:StateId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByState { get; set; }
 		[CProperty(Association ="VwTransaction:StateId")]
 		public virtual ICollection<VwTransaction> VwTransactionByState { get; set; }
 		#endregion

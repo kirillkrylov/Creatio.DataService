@@ -53,6 +53,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<InternalRequestVisa> InternalRequestVisaByStatus { get; set; }
 		[CProperty(Association ="InvoiceVisa:StatusId")]
 		public virtual ICollection<InvoiceVisa> InvoiceVisaByStatus { get; set; }
+		[CProperty(Association ="OpportunityForecastVisa:StatusId")]
+		public virtual ICollection<OpportunityForecastVisa> OpportunityForecastVisaByStatus { get; set; }
 		[CProperty(Association ="OpportunityVisa:StatusId")]
 		public virtual ICollection<OpportunityVisa> OpportunityVisaByStatus { get; set; }
 		[CProperty(Association ="OrderVisa:StatusId")]

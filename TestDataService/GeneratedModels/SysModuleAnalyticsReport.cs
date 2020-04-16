@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		public Guid SysOptionsPageSchemaUId { get; set; }
 		[CProperty(ColumnPath ="SysSchemaUId")]
 		public Guid SysSchemaUId { get; set; }
+		[CProperty(ColumnPath ="TypeId")]
+		public Guid TypeId { get; set; }
 		#endregion
 
 		#region Navigation
@@ -46,6 +48,8 @@ namespace Creatio.DataService.Models
 		public SysImage Logo { get; set; }
 		[CProperty(Navigation ="SysModule:SysModuleId")]
 		public SysModule SysModule { get; set; }
+		[CProperty(Navigation ="SysModuleReportType:TypeId")]
+		public SysModuleReportType Type { get; set; }
 		#endregion
 
 		#region Associations

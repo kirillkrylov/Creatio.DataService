@@ -127,6 +127,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<MLModelTag> MLModelTagByType { get; set; }
 		[CProperty(Association ="OAuth20AppTag:TypeId")]
 		public virtual ICollection<OAuth20AppTag> OAuth20AppTagByType { get; set; }
+		[CProperty(Association ="OpportunityForecastTag:TypeId")]
+		public virtual ICollection<OpportunityForecastTag> OpportunityForecastTagByType { get; set; }
 		[CProperty(Association ="OpportunityTag:TypeId")]
 		public virtual ICollection<OpportunityTag> OpportunityTagByType { get; set; }
 		[CProperty(Association ="OrderTag:TypeId")]

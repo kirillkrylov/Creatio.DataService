@@ -183,6 +183,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ProductEntry> ProductEntryByCrossSalesOferring { get; set; }
 		[CProperty(Association ="ProductFile:ProductId")]
 		public virtual ICollection<ProductFile> ProductFileByProduct { get; set; }
+		[CProperty(Association ="ProductForecast:ProductId")]
+		public virtual ICollection<ProductForecast> ProductForecastByProduct { get; set; }
 		[CProperty(Association ="ProductForLicGenerator:ProductId")]
 		public virtual ICollection<ProductForLicGenerator> ProductForLicGeneratorByProduct { get; set; }
 		[CProperty(Association ="ProductInFolder:ProductId")]
@@ -215,16 +217,18 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SpecificationInProduct> SpecificationInProductByProduct { get; set; }
 		[CProperty(Association ="Transaction:ProductId")]
 		public virtual ICollection<Transaction> TransactionByProduct { get; set; }
+		[CProperty(Association ="TransactionForecast:ProductId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByProduct { get; set; }
 		[CProperty(Association ="VwDocumentProduct:ProductId")]
 		public virtual ICollection<VwDocumentProduct> VwDocumentProductByProduct { get; set; }
 		[CProperty(Association ="VwInvoiceProduct:ProductId")]
 		public virtual ICollection<VwInvoiceProduct> VwInvoiceProductByProduct { get; set; }
 		[CProperty(Association ="VwOrderProduct:ProductId")]
 		public virtual ICollection<VwOrderProduct> VwOrderProductByProduct { get; set; }
-		[CProperty(Association ="VwPortalOrderExpenceProduct:SupportSoldForId")]
-		public virtual ICollection<VwPortalOrderExpenceProduct> VwPortalOrderExpenceProductBySupportSoldFor { get; set; }
-		[CProperty(Association ="VwPortalOrderExpenceProduct:ProductId")]
-		public virtual ICollection<VwPortalOrderExpenceProduct> VwPortalOrderExpenceProductByProduct { get; set; }
+		[CProperty(Association ="VwPortalOrderExpenseProduct:SupportSoldForId")]
+		public virtual ICollection<VwPortalOrderExpenseProduct> VwPortalOrderExpenseProductBySupportSoldFor { get; set; }
+		[CProperty(Association ="VwPortalOrderExpenseProduct:ProductId")]
+		public virtual ICollection<VwPortalOrderExpenseProduct> VwPortalOrderExpenseProductByProduct { get; set; }
 		[CProperty(Association ="VwProductInLeadType:ProductId")]
 		public virtual ICollection<VwProductInLeadType> VwProductInLeadTypeByProduct { get; set; }
 		[CProperty(Association ="VwProductSLA:ProductId")]

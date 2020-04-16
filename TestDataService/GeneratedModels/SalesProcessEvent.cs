@@ -19,6 +19,8 @@ namespace Creatio.DataService.Models
 		public Guid EventTypeId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="LeadCloseReasonId")]
+		public Guid LeadCloseReasonId { get; set; }
 		[CProperty(ColumnPath ="LeadDisqualifyReasonId")]
 		public Guid LeadDisqualifyReasonId { get; set; }
 		[CProperty(ColumnPath ="LeadId")]
@@ -56,6 +58,8 @@ namespace Creatio.DataService.Models
 		public Contact DepartmentManager { get; set; }
 		[CProperty(Navigation ="Lead:LeadId")]
 		public Lead Lead { get; set; }
+		[CProperty(Navigation ="LeadCloseReason:LeadCloseReasonId")]
+		public LeadCloseReason LeadCloseReason { get; set; }
 		[CProperty(Navigation ="LeadDisqualifyReason:LeadDisqualifyReasonId")]
 		public LeadDisqualifyReason LeadDisqualifyReason { get; set; }
 		[CProperty(Navigation ="LeadRegisterMethod:RegisterMethodId")]

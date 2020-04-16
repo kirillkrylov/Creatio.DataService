@@ -11,10 +11,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net.WebSockets;
 using System.Reflection;
-using System.Reflection.Emit;
 using Creatio.DataService.Attributes;
 using Creatio.DataService.Parameters;
-using System.Diagnostics;
 
 namespace Creatio.DataService
 {
@@ -35,7 +33,7 @@ namespace Creatio.DataService
         #endregion
 
         #region Properties
-        public CookieContainer Auth { get; set; }
+        private CookieContainer Auth { get; set; }
         public bool IsLoginSuccess { get { return _IsLoginSuccess; } }
         public CurrentUser CurrentUser { get; private set; } = null;
         public static Utils Instance
@@ -54,7 +52,6 @@ namespace Creatio.DataService
                 return _instance;
             }
         }
-
         #endregion
 
         #region Events
@@ -267,7 +264,8 @@ namespace Creatio.DataService
             };
             SelectQueryColumns Columns = new SelectQueryColumns();
             Dictionary<string, SelectQueryColumn> Items = new Dictionary<string, SelectQueryColumn>();
-            foreach (QueryColumn qc in queryColumns) {
+            foreach (QueryColumn qc in queryColumns)
+            {
                 SelectQueryColumn col = new SelectQueryColumn()
                 {
                     OrderDirection = qc.OrderDirection,
@@ -284,7 +282,8 @@ namespace Creatio.DataService
             selectQuery.Columns = Columns;
             return selectQuery;
         }
-        private Filters BuildFilterById(Guid id) {
+        private Filters BuildFilterById(Guid id)
+        {
 
             Filters filter = new Filters()
             {
@@ -354,7 +353,249 @@ namespace Creatio.DataService
             };
             return filter;
         }
-        private DataTable ConvertResponseToDataTable(string json)
+        private List<Entity> BuildEntity<Entity>(RequestResponse requestResponse) where Entity : BaseEntity, new()
+        {
+            List<Entity> result = new List<Entity>();
+            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
+            foreach (DataRow dr in dt.Rows)
+            {
+                Entity entity = EntityFacotry.Create<Entity>();
+                foreach (PropertyInfo prop in entity.GetType().GetProperties())
+                {
+                    string strValue = string.Empty;
+                    if (dt.Columns.Contains(prop.Name))
+                    {
+                        strValue = dr[prop.Name].ToString();
+
+                        //setting ValueProperties
+                        CPropertyAttribute propertyAttribute = prop.GetCustomAttribute<CPropertyAttribute>(true);
+                        if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
+                        {
+                            switch (prop.PropertyType.Name)
+                            {
+                                case (nameof(Guid)):
+                                    Guid.TryParse(strValue, out Guid val);
+#if DEBUG
+                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+#endif
+                                    prop.SetValue(entity, val);
+                                    break;
+
+                                case (nameof(Decimal)):
+                                    decimal.TryParse(strValue, out decimal decVal);
+#if DEBUG
+                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+#endif
+
+                                    prop.SetValue(entity, decVal);
+                                    break;
+
+                                case (nameof(Int16)):
+                                case (nameof(Int32)):
+                                case (nameof(Int64)):
+                                    int.TryParse(strValue, out int intVal);
+#if DEBUG
+                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+#endif
+                                    prop.SetValue(entity, intVal);
+                                    break;
+
+                                case (nameof(DateTime)):
+                                    DateTime.TryParse(strValue, out DateTime dateTimeVal);
+#if DEBUG
+                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+#endif
+                                    prop.SetValue(entity, dateTimeVal);
+                                    break;
+
+                                case (nameof(String)):
+                                    prop.SetValue(entity, strValue);
+#if DEBUG
+                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+#endif
+                                    break;
+                            }
+                        }
+
+                        //setting up Navigational properties
+                        if (propertyAttribute?.Navigation != null)
+                        {
+                            //1. Create Object
+                            var subEntity = Activator.CreateInstance(prop.PropertyType);
+
+                            //2. Get subEntity's Id;
+                            string navKey = propertyAttribute?.Navigation; // navKey = Account:AccountId
+
+                            if (navKey.Contains(":"))
+                            {
+                                string col = navKey.Split(':')[1]; //col = AccountI
+                                Guid.TryParse(dr[col].ToString(), out Guid subId); //assume that the key is always Guid
+
+                                //3. Set subEntity's Key;
+                                string key = GetSubEntityKeyColumn(subEntity);
+                                subEntity.GetType().GetProperty(key).SetValue(subEntity, subId);
+
+                                //4. Set entity property to subEntity
+                                prop.SetValue(entity, subEntity);
+                            }
+
+                        }
+                    }
+                }
+                result.Add(entity);
+            }
+            return result;
+        }
+        private string GetSubEntityKeyColumn(object subEntity)
+        {
+            string result = string.Empty;
+
+            PropertyInfo[] props = subEntity.GetType().GetProperties();
+            foreach (PropertyInfo subProprty in props)
+            {
+                if (subProprty.GetCustomAttribute<CPropertyAttribute>()?.IsKey == true)
+                {
+                    return subProprty.Name;
+                }
+            }
+            return result;
+        }
+        private QueryParameters BuildQueryParameters<Entity>() where Entity : BaseEntity, new()
+        {
+            Entity entity = EntityFacotry.Create<Entity>();
+            CObjectAttribute rootSchemaNameAttribute = entity.GetType().GetCustomAttribute<CObjectAttribute>(true);
+            QueryParameters queryParameters = new QueryParameters()
+            {
+                RootSchemaName = rootSchemaNameAttribute.RootSchemaName,
+                AllColumns = false,
+                UseLocalization = false
+            };
+            return queryParameters;
+        }
+        private List<QueryColumn> BuildQueryColumns<Entity>() where Entity : BaseEntity, new()
+        {
+            Entity entity = EntityFacotry.Create<Entity>();
+            List<QueryColumn> queryColumns = new List<QueryColumn>();
+            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
+            {
+                string caption = propInfo.Name;
+                CPropertyAttribute propertyAttribute = propInfo.GetCustomAttribute<CPropertyAttribute>(true);
+                if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
+                {
+                    QueryColumn qc = new QueryColumn()
+                    {
+                        Caption = caption,
+                        ColumnPath = GetNewColumnPath(entity, propertyAttribute.ColumnPath),
+                        ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+                        OrderDirection = Enums.OrderDirection.None,
+                        OrderPosition = 0,
+                    };
+                    queryColumns.Add(qc);
+                }
+            }
+            return queryColumns;
+        }
+
+        /// <summary>
+        /// Returns new columns path if column is found in navigational property 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="oldColumnPath"></param>
+        /// <returns>REDO - Highly inefficient</returns>
+        private string GetNewColumnPath(object entity, string oldColumnPath)
+        {
+
+            List<PropertyInfo> vProps = new List<PropertyInfo>();
+            List<PropertyInfo> nProps = new List<PropertyInfo>();
+
+            foreach (PropertyInfo pInfo in entity.GetType().GetProperties())
+            {
+                CPropertyAttribute pAttr = pInfo.GetCustomAttribute<CPropertyAttribute>(true);
+                if (pAttr?.ColumnPath != null) vProps.Add(pInfo);
+                if (pAttr?.Navigation != null) nProps.Add(pInfo);
+            }
+
+            foreach (PropertyInfo pInfo in nProps)
+            {
+                //nav = "Account:AccountId"
+                string nav = pInfo.GetCustomAttribute<CPropertyAttribute>().Navigation;
+                string searchObj = nav.Split(':')[0]; //Account
+                string searchCol = nav.Split(':')[1]; //AccountId
+
+                if (searchCol == oldColumnPath)
+                {
+                    return $"{searchCol.Substring(0, searchCol.Length - 2)}";
+                    //return $"{searchObj}.Id";
+                }
+            }
+            return oldColumnPath;
+        }
+        #endregion
+
+        #region Methods : Public
+
+
+
+        public async Task<RequestResponse> GetResponseAsync(string json, ActionEnum method)
+        {
+            string transportUrl = Url.TransportUrl(method, Instance.domain);
+            HttpStatusCode Code;
+            RequestResponse result = new RequestResponse();
+            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(transportUrl);
+            myHttpWebRequest.Method = "POST";
+            myHttpWebRequest.ContentType = "application/json";
+            myHttpWebRequest.CookieContainer = Instance.Auth;
+
+            Uri siteUri = new Uri(transportUrl);
+            foreach (Cookie cookie in Instance.Auth.GetCookies(siteUri))
+            {
+                if (cookie.Name == "BPMCSRF" || cookie.Name == "BPMSESSIONID")
+                {
+                    myHttpWebRequest.Headers.Add(cookie.Name, cookie.Value);
+                }
+            }
+            //encode json
+            byte[] postBytes = Encoding.UTF8.GetBytes(json);
+
+            //Prepare Request Stream
+            using (Stream requestStream = myHttpWebRequest.GetRequestStream())
+            {
+                requestStream.Write(postBytes, 0, postBytes.Length);
+            }
+            //Send Request
+            try
+            {
+                using (HttpWebResponse myHttpWebResponse = (HttpWebResponse)await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false))
+                {
+                    Code = myHttpWebResponse.StatusCode;
+                    if (Instance.BpmSessionId == false)
+                    {
+                        string val = myHttpWebResponse.Cookies["BPMSESSIONID"].Value;
+                        Cookie C = new Cookie("BPMSESSIONID", val);
+                        Instance.Auth.Add(new Uri(Instance.domain), C);
+                        Instance.BpmSessionId = true;
+                    }
+                    using (StreamReader MyStreamReader = new StreamReader(myHttpWebResponse.GetResponseStream(), true))
+                    {
+                        result.HttpStatusCode = Code;
+                        result.Result = MyStreamReader.ReadToEnd();
+                        result.ErrorMessage = null;
+                    }
+                }
+            }
+            catch (WebException we)
+            {
+                Code = ((HttpWebResponse)(we).Response).StatusCode;
+                using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
+                {
+                    result.HttpStatusCode = Code;
+                    result.Result = null;
+                    result.ErrorMessage = MyStreamReader.ReadToEnd();
+                }
+            }
+            return result;
+        }
+        public static DataTable ConvertResponseToDataTable(string json)
         {
             DataServiceSelectResponseTemplate myResponse = JsonConvert.DeserializeObject<DataServiceSelectResponseTemplate>(json);
             DataTable dt = new DataTable();
@@ -560,358 +801,13 @@ namespace Creatio.DataService
             }
             return dt;
         }
-        private List<Entity> BuildEntity<Entity>(RequestResponse requestResponse) where Entity : BaseEntity, new()
-        {
-            List<Entity> result = new List<Entity>();
-            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
-            foreach (DataRow dr in dt.Rows)
-            {
-                Entity entity = EntityFacotry.Create<Entity>();
-                foreach (PropertyInfo prop in entity.GetType().GetProperties())
-                {
-                    string strValue = string.Empty;
-                    if (dt.Columns.Contains(prop.Name))
-                    {
-                        strValue = dr[prop.Name].ToString();
-                    
-                        //setting ValueProperties
-                        CPropertyAttribute propertyAttribute = prop.GetCustomAttribute<CPropertyAttribute>(true);
-                        if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
-                        {
-                            switch (prop.PropertyType.Name)
-                            {
-                                case (nameof(Guid)):
-                                    Guid.TryParse(strValue, out Guid val);
-    #if DEBUG
-                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-    #endif
-                                    prop.SetValue(entity, val);
-                                    break;
-
-                                case (nameof(Decimal)):
-                                    decimal.TryParse(strValue, out decimal decVal);
-    #if DEBUG
-                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-    #endif
-
-                                    prop.SetValue(entity, decVal);
-                                    break;
-
-                                case (nameof(Int16)):
-                                case (nameof(Int32)):
-                                case (nameof(Int64)):
-                                    int.TryParse(strValue, out int intVal);
-    #if DEBUG
-                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-    #endif                                
-                                    prop.SetValue(entity, intVal);
-                                    break;
-
-                                case (nameof(DateTime)):
-                                    DateTime.TryParse(strValue, out DateTime dateTimeVal);
-    #if DEBUG
-                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-    #endif
-                                    prop.SetValue(entity, dateTimeVal);
-                                    break;
-
-                                case (nameof(String)):
-                                    prop.SetValue(entity, strValue);
-    #if DEBUG
-                                    //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-    #endif
-                                    break;
-                            }
-                        }
-
-                        //setting up Navigational properties
-                        if (propertyAttribute?.Navigation != null)
-                        {
-                            //1. Create Object
-                            var subEntity = Activator.CreateInstance(prop.PropertyType);
-
-                            //2. Get subEntity's Id;
-                            string navKey = propertyAttribute?.Navigation; // navKey = Account:AccountId
-
-                            if (navKey.Contains(":"))
-                            {
-                                string col = navKey.Split(':')[1]; //col = AccountI
-                                Guid.TryParse(dr[col].ToString(), out Guid subId); //assume that the key is always Guid
-
-                                //3. Set subEntity's Key;
-                                string key = GetSubEntityKeyColumn(subEntity);
-                                subEntity.GetType().GetProperty(key).SetValue(subEntity, subId);
-
-                                //4. Set entity property to subEntity
-                                prop.SetValue(entity, subEntity);
-                            }
-
-                        }
-                    }
-                }
-                result.Add(entity);
-            }
-            return result;
-        }
-        private List<Entity> BuildEntity2<Entity>(RequestResponse requestResponse) where Entity : BaseEntity, new()
-        {
-            List<Entity> result = new List<Entity>();
-            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
-            foreach (DataRow dr in dt.Rows)
-            {
-                Entity entity = EntityFacotry.Create<Entity>();
-                foreach (PropertyInfo prop in entity.GetType().GetProperties())
-                {
-                    string strValue = string.Empty;
-                    try
-                    {
-                        strValue = dr[prop.Name]?.ToString();
-                    }
-                    catch (Exception e)
-                    {
-#if DEBUG
-                        //Console.WriteLine($"Utils.cs Line 409: {e.Message}");
-#endif
-                    }
-
-                    //setting ValueProperties
-                    CPropertyAttribute propertyAttribute = prop.GetCustomAttribute<CPropertyAttribute>(true);
-                    if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
-                    {
-                        switch (prop.PropertyType.Name)
-                        {
-                            case (nameof(Guid)):
-                                Guid.TryParse(strValue, out Guid val);
-#if DEBUG
-                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-#endif
-                                prop.SetValue(entity, val);
-                                break;
-
-                            case (nameof(Decimal)):
-                                decimal.TryParse(strValue, out decimal decVal);
-#if DEBUG
-                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-#endif
-
-                                prop.SetValue(entity, decVal);
-                                break;
-
-                            case (nameof(Int16)):
-                            case (nameof(Int32)):
-                            case (nameof(Int64)):
-                                int.TryParse(strValue, out int intVal);
-#if DEBUG
-                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-#endif                                
-                                prop.SetValue(entity, intVal);
-                                break;
-
-                            case (nameof(DateTime)):
-                                DateTime.TryParse(strValue, out DateTime dateTimeVal);
-#if DEBUG
-                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-#endif
-                                prop.SetValue(entity, dateTimeVal);
-                                break;
-
-                            case (nameof(String)):
-                                prop.SetValue(entity, strValue);
-#if DEBUG
-                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-#endif
-                                break;
-                        }
-                    }
-
-                    //setting up Navigational properties
-                    if (propertyAttribute?.Navigation != null)
-                    {
-                        //1. Create Object
-                        var subEntity = Activator.CreateInstance(prop.PropertyType);
-
-                        //2. Get subEntity's Id;
-                        string navKey = propertyAttribute?.Navigation; // navKey = Account:AccountId
-
-                        if (navKey.Contains(":"))
-                        {
-                            string col = navKey.Split(':')[1]; //col = AccountI
-                            Guid.TryParse(dr[col].ToString(), out Guid subId); //assume that the key is always Guid
-
-                            //3. Set subEntity's Key;
-                            string key = GetSubEntityKeyColumn(subEntity);
-                            subEntity.GetType().GetProperty(key).SetValue(subEntity, subId);
-
-                            //4. Set entity property to subEntity
-                            prop.SetValue(entity, subEntity);
-                        }
-
-                    }
-
-                }
-                result.Add(entity);
-            }
-            return result;
-        }
-        private string GetSubEntityKeyColumn(object subEntity) {
-            string result = string.Empty;
-
-            PropertyInfo[] props = subEntity.GetType().GetProperties();
-            foreach (PropertyInfo subProprty in props)
-            {
-                if (subProprty.GetCustomAttribute<CPropertyAttribute>()?.IsKey == true) {
-                    return subProprty.Name;
-                }
-            }
-            return result;
-        }
-        private QueryParameters BuildQueryParameters<Entity>() where Entity : BaseEntity, new()
-        {
-            Entity entity = EntityFacotry.Create<Entity>();
-            CObjectAttribute rootSchemaNameAttribute = entity.GetType().GetCustomAttribute<CObjectAttribute>(true);
-            QueryParameters queryParameters = new QueryParameters()
-            {
-                RootSchemaName = rootSchemaNameAttribute.RootSchemaName,
-                AllColumns = false,
-                UseLocalization = false
-            };
-            return queryParameters;
-        }
-        private List<QueryColumn> BuildQueryColumns<Entity>() where Entity : BaseEntity, new()
-        {
-            Entity entity = EntityFacotry.Create<Entity>();
-            List<QueryColumn> queryColumns = new List<QueryColumn>();
-            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
-            {
-                string caption = propInfo.Name;
-                CPropertyAttribute propertyAttribute = propInfo.GetCustomAttribute<CPropertyAttribute>(true);
-                if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
-                {
-                    QueryColumn qc = new QueryColumn()
-                    {
-                        Caption = caption,
-                        ColumnPath = GetNewColumnPath(entity, propertyAttribute.ColumnPath),
-                        ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
-                        OrderDirection = Enums.OrderDirection.None,
-                        OrderPosition = 0,
-                    };
-                    queryColumns.Add(qc);
-                }
-            }
-            return queryColumns;
-        }
-        private async Task<RequestResponse> GetResponseAsync(string json, ActionEnum method)
-        {
-            string transportUrl = Url.TransportUrl(method, Instance.domain);
-            HttpStatusCode Code;
-            RequestResponse result = new RequestResponse();
-            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(transportUrl);
-            myHttpWebRequest.Method = "POST";
-            myHttpWebRequest.ContentType = "application/json";
-            myHttpWebRequest.CookieContainer = Instance.Auth;
-
-            Uri siteUri = new Uri(transportUrl);
-            foreach (Cookie cookie in Instance.Auth.GetCookies(siteUri))
-            {
-                if (cookie.Name == "BPMCSRF" || cookie.Name == "BPMSESSIONID")
-                {
-                    myHttpWebRequest.Headers.Add(cookie.Name, cookie.Value);
-                }
-            }
-            //encode json
-            byte[] postBytes = Encoding.UTF8.GetBytes(json);
-            //Prepare Request Stream
-            using (Stream requestStream = myHttpWebRequest.GetRequestStream())
-            {
-                requestStream.Write(postBytes, 0, postBytes.Length);
-            }
-            //Send Request
-            try
-            {
-                using (HttpWebResponse myHttpWebResponse = (HttpWebResponse)await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false))
-                {
-                    Code = myHttpWebResponse.StatusCode;
-                    /***
-                    * !!! VERY IMPORTANT !!!
-                    * READ: https://academy.bpmonline.com/documents/technic-sdk/7-14/executing-odata-queries-using-fiddler
-                    * User session is created only upon the first request to the EntityDataService.svc, after which the BPMSESSIONID cookie will be returned in the response. 
-                    * Therefore, there is no need to add BPMSESSIONID cookie to the title of the first request.
-                    * If you do not add BPMSESSIONID cookie to each subseqnent request, then each request will create a new user session. 
-                    * Significant frequency of requests (several or more requests a minute) will increase the RAM consumption which will decrease performance.
-                    */
-                    if (Instance.BpmSessionId == false)
-                    {
-                        //Auth.Add(myHttpWebResponse.Cookies);
-                        string val = myHttpWebResponse.Cookies["BPMSESSIONID"].Value;
-                        Cookie C = new Cookie("BPMSESSIONID", val);
-                        Instance.Auth.Add(new Uri(Instance.domain), C);
-                        Instance.BpmSessionId = true;
-                    }
-                    using (StreamReader MyStreamReader = new StreamReader(myHttpWebResponse.GetResponseStream(), true))
-                    {
-                        result.HttpStatusCode = Code;
-                        result.Result = MyStreamReader.ReadToEnd();
-                        result.ErrorMessage = null;
-                    }
-                }
-            }
-            catch (WebException we)
-            {
-                Code = ((HttpWebResponse)(we).Response).StatusCode;
-                using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
-                {
-                    result.HttpStatusCode = Code;
-                    result.Result = null;
-                    result.ErrorMessage = MyStreamReader.ReadToEnd();
-                }
-            }
-            return result;
-        }
-        /// <summary>
-        /// Returns new columns path if column is found in navigational property 
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="oldColumnPath"></param>
-        /// <returns>REDO - Highly inefficient</returns>
-        private string GetNewColumnPath(object entity, string oldColumnPath) 
-        {
-
-            List<PropertyInfo> vProps = new List<PropertyInfo>();
-            List<PropertyInfo> nProps = new List<PropertyInfo>();
-
-            foreach (PropertyInfo pInfo in entity.GetType().GetProperties())
-            {
-                CPropertyAttribute pAttr = pInfo.GetCustomAttribute<CPropertyAttribute>(true);
-                if (pAttr?.ColumnPath != null) vProps.Add(pInfo);
-                if (pAttr?.Navigation != null) nProps.Add(pInfo);
-            }
-
-            foreach (PropertyInfo pInfo in nProps)
-            {
-                //nav = "Account:AccountId"
-                string nav = pInfo.GetCustomAttribute<CPropertyAttribute>().Navigation;
-                string searchObj = nav.Split(':')[0]; //Account
-                string searchCol = nav.Split(':')[1]; //AccountId
-
-                if (searchCol == oldColumnPath)
-                {
-                    return $"{searchCol.Substring(0, searchCol.Length - 2)}";
-                    //return $"{searchObj}.Id";
-                }
-            }
-            return oldColumnPath;
-        }
-        #endregion
-
-
-        #region Methods : Public
 
         /// <summary>
         /// Sets credentials to use for initial Authentication
         /// </summary>
-        /// <param name="UserName">Username to Login with</param>
-        /// <param name="Password">Password to Login with</param>
-        /// <param name="Domain">Application Url i.e. (https://0123456-studio.creatio.com)</param>
+        /// <param name="UserName">Username to Login with, default Supervisor</param>
+        /// <param name="Password">Password to Login with, default Supervisor</param>
+        /// <param name="Domain">Application Url i.e. (https://xxxxxxx-studio.creatio.com)</param>
         public void SetCredentials(string UserName, string Password, string Domain)
         {
             Instance.userName = (!string.IsNullOrEmpty(UserName)) ? UserName : "Supervisor";
@@ -933,7 +829,6 @@ namespace Creatio.DataService
             }
             return Instance._IsLoginSuccess;
         }
-
         public async Task<bool> LogoutAsync()
         {
             var logout = await GetResponseAsync("{}", ActionEnum.LOGOUT).ConfigureAwait(false);
@@ -1040,13 +935,13 @@ namespace Creatio.DataService
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
             List<QueryColumn> queryColumns = BuildQueryColumns<Entity>();
             SelectQuery selectQuery = BuildSelectRequest(queryParameters, queryColumns);
-            
-            if (!string.IsNullOrEmpty(id)) 
+
+            if (!string.IsNullOrEmpty(id))
             {
                 Filters filterById = BuildFilterById(Guid.Parse(id));
                 selectQuery.Filters = filterById;
             }
-       
+
             string selectQueryJson = JsonConvert.SerializeObject(selectQuery);
             RequestResponse requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
 
@@ -1059,7 +954,8 @@ namespace Creatio.DataService
             return result;
         }
 
-        public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName="") where Entity : BaseEntity, new()
+        
+        public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName = "") where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
             List<QueryColumn> queryColumns = BuildQueryColumns<Entity>();
@@ -1075,22 +971,24 @@ namespace Creatio.DataService
             string selectQueryJson = JsonConvert.SerializeObject(selectQuery);
             RequestResponse requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
 
-            if (!string.IsNullOrEmpty(requestResponse.ErrorMessage)) {
+            if (!string.IsNullOrEmpty(requestResponse.ErrorMessage))
+            {
                 return new List<Entity>();
             }
 
             List<Entity> result = BuildEntity<Entity>(requestResponse);
             return result;
         }
-
+        
+        
         public async Task<List<Entity>> SelectList<Entity>(string childColumnName, Guid parentId = new Guid()) where Entity : BaseEntity, new()
         {
             Entity entity = EntityFacotry.Create<Entity>();
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
-            
-#region QueryColumns
 
-            
+            #region QueryColumns
+
+
 
             List<QueryColumn> QueryColumns = new List<QueryColumn>();
             foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
@@ -1124,10 +1022,10 @@ namespace Creatio.DataService
                     QueryColumns.Add(qc);
                 }
             }
-#endregion
+            #endregion
 
             SelectQuery selectQ = BuildSelectRequest(queryParameters, QueryColumns);
-            if (parentId!=Guid.Empty)
+            if (parentId != Guid.Empty)
             {
                 Filters filterById = BuildFilterByParent(parentId, childColumnName);
                 selectQ.Filters = filterById;
@@ -1141,140 +1039,239 @@ namespace Creatio.DataService
 
             return result;
         }
+        
+
+        #region Experimental
+        //        private List<Entity> BuildEntity2<Entity>(RequestResponse requestResponse) where Entity : BaseEntity, new()
+        //        {
+        //            List<Entity> result = new List<Entity>();
+        //            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
+        //            foreach (DataRow dr in dt.Rows)
+        //            {
+        //                Entity entity = EntityFacotry.Create<Entity>();
+        //                foreach (PropertyInfo prop in entity.GetType().GetProperties())
+        //                {
+        //                    string strValue = string.Empty;
+        //                    try
+        //                    {
+        //                        strValue = dr[prop.Name]?.ToString();
+        //                    }
+        //                    catch (Exception e)
+        //                    {
+        //#if DEBUG
+        //                        //Console.WriteLine($"Utils.cs Line 409: {e.Message}");
+        //#endif
+        //                    }
+
+        //                    //setting ValueProperties
+        //                    CPropertyAttribute propertyAttribute = prop.GetCustomAttribute<CPropertyAttribute>(true);
+        //                    if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
+        //                    {
+        //                        switch (prop.PropertyType.Name)
+        //                        {
+        //                            case (nameof(Guid)):
+        //                                Guid.TryParse(strValue, out Guid val);
+        //#if DEBUG
+        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+        //#endif
+        //                                prop.SetValue(entity, val);
+        //                                break;
+
+        //                            case (nameof(Decimal)):
+        //                                decimal.TryParse(strValue, out decimal decVal);
+        //#if DEBUG
+        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+        //#endif
+
+        //                                prop.SetValue(entity, decVal);
+        //                                break;
+
+        //                            case (nameof(Int16)):
+        //                            case (nameof(Int32)):
+        //                            case (nameof(Int64)):
+        //                                int.TryParse(strValue, out int intVal);
+        //#if DEBUG
+        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+        //#endif                                
+        //                                prop.SetValue(entity, intVal);
+        //                                break;
+
+        //                            case (nameof(DateTime)):
+        //                                DateTime.TryParse(strValue, out DateTime dateTimeVal);
+        //#if DEBUG
+        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+        //#endif
+        //                                prop.SetValue(entity, dateTimeVal);
+        //                                break;
+
+        //                            case (nameof(String)):
+        //                                prop.SetValue(entity, strValue);
+        //#if DEBUG
+        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
+        //#endif
+        //                                break;
+        //                        }
+        //                    }
+
+        //                    //setting up Navigational properties
+        //                    if (propertyAttribute?.Navigation != null)
+        //                    {
+        //                        //1. Create Object
+        //                        var subEntity = Activator.CreateInstance(prop.PropertyType);
+
+        //                        //2. Get subEntity's Id;
+        //                        string navKey = propertyAttribute?.Navigation; // navKey = Account:AccountId
+
+        //                        if (navKey.Contains(":"))
+        //                        {
+        //                            string col = navKey.Split(':')[1]; //col = AccountI
+        //                            Guid.TryParse(dr[col].ToString(), out Guid subId); //assume that the key is always Guid
+
+        //                            //3. Set subEntity's Key;
+        //                            string key = GetSubEntityKeyColumn(subEntity);
+        //                            subEntity.GetType().GetProperty(key).SetValue(subEntity, subId);
+
+        //                            //4. Set entity property to subEntity
+        //                            prop.SetValue(entity, subEntity);
+        //                        }
+
+        //                    }
+
+        //                }
+        //                result.Add(entity);
+        //            }
+        //            return result;
+        //        }
+        //        private List<QueryColumn> GetDeepEntityColumns(object deepEntity)
+        //        {
+
+        //            //Console.WriteLine(deepEntity.GetType().FullName);
+        //            List<QueryColumn> queryColumns = new List<QueryColumn>();
+        //            foreach (PropertyInfo propInfo in deepEntity.GetType().GetProperties())
+        //            {
+        //                string caption = $"{deepEntity.GetType().Name}.{propInfo.Name}";
+        //                Console.WriteLine(caption);
+
+        //                QueryColumnAttribute qca = propInfo.GetCustomAttribute<QueryColumnAttribute>(true);
+        //                if (qca != null)
+        //                {
+        //                    QueryColumn qc = new QueryColumn()
+        //                    {
+        //                        Caption = caption,
+        //                        ColumnPath = caption,
+        //                        ExpressionType = qca.ExpressionType,
+        //                        OrderDirection = qca.OrderDirection,
+        //                        OrderPosition = qca.OrderPosition,
+        //                    };
+        //                    queryColumns.Add(qc);
+        //                }
 
 
-#region Experimental
+        //                RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
+        //                if (ra != null)
+        //                {
+        //                    Type[] types = propInfo.PropertyType.GetInterfaces();
+        //                    var index = Array.FindIndex(types, x => x.Name == "IEnumerable");
+        //                    if (index == -1)//Not a list
+        //                    {
+        //                        var ddeepEntity = Activator.CreateInstance(propInfo.PropertyType);
+        //                        queryColumns.AddRange(GetDeepEntityColumns(ddeepEntity));
+        //                    }
+        //                }
+        //            }
 
-        private List<QueryColumn> GetDeepEntityColumns(object deepEntity)
-        {
+        //            return queryColumns;
+        //        }
+        //        private Filters BuildFilterByParentId(Guid id, string parentReference)
+        //        {
 
-            //Console.WriteLine(deepEntity.GetType().FullName);
-            List<QueryColumn> queryColumns = new List<QueryColumn>();
-            foreach (PropertyInfo propInfo in deepEntity.GetType().GetProperties())
-            {
-                string caption = $"{deepEntity.GetType().Name}.{propInfo.Name}";
-                Console.WriteLine(caption);
+        //            Filters filter = new Filters()
+        //            {
+        //                // Filter type is group.
+        //                FilterType = Enums.FilterType.FilterGroup,
+        //                // Filters collection.
+        //                LogicalOperation = Enums.LogicalOperationStrict.And,
+        //                Items = new Dictionary<string, Filter>()
+        //                {
+        //                    {
+        //                        "ByParentId", new Filter
+        //                        {
+        //                            FilterType = Enums.FilterType.CompareFilter,
+        //                            ComparisonType = Enums.FilterComparisonType.Equal,
+        //                            LeftExpression = new BaseExpression()
+        //                            {
+        //                                ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+        //                                ColumnPath = parentReference
+        //                            },
+        //                            RightExpression = new BaseExpression()
+        //                            {
+        //                                ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
+        //                                Parameter = new Parameter()
+        //                                {
+        //                                    DataValueType = Enums.DataValueType.Guid,
+        //                                    Value = id
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            };
+        //            return filter;
+        //        }
+        //        private List<QueryColumn> BuildDeeperQueryColumns<Entity>() where Entity : BaseEntity, new()
+        //        {
+        //            Entity entity = EntityFacotry.Create<Entity>();
+        //            List<QueryColumn> queryColumns = new List<QueryColumn>();
 
-                QueryColumnAttribute qca = propInfo.GetCustomAttribute<QueryColumnAttribute>(true);
-                if (qca != null)
-                {
-                    QueryColumn qc = new QueryColumn()
-                    {
-                        Caption = caption,
-                        ColumnPath = caption,
-                        ExpressionType = qca.ExpressionType,
-                        OrderDirection = qca.OrderDirection,
-                        OrderPosition = qca.OrderPosition,
-                    };
-                    queryColumns.Add(qc);
-                }
+        //            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
+        //            {
+        //                string caption = propInfo.Name;
+        //                QueryColumnAttribute qca = propInfo.GetCustomAttribute<QueryColumnAttribute>(true);
+        //                if (qca != null)
+        //                {
+        //                    QueryColumn qc = new QueryColumn()
+        //                    {
+        //                        Caption = caption,
+        //                        ColumnPath = qca.ColumnPath,
+        //                        ExpressionType = qca.ExpressionType,
+        //                        OrderDirection = qca.OrderDirection,
+        //                        OrderPosition = qca.OrderPosition,
+        //                    };
+        //                    queryColumns.Add(qc);
+        //                }
 
+        //                RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
+        //                if (ra != null)
+        //                {
+        //                    Type[] types = propInfo.PropertyType.GetInterfaces();
+        //                    var index = Array.FindIndex(types, x => x.Name == "IEnumerable");
+        //                    if (index == -1)//Not a list
+        //                    {
 
-                RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
-                if (ra != null)
-                {
-                    Type[] types = propInfo.PropertyType.GetInterfaces();
-                    var index = Array.FindIndex(types, x => x.Name == "IEnumerable");
-                    if (index == -1)//Not a list
-                    {
-                        var ddeepEntity = Activator.CreateInstance(propInfo.PropertyType);
-                        queryColumns.AddRange(GetDeepEntityColumns(ddeepEntity));
-                    }
-                }
-            }
+        //                        string deepProperty = propInfo.PropertyType.FullName;
+        //                        var deepEntity = Activator.CreateInstance(propInfo.PropertyType);
+        //                        GetDeepEntityColumns(deepEntity);
 
-            return queryColumns;
-        }
-        private Filters BuildFilterByParentId(Guid id, string parentReference)
-        {
+        //                        Console.WriteLine(deepProperty);
 
-            Filters filter = new Filters()
-            {
-                // Filter type is group.
-                FilterType = Enums.FilterType.FilterGroup,
-                // Filters collection.
-                LogicalOperation = Enums.LogicalOperationStrict.And,
-                Items = new Dictionary<string, Filter>()
-                {
-                    {
-                        "ByParentId", new Filter
-                        {
-                            FilterType = Enums.FilterType.CompareFilter,
-                            ComparisonType = Enums.FilterComparisonType.Equal,
-                            LeftExpression = new BaseExpression()
-                            {
-                                ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
-                                ColumnPath = parentReference
-                            },
-                            RightExpression = new BaseExpression()
-                            {
-                                ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
-                                Parameter = new Parameter()
-                                {
-                                    DataValueType = Enums.DataValueType.Guid,
-                                    Value = id
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-            return filter;
-        }
-        private List<QueryColumn> BuildDeeperQueryColumns<Entity>() where Entity : BaseEntity, new()
-        {
-            Entity entity = EntityFacotry.Create<Entity>();
-            List<QueryColumn> queryColumns = new List<QueryColumn>();
+        //                        QueryColumn qc = new QueryColumn()
+        //                        {
+        //                            Caption = caption,
+        //                            ColumnPath = caption,
+        //                            ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
+        //                        };
+        //                        queryColumns.Add(qc);
+        //                    }
+        //                }
+        //            }
 
-            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
-            {
-                string caption = propInfo.Name;
-                QueryColumnAttribute qca = propInfo.GetCustomAttribute<QueryColumnAttribute>(true);
-                if (qca != null)
-                {
-                    QueryColumn qc = new QueryColumn()
-                    {
-                        Caption = caption,
-                        ColumnPath = qca.ColumnPath,
-                        ExpressionType = qca.ExpressionType,
-                        OrderDirection = qca.OrderDirection,
-                        OrderPosition = qca.OrderPosition,
-                    };
-                    queryColumns.Add(qc);
-                }
-
-                RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
-                if (ra != null)
-                {
-                    Type[] types = propInfo.PropertyType.GetInterfaces();
-                    var index = Array.FindIndex(types, x => x.Name == "IEnumerable");
-                    if (index == -1)//Not a list
-                    {
-
-                        string deepProperty = propInfo.PropertyType.FullName;
-                        var deepEntity = Activator.CreateInstance(propInfo.PropertyType);
-                        GetDeepEntityColumns(deepEntity);
-
-                        Console.WriteLine(deepProperty);
-
-                        QueryColumn qc = new QueryColumn()
-                        {
-                            Caption = caption,
-                            ColumnPath = caption,
-                            ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
-                        };
-                        queryColumns.Add(qc);
-                    }
-                }
-            }
-
-            return queryColumns;
-        }
-#endregion
+        //            return queryColumns;
+        //        }
+        #endregion
 
         #endregion
 
-#region IDisposable
+        #region IDisposable
 
         // Flag: Has Dispose already been called?
         bool disposed = false;
@@ -1294,10 +1291,11 @@ namespace Creatio.DataService
 
             if (disposing)
             {
-                Task.Run(async()=> {
+                Task.Run(async () =>
+                {
                     await LogoutAsync();
                 });
-                
+
                 CurrentUser = null;
                 _instance = null;
                 disposed = true;
@@ -1305,7 +1303,8 @@ namespace Creatio.DataService
 
             // Free any unmanaged objects here.
             //
-            Task.Run(async() => {
+            Task.Run(async () =>
+            {
                 await LogoutAsync();
             });
 
@@ -1320,6 +1319,6 @@ namespace Creatio.DataService
             Dispose(false);
         }
 
-#endregion
+        #endregion
     }
 }

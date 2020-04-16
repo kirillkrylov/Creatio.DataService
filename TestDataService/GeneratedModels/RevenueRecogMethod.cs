@@ -35,6 +35,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="ForecastProductType:RevenueRecognizeMethodId")]
+		public virtual ICollection<ForecastProductType> ForecastProductTypeByRevenueRecognizeMethod { get; set; }
 		[CProperty(Association ="Product:RevenueRecognitionMethodId")]
 		public virtual ICollection<Product> ProductByRevenueRecognitionMethod { get; set; }
 		#endregion

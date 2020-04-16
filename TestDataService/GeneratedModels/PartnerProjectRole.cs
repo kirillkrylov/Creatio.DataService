@@ -49,6 +49,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<BonusScheme> BonusSchemeByPartnerProjectRole { get; set; }
 		[CProperty(Association ="InternalRequest:OpportunityPartnerRoleId")]
 		public virtual ICollection<InternalRequest> InternalRequestByOpportunityPartnerRole { get; set; }
+		[CProperty(Association ="OppForecastWizPartners:PartnerRoleId")]
+		public virtual ICollection<OppForecastWizPartners> OppForecastWizPartnersByPartnerRole { get; set; }
 		[CProperty(Association ="Opportunity:PartnerProjectRoleId")]
 		public virtual ICollection<Opportunity> OpportunityByPartnerProjectRole { get; set; }
 		[CProperty(Association ="OpportunityPartner:PartnerProjectRoleId")]

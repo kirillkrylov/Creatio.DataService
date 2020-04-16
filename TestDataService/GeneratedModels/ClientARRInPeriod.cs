@@ -23,8 +23,8 @@ namespace Creatio.DataService.Models
 		public Guid PeriodId { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
-		[CProperty(ColumnPath ="ProductFamilyId")]
-		public Guid ProductFamilyId { get; set; }
+		[CProperty(ColumnPath ="ProductKindId")]
+		public Guid ProductKindId { get; set; }
 		[CProperty(ColumnPath ="SaaSMetricsAmount")]
 		public decimal SaaSMetricsAmount { get; set; }
 		[CProperty(ColumnPath ="SubscriptionProductAmount")]
@@ -40,10 +40,10 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
-		[CProperty(Navigation ="InnerCurrencyRate:PeriodId")]
-		public InnerCurrencyRate Period { get; set; }
-		[CProperty(Navigation ="ProductKind:ProductFamilyId")]
-		public ProductKind ProductFamily { get; set; }
+		[CProperty(Navigation ="Period:PeriodId")]
+		public Period Period { get; set; }
+		[CProperty(Navigation ="ProductKind:ProductKindId")]
+		public ProductKind ProductKind { get; set; }
 		#endregion
 
 		#region Associations

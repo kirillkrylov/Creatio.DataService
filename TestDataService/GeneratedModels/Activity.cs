@@ -127,6 +127,8 @@ namespace Creatio.DataService.Models
 		public int NextStep { get; set; }
 		[CProperty(ColumnPath ="Notes")]
 		public string Notes { get; set; }
+		[CProperty(ColumnPath ="OpportunityForecastId")]
+		public Guid OpportunityForecastId { get; set; }
 		[CProperty(ColumnPath ="OpportunityId")]
 		public Guid OpportunityId { get; set; }
 		[CProperty(ColumnPath ="OrderId")]
@@ -272,6 +274,8 @@ namespace Creatio.DataService.Models
 		public MarketplaceApplication MarketplaceApplication { get; set; }
 		[CProperty(Navigation ="Opportunity:OpportunityId")]
 		public Opportunity Opportunity { get; set; }
+		[CProperty(Navigation ="OpportunityForecast:OpportunityForecastId")]
+		public OpportunityForecast OpportunityForecast { get; set; }
 		[CProperty(Navigation ="Order:OrderId")]
 		public Order Order { get; set; }
 		[CProperty(Navigation ="Partnership:PartnershipId")]

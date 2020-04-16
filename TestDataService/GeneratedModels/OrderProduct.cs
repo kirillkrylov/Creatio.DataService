@@ -191,6 +191,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SupplyPaymentProduct> SupplyPaymentProductByProduct { get; set; }
 		[CProperty(Association ="Transaction:ProductInOrderId")]
 		public virtual ICollection<Transaction> TransactionByProductInOrder { get; set; }
+		[CProperty(Association ="TransactionForecast:ProductInOrderId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByProductInOrder { get; set; }
 		[CProperty(Association ="TsOrderExpenseProduct:OrderProductId")]
 		public virtual ICollection<TsOrderExpenseProduct> TsOrderExpenseProductByOrderProduct { get; set; }
 		[CProperty(Association ="VwInvoiceProduct:OrderProductId")]

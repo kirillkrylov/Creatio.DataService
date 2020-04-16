@@ -33,6 +33,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="SysModuleAnalyticsReport:TypeId")]
+		public virtual ICollection<SysModuleAnalyticsReport> SysModuleAnalyticsReportByType { get; set; }
 		[CProperty(Association ="SysModuleReport:TypeId")]
 		public virtual ICollection<SysModuleReport> SysModuleReportByType { get; set; }
 		#endregion

@@ -201,6 +201,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<InvoiceProduct> InvoiceProductByInvoice { get; set; }
 		[CProperty(Association ="InvoiceVisa:InvoiceId")]
 		public virtual ICollection<InvoiceVisa> InvoiceVisaByInvoice { get; set; }
+		[CProperty(Association ="OpportunityForecast:InvoiceId")]
+		public virtual ICollection<OpportunityForecast> OpportunityForecastByInvoice { get; set; }
+		[CProperty(Association ="OpportunityForecastHistory:InvoiceId")]
+		public virtual ICollection<OpportunityForecastHistory> OpportunityForecastHistoryByInvoice { get; set; }
 		[CProperty(Association ="PRMTransaction:InvoiceId")]
 		public virtual ICollection<PRMTransaction> PRMTransactionByInvoice { get; set; }
 		[CProperty(Association ="PRMTransactionHistory:InvoiceId")]

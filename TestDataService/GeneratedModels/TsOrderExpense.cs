@@ -107,6 +107,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<TsOrderExpenseVisa> TsOrderExpenseVisaByTsOrderExpense { get; set; }
 		[CProperty(Association ="VwOrderExpenseProduct:TsOrderExpenseId")]
 		public virtual ICollection<VwOrderExpenseProduct> VwOrderExpenseProductByTsOrderExpense { get; set; }
+		[CProperty(Association ="VwPortalOrderExpenseProduct:TsOrderExpenseId")]
+		public virtual ICollection<VwPortalOrderExpenseProduct> VwPortalOrderExpenseProductByTsOrderExpense { get; set; }
 		#endregion
 	}
 }

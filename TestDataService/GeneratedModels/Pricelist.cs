@@ -63,14 +63,12 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ProductPrice> ProductPriceByPriceList { get; set; }
 		[CProperty(Association ="ProjectProduct:PriceListId")]
 		public virtual ICollection<ProjectProduct> ProjectProductByPriceList { get; set; }
+		[CProperty(Association ="SupportRate:PriceListId")]
+		public virtual ICollection<SupportRate> SupportRateByPriceList { get; set; }
 		[CProperty(Association ="VwDocumentProduct:PriceListId")]
 		public virtual ICollection<VwDocumentProduct> VwDocumentProductByPriceList { get; set; }
 		[CProperty(Association ="VwInvoiceProduct:PriceListId")]
 		public virtual ICollection<VwInvoiceProduct> VwInvoiceProductByPriceList { get; set; }
-		[CProperty(Association ="VwPortalOrderExpenceProduct:BasePriceListId")]
-		public virtual ICollection<VwPortalOrderExpenceProduct> VwPortalOrderExpenceProductByBasePriceList { get; set; }
-		[CProperty(Association ="VwPortalOrderExpenceProduct:NewPriceListId")]
-		public virtual ICollection<VwPortalOrderExpenceProduct> VwPortalOrderExpenceProductByNewPriceList { get; set; }
 		[CProperty(Association ="VwProjectProduct:PriceListId")]
 		public virtual ICollection<VwProjectProduct> VwProjectProductByPriceList { get; set; }
 		#endregion

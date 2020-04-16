@@ -31,6 +31,8 @@ namespace Creatio.DataService.Models
 		public Guid OrderTypeId { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		[CProperty(ColumnPath ="SupplierBillingInfoId")]
 		public Guid SupplierBillingInfoId { get; set; }
 		[CProperty(ColumnPath ="SupplierId")]

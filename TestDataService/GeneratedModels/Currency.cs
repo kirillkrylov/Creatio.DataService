@@ -127,6 +127,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Pricelist> PricelistByCurrency { get; set; }
 		[CProperty(Association ="Product:CurrencyId")]
 		public virtual ICollection<Product> ProductByCurrency { get; set; }
+		[CProperty(Association ="ProductForecast:CurrencyId")]
+		public virtual ICollection<ProductForecast> ProductForecastByCurrency { get; set; }
 		[CProperty(Association ="ProductForLicGenerator:CurrencyId")]
 		public virtual ICollection<ProductForLicGenerator> ProductForLicGeneratorByCurrency { get; set; }
 		[CProperty(Association ="ProductInSubscription:CurrencyId")]
@@ -141,6 +143,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SupplyPaymentProduct> SupplyPaymentProductByCurrency { get; set; }
 		[CProperty(Association ="Transaction:CurrencyId")]
 		public virtual ICollection<Transaction> TransactionByCurrency { get; set; }
+		[CProperty(Association ="TransactionForecast:CurrencyId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByCurrency { get; set; }
 		[CProperty(Association ="TransactionHistory:BaseCurrencyId")]
 		public virtual ICollection<TransactionHistory> TransactionHistoryByBaseCurrency { get; set; }
 		[CProperty(Association ="TripsDailyAllowance:CurrencyId")]

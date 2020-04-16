@@ -9,6 +9,14 @@ namespace Creatio.DataService.Models
 		#region Values
 		[CProperty(ColumnPath ="AccountId")]
 		public Guid AccountId { get; set; }
+		[CProperty(ColumnPath ="CertificationComDate")]
+		public DateTime CertificationComDate { get; set; }
+		[CProperty(ColumnPath ="CertificationRuDate")]
+		public DateTime CertificationRuDate { get; set; }
+		[CProperty(ColumnPath ="CertificationStatusComId")]
+		public Guid CertificationStatusComId { get; set; }
+		[CProperty(ColumnPath ="CertificationStatusRuId")]
+		public Guid CertificationStatusRuId { get; set; }
 		[CProperty(ColumnPath ="Comment")]
 		public string Comment { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
@@ -64,6 +72,10 @@ namespace Creatio.DataService.Models
 		public Contact Developer { get; set; }
 		[CProperty(Navigation ="Contact:OwnerId")]
 		public Contact Owner { get; set; }
+		[CProperty(Navigation ="MarkCertificationStatus:CertificationStatusComId")]
+		public MarkCertificationStatus CertificationStatusCom { get; set; }
+		[CProperty(Navigation ="MarkCertificationStatus:CertificationStatusRuId")]
+		public MarkCertificationStatus CertificationStatusRu { get; set; }
 		[CProperty(Navigation ="MarketplaceDeveloperCategory:DeveloperCategoryId")]
 		public MarketplaceDeveloperCategory DeveloperCategory { get; set; }
 		[CProperty(Navigation ="MarketplaceProductCategory:ProductCategoryId")]

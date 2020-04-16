@@ -209,6 +209,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Invoice> InvoiceByOrder { get; set; }
 		[CProperty(Association ="Lead:OrderId")]
 		public virtual ICollection<Lead> LeadByOrder { get; set; }
+		[CProperty(Association ="OpportunityForecast:OrderId")]
+		public virtual ICollection<OpportunityForecast> OpportunityForecastByOrder { get; set; }
+		[CProperty(Association ="OpportunityForecastHistory:OrderId")]
+		public virtual ICollection<OpportunityForecastHistory> OpportunityForecastHistoryByOrder { get; set; }
 		[CProperty(Association ="OpportunityPartner:OrderId")]
 		public virtual ICollection<OpportunityPartner> OpportunityPartnerByOrder { get; set; }
 		[CProperty(Association ="OrderExpense:OrderId")]
@@ -235,6 +239,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SupplyPaymentElement> SupplyPaymentElementByOrder { get; set; }
 		[CProperty(Association ="Transaction:OrderId")]
 		public virtual ICollection<Transaction> TransactionByOrder { get; set; }
+		[CProperty(Association ="TransactionForecast:OrderId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByOrder { get; set; }
 		[CProperty(Association ="TsOrderExpense:OrderId")]
 		public virtual ICollection<TsOrderExpense> TsOrderExpenseByOrder { get; set; }
 		[CProperty(Association ="VwLead:OrderId")]

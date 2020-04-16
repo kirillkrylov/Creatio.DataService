@@ -47,6 +47,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SupplyPaymentElement> SupplyPaymentElementByDeliveryType { get; set; }
 		[CProperty(Association ="Transaction:IncomeTypeId")]
 		public virtual ICollection<Transaction> TransactionByIncomeType { get; set; }
+		[CProperty(Association ="TransactionForecast:IncomeTypeId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByIncomeType { get; set; }
 		[CProperty(Association ="VwTransaction:IncomeTypeId")]
 		public virtual ICollection<VwTransaction> VwTransactionByIncomeType { get; set; }
 		#endregion

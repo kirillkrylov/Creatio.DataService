@@ -37,6 +37,8 @@ namespace Creatio.DataService.Models
 		public Guid Id { get; set; }
 		[CProperty(ColumnPath ="InternalRequestId")]
 		public Guid InternalRequestId { get; set; }
+		[CProperty(ColumnPath ="IsNonBudgetExes")]
+		public bool IsNonBudgetExes { get; set; }
 		[CProperty(ColumnPath ="LeadSourceId")]
 		public Guid LeadSourceId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

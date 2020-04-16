@@ -117,6 +117,8 @@ namespace Creatio.DataService.Models
 		public string Strength { get; set; }
 		[CProperty(ColumnPath ="Tactic")]
 		public string Tactic { get; set; }
+		[CProperty(ColumnPath ="TCV")]
+		public decimal TCV { get; set; }
 		[CProperty(ColumnPath ="TerritoryId")]
 		public Guid TerritoryId { get; set; }
 		[CProperty(ColumnPath ="Title")]
@@ -219,12 +221,24 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Lead> LeadByOpportunity { get; set; }
 		[CProperty(Association ="LeadCompetitor:OpportunityId")]
 		public virtual ICollection<LeadCompetitor> LeadCompetitorByOpportunity { get; set; }
+		[CProperty(Association ="OppForecastWizDeliveryPlan:OpportunityId")]
+		public virtual ICollection<OppForecastWizDeliveryPlan> OppForecastWizDeliveryPlanByOpportunity { get; set; }
+		[CProperty(Association ="OppForecastWizPartners:OpportunityId")]
+		public virtual ICollection<OppForecastWizPartners> OppForecastWizPartnersByOpportunity { get; set; }
+		[CProperty(Association ="OppForecastWizPayments:OpportunityId")]
+		public virtual ICollection<OppForecastWizPayments> OppForecastWizPaymentsByOpportunity { get; set; }
+		[CProperty(Association ="OppForecastWizSupport:OpportunityId")]
+		public virtual ICollection<OppForecastWizSupport> OppForecastWizSupportByOpportunity { get; set; }
 		[CProperty(Association ="OpportunityCompetitor:OpportunityId")]
 		public virtual ICollection<OpportunityCompetitor> OpportunityCompetitorByOpportunity { get; set; }
 		[CProperty(Association ="OpportunityContact:OpportunityId")]
 		public virtual ICollection<OpportunityContact> OpportunityContactByOpportunity { get; set; }
 		[CProperty(Association ="OpportunityFile:OpportunityId")]
 		public virtual ICollection<OpportunityFile> OpportunityFileByOpportunity { get; set; }
+		[CProperty(Association ="OpportunityForecast:OpportunityId")]
+		public virtual ICollection<OpportunityForecast> OpportunityForecastByOpportunity { get; set; }
+		[CProperty(Association ="OpportunityForecastHistory:OpportunityId")]
+		public virtual ICollection<OpportunityForecastHistory> OpportunityForecastHistoryByOpportunity { get; set; }
 		[CProperty(Association ="OpportunityInFolder:OpportunityId")]
 		public virtual ICollection<OpportunityInFolder> OpportunityInFolderByOpportunity { get; set; }
 		[CProperty(Association ="OpportunityInStage:OpportunityId")]
@@ -271,6 +285,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ReasonsForLosing> ReasonsForLosingByOpportunity { get; set; }
 		[CProperty(Association ="SalesProcessEvent:OpportunityId")]
 		public virtual ICollection<SalesProcessEvent> SalesProcessEventByOpportunity { get; set; }
+		[CProperty(Association ="TransactionForecast:OpportunityId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByOpportunity { get; set; }
 		[CProperty(Association ="VwLead:OpportunityId")]
 		public virtual ICollection<VwLead> VwLeadByOpportunity { get; set; }
 		[CProperty(Association ="VwOpportFunnelData:OpportunityId")]

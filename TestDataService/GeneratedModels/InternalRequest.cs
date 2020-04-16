@@ -141,6 +141,10 @@ namespace Creatio.DataService.Models
 		public Guid StatusId { get; set; }
 		[CProperty(ColumnPath ="SubTypeId")]
 		public Guid SubTypeId { get; set; }
+		[CProperty(ColumnPath ="Sync1CId")]
+		public Guid Sync1CId { get; set; }
+		[CProperty(ColumnPath ="SyncError")]
+		public string SyncError { get; set; }
 		[CProperty(ColumnPath ="TemporaryChange")]
 		public bool TemporaryChange { get; set; }
 		[CProperty(ColumnPath ="TemporaryChangeDate")]
@@ -262,6 +266,8 @@ namespace Creatio.DataService.Models
 		public VacationType VacationType { get; set; }
 		[CProperty(Navigation ="WorkingDayResult:WorkingDayResultId")]
 		public WorkingDayResult WorkingDayResult { get; set; }
+		[CProperty(Navigation ="YesNo:Sync1CId")]
+		public YesNo Sync1C { get; set; }
 		#endregion
 
 		#region Associations

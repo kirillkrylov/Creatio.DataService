@@ -77,6 +77,8 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
+		[CProperty(Association ="OppForecastWizPartners:OpportunityPartnerId")]
+		public virtual ICollection<OppForecastWizPartners> OppForecastWizPartnersByOpportunityPartner { get; set; }
 		#endregion
 	}
 }

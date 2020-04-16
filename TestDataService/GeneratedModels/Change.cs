@@ -11,22 +11,36 @@ namespace Creatio.DataService.Models
 		public int ActualLabor { get; set; }
 		[CProperty(ColumnPath ="AuthorId")]
 		public Guid AuthorId { get; set; }
+		[CProperty(ColumnPath ="Benefits")]
+		public string Benefits { get; set; }
+		[CProperty(ColumnPath ="BenefitsInt")]
+		public int BenefitsInt { get; set; }
 		[CProperty(ColumnPath ="CategoryId")]
 		public Guid CategoryId { get; set; }
 		[CProperty(ColumnPath ="ClosureDate")]
 		public DateTime ClosureDate { get; set; }
 		[CProperty(ColumnPath ="ComplexityId")]
 		public Guid ComplexityId { get; set; }
+		[CProperty(ColumnPath ="CostOfDelay")]
+		public string CostOfDelay { get; set; }
+		[CProperty(ColumnPath ="CostOfDelayInt")]
+		public int CostOfDelayInt { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
+		[CProperty(ColumnPath ="Deliverables")]
+		public string Deliverables { get; set; }
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
+		[CProperty(ColumnPath ="FeatureUsersNumber")]
+		public int FeatureUsersNumber { get; set; }
 		[CProperty(ColumnPath ="GroupId")]
 		public Guid GroupId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public Guid Id { get; set; }
+		[CProperty(ColumnPath ="JiraURL")]
+		public string JiraURL { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -37,12 +51,16 @@ namespace Creatio.DataService.Models
 		public string Notes { get; set; }
 		[CProperty(ColumnPath ="Number")]
 		public string Number { get; set; }
+		[CProperty(ColumnPath ="Objectives")]
+		public string Objectives { get; set; }
 		[CProperty(ColumnPath ="OwnerId")]
 		public Guid OwnerId { get; set; }
 		[CProperty(ColumnPath ="ParentChangeId")]
 		public Guid ParentChangeId { get; set; }
 		[CProperty(ColumnPath ="PlannedLabor")]
 		public int PlannedLabor { get; set; }
+		[CProperty(ColumnPath ="PriorityCoefficient")]
+		public decimal PriorityCoefficient { get; set; }
 		[CProperty(ColumnPath ="PriorityId")]
 		public Guid PriorityId { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
@@ -69,8 +87,12 @@ namespace Creatio.DataService.Models
 		public Guid SourceId { get; set; }
 		[CProperty(ColumnPath ="StageId")]
 		public Guid StageId { get; set; }
+		[CProperty(ColumnPath ="StartDate")]
+		public DateTime StartDate { get; set; }
 		[CProperty(ColumnPath ="StatusId")]
 		public Guid StatusId { get; set; }
+		[CProperty(ColumnPath ="SuccessCriteria")]
+		public string SuccessCriteria { get; set; }
 		[CProperty(ColumnPath ="TypeId")]
 		public Guid TypeId { get; set; }
 		#endregion

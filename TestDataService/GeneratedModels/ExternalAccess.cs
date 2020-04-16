@@ -15,6 +15,8 @@ namespace Creatio.DataService.Models
 		public DateTime CreatedOn { get; set; }
 		[CProperty(ColumnPath ="DueDate")]
 		public DateTime DueDate { get; set; }
+		[CProperty(ColumnPath ="ExternalAccessClientId")]
+		public Guid ExternalAccessClientId { get; set; }
 		[CProperty(ColumnPath ="GrantorId")]
 		public Guid GrantorId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
@@ -44,6 +46,8 @@ namespace Creatio.DataService.Models
 		public Contact ModifiedBy { get; set; }
 		[CProperty(Navigation ="Contact:GrantorId")]
 		public Contact Grantor { get; set; }
+		[CProperty(Navigation ="ExternalAccessClient:ExternalAccessClientId")]
+		public ExternalAccessClient ExternalAccessClient { get; set; }
 		#endregion
 
 		#region Associations

@@ -173,6 +173,10 @@ namespace Creatio.DataService.Models
 		#region Associations
 		[CProperty(Association ="Activity:DeliveryId")]
 		public virtual ICollection<Activity> ActivityByDelivery { get; set; }
+		[CProperty(Association ="OpportunityForecast:DeliveryId")]
+		public virtual ICollection<OpportunityForecast> OpportunityForecastByDelivery { get; set; }
+		[CProperty(Association ="OpportunityForecastHistory:DeliveryId")]
+		public virtual ICollection<OpportunityForecastHistory> OpportunityForecastHistoryByDelivery { get; set; }
 		[CProperty(Association ="ProductForLicGenerator:SupplyPaymentElementId")]
 		public virtual ICollection<ProductForLicGenerator> ProductForLicGeneratorBySupplyPaymentElement { get; set; }
 		[CProperty(Association ="ProductInSubscription:SupplyPaymentElementId")]

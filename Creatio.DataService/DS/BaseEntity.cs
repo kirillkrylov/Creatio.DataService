@@ -26,6 +26,54 @@ namespace Creatio.DataService
             return baseEntity[0];
         }
 
+        public void ExpandValues() {
+
+            PropertyInfo[] props = this.GetType().GetProperties();
+            foreach (PropertyInfo prop in props) 
+            {
+                if (prop.Name == "Id") {
+                    Guid.TryParse(prop.GetValue(this).ToString(), out Guid Id);
+                    if (Id != Guid.Empty)
+                        this.Id = Id;
+                }
+            }
+
+            if (Id == Guid.Empty) return;
+
+            MethodInfo select = typeof(Utils).GetMethod("Select");
+            Type tThis = this.GetType();
+            MethodInfo generic = select.MakeGenericMethod(tThis);
+            object[] args = { Id.ToString() };
+
+            object selectReturn = generic.Invoke(Utils.Instance, args);
+
+            var taskResult = selectReturn?.GetType().GetProperty("Result")?.GetValue(selectReturn); //a is a Task.Result or List<Entity>
+
+            if (taskResult == null)
+                return;
+
+            IList elements = (IList)taskResult;
+
+            if(elements.Count == 0)
+                return;
+
+            var element = elements[0];
+
+            List<PropertyInfo> propsList = element.GetType().GetProperties().ToList();
+            foreach (PropertyInfo prop in props) 
+            {
+                int index = propsList.FindIndex(i => i.Name == prop.Name);
+
+                if (index >= 0) 
+                {
+                    var value = propsList[index].GetValue(element);
+                    prop.SetValue(this, value);
+                }
+            }
+        }
+
+
+
         /// <summary>
         /// Expands Navigational properties of the object
         /// </summary>
@@ -262,59 +310,6 @@ namespace Creatio.DataService
             //Assembly assembly = Assembly.GetCallingAssembly();
             MethodInfo select = typeof(Utils).GetMethod("SelectAssociation");
             Type tThis = this.GetType();
-
-            /**
-            foreach (PropertyInfo prop in props) {
-
-                Type entityType;
-                if (this.GetType().GetProperty(prop.Name).PropertyType.IsGenericType)
-                {
-                    entityType = this.GetType().GetProperty(prop.Name).PropertyType.GetGenericArguments().FirstOrDefault().UnderlyingSystemType;
-                }
-                else continue;
-
-
-                string id = tThis.GetProperty("Id").GetValue(this, null).ToString();
-                if (id == Guid.Empty.ToString())
-                    return;
-
-                //prop.Name = ContactAddressByContact
-                //attr=ContactAddress:ContactId
-                string attr = tThis.GetProperty(prop.Name).GetCustomAttribute<CPropertyAttribute>()?.Association;
-
-                //string parentColumnName;
-
-                if (attr.Contains("ERROR")) continue;
-                string parentColumnName = attr.Split(':')[1];
-                
-                parentColumnName = parentColumnName.Substring(0, parentColumnName.Length - 2);
-
-                //I want to invoke Select method
-                //Select<Entity>(string id = "")
-                MethodInfo generic = select.MakeGenericMethod(entityType);
-
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"\tExpanding {prop.Name} of Type {entityType} by Id: {id}");
-                object[] args = { id, parentColumnName };
-
-                Stopwatch propStopWatch = new Stopwatch();
-                propStopWatch.Start();
-                object selectReturn = generic.Invoke(Utils.Instance, args);
-                
-                var taskResult = selectReturn.GetType().GetProperty("Result").GetValue(selectReturn); //a is a Task.Result or List<Entity>
-                propStopWatch.Stop();
-                IList elements = (IList)taskResult;
-
-                if (elements.Count > 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"\tSetting value for {prop.Name}, it took me: {propStopWatch.Elapsed.TotalSeconds} seconds.");
-                    Console.ResetColor();
-                    prop.SetValue(this, elements);
-                }
-
-            }
-            */
             
             Parallel.ForEach(props, (prop) =>
             {

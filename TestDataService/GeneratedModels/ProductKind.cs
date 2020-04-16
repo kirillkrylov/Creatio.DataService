@@ -41,10 +41,16 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
-		[CProperty(Association ="ClientARRInPeriod:ProductFamilyId")]
-		public virtual ICollection<ClientARRInPeriod> ClientARRInPeriodByProductFamily { get; set; }
+		[CProperty(Association ="ClientARRInPeriod:ProductKindId")]
+		public virtual ICollection<ClientARRInPeriod> ClientARRInPeriodByProductKind { get; set; }
 		[CProperty(Association ="ClientSaaSMetrics:ProductFamilyId")]
 		public virtual ICollection<ClientSaaSMetrics> ClientSaaSMetricsByProductFamily { get; set; }
+		[CProperty(Association ="OppForecastWizDeliveryPlan:ProductKindId")]
+		public virtual ICollection<OppForecastWizDeliveryPlan> OppForecastWizDeliveryPlanByProductKind { get; set; }
+		[CProperty(Association ="OpportunityForecast:ProductKindId")]
+		public virtual ICollection<OpportunityForecast> OpportunityForecastByProductKind { get; set; }
+		[CProperty(Association ="OpportunityForecastHistory:ProductKindId")]
+		public virtual ICollection<OpportunityForecastHistory> OpportunityForecastHistoryByProductKind { get; set; }
 		[CProperty(Association ="Product:KindId")]
 		public virtual ICollection<Product> ProductByKind { get; set; }
 		[CProperty(Association ="SaaSMetrics:ProductFamilyId")]

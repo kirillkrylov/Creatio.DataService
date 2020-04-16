@@ -345,6 +345,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<MktgActivity> MktgActivityByAccount { get; set; }
 		[CProperty(Association ="NPS:GlbNPSbyCustomerId")]
 		public virtual ICollection<NPS> NPSByGlbNPSbyCustomer { get; set; }
+		[CProperty(Association ="OppForecastWizPartners:PartnerId")]
+		public virtual ICollection<OppForecastWizPartners> OppForecastWizPartnersByPartner { get; set; }
 		[CProperty(Association ="Opportunity:AccountId")]
 		public virtual ICollection<Opportunity> OpportunityByAccount { get; set; }
 		[CProperty(Association ="Opportunity:PartnerId")]
@@ -441,6 +443,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<TableStatistics> TableStatisticsByAccount { get; set; }
 		[CProperty(Association ="Transaction:AccountId")]
 		public virtual ICollection<Transaction> TransactionByAccount { get; set; }
+		[CProperty(Association ="TransactionForecast:AccountId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByAccount { get; set; }
 		[CProperty(Association ="TsOrderExpense:PartnerId")]
 		public virtual ICollection<TsOrderExpense> TsOrderExpenseByPartner { get; set; }
 		[CProperty(Association ="TsOrderExpense:ClientId")]

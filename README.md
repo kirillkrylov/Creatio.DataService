@@ -7,6 +7,22 @@ Install-Package Creatio.DataService
 ```
 
 ## Usage
+
+To use this package you need to first generate models. use [CLIO][clio] tool to generate models. 
+```PowerShell
+$ clio modes -e ENV -d C:\Models;
+```
+
+-<details>
+<symmary></summary>
+
+
+</details>
+
+
+
+
+
 ```C#
 static async Task Main()
 {
@@ -320,3 +336,9 @@ private static SelectQuery BuildContactQuery()
     return contactQuery;
 }
 ```
+
+
+
+
+
+[clio]: https://github.com/Advance-Technologies-Foundation/clio

@@ -59,6 +59,8 @@ namespace Creatio.DataService.Models
 		public Guid OrderProductId { get; set; }
 		[CProperty(ColumnPath ="PrimaryAmount")]
 		public decimal PrimaryAmount { get; set; }
+		[CProperty(ColumnPath ="PrimaryTotalAmountWithoutTax")]
+		public decimal PrimaryTotalAmountWithoutTax { get; set; }
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="ProductId")]
@@ -71,6 +73,8 @@ namespace Creatio.DataService.Models
 		public Guid SubscriptionTypeId { get; set; }
 		[CProperty(ColumnPath ="SupplyPaymentElementId")]
 		public Guid SupplyPaymentElementId { get; set; }
+		[CProperty(ColumnPath ="TotalAmountWithoutTax")]
+		public decimal TotalAmountWithoutTax { get; set; }
 		#endregion
 
 		#region Navigation
@@ -109,6 +113,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SubscriptionExpirationProduct> SubscriptionExpirationProductByProductInSubscription { get; set; }
 		[CProperty(Association ="Transaction:ProductInSubscriptionId")]
 		public virtual ICollection<Transaction> TransactionByProductInSubscription { get; set; }
+		[CProperty(Association ="TransactionForecast:ProductInSubscriptionId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByProductInSubscription { get; set; }
 		[CProperty(Association ="VwProductBalance:ProductInSubscriptionId")]
 		public virtual ICollection<VwProductBalance> VwProductBalanceByProductInSubscription { get; set; }
 		[CProperty(Association ="VwTransaction:ProductInSubscriptionId")]

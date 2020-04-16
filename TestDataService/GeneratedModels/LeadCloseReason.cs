@@ -41,6 +41,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<DetailedReason> DetailedReasonByCloseReason { get; set; }
 		[CProperty(Association ="Lead:LeadCloseReasonId")]
 		public virtual ICollection<Lead> LeadByLeadCloseReason { get; set; }
+		[CProperty(Association ="SalesProcessEvent:LeadCloseReasonId")]
+		public virtual ICollection<SalesProcessEvent> SalesProcessEventByLeadCloseReason { get; set; }
 		[CProperty(Association ="VwLead:LeadCloseReasonId")]
 		public virtual ICollection<VwLead> VwLeadByLeadCloseReason { get; set; }
 		#endregion

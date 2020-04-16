@@ -59,6 +59,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Bonus> BonusByAccrualPeriod { get; set; }
 		[CProperty(Association ="Budget:PeriodId")]
 		public virtual ICollection<Budget> BudgetByPeriod { get; set; }
+		[CProperty(Association ="ClientARRInPeriod:PeriodId")]
+		public virtual ICollection<ClientARRInPeriod> ClientARRInPeriodByPeriod { get; set; }
 		[CProperty(Association ="ClientSaaSMetrics:PeriodId")]
 		public virtual ICollection<ClientSaaSMetrics> ClientSaaSMetricsByPeriod { get; set; }
 		[CProperty(Association ="ContactForecast:PeriodId")]
@@ -83,12 +85,16 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<Period> PeriodByYear { get; set; }
 		[CProperty(Association ="Period:QuarterId")]
 		public virtual ICollection<Period> PeriodByQuarter { get; set; }
+		[CProperty(Association ="ProductForecast:PeriodId")]
+		public virtual ICollection<ProductForecast> ProductForecastByPeriod { get; set; }
 		[CProperty(Association ="SaaSMetrics:PeriodId")]
 		public virtual ICollection<SaaSMetrics> SaaSMetricsByPeriod { get; set; }
 		[CProperty(Association ="SupplyPaymentElement:PeriodId")]
 		public virtual ICollection<SupplyPaymentElement> SupplyPaymentElementByPeriod { get; set; }
 		[CProperty(Association ="Transaction:PeriodId")]
 		public virtual ICollection<Transaction> TransactionByPeriod { get; set; }
+		[CProperty(Association ="TransactionForecast:PeriodId")]
+		public virtual ICollection<TransactionForecast> TransactionForecastByPeriod { get; set; }
 		[CProperty(Association ="TsStaffSkillPeriod:PeriodId")]
 		public virtual ICollection<TsStaffSkillPeriod> TsStaffSkillPeriodByPeriod { get; set; }
 		[CProperty(Association ="VwForecastDashboarData:PeriodId")]

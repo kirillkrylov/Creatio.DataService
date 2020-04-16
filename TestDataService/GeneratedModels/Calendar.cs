@@ -65,6 +65,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ServiceItem> ServiceItemByCalendar { get; set; }
 		[CProperty(Association ="ServicePact:CalendarId")]
 		public virtual ICollection<ServicePact> ServicePactByCalendar { get; set; }
+		[CProperty(Association ="SupportUnit:CalendarId")]
+		public virtual ICollection<SupportUnit> SupportUnitByCalendar { get; set; }
+		[CProperty(Association ="SupportUnitLog:CalendarId")]
+		public virtual ICollection<SupportUnitLog> SupportUnitLogByCalendar { get; set; }
 		[CProperty(Association ="VwProductSLA:CalendarId")]
 		public virtual ICollection<VwProductSLA> VwProductSLAByCalendar { get; set; }
 		#endregion

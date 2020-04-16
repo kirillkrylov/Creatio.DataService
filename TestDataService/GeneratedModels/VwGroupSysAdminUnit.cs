@@ -73,8 +73,6 @@ namespace Creatio.DataService.Models
 		public string TimeZoneId { get; set; }
 		[CProperty(ColumnPath ="UnblockTime")]
 		public DateTime UnblockTime { get; set; }
-		[CProperty(ColumnPath ="UserPassword")]
-		public string UserPassword { get; set; }
 		#endregion
 
 		#region Navigation

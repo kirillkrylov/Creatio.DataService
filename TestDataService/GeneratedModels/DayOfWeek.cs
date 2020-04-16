@@ -43,6 +43,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<MaintenanceWindow> MaintenanceWindowByDayOfWeek { get; set; }
 		[CProperty(Association ="SiteTechnologicalPeriod:DayOfWeekId")]
 		public virtual ICollection<SiteTechnologicalPeriod> SiteTechnologicalPeriodByDayOfWeek { get; set; }
+		[CProperty(Association ="SupportSchedule:DayOfWeekId")]
+		public virtual ICollection<SupportSchedule> SupportScheduleByDayOfWeek { get; set; }
+		[CProperty(Association ="SupportScheduleLog:DayOfWeekId")]
+		public virtual ICollection<SupportScheduleLog> SupportScheduleLogByDayOfWeek { get; set; }
 		#endregion
 	}
 }

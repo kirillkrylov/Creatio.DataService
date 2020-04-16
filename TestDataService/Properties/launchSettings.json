@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TestDataService": {
+      "commandName": "Project",
+      "commandLineArgs": "-i 3896c91e-e1d5-4fc2-8b02-afc885af2129"
+    }
+  }
+}

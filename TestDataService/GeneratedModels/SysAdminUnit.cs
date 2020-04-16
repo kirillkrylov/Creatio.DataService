@@ -75,8 +75,6 @@ namespace Creatio.DataService.Models
 		public string TimeZoneId { get; set; }
 		[CProperty(ColumnPath ="UnblockTime")]
 		public DateTime UnblockTime { get; set; }
-		[CProperty(ColumnPath ="UserPassword")]
-		public string UserPassword { get; set; }
 		#endregion
 
 		#region Navigation
@@ -197,6 +195,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<OpportunityDepartment> OpportunityDepartmentByIndustryProgressManagerUnit { get; set; }
 		[CProperty(Association ="OpportunityDepartment:MPPGroupLeaderUnitId")]
 		public virtual ICollection<OpportunityDepartment> OpportunityDepartmentByMPPGroupLeaderUnit { get; set; }
+		[CProperty(Association ="OpportunityForecastVisa:VisaOwnerId")]
+		public virtual ICollection<OpportunityForecastVisa> OpportunityForecastVisaByVisaOwner { get; set; }
+		[CProperty(Association ="OpportunityForecastVisa:DelegatedFromId")]
+		public virtual ICollection<OpportunityForecastVisa> OpportunityForecastVisaByDelegatedFrom { get; set; }
 		[CProperty(Association ="OpportunityVisa:VisaOwnerId")]
 		public virtual ICollection<OpportunityVisa> OpportunityVisaByVisaOwner { get; set; }
 		[CProperty(Association ="OpportunityVisa:DelegatedFromId")]

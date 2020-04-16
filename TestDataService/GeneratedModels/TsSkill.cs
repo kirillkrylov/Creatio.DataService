@@ -31,6 +31,8 @@ namespace Creatio.DataService.Models
 		public int ProcessListeners { get; set; }
 		[CProperty(ColumnPath ="RangeRule")]
 		public bool RangeRule { get; set; }
+		[CProperty(ColumnPath ="RecordInactive")]
+		public bool RecordInactive { get; set; }
 		[CProperty(ColumnPath ="SkillGroupId")]
 		public Guid SkillGroupId { get; set; }
 		[CProperty(ColumnPath ="Weight")]

@@ -39,8 +39,6 @@ namespace Creatio.DataService.Models
 		#endregion
 
 		#region Associations
-		[CProperty(Association ="ClientARRInPeriod:PeriodId")]
-		public virtual ICollection<ClientARRInPeriod> ClientARRInPeriodByPeriod { get; set; }
 		#endregion
 	}
 }

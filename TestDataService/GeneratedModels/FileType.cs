@@ -143,6 +143,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<OAuth20AppFile> OAuth20AppFileByType { get; set; }
 		[CProperty(Association ="OpportunityFile:TypeId")]
 		public virtual ICollection<OpportunityFile> OpportunityFileByType { get; set; }
+		[CProperty(Association ="OpportunityForecastFile:TypeId")]
+		public virtual ICollection<OpportunityForecastFile> OpportunityForecastFileByType { get; set; }
 		[CProperty(Association ="OrderFile:TypeId")]
 		public virtual ICollection<OrderFile> OrderFileByType { get; set; }
 		[CProperty(Association ="OrgStructureUnitFile:TypeId")]

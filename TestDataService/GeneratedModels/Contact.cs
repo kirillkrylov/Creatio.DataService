@@ -653,6 +653,14 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<OpportunityDepartment> OpportunityDepartmentBySalesDirector { get; set; }
 		[CProperty(Association ="OpportunityFile:LockedById")]
 		public virtual ICollection<OpportunityFile> OpportunityFileByLockedBy { get; set; }
+		[CProperty(Association ="OpportunityForecast:ForecastOwnerId")]
+		public virtual ICollection<OpportunityForecast> OpportunityForecastByForecastOwner { get; set; }
+		[CProperty(Association ="OpportunityForecastFile:LockedById")]
+		public virtual ICollection<OpportunityForecastFile> OpportunityForecastFileByLockedBy { get; set; }
+		[CProperty(Association ="OpportunityForecastHistory:ForecastOwnerId")]
+		public virtual ICollection<OpportunityForecastHistory> OpportunityForecastHistoryByForecastOwner { get; set; }
+		[CProperty(Association ="OpportunityForecastVisa:SetById")]
+		public virtual ICollection<OpportunityForecastVisa> OpportunityForecastVisaBySetBy { get; set; }
 		[CProperty(Association ="OpportunityInStage:OwnerId")]
 		public virtual ICollection<OpportunityInStage> OpportunityInStageByOwner { get; set; }
 		[CProperty(Association ="OpportunityParticipant:ContactId")]
@@ -799,6 +807,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<SupplyPaymentElement> SupplyPaymentElementByContact { get; set; }
 		[CProperty(Association ="SupplyPaymentItemFile:LockedById")]
 		public virtual ICollection<SupplyPaymentItemFile> SupplyPaymentItemFileByLockedBy { get; set; }
+		[CProperty(Association ="SupportUnit:ContactId")]
+		public virtual ICollection<SupportUnit> SupportUnitByContact { get; set; }
+		[CProperty(Association ="SupportUnitLog:ContactId")]
+		public virtual ICollection<SupportUnitLog> SupportUnitLogByContact { get; set; }
 		[CProperty(Association ="SysAdminUnit:ContactId")]
 		public virtual ICollection<SysAdminUnit> SysAdminUnitByContact { get; set; }
 		[CProperty(Association ="SysGridPageView:OwnerId")]

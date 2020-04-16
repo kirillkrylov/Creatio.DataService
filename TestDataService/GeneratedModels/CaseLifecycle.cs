@@ -11,6 +11,8 @@ namespace Creatio.DataService.Models
 		public Guid AccountId { get; set; }
 		[CProperty(ColumnPath ="CaseId")]
 		public Guid CaseId { get; set; }
+		[CProperty(ColumnPath ="CaseRecordId")]
+		public Guid CaseRecordId { get; set; }
 		[CProperty(ColumnPath ="CategoryId")]
 		public Guid CategoryId { get; set; }
 		[CProperty(ColumnPath ="ContactId")]
