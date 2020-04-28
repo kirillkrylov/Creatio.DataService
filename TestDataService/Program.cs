@@ -16,8 +16,8 @@ namespace TestDataService
     {
         public static async Task Main(string[] args)
         {
+            Utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
             Utils utils = Utils.Instance;
-            utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
             if (await utils.LoginAsync())
             {
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
@@ -253,9 +253,6 @@ namespace TestDataService
 
             return "P0000000";
         }
-
-
-
         private static async Task AdHocQuery() {
             Console.Write("Enter Email to Search: ");
             Console.ForegroundColor = ConsoleColor.Green;

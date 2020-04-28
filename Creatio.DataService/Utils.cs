@@ -53,15 +53,18 @@ namespace Creatio.DataService
             }
         }
         #endregion
+               
 
         #region Events
         public event EventHandler<WebSocketMessageReceivedEventArgs> WebSocketMessageReceived;
         #endregion
 
-        #region Methods : Private
+#region Methods : Private
+        /// <summary>
+        /// Will try to connect 5 times then give up
+        /// </summary>
         private async void ConectWebSocket()
         {
-
             ClientWebSocket wss = new ClientWebSocket();
             wss.Options.Cookies = Instance.Auth;
             foreach (Cookie c in Instance.Auth.GetCookies(new Uri(domain)))
@@ -83,32 +86,58 @@ namespace Creatio.DataService
                 socketDomain = domain.Replace("http://", "ws://");
             }
 
-            await wss.ConnectAsync(new Uri($"{socketDomain}/0/Nui/ViewModule.aspx.ashx"), CancellationToken.None).ConfigureAwait(false);
-            while (wss.State == WebSocketState.Open)
+            int attempts = 0;
+            try
             {
-                ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[8192]);
-                WebSocketReceiveResult result;
-                using (var ms = new MemoryStream())
+                while(wss.State != WebSocketState.Open && wss.State != WebSocketState.Connecting && attempts <5)
                 {
-                    do
+                    try
                     {
-                        result = await wss.ReceiveAsync(buffer, CancellationToken.None).ConfigureAwait(false);
-                        ms.Write(buffer.Array, buffer.Offset, result.Count);
+                        await wss.ConnectAsync(new Uri($"{socketDomain}/0/Nui/ViewModule.aspx.ashx"), CancellationToken.None).ConfigureAwait(false);
                     }
-                    while (!result.EndOfMessage);
-
-                    ms.Seek(0, SeekOrigin.Begin);
-
-                    if (result.MessageType == WebSocketMessageType.Text)
+                    catch (WebSocketException ex)
                     {
-                        using (var reader = new StreamReader(ms, Encoding.UTF8))
+                        attempts++;
+#if DEBUG           
+                        Console.WriteLine(ex.Message);
+#endif
+                    }
+                }
+                while (wss.State == WebSocketState.Open)
+                {
+#if DEBUG
+                    Console.WriteLine("Socket Connected ...");
+#endif
+                    attempts = 0;
+                    ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[8192]);
+                    WebSocketReceiveResult result;
+                    using (var ms = new MemoryStream())
+                    {
+                        do
                         {
-                            string txt = reader.ReadToEnd();
-                            WebSocketMessageReceivedEventArgs e = JsonConvert.DeserializeObject<WebSocketMessageReceivedEventArgs>(txt);
-                            Instance.OnWebSocketMessageReceived(e);
+                            result = await wss.ReceiveAsync(buffer, CancellationToken.None).ConfigureAwait(false);
+                            ms.Write(buffer.Array, buffer.Offset, result.Count);
+                        }
+                        while (!result.EndOfMessage);
+
+                        ms.Seek(0, SeekOrigin.Begin);
+
+                        if (result.MessageType == WebSocketMessageType.Text)
+                        {
+                            using (var reader = new StreamReader(ms, Encoding.UTF8))
+                            {
+                                string txt = reader.ReadToEnd();
+                                WebSocketMessageReceivedEventArgs e = JsonConvert.DeserializeObject<WebSocketMessageReceivedEventArgs>(txt);
+                                Instance.OnWebSocketMessageReceived(e);
+                            }
                         }
                     }
                 }
+
+            }
+            catch
+            {
+
             }
             wss.Dispose();
         }
@@ -504,7 +533,6 @@ namespace Creatio.DataService
         /// <returns>REDO - Highly inefficient</returns>
         private string GetNewColumnPath(object entity, string oldColumnPath)
         {
-
             List<PropertyInfo> vProps = new List<PropertyInfo>();
             List<PropertyInfo> nProps = new List<PropertyInfo>();
 
@@ -530,71 +558,11 @@ namespace Creatio.DataService
             }
             return oldColumnPath;
         }
-        #endregion
+#endregion
 
-        #region Methods : Public
+#region Methods : Public
 
-
-
-        public async Task<RequestResponse> GetResponseAsync(string json, ActionEnum method)
-        {
-            string transportUrl = Url.TransportUrl(method, Instance.domain);
-            HttpStatusCode Code;
-            RequestResponse result = new RequestResponse();
-            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(transportUrl);
-            myHttpWebRequest.Method = "POST";
-            myHttpWebRequest.ContentType = "application/json";
-            myHttpWebRequest.CookieContainer = Instance.Auth;
-
-            Uri siteUri = new Uri(transportUrl);
-            foreach (Cookie cookie in Instance.Auth.GetCookies(siteUri))
-            {
-                if (cookie.Name == "BPMCSRF" || cookie.Name == "BPMSESSIONID")
-                {
-                    myHttpWebRequest.Headers.Add(cookie.Name, cookie.Value);
-                }
-            }
-            //encode json
-            byte[] postBytes = Encoding.UTF8.GetBytes(json);
-
-            //Prepare Request Stream
-            using (Stream requestStream = myHttpWebRequest.GetRequestStream())
-            {
-                requestStream.Write(postBytes, 0, postBytes.Length);
-            }
-            //Send Request
-            try
-            {
-                using (HttpWebResponse myHttpWebResponse = (HttpWebResponse)await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false))
-                {
-                    Code = myHttpWebResponse.StatusCode;
-                    if (Instance.BpmSessionId == false)
-                    {
-                        string val = myHttpWebResponse.Cookies["BPMSESSIONID"].Value;
-                        Cookie C = new Cookie("BPMSESSIONID", val);
-                        Instance.Auth.Add(new Uri(Instance.domain), C);
-                        Instance.BpmSessionId = true;
-                    }
-                    using (StreamReader MyStreamReader = new StreamReader(myHttpWebResponse.GetResponseStream(), true))
-                    {
-                        result.HttpStatusCode = Code;
-                        result.Result = MyStreamReader.ReadToEnd();
-                        result.ErrorMessage = null;
-                    }
-                }
-            }
-            catch (WebException we)
-            {
-                Code = ((HttpWebResponse)(we).Response).StatusCode;
-                using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
-                {
-                    result.HttpStatusCode = Code;
-                    result.Result = null;
-                    result.ErrorMessage = MyStreamReader.ReadToEnd();
-                }
-            }
-            return result;
-        }
+       
         public static DataTable ConvertResponseToDataTable(string json)
         {
             DataServiceSelectResponseTemplate myResponse = JsonConvert.DeserializeObject<DataServiceSelectResponseTemplate>(json);
@@ -808,7 +776,7 @@ namespace Creatio.DataService
         /// <param name="UserName">Username to Login with, default Supervisor</param>
         /// <param name="Password">Password to Login with, default Supervisor</param>
         /// <param name="Domain">Application Url i.e. (https://xxxxxxx-studio.creatio.com)</param>
-        public void SetCredentials(string UserName, string Password, string Domain)
+        public static void SetCredentials(string UserName, string Password, string Domain)
         {
             Instance.userName = (!string.IsNullOrEmpty(UserName)) ? UserName : "Supervisor";
             Instance.password = (!string.IsNullOrEmpty(Password)) ? Password : "Supervisor";
@@ -819,6 +787,9 @@ namespace Creatio.DataService
         /// Logs in and requests Current User info
         /// </summary>
         /// <returns>Authentication result</returns>
+
+        #region Methods: Public : OverTheWire        
+        
         public async Task<bool> LoginAsync()
         {
             Auth = AuthRequest(Instance.userName, Instance.password, Instance.domain);
@@ -853,9 +824,11 @@ namespace Creatio.DataService
         /// <returns>Base64 encoded image or error message</returns>
         public async Task<RequestResponse> GetImageAsync(string id)
         {
+            if (!IsLoginSuccess) await LoginAsync();
+
             string transportUrl = Url.TransportUrl(ActionEnum.SYSIMAGE, Instance.domain) + id;
             HttpStatusCode Code;
-
+            
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(transportUrl);
             myHttpWebRequest.Method = "GET";
             myHttpWebRequest.ContentType = "application/octet-stream";
@@ -913,6 +886,14 @@ namespace Creatio.DataService
             catch (WebException we)
             {
                 Code = ((HttpWebResponse)(we).Response).StatusCode;
+                if (Code == HttpStatusCode.Unauthorized)
+                {
+                    Auth = null;
+                    Instance.BpmSessionId = false;
+                    Instance.CurrentUser = null;
+                    Instance._IsLoginSuccess = false;
+                }
+
                 using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
                 {
                     return new RequestResponse()
@@ -920,10 +901,82 @@ namespace Creatio.DataService
                         HttpStatusCode = Code,
                         Result = null,
                         ErrorMessage = MyStreamReader.ReadToEnd()
+
                     };
                 }
             }
         }
+
+        public async Task<RequestResponse> GetResponseAsync(string json, ActionEnum method)
+        {
+            if (!IsLoginSuccess) await LoginAsync();
+
+            string transportUrl = Url.TransportUrl(method, Instance.domain);
+            HttpStatusCode Code;
+            RequestResponse result = new RequestResponse();
+            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(transportUrl);
+            myHttpWebRequest.Method = "POST";
+            myHttpWebRequest.ContentType = "application/json";
+            myHttpWebRequest.CookieContainer = Instance.Auth;
+
+            Uri siteUri = new Uri(transportUrl);
+            foreach (Cookie cookie in Instance.Auth.GetCookies(siteUri))
+            {
+                if (cookie.Name == "BPMCSRF" || cookie.Name == "BPMSESSIONID")
+                {
+                    myHttpWebRequest.Headers.Add(cookie.Name, cookie.Value);
+                }
+            }
+            //encode json
+            byte[] postBytes = Encoding.UTF8.GetBytes(json);
+
+            //Prepare Request Stream
+            using (Stream requestStream = myHttpWebRequest.GetRequestStream())
+            {
+                requestStream.Write(postBytes, 0, postBytes.Length);
+            }
+            //Send Request
+            try
+            {
+                using (HttpWebResponse myHttpWebResponse = (HttpWebResponse)await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false))
+                {
+                    Code = myHttpWebResponse.StatusCode;
+                    if (Instance.BpmSessionId == false)
+                    {
+                        string val = myHttpWebResponse.Cookies["BPMSESSIONID"].Value;
+                        Cookie C = new Cookie("BPMSESSIONID", val);
+                        Instance.Auth.Add(new Uri(Instance.domain), C);
+                        Instance.BpmSessionId = true;
+                    }
+                    using (StreamReader MyStreamReader = new StreamReader(myHttpWebResponse.GetResponseStream(), true))
+                    {
+                        result.HttpStatusCode = Code;
+                        result.Result = MyStreamReader.ReadToEnd();
+                        result.ErrorMessage = null;
+                    }
+                }
+            }
+            catch (WebException we)
+            {
+                Code = ((HttpWebResponse)(we).Response).StatusCode;
+                if (Code == HttpStatusCode.Unauthorized) 
+                {
+                    Auth = null;
+                    Instance.BpmSessionId = false;
+                    Instance.CurrentUser = null;
+                    Instance._IsLoginSuccess = false;
+                }
+
+                using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
+                {
+                    result.HttpStatusCode = Code;
+                    result.Result = null;
+                    result.ErrorMessage = MyStreamReader.ReadToEnd();
+                }
+            }
+            return result;
+        }
+        #endregion
 
         /// <summary></summary>
         /// <code>List<Contact> CurrentUser = await utils.Select<Contact>(ContactId)</code>
@@ -944,6 +997,11 @@ namespace Creatio.DataService
 
             string selectQueryJson = JsonConvert.SerializeObject(selectQuery);
             RequestResponse requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
+            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized) 
+            {
+                requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
+            }
+
 
             if (!string.IsNullOrEmpty(requestResponse.ErrorMessage))
             {
@@ -953,8 +1011,7 @@ namespace Creatio.DataService
             List<Entity> result = BuildEntity<Entity>(requestResponse);
             return result;
         }
-
-        
+    
         public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName = "") where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
@@ -965,11 +1022,14 @@ namespace Creatio.DataService
             {
                 Filters filterById = BuildFilterByParent(Guid.Parse(parentId), childColumnName);
                 selectQuery.Filters = filterById;
-
             }
 
             string selectQueryJson = JsonConvert.SerializeObject(selectQuery);
             RequestResponse requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
+            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
+            {
+                requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
+            }
 
             if (!string.IsNullOrEmpty(requestResponse.ErrorMessage))
             {
@@ -980,13 +1040,12 @@ namespace Creatio.DataService
             return result;
         }
         
-        
         public async Task<List<Entity>> SelectList<Entity>(string childColumnName, Guid parentId = new Guid()) where Entity : BaseEntity, new()
         {
             Entity entity = EntityFacotry.Create<Entity>();
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
 
-            #region QueryColumns
+#region QueryColumns
 
 
 
@@ -1022,26 +1081,24 @@ namespace Creatio.DataService
                     QueryColumns.Add(qc);
                 }
             }
-            #endregion
+#endregion
 
-            SelectQuery selectQ = BuildSelectRequest(queryParameters, QueryColumns);
+            SelectQuery selectQuery = BuildSelectRequest(queryParameters, QueryColumns);
             if (parentId != Guid.Empty)
             {
                 Filters filterById = BuildFilterByParent(parentId, childColumnName);
-                selectQ.Filters = filterById;
+                selectQuery.Filters = filterById;
             }
-
-            //string json = string.Empty;
-            string json = JsonConvert.SerializeObject(selectQ);
-            RequestResponse requestResponse = await GetResponseAsync(json, ActionEnum.SELECT);
-
+            string selectQueryJson = JsonConvert.SerializeObject(selectQuery);
+            RequestResponse requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
+            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
+            {
+                requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
+            }
             List<Entity> result = BuildEntity<Entity>(requestResponse);
-
             return result;
         }
-        
-
-        #region Experimental
+#region Experimental
         //        private List<Entity> BuildEntity2<Entity>(RequestResponse requestResponse) where Entity : BaseEntity, new()
         //        {
         //            List<Entity> result = new List<Entity>();
@@ -1267,11 +1324,11 @@ namespace Creatio.DataService
 
         //            return queryColumns;
         //        }
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
-        #region IDisposable
+#region IDisposable
 
         // Flag: Has Dispose already been called?
         bool disposed = false;
@@ -1319,6 +1376,6 @@ namespace Creatio.DataService
             Dispose(false);
         }
 
-        #endregion
+#endregion
     }
 }
