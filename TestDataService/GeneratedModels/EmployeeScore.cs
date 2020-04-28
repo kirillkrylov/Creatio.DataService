@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GiftId")]
 		public Guid GiftId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MarketplaceApplicationId")]
 		public Guid MarketplaceApplicationId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FillColumnTypeId")]
 		public Guid FillColumnTypeId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntegrationObjectId")]
 		public Guid IntegrationObjectId { get; set; }
 		[CProperty(ColumnPath ="IsDefault")]

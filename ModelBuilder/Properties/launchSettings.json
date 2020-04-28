@@ -2,7 +2,7 @@
   "profiles": {
     "ModelBuilder": {
       "commandName": "Project",
-      "commandLineArgs": "-e work"
+      "commandLineArgs": "-e work -d C:\\MyModels"
     }
   }
 }

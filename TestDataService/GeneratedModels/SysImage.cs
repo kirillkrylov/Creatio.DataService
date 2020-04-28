@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HasRef")]
 		public bool HasRef { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MimeType")]
 		public string MimeType { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

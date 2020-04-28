@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FirstName")]
 		public string FirstName { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InternalId")]
 		public string InternalId { get; set; }
 		[CProperty(ColumnPath ="Language")]

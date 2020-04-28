@@ -15,6 +15,7 @@ namespace ModelBuilder
     {
         const string clioJson = @"\creatio\clio\appsettings.json";
         public static string requestedEnvironment = string.Empty;
+        public static DirectoryInfo destination;
 
         static async Task Main(string[] args)
         {
@@ -92,6 +93,14 @@ namespace ModelBuilder
                 if (args.Length - 1 >= eIndex+1) {
                     requestedEnvironment = args[eIndex + 1].ToString(CultureInfo.InvariantCulture);
                 }
+
+                int dIndex = Array.IndexOf(args, "-d");
+                if (args.Length - 1 >= dIndex + 1)
+                {
+                    string dest = args[dIndex + 1].ToString(CultureInfo.InvariantCulture);
+                    destination = new DirectoryInfo(dest);
+                }
+
             }
         }
 
@@ -146,7 +155,9 @@ namespace ModelBuilder
                          select c.Attribute("Namespace").Value;
             
             //Create Directory
-            string dir = @"C:\Models";
+            //string dir = @"C:\Models";
+            string dir = destination.FullName;
+
             Directory.CreateDirectory(dir);
 
             var associations = (from ent in xDoc.Descendants()

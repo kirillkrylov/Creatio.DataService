@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="JiraComponent")]
 		public string JiraComponent { get; set; }
 		[CProperty(ColumnPath ="JiraEpic")]

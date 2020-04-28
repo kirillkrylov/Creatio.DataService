@@ -42,7 +42,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GroupId")]
 		public Guid GroupId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsAutoUpdated")]
 		public bool IsAutoUpdated { get; set; }
 		[CProperty(ColumnPath ="IsHasRevert")]

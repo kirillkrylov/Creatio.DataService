@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CurrentStepId")]
 		public Guid CurrentStepId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsFromGroup")]
 		public bool IsFromGroup { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

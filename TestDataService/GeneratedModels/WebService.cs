@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HTTPAuthTypeId")]
 		public Guid HTTPAuthTypeId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Login")]
 		public string Login { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

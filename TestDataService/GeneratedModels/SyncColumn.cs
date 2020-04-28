@@ -36,7 +36,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FillColumnTypeId")]
 		public Guid FillColumnTypeId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IdentityColumnId")]
 		public Guid IdentityColumnId { get; set; }
 		[CProperty(ColumnPath ="IntegrationObjectId")]

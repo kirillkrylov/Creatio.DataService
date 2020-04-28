@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FullClassName")]
 		public string FullClassName { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LicOperations")]
 		public string LicOperations { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Goal")]
 		public string Goal { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IndustryId")]
 		public Guid IndustryId { get; set; }
 		[CProperty(ColumnPath ="LastActualizeDate")]

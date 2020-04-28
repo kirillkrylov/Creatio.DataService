@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExtendParent")]
 		public bool ExtendParent { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsVirtual")]
 		public bool IsVirtual { get; set; }
 		[CProperty(ColumnPath ="ManagerName")]

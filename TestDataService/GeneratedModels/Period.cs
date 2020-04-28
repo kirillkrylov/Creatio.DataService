@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DueDate")]
 		public DateTime DueDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -71,6 +71,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<DwhRndActivityTagCube> DwhRndActivityTagCubeByPeriod { get; set; }
 		[CProperty(Association ="DwhRndActivityTaskCategoryCube:PeriodId")]
 		public virtual ICollection<DwhRndActivityTaskCategoryCube> DwhRndActivityTaskCategoryCubeByPeriod { get; set; }
+		[CProperty(Association ="EmployeeForecast:PeriodId")]
+		public virtual ICollection<EmployeeForecast> EmployeeForecastByPeriod { get; set; }
 		[CProperty(Association ="EmployeeKpi:PeriodId")]
 		public virtual ICollection<EmployeeKpi> EmployeeKpiByPeriod { get; set; }
 		[CProperty(Association ="InternalRequest:PeriodId")]

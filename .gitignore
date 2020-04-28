@@ -340,3 +340,6 @@ ASALocalRun/
 healthchecksdb
 Creatio.DataService/readme.txt
 TestDataService/Properties/Resources.resx
+
+# Ignore Generated Models
+**/GeneratedModels

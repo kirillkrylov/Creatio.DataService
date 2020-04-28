@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Data")]
 		public byte[] Data { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="KnowledgeBaseId")]
 		public Guid KnowledgeBaseId { get; set; }
 		[CProperty(ColumnPath ="LockedById")]

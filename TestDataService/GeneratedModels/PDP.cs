@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExpectedResult")]
 		public string ExpectedResult { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InteractionWithManagerId")]
 		public Guid InteractionWithManagerId { get; set; }
 		[CProperty(ColumnPath ="Mentor")]

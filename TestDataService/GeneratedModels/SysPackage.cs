@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Essential")]
 		public bool Essential { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InstallType")]
 		public int InstallType { get; set; }
 		[CProperty(ColumnPath ="IsChanged")]

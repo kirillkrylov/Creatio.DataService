@@ -74,7 +74,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FromDate")]
 		public DateTime FromDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InvoiceId")]
 		public Guid InvoiceId { get; set; }
 		[CProperty(ColumnPath ="LicenseId")]
@@ -283,6 +283,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<CorrespondenceLink> CorrespondenceLinkByRequest { get; set; }
 		[CProperty(Association ="Document:InternalRequestId")]
 		public virtual ICollection<Document> DocumentByInternalRequest { get; set; }
+		[CProperty(Association ="DomainInRequest:InternalRequestId")]
+		public virtual ICollection<DomainInRequest> DomainInRequestByInternalRequest { get; set; }
 		[CProperty(Association ="ExesInRequest:InternalRequestId")]
 		public virtual ICollection<ExesInRequest> ExesInRequestByInternalRequest { get; set; }
 		[CProperty(Association ="InternalRequest:ParrentRequestId")]

@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ErrorMessage")]
 		public string ErrorMessage { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsChanged0")]
 		public bool IsChanged0 { get; set; }
 		[CProperty(ColumnPath ="IsChanged1")]

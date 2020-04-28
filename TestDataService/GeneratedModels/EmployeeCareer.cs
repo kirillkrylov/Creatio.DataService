@@ -26,7 +26,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FullJobTitle")]
 		public string FullJobTitle { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsCurrent")]
 		public bool IsCurrent { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

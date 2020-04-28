@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FunctionId")]
 		public Guid FunctionId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MetricCode")]
 		public string MetricCode { get; set; }
 		[CProperty(ColumnPath ="MetricValue")]

@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DateTimeStamp")]
 		public DateTime DateTimeStamp { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Link")]
 		public string Link { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ErrorDescription")]
 		public string ErrorDescription { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntegrationSystemId")]
 		public Guid IntegrationSystemId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

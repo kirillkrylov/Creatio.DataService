@@ -10,7 +10,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Dn")]
 		public string Dn { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public string Id { get; set; }
+		public override string Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="Name")]

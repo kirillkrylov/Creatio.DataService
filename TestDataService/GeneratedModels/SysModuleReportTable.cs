@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Filter")]
 		public byte[] Filter { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsEmptyTableHide")]
 		public bool IsEmptyTableHide { get; set; }
 		[CProperty(ColumnPath ="MacrosList")]

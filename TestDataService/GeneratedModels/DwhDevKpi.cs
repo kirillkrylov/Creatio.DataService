@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HodId")]
 		public Guid HodId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="JiraBillingTime")]
 		public decimal JiraBillingTime { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

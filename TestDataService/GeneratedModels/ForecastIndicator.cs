@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -41,6 +41,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<AccountForecast> AccountForecastByIndicator { get; set; }
 		[CProperty(Association ="ContactForecast:IndicatorId")]
 		public virtual ICollection<ContactForecast> ContactForecastByIndicator { get; set; }
+		[CProperty(Association ="EmployeeForecast:IndicatorId")]
+		public virtual ICollection<EmployeeForecast> EmployeeForecastByIndicator { get; set; }
 		[CProperty(Association ="ForecastColumn:IndicatorId")]
 		public virtual ICollection<ForecastColumn> ForecastColumnByIndicator { get; set; }
 		[CProperty(Association ="LeadTypeForecast:IndicatorId")]

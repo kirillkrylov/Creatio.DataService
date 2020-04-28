@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="From")]
 		public DateTime From { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsAvailable")]
 		public bool IsAvailable { get; set; }
 		[CProperty(ColumnPath ="IsDuty")]

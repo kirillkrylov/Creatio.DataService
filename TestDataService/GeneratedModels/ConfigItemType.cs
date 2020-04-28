@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsEnabled")]
 		public bool IsEnabled { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

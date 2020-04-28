@@ -15,6 +15,8 @@ namespace Creatio.DataService.Models
 		public string BatchPredictionQuery { get; set; }
 		[CProperty(ColumnPath ="BatchPredictionStartMethodId")]
 		public Guid BatchPredictionStartMethodId { get; set; }
+		[CProperty(ColumnPath ="ConfidentValueLowEdge")]
+		public decimal ConfidentValueLowEdge { get; set; }
 		[CProperty(ColumnPath ="CreatedById")]
 		public Guid CreatedById { get; set; }
 		[CProperty(ColumnPath ="CreatedOn")]
@@ -22,7 +24,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InstanceMetric")]
 		public decimal InstanceMetric { get; set; }
 		[CProperty(ColumnPath ="LastError")]
@@ -33,6 +35,8 @@ namespace Creatio.DataService.Models
 		public string MetaDataLcz { get; set; }
 		[CProperty(ColumnPath ="MetricThreshold")]
 		public decimal MetricThreshold { get; set; }
+		[CProperty(ColumnPath ="MLConfidentValueMethodId")]
+		public Guid MLConfidentValueMethodId { get; set; }
 		[CProperty(ColumnPath ="MLProblemTypeId")]
 		public Guid MLProblemTypeId { get; set; }
 		[CProperty(ColumnPath ="ModelInstanceUId")]
@@ -63,6 +67,8 @@ namespace Creatio.DataService.Models
 		public int TrainFrequency { get; set; }
 		[CProperty(ColumnPath ="TrainingFilterData")]
 		public byte[] TrainingFilterData { get; set; }
+		[CProperty(ColumnPath ="TrainingMaxRecordsCount")]
+		public int TrainingMaxRecordsCount { get; set; }
 		[CProperty(ColumnPath ="TrainingMinimumRecordsCount")]
 		public int TrainingMinimumRecordsCount { get; set; }
 		[CProperty(ColumnPath ="TrainingOutputFilterData")]
@@ -80,6 +86,8 @@ namespace Creatio.DataService.Models
 		public Contact CreatedBy { get; set; }
 		[CProperty(Navigation="Contact:ModifiedById")]
 		public Contact ModifiedBy { get; set; }
+		[CProperty(Navigation ="MLConfidentValueMethod:MLConfidentValueMethodId")]
+		public MLConfidentValueMethod MLConfidentValueMethod { get; set; }
 		[CProperty(Navigation ="MLModelState:StateId")]
 		public MLModelState State { get; set; }
 		[CProperty(Navigation ="MLProblemType:MLProblemTypeId")]

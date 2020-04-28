@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="End")]
 		public bool End { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MaxProbability")]
 		public int MaxProbability { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

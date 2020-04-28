@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExchangeEmailAddress")]
 		public string ExchangeEmailAddress { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsExchengeAutodiscover")]
 		public bool IsExchengeAutodiscover { get; set; }
 		[CProperty(ColumnPath ="IsStartTls")]

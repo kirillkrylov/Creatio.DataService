@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Date")]
 		public DateTime Date { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MetrixTypeId")]
 		public Guid MetrixTypeId { get; set; }
 		[CProperty(ColumnPath ="ProductId")]

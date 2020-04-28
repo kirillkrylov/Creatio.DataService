@@ -76,7 +76,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HomePhone")]
 		public string HomePhone { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsNonActualEmail")]
 		public bool IsNonActualEmail { get; set; }
 		[CProperty(ColumnPath ="JobENG")]
@@ -791,6 +791,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ServicePact> ServicePactByServiceProviderContact { get; set; }
 		[CProperty(Association ="ServicePactFile:LockedById")]
 		public virtual ICollection<ServicePactFile> ServicePactFileByLockedBy { get; set; }
+		[CProperty(Association ="SiteDomain:OwnerId")]
+		public virtual ICollection<SiteDomain> SiteDomainByOwner { get; set; }
+		[CProperty(Association ="SiteDomainFile:LockedById")]
+		public virtual ICollection<SiteDomainFile> SiteDomainFileByLockedBy { get; set; }
 		[CProperty(Association ="SiteEvent:ContactId")]
 		public virtual ICollection<SiteEvent> SiteEventByContact { get; set; }
 		[CProperty(Association ="SiteEventTypeFile:LockedById")]
@@ -839,6 +843,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<TeamOnDutyFile> TeamOnDutyFileByLockedBy { get; set; }
 		[CProperty(Association ="ToEmployeeQuote:ContactId")]
 		public virtual ICollection<ToEmployeeQuote> ToEmployeeQuoteByContact { get; set; }
+		[CProperty(Association ="TrackingProject:OwnerId")]
+		public virtual ICollection<TrackingProject> TrackingProjectByOwner { get; set; }
 		[CProperty(Association ="TransactionFile:LockedById")]
 		public virtual ICollection<TransactionFile> TransactionFileByLockedBy { get; set; }
 		[CProperty(Association ="TsOrderExpense:InvoiceOwnerId")]

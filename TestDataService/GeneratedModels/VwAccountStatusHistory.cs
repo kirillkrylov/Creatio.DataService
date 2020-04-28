@@ -12,7 +12,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ChangeDate")]
 		public DateTime ChangeDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="NewStatusId")]
 		public Guid NewStatusId { get; set; }
 		[CProperty(ColumnPath ="OldStatusId")]

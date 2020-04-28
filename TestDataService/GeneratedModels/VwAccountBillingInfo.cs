@@ -24,7 +24,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Fax")]
 		public string Fax { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
 		[CProperty(ColumnPath ="Name1")]

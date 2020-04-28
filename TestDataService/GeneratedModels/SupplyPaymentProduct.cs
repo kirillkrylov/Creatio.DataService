@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CurrencyRate")]
 		public decimal CurrencyRate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsRecordLocked")]
 		public bool IsRecordLocked { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

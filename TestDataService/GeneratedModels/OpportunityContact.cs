@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GlbAccountId")]
 		public Guid GlbAccountId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InfluenceId")]
 		public Guid InfluenceId { get; set; }
 		[CProperty(ColumnPath ="IsMainContact")]

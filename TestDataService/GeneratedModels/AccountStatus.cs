@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FirstOpportunity")]
 		public bool FirstOpportunity { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsActive")]
 		public bool IsActive { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

@@ -34,7 +34,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HelpContextId")]
 		public string HelpContextId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Image16")]
 		public byte[] Image16 { get; set; }
 		[CProperty(ColumnPath ="Image20")]

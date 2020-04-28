@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EnrchTextEntityId")]
 		public Guid EnrchTextEntityId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IdentificationType")]
 		public string IdentificationType { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

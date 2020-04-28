@@ -24,7 +24,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HourInMonts")]
 		public int HourInMonts { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MeetConductCount")]
 		public int MeetConductCount { get; set; }
 		[CProperty(ColumnPath ="MeetDoneCount")]

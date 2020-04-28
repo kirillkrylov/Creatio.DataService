@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsSimple")]
 		public bool IsSimple { get; set; }
 		[CProperty(ColumnPath ="IsSystem")]
@@ -53,6 +53,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<BonusScheme> BonusSchemeBySysLookup { get; set; }
 		[CProperty(Association ="CampaignLogItemType:SysLookupId")]
 		public virtual ICollection<CampaignLogItemType> CampaignLogItemTypeBySysLookup { get; set; }
+		[CProperty(Association ="ContentBuilderCustomerFont:SysLookupId")]
+		public virtual ICollection<ContentBuilderCustomerFont> ContentBuilderCustomerFontBySysLookup { get; set; }
 		[CProperty(Association ="ContentBuilderFontSet:SysLookupId")]
 		public virtual ICollection<ContentBuilderFontSet> ContentBuilderFontSetBySysLookup { get; set; }
 		[CProperty(Association ="DeduplicateOperation:SysLookupId")]

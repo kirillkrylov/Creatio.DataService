@@ -28,7 +28,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HRBPId")]
 		public Guid HRBPId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsManuallyEditingHead")]
 		public bool IsManuallyEditingHead { get; set; }
 		[CProperty(ColumnPath ="IsNotUsed")]

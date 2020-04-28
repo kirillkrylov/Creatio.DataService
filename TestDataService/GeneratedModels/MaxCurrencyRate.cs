@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CurrencyId")]
 		public Guid CurrencyId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MaxCurrencyPercent")]
 		public int MaxCurrencyPercent { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

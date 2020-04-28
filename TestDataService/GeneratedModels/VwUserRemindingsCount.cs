@@ -8,7 +8,7 @@ namespace Creatio.DataService.Models
 	{
 		#region Values
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="RemindingsCount")]
 		public int RemindingsCount { get; set; }
 		[CProperty(ColumnPath ="RemindTime")]

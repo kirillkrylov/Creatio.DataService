@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DelegatedFromId")]
 		public Guid DelegatedFromId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InternalRequestId")]
 		public Guid InternalRequestId { get; set; }
 		[CProperty(ColumnPath ="IsAllowedToDelegate")]

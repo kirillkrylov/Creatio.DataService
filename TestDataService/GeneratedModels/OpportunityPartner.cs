@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FixedSum")]
 		public decimal FixedSum { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsExpenseConsidered")]
 		public bool IsExpenseConsidered { get; set; }
 		[CProperty(ColumnPath ="LeadId")]

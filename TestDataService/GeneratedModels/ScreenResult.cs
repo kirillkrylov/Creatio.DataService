@@ -46,7 +46,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GoodGuy")]
 		public bool GoodGuy { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsActual")]
 		public bool IsActual { get; set; }
 		[CProperty(ColumnPath ="LADP")]

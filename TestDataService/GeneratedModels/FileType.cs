@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -175,6 +175,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ServiceItemFile> ServiceItemFileByType { get; set; }
 		[CProperty(Association ="ServicePactFile:TypeId")]
 		public virtual ICollection<ServicePactFile> ServicePactFileByType { get; set; }
+		[CProperty(Association ="SiteDomainFile:TypeId")]
+		public virtual ICollection<SiteDomainFile> SiteDomainFileByType { get; set; }
 		[CProperty(Association ="SiteEventTypeFile:TypeId")]
 		public virtual ICollection<SiteEventTypeFile> SiteEventTypeFileByType { get; set; }
 		[CProperty(Association ="SupAccessToClientFile:TypeId")]

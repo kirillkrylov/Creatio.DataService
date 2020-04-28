@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FeatureImportances")]
 		public string FeatureImportances { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IgnoreMetricThreshold")]
 		public bool IgnoreMetricThreshold { get; set; }
 		[CProperty(ColumnPath ="InstanceMetric")]

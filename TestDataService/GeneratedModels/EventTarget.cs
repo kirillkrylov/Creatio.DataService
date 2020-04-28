@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GeneratedWebFormId")]
 		public Guid GeneratedWebFormId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsFromGroup")]
 		public bool IsFromGroup { get; set; }
 		[CProperty(ColumnPath ="LeadId")]

@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FullQuotaPercent")]
 		public decimal FullQuotaPercent { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ManagerRoleId")]
 		public Guid ManagerRoleId { get; set; }
 		[CProperty(ColumnPath ="ManagerSegmentId")]

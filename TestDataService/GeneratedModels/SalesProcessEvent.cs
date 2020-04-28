@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EventTypeId")]
 		public Guid EventTypeId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LeadCloseReasonId")]
 		public Guid LeadCloseReasonId { get; set; }
 		[CProperty(ColumnPath ="LeadDisqualifyReasonId")]

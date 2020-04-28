@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DetailEntityName")]
 		public string DetailEntityName { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsColumn")]
 		public bool IsColumn { get; set; }
 		[CProperty(ColumnPath ="IsDetail")]

@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DayTypeId")]
 		public Guid DayTypeId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsRepeated")]
 		public bool IsRepeated { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

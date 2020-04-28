@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FirePeriod")]
 		public int FirePeriod { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="INFLUSync")]
 		public bool INFLUSync { get; set; }
 		[CProperty(ColumnPath ="InProgress")]
@@ -111,6 +111,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<CampaignStep> CampaignStepByCampaign { get; set; }
 		[CProperty(Association ="CampaignTarget:CampaignId")]
 		public virtual ICollection<CampaignTarget> CampaignTargetByCampaign { get; set; }
+		[CProperty(Association ="CampaignVersion:CampaignId")]
+		public virtual ICollection<CampaignVersion> CampaignVersionByCampaign { get; set; }
 		[CProperty(Association ="ContactFolder:CampaignId")]
 		public virtual ICollection<ContactFolder> ContactFolderByCampaign { get; set; }
 		[CProperty(Association ="Event:CampaignId")]

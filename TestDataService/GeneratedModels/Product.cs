@@ -34,7 +34,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EndDate")]
 		public DateTime EndDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntegratedOn")]
 		public DateTime IntegratedOn { get; set; }
 		[CProperty(ColumnPath ="IsArchive")]

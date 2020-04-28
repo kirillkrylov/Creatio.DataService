@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EmailFolderId")]
 		public Guid EmailFolderId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InvoiceId")]
 		public Guid InvoiceId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

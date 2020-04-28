@@ -48,7 +48,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DueDate")]
 		public DateTime DueDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InventoryNumber")]
 		public string InventoryNumber { get; set; }
 		[CProperty(ColumnPath ="LastSessionEndDate")]

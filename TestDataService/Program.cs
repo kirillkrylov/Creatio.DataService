@@ -22,11 +22,22 @@ namespace TestDataService
             {
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
 
-                Guid.TryParse("8d45b7a8-844b-44f1-b689-a11bf80986e0", out Guid contactId);
-                Creatio.DataService.RequestResponse res = await utils.DeleteAsyc<Contact>(contactId);
-                Console.WriteLine(res.ErrorMessage);
-                Console.WriteLine(res.HttpStatusCode);
-                Console.WriteLine(res.Result);
+                Guid.TryParse(utils.CurrentUser.Contact.Value, out Guid contactId);
+                Contact c = new Contact() { Id = contactId };
+                c.Notes = "Testing Update";
+
+                await Utils.Instance.UpdateAsync(c);
+
+                c.ExpandValues();
+                Console.WriteLine(c.Notes);
+
+
+                //Guid.TryParse("8d45b7a8-844b-44f1-b689-a11bf80986e0", out Guid contactId);
+                //Creatio.DataService.RequestResponse res = await utils.DeleteAsyc<Contact>(contactId);
+                
+                //Console.WriteLine(res.ErrorMessage);
+                //Console.WriteLine(res.HttpStatusCode);
+                //Console.WriteLine(res.Result);
 
                 
                 ContactById(utils.CurrentUser.Contact.Value);

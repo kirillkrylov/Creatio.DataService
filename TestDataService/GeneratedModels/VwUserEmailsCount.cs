@@ -10,7 +10,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EmailsCount")]
 		public int EmailsCount { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="SysAdminUnitId")]
 		public Guid SysAdminUnitId { get; set; }
 		#endregion

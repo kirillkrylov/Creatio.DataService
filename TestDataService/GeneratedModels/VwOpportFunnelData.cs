@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="fStartDate")]
 		public DateTime fStartDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsInStageConversion")]
 		public int IsInStageConversion { get; set; }
 		[CProperty(ColumnPath ="lCreatedOn")]

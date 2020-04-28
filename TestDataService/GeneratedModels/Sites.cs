@@ -30,7 +30,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DataCenterDomain")]
 		public string DataCenterDomain { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]

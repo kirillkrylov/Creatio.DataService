@@ -28,7 +28,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExportContactsSelected")]
 		public bool ExportContactsSelected { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ImportContacts")]
 		public bool ImportContacts { get; set; }
 		[CProperty(ColumnPath ="ImportContactsAll")]

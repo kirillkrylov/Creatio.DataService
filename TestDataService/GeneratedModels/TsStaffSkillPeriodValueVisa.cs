@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HeadComment")]
 		public string HeadComment { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsAllowedToDelegate")]
 		public bool IsAllowedToDelegate { get; set; }
 		[CProperty(ColumnPath ="IsCanceled")]

@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DefaultPageCaption")]
 		public string DefaultPageCaption { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
 		public DateTime ModifiedOn { get; set; }
 		[CProperty(ColumnPath ="ModuleCode")]

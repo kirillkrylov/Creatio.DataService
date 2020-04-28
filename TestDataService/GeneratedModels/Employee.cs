@@ -40,7 +40,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HRId")]
 		public Guid HRId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="JobId")]
 		public Guid JobId { get; set; }
 		[CProperty(ColumnPath ="ManagerId")]
@@ -151,6 +151,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<EmployeeCompetence> EmployeeCompetenceByEmployee { get; set; }
 		[CProperty(Association ="EmployeeFile:EmployeeId")]
 		public virtual ICollection<EmployeeFile> EmployeeFileByEmployee { get; set; }
+		[CProperty(Association ="EmployeeForecast:EmployeeId")]
+		public virtual ICollection<EmployeeForecast> EmployeeForecastByEmployee { get; set; }
 		[CProperty(Association ="EmployeeInFolder:EmployeeId")]
 		public virtual ICollection<EmployeeInFolder> EmployeeInFolderByEmployee { get; set; }
 		[CProperty(Association ="EmployeeInTag:EntityId")]

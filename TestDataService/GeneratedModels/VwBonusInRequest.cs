@@ -12,7 +12,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CalculationRuleId")]
 		public Guid CalculationRuleId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InternalRequestId")]
 		public Guid InternalRequestId { get; set; }
 		[CProperty(ColumnPath ="InvoiceId")]

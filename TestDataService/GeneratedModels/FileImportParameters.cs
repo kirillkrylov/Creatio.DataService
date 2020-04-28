@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FileData")]
 		public byte[] FileData { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ImportEntities")]
 		public byte[] ImportEntities { get; set; }
 		[CProperty(ColumnPath ="ImportParameters")]

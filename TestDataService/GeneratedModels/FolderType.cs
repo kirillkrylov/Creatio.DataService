@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ImageId")]
 		public Guid ImageId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
@@ -173,6 +173,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<ServiceItemFolder> ServiceItemFolderByFolderType { get; set; }
 		[CProperty(Association ="ServicePactFolder:FolderTypeId")]
 		public virtual ICollection<ServicePactFolder> ServicePactFolderByFolderType { get; set; }
+		[CProperty(Association ="SiteDomainFolder:FolderTypeId")]
+		public virtual ICollection<SiteDomainFolder> SiteDomainFolderByFolderType { get; set; }
 		[CProperty(Association ="SiteEventTypeFolder:FolderTypeId")]
 		public virtual ICollection<SiteEventTypeFolder> SiteEventTypeFolderByFolderType { get; set; }
 		[CProperty(Association ="SocialChannelFolder:FolderTypeId")]

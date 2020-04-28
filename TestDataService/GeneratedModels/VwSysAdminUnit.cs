@@ -28,7 +28,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HomePageId")]
 		public Guid HomePageId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsDirectoryEntry")]
 		public bool IsDirectoryEntry { get; set; }
 		[CProperty(ColumnPath ="LDAPElementId")]

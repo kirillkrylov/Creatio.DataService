@@ -110,7 +110,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GiveGetTL")]
 		public int GiveGetTL { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntroductionSE")]
 		public int IntroductionSE { get; set; }
 		[CProperty(ColumnPath ="IntroductionTL")]

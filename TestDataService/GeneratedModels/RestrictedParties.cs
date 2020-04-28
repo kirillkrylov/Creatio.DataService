@@ -26,7 +26,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="hasMoreDetails")]
 		public bool hasMoreDetails { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Info")]
 		public string Info { get; set; }
 		[CProperty(ColumnPath ="MatchConfirmed")]

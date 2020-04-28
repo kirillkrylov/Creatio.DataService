@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EditPageName")]
 		public string EditPageName { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MiniPageSchemaUId")]
 		public Guid MiniPageSchemaUId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

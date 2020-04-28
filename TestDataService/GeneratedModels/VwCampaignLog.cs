@@ -26,7 +26,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ErrorText")]
 		public string ErrorText { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ScheduledDate")]
 		public DateTime ScheduledDate { get; set; }
 		[CProperty(ColumnPath ="SessionId")]

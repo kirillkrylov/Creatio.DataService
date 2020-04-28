@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FactToPlan")]
 		public decimal FactToPlan { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LastMonthFact")]
 		public decimal LastMonthFact { get; set; }
 		[CProperty(ColumnPath ="LastMonthFactToPlan")]

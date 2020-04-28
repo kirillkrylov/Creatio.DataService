@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ForecastId")]
 		public Guid ForecastId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IndicatorId")]
 		public Guid IndicatorId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

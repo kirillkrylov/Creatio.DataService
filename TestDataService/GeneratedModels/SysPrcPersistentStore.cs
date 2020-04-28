@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GroupKey")]
 		public string GroupKey { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Key")]
 		public string Key { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

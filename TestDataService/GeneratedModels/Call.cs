@@ -35,10 +35,12 @@ namespace Creatio.DataService.Models
 		public int Duration { get; set; }
 		[CProperty(ColumnPath ="EndDate")]
 		public DateTime EndDate { get; set; }
+		[CProperty(ColumnPath ="GloballyUniqueCallLinkageId")]
+		public string GloballyUniqueCallLinkageId { get; set; }
 		[CProperty(ColumnPath ="HoldTime")]
 		public int HoldTime { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntegrationId")]
 		public string IntegrationId { get; set; }
 		[CProperty(ColumnPath ="LeadId")]

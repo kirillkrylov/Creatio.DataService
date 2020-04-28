@@ -12,7 +12,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -33,6 +33,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<AccountForecast> AccountForecastByRow { get; set; }
 		[CProperty(Association ="ContactForecast:RowId")]
 		public virtual ICollection<ContactForecast> ContactForecastByRow { get; set; }
+		[CProperty(Association ="EmployeeForecast:RowId")]
+		public virtual ICollection<EmployeeForecast> EmployeeForecastByRow { get; set; }
 		[CProperty(Association ="LeadTypeForecast:RowId")]
 		public virtual ICollection<LeadTypeForecast> LeadTypeForecastByRow { get; set; }
 		[CProperty(Association ="OppDepartmentForecast:RowId")]

@@ -26,7 +26,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DayOfWeek")]
 		public int DayOfWeek { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsCustom")]
 		public bool IsCustom { get; set; }
 		[CProperty(ColumnPath ="IsDaily")]

@@ -10,7 +10,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CalendarId")]
 		public Guid CalendarId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ProductId")]
 		public Guid ProductId { get; set; }
 		[CProperty(ColumnPath ="ServicePactTypeId")]

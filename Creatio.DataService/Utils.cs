@@ -13,6 +13,7 @@ using System.Net.WebSockets;
 using System.Reflection;
 using Creatio.DataService.Attributes;
 using Creatio.DataService.Parameters;
+using System.Numerics;
 
 namespace Creatio.DataService
 {
@@ -524,6 +525,65 @@ namespace Creatio.DataService
             return queryColumns;
         }
 
+        private List<UpdateQueryColumn> BuildQueryColumnsForUpdate<Entity>(Entity entity) where Entity : BaseEntity, new()
+        {           
+            List<UpdateQueryColumn> queryColumns = new List<UpdateQueryColumn>();
+            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
+            {
+                string caption = propInfo.Name;
+                
+                CPropertyAttribute propertyAttribute = propInfo.GetCustomAttribute<CPropertyAttribute>(true);
+                if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
+                {
+                    Enums.DataValueType dtv = Enums.DataValueType.Text;
+                    switch (propInfo.PropertyType.Name)
+                    {
+                        case nameof(String):
+                            dtv = Enums.DataValueType.Text;
+                            break;
+
+                        case nameof(Int64):
+                        case nameof(Int32):
+                        case nameof(Int16):
+                            dtv = Enums.DataValueType.Integer;
+                            break;
+
+                        case nameof(Decimal):
+                            dtv = Enums.DataValueType.Float;
+                            break;
+                       
+                        case nameof(DateTime):
+                            dtv = Enums.DataValueType.DateTime;
+                            break;
+
+                        case nameof(Guid):
+                            dtv = Enums.DataValueType.Guid;
+                            break;
+
+                        case nameof(Boolean):
+                            dtv = Enums.DataValueType.Boolean;
+                            break;
+
+                        default:
+                            dtv = Enums.DataValueType.Text;
+                            break;
+                    }
+
+                    UpdateQueryColumn updateColumn = new UpdateQueryColumn()
+                    {
+                        ColumnPath = propInfo.Name,
+                        ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
+                        Parameter = new Parameter() { 
+                            DataValueType = dtv,
+                            Value = propInfo.GetValue(entity)
+                        }                        
+                    };
+                    queryColumns.Add(updateColumn);
+                }
+            }
+            return queryColumns;
+        }
+
         private DeleteQuery BuildDeleteQuery(QueryParameters queryParameters, Guid id)
         {
             DeleteQuery deleteQuery = new DeleteQuery()
@@ -532,6 +592,33 @@ namespace Creatio.DataService
             };
             deleteQuery.Filters = BuildFilterById(id);
             return deleteQuery;
+        }
+
+        private UpdateQuery BuildUpdateQuery<Entity>(QueryParameters queryParameters, Entity entity) where Entity : BaseEntity, new()
+        {
+            UpdateQuery updateQuery = new UpdateQuery()
+            {
+                RootSchemaName = queryParameters.RootSchemaName
+            };
+            List<UpdateQueryColumn> columnsToUpdate = BuildQueryColumnsForUpdate(entity);
+            
+            foreach(UpdateQueryColumn column in columnsToUpdate)
+            {
+
+                Dictionary<string, ColumnExpression> items = new Dictionary<string, ColumnExpression>();
+                if (column.Parameter.Value != null) { 
+                    ColumnExpression ex = new ColumnExpression()
+                    {
+                        Parameter = column.Parameter,
+                        ExpressionType= column.ExpressionType
+                    
+                    };
+                    items.Add(column.ColumnPath, ex);               
+                    updateQuery.ColumnValues.Items = items;
+                }
+            }
+            updateQuery.Filters = BuildFilterById(entity.Id);
+            return updateQuery;
         }
 
 
@@ -1106,7 +1193,6 @@ namespace Creatio.DataService
             return result;
         }
 
-
         public async Task<RequestResponse> DeleteAsyc<Entity>(Guid Id) where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
@@ -1116,6 +1202,21 @@ namespace Creatio.DataService
             if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
             {
                 requestResponse = await GetResponseAsync(deleteQueryJson, ActionEnum.DELETE);
+            }
+            return requestResponse;
+        }
+
+        public async Task<RequestResponse> UpdateAsync<Entity>(Entity entity) where Entity : BaseEntity, new()
+        {
+            QueryParameters queryParameters = BuildQueryParameters<Entity>();
+            UpdateQuery updateQuery = BuildUpdateQuery(queryParameters, entity);
+
+            string updateQueryJson = JsonConvert.SerializeObject(updateQuery);
+            
+            RequestResponse requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.UPDATE);
+            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
+            {
+                requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.UPDATE);
             }
             return requestResponse;
         }

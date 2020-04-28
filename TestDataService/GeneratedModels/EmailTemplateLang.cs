@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EmailTemplateId")]
 		public Guid EmailTemplateId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsHtmlBody")]
 		public bool IsHtmlBody { get; set; }
 		[CProperty(ColumnPath ="LanguageId")]

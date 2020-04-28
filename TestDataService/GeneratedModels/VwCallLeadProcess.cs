@@ -10,7 +10,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CallTitle")]
 		public string CallTitle { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="OppName")]
 		public string OppName { get; set; }
 		#endregion

@@ -24,7 +24,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HasStartEvent")]
 		public bool HasStartEvent { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsActiveVersion")]
 		public bool IsActiveVersion { get; set; }
 		[CProperty(ColumnPath ="IsChanged")]

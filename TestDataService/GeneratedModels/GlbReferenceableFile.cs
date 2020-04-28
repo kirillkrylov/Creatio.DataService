@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GlbReferenceableId")]
 		public Guid GlbReferenceableId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LockedById")]
 		public Guid LockedById { get; set; }
 		[CProperty(ColumnPath ="LockedOn")]

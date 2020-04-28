@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DCTemplateId")]
 		public Guid DCTemplateId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Mask")]
 		public int Mask { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

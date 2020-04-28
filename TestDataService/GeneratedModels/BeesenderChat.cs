@@ -24,7 +24,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FirstMessage")]
 		public string FirstMessage { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InternalId")]
 		public string InternalId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

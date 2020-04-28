@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FirstActivityDate")]
 		public DateTime FirstActivityDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LastActivityContact")]
 		public string LastActivityContact { get; set; }
 		[CProperty(ColumnPath ="LastActivityCreatedOn")]

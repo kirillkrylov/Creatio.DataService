@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CredentialsLocationInRequest")]
 		public int CredentialsLocationInRequest { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ImageId")]
 		public Guid ImageId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

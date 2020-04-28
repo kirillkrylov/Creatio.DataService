@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Duration")]
 		public int Duration { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InvoiceId")]
 		public Guid InvoiceId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

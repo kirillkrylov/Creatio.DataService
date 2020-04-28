@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CultureId")]
 		public Guid CultureId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsDefault")]
 		public bool IsDefault { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

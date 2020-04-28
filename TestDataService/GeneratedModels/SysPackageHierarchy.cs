@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DependOnPackageId")]
 		public Guid DependOnPackageId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Level")]
 		public int Level { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

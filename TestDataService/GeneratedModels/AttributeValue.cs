@@ -24,7 +24,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GuidValue")]
 		public Guid GuidValue { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntegerValue")]
 		public int IntegerValue { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

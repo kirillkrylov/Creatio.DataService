@@ -26,7 +26,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExpireDate")]
 		public DateTime ExpireDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IssueDate")]
 		public DateTime IssueDate { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

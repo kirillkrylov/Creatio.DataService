@@ -26,7 +26,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FilterEditData")]
 		public string FilterEditData { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IgnorePriorityFilterData")]
 		public string IgnorePriorityFilterData { get; set; }
 		[CProperty(ColumnPath ="IsManuallyFilling")]

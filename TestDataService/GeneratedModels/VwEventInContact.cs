@@ -82,7 +82,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HomePhone")]
 		public string HomePhone { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsNonActualEmail")]
 		public bool IsNonActualEmail { get; set; }
 		[CProperty(ColumnPath ="JobENG")]

@@ -84,7 +84,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HeaderProperties")]
 		public string HeaderProperties { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="InternalRequestId")]
 		public Guid InternalRequestId { get; set; }
 		[CProperty(ColumnPath ="InvestorId")]
@@ -185,6 +185,8 @@ namespace Creatio.DataService.Models
 		public bool ServiceProcessed { get; set; }
 		[CProperty(ColumnPath ="ShowInScheduler")]
 		public bool ShowInScheduler { get; set; }
+		[CProperty(ColumnPath ="SiteDomainId")]
+		public Guid SiteDomainId { get; set; }
 		[CProperty(ColumnPath ="StartDate")]
 		public DateTime StartDate { get; set; }
 		[CProperty(ColumnPath ="StatusId")]
@@ -288,6 +290,8 @@ namespace Creatio.DataService.Models
 		public Queue Queue { get; set; }
 		[CProperty(Navigation ="Release:ReleaseId")]
 		public Release Release { get; set; }
+		[CProperty(Navigation ="SiteDomain:SiteDomainId")]
+		public SiteDomain SiteDomain { get; set; }
 		[CProperty(Navigation ="SupplyPaymentElement:DeliveryId")]
 		public SupplyPaymentElement Delivery { get; set; }
 		[CProperty(Navigation ="TimeZone:TimeZoneId")]

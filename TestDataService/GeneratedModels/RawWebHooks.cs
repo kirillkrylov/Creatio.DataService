@@ -10,7 +10,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Failed")]
 		public bool Failed { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="JsonData")]
 		public byte[] JsonData { get; set; }
 		[CProperty(ColumnPath ="Type")]

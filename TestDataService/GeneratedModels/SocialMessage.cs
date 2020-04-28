@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EntitySchemaUId")]
 		public Guid EntitySchemaUId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LastActionOn")]
 		public DateTime LastActionOn { get; set; }
 		[CProperty(ColumnPath ="LikeCount")]

@@ -61,7 +61,6 @@ namespace ModelBuilder
                 ModelBuilderClassProperty property = Factory.Create<ModelBuilderClassProperty>();
                 if (keys.FirstOrDefault().Attribute("Name").Value == name)
                 {
-
                     property.PropAttribute = $"[CProperty(ColumnPath=\"{name}\", IsKey=true)]";
                 }
                 else

@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DbProjectServerId")]
 		public Guid DbProjectServerId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="JiraComponent")]
 		public string JiraComponent { get; set; }
 		[CProperty(ColumnPath ="KindId")]

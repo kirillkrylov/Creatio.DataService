@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FiltersUnionTypeId")]
 		public Guid FiltersUnionTypeId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntegrationId")]
 		public Guid IntegrationId { get; set; }
 		[CProperty(ColumnPath ="IntegrationTypeId")]

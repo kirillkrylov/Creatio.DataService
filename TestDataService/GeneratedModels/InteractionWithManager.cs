@@ -34,7 +34,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HardSkills")]
 		public string HardSkills { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IncomeId")]
 		public Guid IncomeId { get; set; }
 		[CProperty(ColumnPath ="InteractionWithTeamId")]

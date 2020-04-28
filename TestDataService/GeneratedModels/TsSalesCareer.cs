@@ -26,7 +26,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DateStart")]
 		public DateTime DateStart { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ManagerRoleId")]
 		public Guid ManagerRoleId { get; set; }
 		[CProperty(ColumnPath ="MarketId")]

@@ -47,7 +47,15 @@ namespace ModelBuilder
                 foreach (ModelBuilderClassProperty prop in valueList)
                 {
                     sb.AppendLine($"\t\t{prop.PropAttribute}");
-                    sb.AppendLine($"\t\tpublic {prop.Type} {prop.Name} {{ get; set; }}");
+                    if (prop.Name == "Id") 
+                    {
+                        sb.AppendLine($"\t\tpublic override {prop.Type} {prop.Name} {{ get; set; }}");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"\t\tpublic {prop.Type} {prop.Name} {{ get; set; }}");
+                    }
+
                 }
                 sb.AppendLine("\t\t#endregion");
                 sb.AppendLine();

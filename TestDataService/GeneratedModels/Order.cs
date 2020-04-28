@@ -52,7 +52,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FixedExchangeRate")]
 		public decimal FixedExchangeRate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsApproved")]
 		public bool IsApproved { get; set; }
 		[CProperty(ColumnPath ="isFirstOrder")]

@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Description")]
 		public string Description { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -47,6 +47,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<InternalRequest> InternalRequestByTerr { get; set; }
 		[CProperty(Association ="RequestBudgetHolderByExesType:BudgetTerritoryId")]
 		public virtual ICollection<RequestBudgetHolderByExesType> RequestBudgetHolderByExesTypeByBudgetTerritory { get; set; }
+		[CProperty(Association ="SiteDomain:TerritoryId")]
+		public virtual ICollection<SiteDomain> SiteDomainByTerritory { get; set; }
 		[CProperty(Association ="TripsDailyAllowance:TerritoryId")]
 		public virtual ICollection<TripsDailyAllowance> TripsDailyAllowanceByTerritory { get; set; }
 		#endregion

@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExtraParameters")]
 		public string ExtraParameters { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsLocalDeleted")]
 		public bool IsLocalDeleted { get; set; }
 		[CProperty(ColumnPath ="IsRemoteDeleted")]

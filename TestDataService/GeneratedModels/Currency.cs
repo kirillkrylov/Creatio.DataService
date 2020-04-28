@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Division")]
 		public int Division { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById { get; set; }
 		[CProperty(ColumnPath ="ModifiedOn")]
@@ -75,6 +75,8 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<CurrencyRate> CurrencyRateByCurrency { get; set; }
 		[CProperty(Association ="Document:CurrencyId")]
 		public virtual ICollection<Document> DocumentByCurrency { get; set; }
+		[CProperty(Association ="EmployeeForecast:CurrencyId")]
+		public virtual ICollection<EmployeeForecast> EmployeeForecastByCurrency { get; set; }
 		[CProperty(Association ="ExesInRequest:CurrencyId")]
 		public virtual ICollection<ExesInRequest> ExesInRequestByCurrency { get; set; }
 		[CProperty(Association ="ExesInRequestHistory:BaseCurrencyId")]

@@ -8,7 +8,7 @@ namespace Creatio.DataService.Models
 	{
 		#region Values
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Name")]
 		public string Name { get; set; }
 		#endregion

@@ -38,7 +38,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GroupId")]
 		public Guid GroupId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="JiraURL")]
 		public string JiraURL { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MFO")]
 		public string MFO { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

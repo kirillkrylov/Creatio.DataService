@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExternalStorageProperties")]
 		public string ExternalStorageProperties { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="Inline")]
 		public bool Inline { get; set; }
 		[CProperty(ColumnPath ="LockedById")]

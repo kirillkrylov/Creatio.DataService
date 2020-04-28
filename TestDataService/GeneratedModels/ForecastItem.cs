@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ForecastId")]
 		public Guid ForecastId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsDeleted")]
 		public bool IsDeleted { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

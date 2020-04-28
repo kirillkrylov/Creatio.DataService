@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="EntitySchemaName")]
 		public string EntitySchemaName { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsInProgress")]
 		public bool IsInProgress { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

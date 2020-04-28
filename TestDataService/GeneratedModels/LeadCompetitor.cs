@@ -22,7 +22,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DateTo")]
 		public DateTime DateTo { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsWinner")]
 		public bool IsWinner { get; set; }
 		[CProperty(ColumnPath ="LeadId")]

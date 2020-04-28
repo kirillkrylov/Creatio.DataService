@@ -12,7 +12,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ContactManagerId")]
 		public Guid ContactManagerId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ManagerId")]
 		public Guid ManagerId { get; set; }
 		[CProperty(ColumnPath ="Name")]

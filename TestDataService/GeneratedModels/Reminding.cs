@@ -24,7 +24,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Hash")]
 		public string Hash { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsNeedToSend")]
 		public bool IsNeedToSend { get; set; }
 		[CProperty(ColumnPath ="IsRead")]

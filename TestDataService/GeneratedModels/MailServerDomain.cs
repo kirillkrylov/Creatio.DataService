@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="Domain")]
 		public string Domain { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MailServerId")]
 		public Guid MailServerId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

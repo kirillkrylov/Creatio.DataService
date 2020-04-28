@@ -50,7 +50,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FactMarginPerc")]
 		public decimal FactMarginPerc { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IncomeDev")]
 		public decimal IncomeDev { get; set; }
 		[CProperty(ColumnPath ="IncomeDevPerc")]

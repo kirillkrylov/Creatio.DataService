@@ -18,7 +18,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GeValue")]
 		public decimal GeValue { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LeValue")]
 		public decimal LeValue { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

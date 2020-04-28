@@ -32,7 +32,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExportTasks")]
 		public bool ExportTasks { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ImpAppointmentsFromCalendars")]
 		public bool ImpAppointmentsFromCalendars { get; set; }
 		[CProperty(ColumnPath ="ImportActivitiesFrom")]

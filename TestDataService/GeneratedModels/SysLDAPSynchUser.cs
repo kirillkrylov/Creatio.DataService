@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FullName")]
 		public string FullName { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public string Id { get; set; }
+		public override string Id { get; set; }
 		[CProperty(ColumnPath ="IsActive")]
 		public bool IsActive { get; set; }
 		[CProperty(ColumnPath ="JobTitle")]

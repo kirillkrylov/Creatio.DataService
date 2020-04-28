@@ -28,7 +28,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DeveloperId")]
 		public Guid DeveloperId { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="MarketplaceSiteId")]
 		public Guid MarketplaceSiteId { get; set; }
 		[CProperty(ColumnPath ="MarketplaceUrl")]

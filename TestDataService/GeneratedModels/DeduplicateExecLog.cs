@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="ExecutedOn")]
 		public DateTime ExecutedOn { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="ProcedureName")]
 		public string ProcedureName { get; set; }
 		[CProperty(ColumnPath ="SqlErrorCode")]

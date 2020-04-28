@@ -20,7 +20,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DeactivationDate")]
 		public DateTime DeactivationDate { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsActive")]
 		public bool IsActive { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

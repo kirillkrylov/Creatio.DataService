@@ -38,7 +38,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="HoldTime")]
 		public int HoldTime { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IntegrationId")]
 		public string IntegrationId { get; set; }
 		[CProperty(ColumnPath ="ModifiedById")]

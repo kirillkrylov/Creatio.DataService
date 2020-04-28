@@ -16,7 +16,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="DiscountPercent")]
 		public decimal DiscountPercent { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="IsDistributed")]
 		public int IsDistributed { get; set; }
 		[CProperty(ColumnPath ="MaxQuantity")]

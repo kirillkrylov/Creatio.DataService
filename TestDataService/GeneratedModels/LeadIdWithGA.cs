@@ -12,7 +12,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="GoogleAnalytics")]
 		public string GoogleAnalytics { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LeadId")]
 		public string LeadId { get; set; }
 		[CProperty(ColumnPath ="MarketingActivity")]

@@ -14,7 +14,7 @@ namespace Creatio.DataService.Models
 		[CProperty(ColumnPath ="FileValue")]
 		public string FileValue { get; set; }
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public Guid Id { get; set; }
+		public override Guid Id { get; set; }
 		[CProperty(ColumnPath ="LookupName")]
 		public string LookupName { get; set; }
 		[CProperty(ColumnPath ="LookupValue")]

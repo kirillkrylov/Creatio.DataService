@@ -7,6 +7,8 @@ namespace Creatio.DataService.Models
 	public class CmpgnPrtcpntEmailTarget : BaseEntity
 	{
 		#region Values
+		[CProperty(ColumnPath ="BulkEmailId")]
+		public Guid BulkEmailId { get; set; }
 		[CProperty(ColumnPath ="CampaignParticipantId")]
 		public Guid CampaignParticipantId { get; set; }
 		[CProperty(ColumnPath ="MandrillRecipientUId")]
