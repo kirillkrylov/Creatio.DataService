@@ -26,6 +26,12 @@ namespace Creatio.DataService
             return baseEntity[0];
         }
 
+        public async Task<RequestResponse> Delete<Entity>(Guid Id) where Entity : BaseEntity, new()
+        {
+            Utils utils = Utils.Instance;
+            return await utils.DeleteAsyc<Entity>(Id);
+        }
+
         public void ExpandValues() {
 
             PropertyInfo[] props = this.GetType().GetProperties();
@@ -369,5 +375,35 @@ namespace Creatio.DataService
             Console.ResetColor();
 #endif
         }
+
+
+
+        public RequestResponse DeleteEntity()
+        {
+            PropertyInfo[] props = this.GetType().GetProperties();
+            foreach (PropertyInfo prop in props)
+            {
+                if (prop.Name == "Id")
+                {
+                    Guid.TryParse(prop.GetValue(this).ToString(), out Guid Id);
+                    if (Id != Guid.Empty)
+                        this.Id = Id;
+                }
+            }
+
+            MethodInfo select = typeof(Utils).GetMethod("DeleteAsyc");
+            Type tThis = this.GetType();
+            MethodInfo generic = select.MakeGenericMethod(tThis);
+            object[] args = { Id.ToString() };
+
+            object deleteReturn = generic.Invoke(Utils.Instance, args);
+
+            var taskResult = deleteReturn?.GetType().GetProperty("Result")?.GetValue(deleteReturn); 
+
+            
+            RequestResponse response = (RequestResponse)taskResult;
+            return response;
+        }
+
     }
 }

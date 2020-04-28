@@ -53,13 +53,12 @@ namespace Creatio.DataService
             }
         }
         #endregion
-               
 
         #region Events
         public event EventHandler<WebSocketMessageReceivedEventArgs> WebSocketMessageReceived;
         #endregion
 
-#region Methods : Private
+        #region Methods : Private
         /// <summary>
         /// Will try to connect 5 times then give up
         /// </summary>
@@ -525,6 +524,18 @@ namespace Creatio.DataService
             return queryColumns;
         }
 
+        private DeleteQuery BuildDeleteQuery(QueryParameters queryParameters, Guid id)
+        {
+            DeleteQuery deleteQuery = new DeleteQuery()
+            {
+                RootSchemaName = queryParameters.RootSchemaName
+            };
+            deleteQuery.Filters = BuildFilterById(id);
+            return deleteQuery;
+        }
+
+
+
         /// <summary>
         /// Returns new columns path if column is found in navigational property 
         /// </summary>
@@ -558,11 +569,9 @@ namespace Creatio.DataService
             }
             return oldColumnPath;
         }
-#endregion
+        #endregion
 
-#region Methods : Public
-
-       
+        #region Methods : Public
         public static DataTable ConvertResponseToDataTable(string json)
         {
             DataServiceSelectResponseTemplate myResponse = JsonConvert.DeserializeObject<DataServiceSelectResponseTemplate>(json);
@@ -783,13 +792,12 @@ namespace Creatio.DataService
             Instance.domain = (!string.IsNullOrEmpty(Domain)) ? Domain : "https://work.creatio.com";
         }
 
+
+        #region Methods: Public : OverTheWire        
         /// <summary>
         /// Logs in and requests Current User info
         /// </summary>
         /// <returns>Authentication result</returns>
-
-        #region Methods: Public : OverTheWire        
-        
         public async Task<bool> LoginAsync()
         {
             Auth = AuthRequest(Instance.userName, Instance.password, Instance.domain);
@@ -1002,7 +1010,6 @@ namespace Creatio.DataService
                 requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
             }
 
-
             if (!string.IsNullOrEmpty(requestResponse.ErrorMessage))
             {
                 return new List<Entity>();
@@ -1011,7 +1018,7 @@ namespace Creatio.DataService
             List<Entity> result = BuildEntity<Entity>(requestResponse);
             return result;
         }
-    
+
         public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName = "") where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
@@ -1098,237 +1105,24 @@ namespace Creatio.DataService
             List<Entity> result = BuildEntity<Entity>(requestResponse);
             return result;
         }
-#region Experimental
-        //        private List<Entity> BuildEntity2<Entity>(RequestResponse requestResponse) where Entity : BaseEntity, new()
-        //        {
-        //            List<Entity> result = new List<Entity>();
-        //            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
-        //            foreach (DataRow dr in dt.Rows)
-        //            {
-        //                Entity entity = EntityFacotry.Create<Entity>();
-        //                foreach (PropertyInfo prop in entity.GetType().GetProperties())
-        //                {
-        //                    string strValue = string.Empty;
-        //                    try
-        //                    {
-        //                        strValue = dr[prop.Name]?.ToString();
-        //                    }
-        //                    catch (Exception e)
-        //                    {
-        //#if DEBUG
-        //                        //Console.WriteLine($"Utils.cs Line 409: {e.Message}");
-        //#endif
-        //                    }
-
-        //                    //setting ValueProperties
-        //                    CPropertyAttribute propertyAttribute = prop.GetCustomAttribute<CPropertyAttribute>(true);
-        //                    if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
-        //                    {
-        //                        switch (prop.PropertyType.Name)
-        //                        {
-        //                            case (nameof(Guid)):
-        //                                Guid.TryParse(strValue, out Guid val);
-        //#if DEBUG
-        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-        //#endif
-        //                                prop.SetValue(entity, val);
-        //                                break;
-
-        //                            case (nameof(Decimal)):
-        //                                decimal.TryParse(strValue, out decimal decVal);
-        //#if DEBUG
-        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-        //#endif
-
-        //                                prop.SetValue(entity, decVal);
-        //                                break;
-
-        //                            case (nameof(Int16)):
-        //                            case (nameof(Int32)):
-        //                            case (nameof(Int64)):
-        //                                int.TryParse(strValue, out int intVal);
-        //#if DEBUG
-        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-        //#endif                                
-        //                                prop.SetValue(entity, intVal);
-        //                                break;
-
-        //                            case (nameof(DateTime)):
-        //                                DateTime.TryParse(strValue, out DateTime dateTimeVal);
-        //#if DEBUG
-        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-        //#endif
-        //                                prop.SetValue(entity, dateTimeVal);
-        //                                break;
-
-        //                            case (nameof(String)):
-        //                                prop.SetValue(entity, strValue);
-        //#if DEBUG
-        //                                //Console.WriteLine($"Setting {prop.Name} of Type:{prop.PropertyType.Name} to value of {strValue}");
-        //#endif
-        //                                break;
-        //                        }
-        //                    }
-
-        //                    //setting up Navigational properties
-        //                    if (propertyAttribute?.Navigation != null)
-        //                    {
-        //                        //1. Create Object
-        //                        var subEntity = Activator.CreateInstance(prop.PropertyType);
-
-        //                        //2. Get subEntity's Id;
-        //                        string navKey = propertyAttribute?.Navigation; // navKey = Account:AccountId
-
-        //                        if (navKey.Contains(":"))
-        //                        {
-        //                            string col = navKey.Split(':')[1]; //col = AccountI
-        //                            Guid.TryParse(dr[col].ToString(), out Guid subId); //assume that the key is always Guid
-
-        //                            //3. Set subEntity's Key;
-        //                            string key = GetSubEntityKeyColumn(subEntity);
-        //                            subEntity.GetType().GetProperty(key).SetValue(subEntity, subId);
-
-        //                            //4. Set entity property to subEntity
-        //                            prop.SetValue(entity, subEntity);
-        //                        }
-
-        //                    }
-
-        //                }
-        //                result.Add(entity);
-        //            }
-        //            return result;
-        //        }
-        //        private List<QueryColumn> GetDeepEntityColumns(object deepEntity)
-        //        {
-
-        //            //Console.WriteLine(deepEntity.GetType().FullName);
-        //            List<QueryColumn> queryColumns = new List<QueryColumn>();
-        //            foreach (PropertyInfo propInfo in deepEntity.GetType().GetProperties())
-        //            {
-        //                string caption = $"{deepEntity.GetType().Name}.{propInfo.Name}";
-        //                Console.WriteLine(caption);
-
-        //                QueryColumnAttribute qca = propInfo.GetCustomAttribute<QueryColumnAttribute>(true);
-        //                if (qca != null)
-        //                {
-        //                    QueryColumn qc = new QueryColumn()
-        //                    {
-        //                        Caption = caption,
-        //                        ColumnPath = caption,
-        //                        ExpressionType = qca.ExpressionType,
-        //                        OrderDirection = qca.OrderDirection,
-        //                        OrderPosition = qca.OrderPosition,
-        //                    };
-        //                    queryColumns.Add(qc);
-        //                }
 
 
-        //                RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
-        //                if (ra != null)
-        //                {
-        //                    Type[] types = propInfo.PropertyType.GetInterfaces();
-        //                    var index = Array.FindIndex(types, x => x.Name == "IEnumerable");
-        //                    if (index == -1)//Not a list
-        //                    {
-        //                        var ddeepEntity = Activator.CreateInstance(propInfo.PropertyType);
-        //                        queryColumns.AddRange(GetDeepEntityColumns(ddeepEntity));
-        //                    }
-        //                }
-        //            }
+        public async Task<RequestResponse> DeleteAsyc<Entity>(Guid Id) where Entity : BaseEntity, new()
+        {
+            QueryParameters queryParameters = BuildQueryParameters<Entity>();
+            DeleteQuery deleteQuery = BuildDeleteQuery(queryParameters, Id);
+            string deleteQueryJson = JsonConvert.SerializeObject(deleteQuery);
+            RequestResponse requestResponse = await GetResponseAsync(deleteQueryJson, ActionEnum.DELETE);
+            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
+            {
+                requestResponse = await GetResponseAsync(deleteQueryJson, ActionEnum.DELETE);
+            }
+            return requestResponse;
+        }
 
-        //            return queryColumns;
-        //        }
-        //        private Filters BuildFilterByParentId(Guid id, string parentReference)
-        //        {
+        #endregion
 
-        //            Filters filter = new Filters()
-        //            {
-        //                // Filter type is group.
-        //                FilterType = Enums.FilterType.FilterGroup,
-        //                // Filters collection.
-        //                LogicalOperation = Enums.LogicalOperationStrict.And,
-        //                Items = new Dictionary<string, Filter>()
-        //                {
-        //                    {
-        //                        "ByParentId", new Filter
-        //                        {
-        //                            FilterType = Enums.FilterType.CompareFilter,
-        //                            ComparisonType = Enums.FilterComparisonType.Equal,
-        //                            LeftExpression = new BaseExpression()
-        //                            {
-        //                                ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
-        //                                ColumnPath = parentReference
-        //                            },
-        //                            RightExpression = new BaseExpression()
-        //                            {
-        //                                ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
-        //                                Parameter = new Parameter()
-        //                                {
-        //                                    DataValueType = Enums.DataValueType.Guid,
-        //                                    Value = id
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            };
-        //            return filter;
-        //        }
-        //        private List<QueryColumn> BuildDeeperQueryColumns<Entity>() where Entity : BaseEntity, new()
-        //        {
-        //            Entity entity = EntityFacotry.Create<Entity>();
-        //            List<QueryColumn> queryColumns = new List<QueryColumn>();
-
-        //            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
-        //            {
-        //                string caption = propInfo.Name;
-        //                QueryColumnAttribute qca = propInfo.GetCustomAttribute<QueryColumnAttribute>(true);
-        //                if (qca != null)
-        //                {
-        //                    QueryColumn qc = new QueryColumn()
-        //                    {
-        //                        Caption = caption,
-        //                        ColumnPath = qca.ColumnPath,
-        //                        ExpressionType = qca.ExpressionType,
-        //                        OrderDirection = qca.OrderDirection,
-        //                        OrderPosition = qca.OrderPosition,
-        //                    };
-        //                    queryColumns.Add(qc);
-        //                }
-
-        //                RootSchemaNameAttribute ra = propInfo.GetCustomAttribute<RootSchemaNameAttribute>(true);
-        //                if (ra != null)
-        //                {
-        //                    Type[] types = propInfo.PropertyType.GetInterfaces();
-        //                    var index = Array.FindIndex(types, x => x.Name == "IEnumerable");
-        //                    if (index == -1)//Not a list
-        //                    {
-
-        //                        string deepProperty = propInfo.PropertyType.FullName;
-        //                        var deepEntity = Activator.CreateInstance(propInfo.PropertyType);
-        //                        GetDeepEntityColumns(deepEntity);
-
-        //                        Console.WriteLine(deepProperty);
-
-        //                        QueryColumn qc = new QueryColumn()
-        //                        {
-        //                            Caption = caption,
-        //                            ColumnPath = caption,
-        //                            ExpressionType = Enums.EntitySchemaQueryExpressionType.SchemaColumn,
-        //                        };
-        //                        queryColumns.Add(qc);
-        //                    }
-        //                }
-        //            }
-
-        //            return queryColumns;
-        //        }
-#endregion
-
-#endregion
-
-#region IDisposable
+        #region IDisposable
 
         // Flag: Has Dispose already been called?
         bool disposed = false;
@@ -1376,6 +1170,6 @@ namespace Creatio.DataService
             Dispose(false);
         }
 
-#endregion
+        #endregion
     }
 }

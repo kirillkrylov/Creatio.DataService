@@ -9,7 +9,7 @@
 - CREATE not implemented
 - READ partially implemented
 - UPDATE not implemented
-- DELETE not implemented
+- DELETE implemented
 
 Active development will change almost daily for now</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -20,7 +20,7 @@ Active development will change almost daily for now</Description>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
     <FileVersion>1.0.1.0</FileVersion>
     <NeutralLanguage>aa-ET</NeutralLanguage>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
   </PropertyGroup>
 
   <ItemGroup>
