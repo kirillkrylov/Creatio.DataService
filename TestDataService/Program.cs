@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using TestDataService.Properties;
 using static Creatio.DataService.Enums;
@@ -23,51 +22,7 @@ namespace TestDataService
             {
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
 
-
-                //Guid.TryParse("d7ab0704-9dbf-4363-a208-1fa64a7c04e3", out Guid contactId);
-
-                //Contact contact = new Contact() { 
-
-                //    Name = "Test Insert new record 4- Kirill",
-                //    Dear = "Recepient name here",
-                //    MobilePhone = "+380950661405",
-                //    Email = "yetanother.random@email.com"                 
-                //};
-                //contact.Name = "UPDATE DS LIB";
-                //contact.MobilePhone = "+380950661405";
-                //contact.Email = "random@doesnotexist.com";
-                //contact.Dear = "Recepient name here";
-                //contact.DearUkr = "Recepient name here";
-
-                //RequestResponse r = await contact.InsertAsync();
-                //RequestResponse r = await contact.UpdateAsync();
-
-                Contact contact = new Contact() { Id = Guid.Parse("d7ab0704-9dbf-4363-a208-1fa64a7c04e3") };
-                await contact.ExpandNavAsync();
-                await contact.ExpandNavAsync(nameof(contact.Account));
-                await contact.ExpandAssociationsAsync(nameof(contact.ContactCompletenessByContact));
-                if (contact.ContactCompletenessByContact?.Count > 0)
-                {
-                    foreach (var i in contact.ContactCompletenessByContact)
-                    {
-                        var rr = await i.DeleteEntityAsync();
-                        Console.WriteLine( $"Deleted { rr.Result.RowsAffected} rows from ContactCompleteness"); 
-                    }
-                }
-
-                var r = await contact.DeleteEntityAsync();
-
-                Console.WriteLine(r.Result.RowsAffected);
-                Console.WriteLine(r.ErrorMessage ?? r.ResultString);
-                if(r.Result.Id != Guid.Empty)
-                {
-                    Console.WriteLine($"New Record Id:{r.Result.Id.ToString()}");
-                }
-                                
-                //var rr = await contact.DeleteEntityAsync();
-
-
-                //ContactById(utils.CurrentUser.Contact.Value);
+                Guid.TryParse(utils.CurrentUser.Contact.Value, out Guid contactToUpdate);
             }
             Console.ReadLine();
             await utils.LogoutAsync();
