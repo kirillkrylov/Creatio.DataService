@@ -6,22 +6,22 @@
     <Authors>Kirill Krylov, CPA</Authors>
     <Company>Creatio</Company>
     <Description>Allows cRud operation via DataService
-- CREATE not implemented
-- READ partially implemented
-- UPDATE not implemented
+- CREATE implemented
+- READ implemented
+- UPDATE implemented
 - DELETE implemented
-
 Active development will change almost daily for now</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>accelerateLogo.png</PackageIcon>
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/kirillkrylov/Creatio.DataService/blob/master/README.md</RepositoryUrl>
     <PackageTags>Creatio, DataService</PackageTags>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <AssemblyVersion>1.0.12.0</AssemblyVersion>
+    <FileVersion>1.0.12.0</FileVersion>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>1.0.11</Version>
+    <Version>1.0.12</Version>
     <ApplicationIcon>acceleratelogo_SQK_icon.ico</ApplicationIcon>
+    <Copyright></Copyright>
   </PropertyGroup>
 
   <ItemGroup>
