@@ -7,70 +7,358 @@ namespace Creatio.DataService.Models
 	public class CaseLifecycle : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CaseId;
 		[CProperty(ColumnPath ="CaseId")]
-		public Guid CaseId { get; set; }
+		public Guid CaseId
+		{
+			get{return _CaseId;}
+			set
+			{
+				_CaseId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CaseRecordId;
 		[CProperty(ColumnPath ="CaseRecordId")]
-		public Guid CaseRecordId { get; set; }
+		public Guid CaseRecordId
+		{
+			get{return _CaseRecordId;}
+			set
+			{
+				_CaseRecordId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CategoryId;
 		[CProperty(ColumnPath ="CategoryId")]
-		public Guid CategoryId { get; set; }
+		public Guid CategoryId
+		{
+			get{return _CategoryId;}
+			set
+			{
+				_CategoryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ContactId;
 		[CProperty(ColumnPath ="ContactId")]
-		public Guid ContactId { get; set; }
+		public Guid ContactId
+		{
+			get{return _ContactId;}
+			set
+			{
+				_ContactId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _EndDate;
 		[CProperty(ColumnPath ="EndDate")]
-		public DateTime EndDate { get; set; }
+		public DateTime EndDate
+		{
+			get{return _EndDate;}
+			set
+			{
+				_EndDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GroupId;
 		[CProperty(ColumnPath ="GroupId")]
-		public Guid GroupId { get; set; }
+		public Guid GroupId
+		{
+			get{return _GroupId;}
+			set
+			{
+				_GroupId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PriorityId;
 		[CProperty(ColumnPath ="PriorityId")]
-		public Guid PriorityId { get; set; }
+		public Guid PriorityId
+		{
+			get{return _PriorityId;}
+			set
+			{
+				_PriorityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ProblemId;
 		[CProperty(ColumnPath ="ProblemId")]
-		public Guid ProblemId { get; set; }
+		public Guid ProblemId
+		{
+			get{return _ProblemId;}
+			set
+			{
+				_ProblemId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ResponseDate;
 		[CProperty(ColumnPath ="ResponseDate")]
-		public DateTime ResponseDate { get; set; }
+		public DateTime ResponseDate
+		{
+			get{return _ResponseDate;}
+			set
+			{
+				_ResponseDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _ResponseOverdue;
 		[CProperty(ColumnPath ="ResponseOverdue")]
-		public bool ResponseOverdue { get; set; }
+		public bool ResponseOverdue
+		{
+			get{return _ResponseOverdue;}
+			set
+			{
+				_ResponseOverdue = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _SatisfactionLevelComment;
 		[CProperty(ColumnPath ="SatisfactionLevelComment")]
-		public string SatisfactionLevelComment { get; set; }
+		public string SatisfactionLevelComment
+		{
+			get{return _SatisfactionLevelComment;}
+			set
+			{
+				_SatisfactionLevelComment = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SatisfactionLevelId;
 		[CProperty(ColumnPath ="SatisfactionLevelId")]
-		public Guid SatisfactionLevelId { get; set; }
+		public Guid SatisfactionLevelId
+		{
+			get{return _SatisfactionLevelId;}
+			set
+			{
+				_SatisfactionLevelId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ServiceItemId;
 		[CProperty(ColumnPath ="ServiceItemId")]
-		public Guid ServiceItemId { get; set; }
+		public Guid ServiceItemId
+		{
+			get{return _ServiceItemId;}
+			set
+			{
+				_ServiceItemId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ServicePactId;
 		[CProperty(ColumnPath ="ServicePactId")]
-		public Guid ServicePactId { get; set; }
+		public Guid ServicePactId
+		{
+			get{return _ServicePactId;}
+			set
+			{
+				_ServicePactId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _SolutionDate;
 		[CProperty(ColumnPath ="SolutionDate")]
-		public DateTime SolutionDate { get; set; }
+		public DateTime SolutionDate
+		{
+			get{return _SolutionDate;}
+			set
+			{
+				_SolutionDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _SolutionOverdue;
 		[CProperty(ColumnPath ="SolutionOverdue")]
-		public bool SolutionOverdue { get; set; }
+		public bool SolutionOverdue
+		{
+			get{return _SolutionOverdue;}
+			set
+			{
+				_SolutionOverdue = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _SolutionProvidedOn;
 		[CProperty(ColumnPath ="SolutionProvidedOn")]
-		public DateTime SolutionProvidedOn { get; set; }
+		public DateTime SolutionProvidedOn
+		{
+			get{return _SolutionProvidedOn;}
+			set
+			{
+				_SolutionProvidedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _StartDate;
 		[CProperty(ColumnPath ="StartDate")]
-		public DateTime StartDate { get; set; }
+		public DateTime StartDate
+		{
+			get{return _StartDate;}
+			set
+			{
+				_StartDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _StateDurationInDays;
 		[CProperty(ColumnPath ="StateDurationInDays")]
-		public decimal StateDurationInDays { get; set; }
+		public decimal StateDurationInDays
+		{
+			get{return _StateDurationInDays;}
+			set
+			{
+				_StateDurationInDays = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _StateDurationInHours;
 		[CProperty(ColumnPath ="StateDurationInHours")]
-		public decimal StateDurationInHours { get; set; }
+		public decimal StateDurationInHours
+		{
+			get{return _StateDurationInHours;}
+			set
+			{
+				_StateDurationInHours = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _StateDurationInMinutes;
 		[CProperty(ColumnPath ="StateDurationInMinutes")]
-		public int StateDurationInMinutes { get; set; }
+		public int StateDurationInMinutes
+		{
+			get{return _StateDurationInMinutes;}
+			set
+			{
+				_StateDurationInMinutes = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StatusId;
 		[CProperty(ColumnPath ="StatusId")]
-		public Guid StatusId { get; set; }
+		public Guid StatusId
+		{
+			get{return _StatusId;}
+			set
+			{
+				_StatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SupportLevelId;
 		[CProperty(ColumnPath ="SupportLevelId")]
-		public Guid SupportLevelId { get; set; }
+		public Guid SupportLevelId
+		{
+			get{return _SupportLevelId;}
+			set
+			{
+				_SupportLevelId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Symptoms;
 		[CProperty(ColumnPath ="Symptoms")]
-		public string Symptoms { get; set; }
+		public string Symptoms
+		{
+			get{return _Symptoms;}
+			set
+			{
+				_Symptoms = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

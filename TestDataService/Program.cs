@@ -16,33 +16,41 @@ namespace TestDataService
     {
         public static async Task Main(string[] args)
         {
+
+            //Contact c = new Contact() { Id = Guid.NewGuid() };
+            //c.Notes = "Testing Update";         
+
             Utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
             Utils utils = Utils.Instance;
             if (await utils.LoginAsync())
             {
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
 
-                Guid.TryParse(utils.CurrentUser.Contact.Value, out Guid contactId);
-                Contact c = new Contact() { Id = contactId };
-                c.Notes = "Testing Update";
+                //Guid.TryParse(utils.CurrentUser.Contact.Value, out Guid contactId);
+                //Contact c = new Contact() { Id = contactId };
+            
 
-                await Utils.Instance.UpdateAsync(c);
+                //await c.ExpandValuesAsync();
+                //await c.ExpandNavAsync(nameof(c.Type));
+                //await c.ExpandAssociationsAsync(nameof(c.ContactAddressByContact));
 
-                c.ExpandValues();
-                Console.WriteLine(c.Notes);
+                
+                //Console.WriteLine(c.HasChanges);
+                //Console.WriteLine(string.Join(",", c.ChangedColumns));
 
-
+                //Console.WriteLine(c.Type.ToString());
                 //Guid.TryParse("8d45b7a8-844b-44f1-b689-a11bf80986e0", out Guid contactId);
                 //Creatio.DataService.RequestResponse res = await utils.DeleteAsyc<Contact>(contactId);
-                
+
                 //Console.WriteLine(res.ErrorMessage);
                 //Console.WriteLine(res.HttpStatusCode);
                 //Console.WriteLine(res.Result);
 
-                
-                ContactById(utils.CurrentUser.Contact.Value);
+                //ContactById(utils.CurrentUser.Contact.Value);
             }
-            await utils.LoginAsync();
+            Console.WriteLine("Waiting for messages... Press Enter to exit");
+            Console.ReadLine();
+            await utils.LogoutAsync();
             utils.Dispose();
         }
 

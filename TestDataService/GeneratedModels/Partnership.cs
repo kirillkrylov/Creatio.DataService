@@ -7,58 +7,292 @@ namespace Creatio.DataService.Models
 	public class Partnership : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _CertifiedEmployees;
 		[CProperty(ColumnPath ="CertifiedEmployees")]
-		public int CertifiedEmployees { get; set; }
+		public int CertifiedEmployees
+		{
+			get{return _CertifiedEmployees;}
+			set
+			{
+				_CertifiedEmployees = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _DueDate;
 		[CProperty(ColumnPath ="DueDate")]
-		public DateTime DueDate { get; set; }
+		public DateTime DueDate
+		{
+			get{return _DueDate;}
+			set
+			{
+				_DueDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _InvestmentScoreId;
 		[CProperty(ColumnPath ="InvestmentScoreId")]
-		public Guid InvestmentScoreId { get; set; }
+		public Guid InvestmentScoreId
+		{
+			get{return _InvestmentScoreId;}
+			set
+			{
+				_InvestmentScoreId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsActive;
 		[CProperty(ColumnPath ="IsActive")]
-		public bool IsActive { get; set; }
+		public bool IsActive
+		{
+			get{return _IsActive;}
+			set
+			{
+				_IsActive = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PartneBoardMember;
 		[CProperty(ColumnPath ="PartneBoardMember")]
-		public bool PartneBoardMember { get; set; }
+		public bool PartneBoardMember
+		{
+			get{return _PartneBoardMember;}
+			set
+			{
+				_PartneBoardMember = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _PartnerLeads;
 		[CProperty(ColumnPath ="PartnerLeads")]
-		public int PartnerLeads { get; set; }
+		public int PartnerLeads
+		{
+			get{return _PartnerLeads;}
+			set
+			{
+				_PartnerLeads = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PartnerLevelId;
 		[CProperty(ColumnPath ="PartnerLevelId")]
-		public Guid PartnerLevelId { get; set; }
+		public Guid PartnerLevelId
+		{
+			get{return _PartnerLevelId;}
+			set
+			{
+				_PartnerLevelId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PartnershipKindId;
 		[CProperty(ColumnPath ="PartnershipKindId")]
-		public Guid PartnershipKindId { get; set; }
+		public Guid PartnershipKindId
+		{
+			get{return _PartnershipKindId;}
+			set
+			{
+				_PartnershipKindId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PartnershipStatusId;
 		[CProperty(ColumnPath ="PartnershipStatusId")]
-		public Guid PartnershipStatusId { get; set; }
+		public Guid PartnershipStatusId
+		{
+			get{return _PartnershipStatusId;}
+			set
+			{
+				_PartnershipStatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PartnerTypeId;
 		[CProperty(ColumnPath ="PartnerTypeId")]
-		public Guid PartnerTypeId { get; set; }
+		public Guid PartnerTypeId
+		{
+			get{return _PartnerTypeId;}
+			set
+			{
+				_PartnerTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PMMId;
 		[CProperty(ColumnPath ="PMMId")]
-		public Guid PMMId { get; set; }
+		public Guid PMMId
+		{
+			get{return _PMMId;}
+			set
+			{
+				_PMMId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _POManagerId;
 		[CProperty(ColumnPath ="POManagerId")]
-		public Guid POManagerId { get; set; }
+		public Guid POManagerId
+		{
+			get{return _POManagerId;}
+			set
+			{
+				_POManagerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _RenewalRate;
 		[CProperty(ColumnPath ="RenewalRate")]
-		public decimal RenewalRate { get; set; }
+		public decimal RenewalRate
+		{
+			get{return _RenewalRate;}
+			set
+			{
+				_RenewalRate = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _SalesQualifiedPartner;
 		[CProperty(ColumnPath ="SalesQualifiedPartner")]
-		public bool SalesQualifiedPartner { get; set; }
+		public bool SalesQualifiedPartner
+		{
+			get{return _SalesQualifiedPartner;}
+			set
+			{
+				_SalesQualifiedPartner = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ScoreLeft;
 		[CProperty(ColumnPath ="ScoreLeft")]
-		public int ScoreLeft { get; set; }
+		public int ScoreLeft
+		{
+			get{return _ScoreLeft;}
+			set
+			{
+				_ScoreLeft = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _StartDate;
 		[CProperty(ColumnPath ="StartDate")]
-		public DateTime StartDate { get; set; }
+		public DateTime StartDate
+		{
+			get{return _StartDate;}
+			set
+			{
+				_StartDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _TotalSales;
 		[CProperty(ColumnPath ="TotalSales")]
-		public decimal TotalSales { get; set; }
+		public decimal TotalSales
+		{
+			get{return _TotalSales;}
+			set
+			{
+				_TotalSales = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

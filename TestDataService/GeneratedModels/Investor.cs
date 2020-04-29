@@ -7,38 +7,182 @@ namespace Creatio.DataService.Models
 	public class Investor : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _AUM;
 		[CProperty(ColumnPath ="AUM")]
-		public decimal AUM { get; set; }
+		public decimal AUM
+		{
+			get{return _AUM;}
+			set
+			{
+				_AUM = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _CheckSize;
 		[CProperty(ColumnPath ="CheckSize")]
-		public string CheckSize { get; set; }
+		public string CheckSize
+		{
+			get{return _CheckSize;}
+			set
+			{
+				_CheckSize = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _CulturalFit;
 		[CProperty(ColumnPath ="CulturalFit")]
-		public string CulturalFit { get; set; }
+		public string CulturalFit
+		{
+			get{return _CulturalFit;}
+			set
+			{
+				_CulturalFit = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _EnterpriseExperience;
 		[CProperty(ColumnPath ="EnterpriseExperience")]
-		public string EnterpriseExperience { get; set; }
+		public string EnterpriseExperience
+		{
+			get{return _EnterpriseExperience;}
+			set
+			{
+				_EnterpriseExperience = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Notes;
 		[CProperty(ColumnPath ="Notes")]
-		public string Notes { get; set; }
+		public string Notes
+		{
+			get{return _Notes;}
+			set
+			{
+				_Notes = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OverallPriorityId;
 		[CProperty(ColumnPath ="OverallPriorityId")]
-		public Guid OverallPriorityId { get; set; }
+		public Guid OverallPriorityId
+		{
+			get{return _OverallPriorityId;}
+			set
+			{
+				_OverallPriorityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StatusId;
 		[CProperty(ColumnPath ="StatusId")]
-		public Guid StatusId { get; set; }
+		public Guid StatusId
+		{
+			get{return _StatusId;}
+			set
+			{
+				_StatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _StrengthOfNetwork;
 		[CProperty(ColumnPath ="StrengthOfNetwork")]
-		public string StrengthOfNetwork { get; set; }
+		public string StrengthOfNetwork
+		{
+			get{return _StrengthOfNetwork;}
+			set
+			{
+				_StrengthOfNetwork = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

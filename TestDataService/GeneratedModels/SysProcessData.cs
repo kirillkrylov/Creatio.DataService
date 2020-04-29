@@ -7,30 +7,138 @@ namespace Creatio.DataService.Models
 	public class SysProcessData : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ParentId;
 		[CProperty(ColumnPath ="ParentId")]
-		public Guid ParentId { get; set; }
+		public Guid ParentId
+		{
+			get{return _ParentId;}
+			set
+			{
+				_ParentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private byte[] _PropertiesData;
 		[CProperty(ColumnPath ="PropertiesData")]
-		public byte[] PropertiesData { get; set; }
+		public byte[] PropertiesData
+		{
+			get{return _PropertiesData;}
+			set
+			{
+				_PropertiesData = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SchemaElementUId;
 		[CProperty(ColumnPath ="SchemaElementUId")]
-		public Guid SchemaElementUId { get; set; }
+		public Guid SchemaElementUId
+		{
+			get{return _SchemaElementUId;}
+			set
+			{
+				_SchemaElementUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Status;
 		[CProperty(ColumnPath ="Status")]
-		public int Status { get; set; }
+		public int Status
+		{
+			get{return _Status;}
+			set
+			{
+				_Status = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SysSchemaId;
 		[CProperty(ColumnPath ="SysSchemaId")]
-		public Guid SysSchemaId { get; set; }
+		public Guid SysSchemaId
+		{
+			get{return _SysSchemaId;}
+			set
+			{
+				_SysSchemaId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

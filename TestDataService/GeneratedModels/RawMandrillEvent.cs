@@ -7,10 +7,28 @@ namespace Creatio.DataService.Models
 	public class RawMandrillEvent : BaseEntity
 	{
 		#region Values
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private byte[] _JsonData;
 		[CProperty(ColumnPath ="JsonData")]
-		public byte[] JsonData { get; set; }
+		public byte[] JsonData
+		{
+			get{return _JsonData;}
+			set
+			{
+				_JsonData = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

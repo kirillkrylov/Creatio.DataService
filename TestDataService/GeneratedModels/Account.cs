@@ -7,142 +7,754 @@ namespace Creatio.DataService.Models
 	public class Account : BaseEntity
 	{
 		#region Values
+		private Guid _AccountCategoryId;
 		[CProperty(ColumnPath ="AccountCategoryId")]
-		public Guid AccountCategoryId { get; set; }
+		public Guid AccountCategoryId
+		{
+			get{return _AccountCategoryId;}
+			set
+			{
+				_AccountCategoryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _AccountLogoId;
 		[CProperty(ColumnPath ="AccountLogoId")]
-		public Guid AccountLogoId { get; set; }
+		public Guid AccountLogoId
+		{
+			get{return _AccountLogoId;}
+			set
+			{
+				_AccountLogoId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _AccountOwnerId;
 		[CProperty(ColumnPath ="AccountOwnerId")]
-		public Guid AccountOwnerId { get; set; }
+		public Guid AccountOwnerId
+		{
+			get{return _AccountOwnerId;}
+			set
+			{
+				_AccountOwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _AdditionalComments;
 		[CProperty(ColumnPath ="AdditionalComments")]
-		public string AdditionalComments { get; set; }
+		public string AdditionalComments
+		{
+			get{return _AdditionalComments;}
+			set
+			{
+				_AdditionalComments = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _AdditionalPhone;
 		[CProperty(ColumnPath ="AdditionalPhone")]
-		public string AdditionalPhone { get; set; }
+		public string AdditionalPhone
+		{
+			get{return _AdditionalPhone;}
+			set
+			{
+				_AdditionalPhone = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Address;
 		[CProperty(ColumnPath ="Address")]
-		public string Address { get; set; }
+		public string Address
+		{
+			get{return _Address;}
+			set
+			{
+				_Address = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _AddressTypeId;
 		[CProperty(ColumnPath ="AddressTypeId")]
-		public Guid AddressTypeId { get; set; }
+		public Guid AddressTypeId
+		{
+			get{return _AddressTypeId;}
+			set
+			{
+				_AddressTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _AlternativeName;
 		[CProperty(ColumnPath ="AlternativeName")]
-		public string AlternativeName { get; set; }
+		public string AlternativeName
+		{
+			get{return _AlternativeName;}
+			set
+			{
+				_AlternativeName = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _AnnualRevenueBC;
 		[CProperty(ColumnPath ="AnnualRevenueBC")]
-		public decimal AnnualRevenueBC { get; set; }
+		public decimal AnnualRevenueBC
+		{
+			get{return _AnnualRevenueBC;}
+			set
+			{
+				_AnnualRevenueBC = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _AnnualRevenueId;
 		[CProperty(ColumnPath ="AnnualRevenueId")]
-		public Guid AnnualRevenueId { get; set; }
+		public Guid AnnualRevenueId
+		{
+			get{return _AnnualRevenueId;}
+			set
+			{
+				_AnnualRevenueId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ARRBucketId;
 		[CProperty(ColumnPath ="ARRBucketId")]
-		public Guid ARRBucketId { get; set; }
+		public Guid ARRBucketId
+		{
+			get{return _ARRBucketId;}
+			set
+			{
+				_ARRBucketId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Assets;
 		[CProperty(ColumnPath ="Assets")]
-		public decimal Assets { get; set; }
+		public decimal Assets
+		{
+			get{return _Assets;}
+			set
+			{
+				_Assets = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CityId;
 		[CProperty(ColumnPath ="CityId")]
-		public Guid CityId { get; set; }
+		public Guid CityId
+		{
+			get{return _CityId;}
+			set
+			{
+				_CityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Code;
 		[CProperty(ColumnPath ="Code")]
-		public string Code { get; set; }
+		public string Code
+		{
+			get{return _Code;}
+			set
+			{
+				_Code = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Completeness;
 		[CProperty(ColumnPath ="Completeness")]
-		public int Completeness { get; set; }
+		public int Completeness
+		{
+			get{return _Completeness;}
+			set
+			{
+				_Completeness = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CountryId;
 		[CProperty(ColumnPath ="CountryId")]
-		public Guid CountryId { get; set; }
+		public Guid CountryId
+		{
+			get{return _CountryId;}
+			set
+			{
+				_CountryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CsmId;
 		[CProperty(ColumnPath ="CsmId")]
-		public Guid CsmId { get; set; }
+		public Guid CsmId
+		{
+			get{return _CsmId;}
+			set
+			{
+				_CsmId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DeploymentTypeId;
 		[CProperty(ColumnPath ="DeploymentTypeId")]
-		public Guid DeploymentTypeId { get; set; }
+		public Guid DeploymentTypeId
+		{
+			get{return _DeploymentTypeId;}
+			set
+			{
+				_DeploymentTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _DR;
 		[CProperty(ColumnPath ="DR")]
-		public decimal DR { get; set; }
+		public decimal DR
+		{
+			get{return _DR;}
+			set
+			{
+				_DR = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EmployeesNumberId;
 		[CProperty(ColumnPath ="EmployeesNumberId")]
-		public Guid EmployeesNumberId { get; set; }
+		public Guid EmployeesNumberId
+		{
+			get{return _EmployeesNumberId;}
+			set
+			{
+				_EmployeesNumberId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _Enterprisebasket;
 		[CProperty(ColumnPath ="Enterprisebasket")]
-		public bool Enterprisebasket { get; set; }
+		public bool Enterprisebasket
+		{
+			get{return _Enterprisebasket;}
+			set
+			{
+				_Enterprisebasket = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ExactNoOfEmployees;
 		[CProperty(ColumnPath ="ExactNoOfEmployees")]
-		public int ExactNoOfEmployees { get; set; }
+		public int ExactNoOfEmployees
+		{
+			get{return _ExactNoOfEmployees;}
+			set
+			{
+				_ExactNoOfEmployees = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Fax;
 		[CProperty(ColumnPath ="Fax")]
-		public string Fax { get; set; }
+		public string Fax
+		{
+			get{return _Fax;}
+			set
+			{
+				_Fax = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbCustomerId;
 		[CProperty(ColumnPath ="GlbCustomerId")]
-		public Guid GlbCustomerId { get; set; }
+		public Guid GlbCustomerId
+		{
+			get{return _GlbCustomerId;}
+			set
+			{
+				_GlbCustomerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbReferenceableDetailsId;
 		[CProperty(ColumnPath ="GlbReferenceableDetailsId")]
-		public Guid GlbReferenceableDetailsId { get; set; }
+		public Guid GlbReferenceableDetailsId
+		{
+			get{return _GlbReferenceableDetailsId;}
+			set
+			{
+				_GlbReferenceableDetailsId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbReferenceableTypeId;
 		[CProperty(ColumnPath ="GlbReferenceableTypeId")]
-		public Guid GlbReferenceableTypeId { get; set; }
+		public Guid GlbReferenceableTypeId
+		{
+			get{return _GlbReferenceableTypeId;}
+			set
+			{
+				_GlbReferenceableTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GPSE;
 		[CProperty(ColumnPath ="GPSE")]
-		public string GPSE { get; set; }
+		public string GPSE
+		{
+			get{return _GPSE;}
+			set
+			{
+				_GPSE = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GPSN;
 		[CProperty(ColumnPath ="GPSN")]
-		public string GPSN { get; set; }
+		public string GPSN
+		{
+			get{return _GPSN;}
+			set
+			{
+				_GPSN = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _IndustryId;
 		[CProperty(ColumnPath ="IndustryId")]
-		public Guid IndustryId { get; set; }
+		public Guid IndustryId
+		{
+			get{return _IndustryId;}
+			set
+			{
+				_IndustryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _IntegratedOn;
 		[CProperty(ColumnPath ="IntegratedOn")]
-		public DateTime IntegratedOn { get; set; }
+		public DateTime IntegratedOn
+		{
+			get{return _IntegratedOn;}
+			set
+			{
+				_IntegratedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _LABActualAnonymizationDate;
 		[CProperty(ColumnPath ="LABActualAnonymizationDate")]
-		public DateTime LABActualAnonymizationDate { get; set; }
+		public DateTime LABActualAnonymizationDate
+		{
+			get{return _LABActualAnonymizationDate;}
+			set
+			{
+				_LABActualAnonymizationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _LABMarkedForAnonymizationDate;
 		[CProperty(ColumnPath ="LABMarkedForAnonymizationDate")]
-		public DateTime LABMarkedForAnonymizationDate { get; set; }
+		public DateTime LABMarkedForAnonymizationDate
+		{
+			get{return _LABMarkedForAnonymizationDate;}
+			set
+			{
+				_LABMarkedForAnonymizationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private byte[] _Logo;
 		[CProperty(ColumnPath ="Logo")]
-		public byte[] Logo { get; set; }
+		public byte[] Logo
+		{
+			get{return _Logo;}
+			set
+			{
+				_Logo = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _NameENU;
 		[CProperty(ColumnPath ="NameENU")]
-		public string NameENU { get; set; }
+		public string NameENU
+		{
+			get{return _NameENU;}
+			set
+			{
+				_NameENU = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Notes;
 		[CProperty(ColumnPath ="Notes")]
-		public string Notes { get; set; }
+		public string Notes
+		{
+			get{return _Notes;}
+			set
+			{
+				_Notes = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _NumberOfMarketing;
 		[CProperty(ColumnPath ="NumberOfMarketing")]
-		public int NumberOfMarketing { get; set; }
+		public int NumberOfMarketing
+		{
+			get{return _NumberOfMarketing;}
+			set
+			{
+				_NumberOfMarketing = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _NumberOfSales;
 		[CProperty(ColumnPath ="NumberOfSales")]
-		public int NumberOfSales { get; set; }
+		public int NumberOfSales
+		{
+			get{return _NumberOfSales;}
+			set
+			{
+				_NumberOfSales = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _NumberOfService;
 		[CProperty(ColumnPath ="NumberOfService")]
-		public int NumberOfService { get; set; }
+		public int NumberOfService
+		{
+			get{return _NumberOfService;}
+			set
+			{
+				_NumberOfService = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OpportunityDepartmentId;
 		[CProperty(ColumnPath ="OpportunityDepartmentId")]
-		public Guid OpportunityDepartmentId { get; set; }
+		public Guid OpportunityDepartmentId
+		{
+			get{return _OpportunityDepartmentId;}
+			set
+			{
+				_OpportunityDepartmentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnershipId;
 		[CProperty(ColumnPath ="OwnershipId")]
-		public Guid OwnershipId { get; set; }
+		public Guid OwnershipId
+		{
+			get{return _OwnershipId;}
+			set
+			{
+				_OwnershipId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ParentId;
 		[CProperty(ColumnPath ="ParentId")]
-		public Guid ParentId { get; set; }
+		public Guid ParentId
+		{
+			get{return _ParentId;}
+			set
+			{
+				_ParentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PartnerRoleId;
 		[CProperty(ColumnPath ="PartnerRoleId")]
-		public Guid PartnerRoleId { get; set; }
+		public Guid PartnerRoleId
+		{
+			get{return _PartnerRoleId;}
+			set
+			{
+				_PartnerRoleId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PartnerSegmentId;
 		[CProperty(ColumnPath ="PartnerSegmentId")]
-		public Guid PartnerSegmentId { get; set; }
+		public Guid PartnerSegmentId
+		{
+			get{return _PartnerSegmentId;}
+			set
+			{
+				_PartnerSegmentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Phone;
 		[CProperty(ColumnPath ="Phone")]
-		public string Phone { get; set; }
+		public string Phone
+		{
+			get{return _Phone;}
+			set
+			{
+				_Phone = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PracticeId;
 		[CProperty(ColumnPath ="PracticeId")]
-		public Guid PracticeId { get; set; }
+		public Guid PracticeId
+		{
+			get{return _PracticeId;}
+			set
+			{
+				_PracticeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PriceListId;
 		[CProperty(ColumnPath ="PriceListId")]
-		public Guid PriceListId { get; set; }
+		public Guid PriceListId
+		{
+			get{return _PriceListId;}
+			set
+			{
+				_PriceListId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PrimaryContactId;
 		[CProperty(ColumnPath ="PrimaryContactId")]
-		public Guid PrimaryContactId { get; set; }
+		public Guid PrimaryContactId
+		{
+			get{return _PrimaryContactId;}
+			set
+			{
+				_PrimaryContactId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ProductPlatformId;
 		[CProperty(ColumnPath ="ProductPlatformId")]
-		public Guid ProductPlatformId { get; set; }
+		public Guid ProductPlatformId
+		{
+			get{return _ProductPlatformId;}
+			set
+			{
+				_ProductPlatformId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _RegionId;
 		[CProperty(ColumnPath ="RegionId")]
-		public Guid RegionId { get; set; }
+		public Guid RegionId
+		{
+			get{return _RegionId;}
+			set
+			{
+				_RegionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _RenewalDate;
 		[CProperty(ColumnPath ="RenewalDate")]
-		public DateTime RenewalDate { get; set; }
+		public DateTime RenewalDate
+		{
+			get{return _RenewalDate;}
+			set
+			{
+				_RenewalDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _SegmentVerification;
 		[CProperty(ColumnPath ="SegmentVerification")]
-		public bool SegmentVerification { get; set; }
+		public bool SegmentVerification
+		{
+			get{return _SegmentVerification;}
+			set
+			{
+				_SegmentVerification = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StatusId;
 		[CProperty(ColumnPath ="StatusId")]
-		public Guid StatusId { get; set; }
+		public Guid StatusId
+		{
+			get{return _StatusId;}
+			set
+			{
+				_StatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SubIndustryId;
 		[CProperty(ColumnPath ="SubIndustryId")]
-		public Guid SubIndustryId { get; set; }
+		public Guid SubIndustryId
+		{
+			get{return _SubIndustryId;}
+			set
+			{
+				_SubIndustryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _SupportNotes;
 		[CProperty(ColumnPath ="SupportNotes")]
-		public string SupportNotes { get; set; }
+		public string SupportNotes
+		{
+			get{return _SupportNotes;}
+			set
+			{
+				_SupportNotes = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TerritoryId;
 		[CProperty(ColumnPath ="TerritoryId")]
-		public Guid TerritoryId { get; set; }
+		public Guid TerritoryId
+		{
+			get{return _TerritoryId;}
+			set
+			{
+				_TerritoryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _Top50;
 		[CProperty(ColumnPath ="Top50")]
-		public bool Top50 { get; set; }
+		public bool Top50
+		{
+			get{return _Top50;}
+			set
+			{
+				_Top50 = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TypeId;
 		[CProperty(ColumnPath ="TypeId")]
-		public Guid TypeId { get; set; }
+		public Guid TypeId
+		{
+			get{return _TypeId;}
+			set
+			{
+				_TypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Uid1C;
 		[CProperty(ColumnPath ="Uid1C")]
-		public Guid Uid1C { get; set; }
+		public Guid Uid1C
+		{
+			get{return _Uid1C;}
+			set
+			{
+				_Uid1C = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Web;
 		[CProperty(ColumnPath ="Web")]
-		public string Web { get; set; }
+		public string Web
+		{
+			get{return _Web;}
+			set
+			{
+				_Web = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Zip;
 		[CProperty(ColumnPath ="Zip")]
-		public string Zip { get; set; }
+		public string Zip
+		{
+			get{return _Zip;}
+			set
+			{
+				_Zip = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,12 +7,39 @@ namespace Creatio.DataService.Models
 	public class KnowledgeBaseTagDecoupling : BaseEntity
 	{
 		#region Values
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _KnowledgeBaseId;
 		[CProperty(ColumnPath ="KnowledgeBaseId")]
-		public Guid KnowledgeBaseId { get; set; }
+		public Guid KnowledgeBaseId
+		{
+			get{return _KnowledgeBaseId;}
+			set
+			{
+				_KnowledgeBaseId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TagId;
 		[CProperty(ColumnPath ="TagId")]
-		public Guid TagId { get; set; }
+		public Guid TagId
+		{
+			get{return _TagId;}
+			set
+			{
+				_TagId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

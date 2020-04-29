@@ -7,76 +7,391 @@ namespace Creatio.DataService.Models
 	public class VwTSSLAArchive : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ActivationDate;
 		[CProperty(ColumnPath ="ActivationDate")]
-		public DateTime ActivationDate { get; set; }
+		public DateTime ActivationDate
+		{
+			get{return _ActivationDate;}
+			set
+			{
+				_ActivationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Amount;
 		[CProperty(ColumnPath ="Amount")]
-		public decimal Amount { get; set; }
+		public decimal Amount
+		{
+			get{return _Amount;}
+			set
+			{
+				_Amount = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _AtZeroValue;
 		[CProperty(ColumnPath ="AtZeroValue")]
-		public bool AtZeroValue { get; set; }
+		public bool AtZeroValue
+		{
+			get{return _AtZeroValue;}
+			set
+			{
+				_AtZeroValue = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _BilledAmount;
 		[CProperty(ColumnPath ="BilledAmount")]
-		public decimal BilledAmount { get; set; }
+		public decimal BilledAmount
+		{
+			get{return _BilledAmount;}
+			set
+			{
+				_BilledAmount = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _BilledManhours;
 		[CProperty(ColumnPath ="BilledManhours")]
-		public decimal BilledManhours { get; set; }
+		public decimal BilledManhours
+		{
+			get{return _BilledManhours;}
+			set
+			{
+				_BilledManhours = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CancelDate;
 		[CProperty(ColumnPath ="CancelDate")]
-		public DateTime CancelDate { get; set; }
+		public DateTime CancelDate
+		{
+			get{return _CancelDate;}
+			set
+			{
+				_CancelDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Comments;
 		[CProperty(ColumnPath ="Comments")]
-		public string Comments { get; set; }
+		public string Comments
+		{
+			get{return _Comments;}
+			set
+			{
+				_Comments = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ConfItemId;
 		[CProperty(ColumnPath ="ConfItemId")]
-		public Guid ConfItemId { get; set; }
+		public Guid ConfItemId
+		{
+			get{return _ConfItemId;}
+			set
+			{
+				_ConfItemId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Count;
 		[CProperty(ColumnPath ="Count")]
-		public decimal Count { get; set; }
+		public decimal Count
+		{
+			get{return _Count;}
+			set
+			{
+				_Count = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CurrencyId;
 		[CProperty(ColumnPath ="CurrencyId")]
-		public Guid CurrencyId { get; set; }
+		public Guid CurrencyId
+		{
+			get{return _CurrencyId;}
+			set
+			{
+				_CurrencyId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _CurrencyRate;
 		[CProperty(ColumnPath ="CurrencyRate")]
-		public decimal CurrencyRate { get; set; }
+		public decimal CurrencyRate
+		{
+			get{return _CurrencyRate;}
+			set
+			{
+				_CurrencyRate = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _DeactivationDate;
 		[CProperty(ColumnPath ="DeactivationDate")]
-		public DateTime DeactivationDate { get; set; }
+		public DateTime DeactivationDate
+		{
+			get{return _DeactivationDate;}
+			set
+			{
+				_DeactivationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _InternalRequestId;
 		[CProperty(ColumnPath ="InternalRequestId")]
-		public Guid InternalRequestId { get; set; }
+		public Guid InternalRequestId
+		{
+			get{return _InternalRequestId;}
+			set
+			{
+				_InternalRequestId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsCompetitive;
 		[CProperty(ColumnPath ="IsCompetitive")]
-		public bool IsCompetitive { get; set; }
+		public bool IsCompetitive
+		{
+			get{return _IsCompetitive;}
+			set
+			{
+				_IsCompetitive = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsRecordLocked;
 		[CProperty(ColumnPath ="IsRecordLocked")]
-		public bool IsRecordLocked { get; set; }
+		public bool IsRecordLocked
+		{
+			get{return _IsRecordLocked;}
+			set
+			{
+				_IsRecordLocked = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsVefiried;
 		[CProperty(ColumnPath ="IsVefiried")]
-		public bool IsVefiried { get; set; }
+		public bool IsVefiried
+		{
+			get{return _IsVefiried;}
+			set
+			{
+				_IsVefiried = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OrderId;
 		[CProperty(ColumnPath ="OrderId")]
-		public Guid OrderId { get; set; }
+		public Guid OrderId
+		{
+			get{return _OrderId;}
+			set
+			{
+				_OrderId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OrderProductId;
 		[CProperty(ColumnPath ="OrderProductId")]
-		public Guid OrderProductId { get; set; }
+		public Guid OrderProductId
+		{
+			get{return _OrderProductId;}
+			set
+			{
+				_OrderProductId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _PrimaryAmount;
 		[CProperty(ColumnPath ="PrimaryAmount")]
-		public decimal PrimaryAmount { get; set; }
+		public decimal PrimaryAmount
+		{
+			get{return _PrimaryAmount;}
+			set
+			{
+				_PrimaryAmount = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _PrimaryTotalAmountWithoutTax;
 		[CProperty(ColumnPath ="PrimaryTotalAmountWithoutTax")]
-		public decimal PrimaryTotalAmountWithoutTax { get; set; }
+		public decimal PrimaryTotalAmountWithoutTax
+		{
+			get{return _PrimaryTotalAmountWithoutTax;}
+			set
+			{
+				_PrimaryTotalAmountWithoutTax = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ProductId;
 		[CProperty(ColumnPath ="ProductId")]
-		public Guid ProductId { get; set; }
+		public Guid ProductId
+		{
+			get{return _ProductId;}
+			set
+			{
+				_ProductId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PurchaseTypeId;
 		[CProperty(ColumnPath ="PurchaseTypeId")]
-		public Guid PurchaseTypeId { get; set; }
+		public Guid PurchaseTypeId
+		{
+			get{return _PurchaseTypeId;}
+			set
+			{
+				_PurchaseTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Status;
 		[CProperty(ColumnPath ="Status")]
-		public string Status { get; set; }
+		public string Status
+		{
+			get{return _Status;}
+			set
+			{
+				_Status = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SubscriptionId;
 		[CProperty(ColumnPath ="SubscriptionId")]
-		public Guid SubscriptionId { get; set; }
+		public Guid SubscriptionId
+		{
+			get{return _SubscriptionId;}
+			set
+			{
+				_SubscriptionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SubscriptionTypeId;
 		[CProperty(ColumnPath ="SubscriptionTypeId")]
-		public Guid SubscriptionTypeId { get; set; }
+		public Guid SubscriptionTypeId
+		{
+			get{return _SubscriptionTypeId;}
+			set
+			{
+				_SubscriptionTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SupplyPaymentElementId;
 		[CProperty(ColumnPath ="SupplyPaymentElementId")]
-		public Guid SupplyPaymentElementId { get; set; }
+		public Guid SupplyPaymentElementId
+		{
+			get{return _SupplyPaymentElementId;}
+			set
+			{
+				_SupplyPaymentElementId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _TotalAmountWithoutTax;
 		[CProperty(ColumnPath ="TotalAmountWithoutTax")]
-		public decimal TotalAmountWithoutTax { get; set; }
+		public decimal TotalAmountWithoutTax
+		{
+			get{return _TotalAmountWithoutTax;}
+			set
+			{
+				_TotalAmountWithoutTax = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

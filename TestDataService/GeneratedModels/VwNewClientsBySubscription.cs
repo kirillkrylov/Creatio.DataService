@@ -7,16 +7,61 @@ namespace Creatio.DataService.Models
 	public class VwNewClientsBySubscription : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ActivationDate;
 		[CProperty(ColumnPath ="ActivationDate")]
-		public DateTime ActivationDate { get; set; }
+		public DateTime ActivationDate
+		{
+			get{return _ActivationDate;}
+			set
+			{
+				_ActivationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _KindId;
 		[CProperty(ColumnPath ="KindId")]
-		public Guid KindId { get; set; }
+		public Guid KindId
+		{
+			get{return _KindId;}
+			set
+			{
+				_KindId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

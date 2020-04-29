@@ -7,42 +7,204 @@ namespace Creatio.DataService.Models
 	public class SalesProcessEvent : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DepartmentManagerId;
 		[CProperty(ColumnPath ="DepartmentManagerId")]
-		public Guid DepartmentManagerId { get; set; }
+		public Guid DepartmentManagerId
+		{
+			get{return _DepartmentManagerId;}
+			set
+			{
+				_DepartmentManagerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _EventDate;
 		[CProperty(ColumnPath ="EventDate")]
-		public DateTime EventDate { get; set; }
+		public DateTime EventDate
+		{
+			get{return _EventDate;}
+			set
+			{
+				_EventDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EventTypeId;
 		[CProperty(ColumnPath ="EventTypeId")]
-		public Guid EventTypeId { get; set; }
+		public Guid EventTypeId
+		{
+			get{return _EventTypeId;}
+			set
+			{
+				_EventTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LeadCloseReasonId;
 		[CProperty(ColumnPath ="LeadCloseReasonId")]
-		public Guid LeadCloseReasonId { get; set; }
+		public Guid LeadCloseReasonId
+		{
+			get{return _LeadCloseReasonId;}
+			set
+			{
+				_LeadCloseReasonId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LeadDisqualifyReasonId;
 		[CProperty(ColumnPath ="LeadDisqualifyReasonId")]
-		public Guid LeadDisqualifyReasonId { get; set; }
+		public Guid LeadDisqualifyReasonId
+		{
+			get{return _LeadDisqualifyReasonId;}
+			set
+			{
+				_LeadDisqualifyReasonId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LeadId;
 		[CProperty(ColumnPath ="LeadId")]
-		public Guid LeadId { get; set; }
+		public Guid LeadId
+		{
+			get{return _LeadId;}
+			set
+			{
+				_LeadId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ManagerId;
 		[CProperty(ColumnPath ="ManagerId")]
-		public Guid ManagerId { get; set; }
+		public Guid ManagerId
+		{
+			get{return _ManagerId;}
+			set
+			{
+				_ManagerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OpportunityCloseReasonId;
 		[CProperty(ColumnPath ="OpportunityCloseReasonId")]
-		public Guid OpportunityCloseReasonId { get; set; }
+		public Guid OpportunityCloseReasonId
+		{
+			get{return _OpportunityCloseReasonId;}
+			set
+			{
+				_OpportunityCloseReasonId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OpportunityId;
 		[CProperty(ColumnPath ="OpportunityId")]
-		public Guid OpportunityId { get; set; }
+		public Guid OpportunityId
+		{
+			get{return _OpportunityId;}
+			set
+			{
+				_OpportunityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _RegisterMethodId;
 		[CProperty(ColumnPath ="RegisterMethodId")]
-		public Guid RegisterMethodId { get; set; }
+		public Guid RegisterMethodId
+		{
+			get{return _RegisterMethodId;}
+			set
+			{
+				_RegisterMethodId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TerritoryId;
 		[CProperty(ColumnPath ="TerritoryId")]
-		public Guid TerritoryId { get; set; }
+		public Guid TerritoryId
+		{
+			get{return _TerritoryId;}
+			set
+			{
+				_TerritoryId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

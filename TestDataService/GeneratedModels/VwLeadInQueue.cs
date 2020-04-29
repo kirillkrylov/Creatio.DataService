@@ -7,34 +7,160 @@ namespace Creatio.DataService.Models
 	public class VwLeadInQueue : BaseEntity
 	{
 		#region Values
+		private Guid _CloseReasonId;
 		[CProperty(ColumnPath ="CloseReasonId")]
-		public Guid CloseReasonId { get; set; }
+		public Guid CloseReasonId
+		{
+			get{return _CloseReasonId;}
+			set
+			{
+				_CloseReasonId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _Date;
 		[CProperty(ColumnPath ="Date")]
-		public DateTime Date { get; set; }
+		public DateTime Date
+		{
+			get{return _Date;}
+			set
+			{
+				_Date = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ElementStatusId;
 		[CProperty(ColumnPath ="ElementStatusId")]
-		public Guid ElementStatusId { get; set; }
+		public Guid ElementStatusId
+		{
+			get{return _ElementStatusId;}
+			set
+			{
+				_ElementStatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EntityRecordId;
 		[CProperty(ColumnPath ="EntityRecordId")]
-		public Guid EntityRecordId { get; set; }
+		public Guid EntityRecordId
+		{
+			get{return _EntityRecordId;}
+			set
+			{
+				_EntityRecordId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OperatorId;
 		[CProperty(ColumnPath ="OperatorId")]
-		public Guid OperatorId { get; set; }
+		public Guid OperatorId
+		{
+			get{return _OperatorId;}
+			set
+			{
+				_OperatorId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _QueueName;
 		[CProperty(ColumnPath ="QueueName")]
-		public string QueueName { get; set; }
+		public string QueueName
+		{
+			get{return _QueueName;}
+			set
+			{
+				_QueueName = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _QueuePriorityId;
 		[CProperty(ColumnPath ="QueuePriorityId")]
-		public Guid QueuePriorityId { get; set; }
+		public Guid QueuePriorityId
+		{
+			get{return _QueuePriorityId;}
+			set
+			{
+				_QueuePriorityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _QueueStatusId;
 		[CProperty(ColumnPath ="QueueStatusId")]
-		public Guid QueueStatusId { get; set; }
+		public Guid QueueStatusId
+		{
+			get{return _QueueStatusId;}
+			set
+			{
+				_QueueStatusId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

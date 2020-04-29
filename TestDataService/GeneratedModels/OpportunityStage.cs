@@ -7,46 +7,226 @@ namespace Creatio.DataService.Models
 	public class OpportunityStage : BaseEntity
 	{
 		#region Values
+		private bool _CloseReasonVisible;
 		[CProperty(ColumnPath ="CloseReasonVisible")]
-		public bool CloseReasonVisible { get; set; }
+		public bool CloseReasonVisible
+		{
+			get{return _CloseReasonVisible;}
+			set
+			{
+				_CloseReasonVisible = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Color;
 		[CProperty(ColumnPath ="Color")]
-		public string Color { get; set; }
+		public string Color
+		{
+			get{return _Color;}
+			set
+			{
+				_Color = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _End;
 		[CProperty(ColumnPath ="End")]
-		public bool End { get; set; }
+		public bool End
+		{
+			get{return _End;}
+			set
+			{
+				_End = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _MaxProbability;
 		[CProperty(ColumnPath ="MaxProbability")]
-		public int MaxProbability { get; set; }
+		public int MaxProbability
+		{
+			get{return _MaxProbability;}
+			set
+			{
+				_MaxProbability = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _NameEN;
 		[CProperty(ColumnPath ="NameEN")]
-		public string NameEN { get; set; }
+		public string NameEN
+		{
+			get{return _NameEN;}
+			set
+			{
+				_NameEN = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _NextStepTerm;
 		[CProperty(ColumnPath ="NextStepTerm")]
-		public int NextStepTerm { get; set; }
+		public int NextStepTerm
+		{
+			get{return _NextStepTerm;}
+			set
+			{
+				_NextStepTerm = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _NotUse;
 		[CProperty(ColumnPath ="NotUse")]
-		public bool NotUse { get; set; }
+		public bool NotUse
+		{
+			get{return _NotUse;}
+			set
+			{
+				_NotUse = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Number;
 		[CProperty(ColumnPath ="Number")]
-		public int Number { get; set; }
+		public int Number
+		{
+			get{return _Number;}
+			set
+			{
+				_Number = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _ShowInFunnel;
 		[CProperty(ColumnPath ="ShowInFunnel")]
-		public bool ShowInFunnel { get; set; }
+		public bool ShowInFunnel
+		{
+			get{return _ShowInFunnel;}
+			set
+			{
+				_ShowInFunnel = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _ShowInProgressBar;
 		[CProperty(ColumnPath ="ShowInProgressBar")]
-		public bool ShowInProgressBar { get; set; }
+		public bool ShowInProgressBar
+		{
+			get{return _ShowInProgressBar;}
+			set
+			{
+				_ShowInProgressBar = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _Successful;
 		[CProperty(ColumnPath ="Successful")]
-		public bool Successful { get; set; }
+		public bool Successful
+		{
+			get{return _Successful;}
+			set
+			{
+				_Successful = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _UseInOpportunityFunnel;
 		[CProperty(ColumnPath ="UseInOpportunityFunnel")]
-		public bool UseInOpportunityFunnel { get; set; }
+		public bool UseInOpportunityFunnel
+		{
+			get{return _UseInOpportunityFunnel;}
+			set
+			{
+				_UseInOpportunityFunnel = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

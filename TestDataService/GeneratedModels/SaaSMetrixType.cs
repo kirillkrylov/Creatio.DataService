@@ -7,14 +7,50 @@ namespace Creatio.DataService.Models
 	public class SaaSMetrixType : BaseEntity
 	{
 		#region Values
+		private Guid _ARRBucketId;
 		[CProperty(ColumnPath ="ARRBucketId")]
-		public Guid ARRBucketId { get; set; }
+		public Guid ARRBucketId
+		{
+			get{return _ARRBucketId;}
+			set
+			{
+				_ARRBucketId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TerritoryId;
 		[CProperty(ColumnPath ="TerritoryId")]
-		public Guid TerritoryId { get; set; }
+		public Guid TerritoryId
+		{
+			get{return _TerritoryId;}
+			set
+			{
+				_TerritoryId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,22 +7,94 @@ namespace Creatio.DataService.Models
 	public class VwOrderProduct : BaseEntity
 	{
 		#region Values
+		private Guid _ContractId;
 		[CProperty(ColumnPath ="ContractId")]
-		public Guid ContractId { get; set; }
+		public Guid ContractId
+		{
+			get{return _ContractId;}
+			set
+			{
+				_ContractId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _PriceWithDiscount;
 		[CProperty(ColumnPath ="PriceWithDiscount")]
-		public decimal PriceWithDiscount { get; set; }
+		public decimal PriceWithDiscount
+		{
+			get{return _PriceWithDiscount;}
+			set
+			{
+				_PriceWithDiscount = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ProductId;
 		[CProperty(ColumnPath ="ProductId")]
-		public Guid ProductId { get; set; }
+		public Guid ProductId
+		{
+			get{return _ProductId;}
+			set
+			{
+				_ProductId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Quantity;
 		[CProperty(ColumnPath ="Quantity")]
-		public decimal Quantity { get; set; }
+		public decimal Quantity
+		{
+			get{return _Quantity;}
+			set
+			{
+				_Quantity = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _SummaryAmount;
 		[CProperty(ColumnPath ="SummaryAmount")]
-		public decimal SummaryAmount { get; set; }
+		public decimal SummaryAmount
+		{
+			get{return _SummaryAmount;}
+			set
+			{
+				_SummaryAmount = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _UnitId;
 		[CProperty(ColumnPath ="UnitId")]
-		public Guid UnitId { get; set; }
+		public Guid UnitId
+		{
+			get{return _UnitId;}
+			set
+			{
+				_UnitId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

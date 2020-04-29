@@ -7,50 +7,248 @@ namespace Creatio.DataService.Models
 	public class KnowledgeBase : BaseEntity
 	{
 		#region Values
+		private string _Code;
 		[CProperty(ColumnPath ="Code")]
-		public string Code { get; set; }
+		public string Code
+		{
+			get{return _Code;}
+			set
+			{
+				_Code = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Keywords;
 		[CProperty(ColumnPath ="Keywords")]
-		public string Keywords { get; set; }
+		public string Keywords
+		{
+			get{return _Keywords;}
+			set
+			{
+				_Keywords = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Notes;
 		[CProperty(ColumnPath ="Notes")]
-		public string Notes { get; set; }
+		public string Notes
+		{
+			get{return _Notes;}
+			set
+			{
+				_Notes = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _NotHtmlNote;
 		[CProperty(ColumnPath ="NotHtmlNote")]
-		public string NotHtmlNote { get; set; }
+		public string NotHtmlNote
+		{
+			get{return _NotHtmlNote;}
+			set
+			{
+				_NotHtmlNote = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PDEAccountId;
 		[CProperty(ColumnPath ="PDEAccountId")]
-		public Guid PDEAccountId { get; set; }
+		public Guid PDEAccountId
+		{
+			get{return _PDEAccountId;}
+			set
+			{
+				_PDEAccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PDECustomerId;
 		[CProperty(ColumnPath ="PDECustomerId")]
-		public Guid PDECustomerId { get; set; }
+		public Guid PDECustomerId
+		{
+			get{return _PDECustomerId;}
+			set
+			{
+				_PDECustomerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PDEIndustryId;
 		[CProperty(ColumnPath ="PDEIndustryId")]
-		public Guid PDEIndustryId { get; set; }
+		public Guid PDEIndustryId
+		{
+			get{return _PDEIndustryId;}
+			set
+			{
+				_PDEIndustryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _PDEProjectEndDate;
 		[CProperty(ColumnPath ="PDEProjectEndDate")]
-		public DateTime PDEProjectEndDate { get; set; }
+		public DateTime PDEProjectEndDate
+		{
+			get{return _PDEProjectEndDate;}
+			set
+			{
+				_PDEProjectEndDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PDEProjectStatusId;
 		[CProperty(ColumnPath ="PDEProjectStatusId")]
-		public Guid PDEProjectStatusId { get; set; }
+		public Guid PDEProjectStatusId
+		{
+			get{return _PDEProjectStatusId;}
+			set
+			{
+				_PDEProjectStatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PDEStatusId;
 		[CProperty(ColumnPath ="PDEStatusId")]
-		public Guid PDEStatusId { get; set; }
+		public Guid PDEStatusId
+		{
+			get{return _PDEStatusId;}
+			set
+			{
+				_PDEStatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PDESubIndustryId;
 		[CProperty(ColumnPath ="PDESubIndustryId")]
-		public Guid PDESubIndustryId { get; set; }
+		public Guid PDESubIndustryId
+		{
+			get{return _PDESubIndustryId;}
+			set
+			{
+				_PDESubIndustryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _PDEVerificationDate;
 		[CProperty(ColumnPath ="PDEVerificationDate")]
-		public DateTime PDEVerificationDate { get; set; }
+		public DateTime PDEVerificationDate
+		{
+			get{return _PDEVerificationDate;}
+			set
+			{
+				_PDEVerificationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TerritoryId;
 		[CProperty(ColumnPath ="TerritoryId")]
-		public Guid TerritoryId { get; set; }
+		public Guid TerritoryId
+		{
+			get{return _TerritoryId;}
+			set
+			{
+				_TerritoryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TypeId;
 		[CProperty(ColumnPath ="TypeId")]
-		public Guid TypeId { get; set; }
+		public Guid TypeId
+		{
+			get{return _TypeId;}
+			set
+			{
+				_TypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ViewsCount;
 		[CProperty(ColumnPath ="ViewsCount")]
-		public int ViewsCount { get; set; }
+		public int ViewsCount
+		{
+			get{return _ViewsCount;}
+			set
+			{
+				_ViewsCount = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

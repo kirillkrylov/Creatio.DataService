@@ -7,16 +7,61 @@ namespace Creatio.DataService.Models
 	public class VwProjectHierarchy : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _BaseProjectId;
 		[CProperty(ColumnPath ="BaseProjectId")]
-		public Guid BaseProjectId { get; set; }
+		public Guid BaseProjectId
+		{
+			get{return _BaseProjectId;}
+			set
+			{
+				_BaseProjectId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsFirst;
 		[CProperty(ColumnPath ="IsFirst")]
-		public bool IsFirst { get; set; }
+		public bool IsFirst
+		{
+			get{return _IsFirst;}
+			set
+			{
+				_IsFirst = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ProjectId;
 		[CProperty(ColumnPath ="ProjectId")]
-		public Guid ProjectId { get; set; }
+		public Guid ProjectId
+		{
+			get{return _ProjectId;}
+			set
+			{
+				_ProjectId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,60 +7,303 @@ namespace Creatio.DataService.Models
 	public class SysSchema : BaseEntity
 	{
 		#region Values
+		private string _Caption;
 		[CProperty(ColumnPath ="Caption")]
-		public string Caption { get; set; }
+		public string Caption
+		{
+			get{return _Caption;}
+			set
+			{
+				_Caption = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Checksum;
 		[CProperty(ColumnPath ="Checksum")]
-		public string Checksum { get; set; }
+		public string Checksum
+		{
+			get{return _Checksum;}
+			set
+			{
+				_Checksum = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ClientContentModifiedOn;
 		[CProperty(ColumnPath ="ClientContentModifiedOn")]
-		public DateTime ClientContentModifiedOn { get; set; }
+		public DateTime ClientContentModifiedOn
+		{
+			get{return _ClientContentModifiedOn;}
+			set
+			{
+				_ClientContentModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _DenyExtending;
 		[CProperty(ColumnPath ="DenyExtending")]
-		public bool DenyExtending { get; set; }
+		public bool DenyExtending
+		{
+			get{return _DenyExtending;}
+			set
+			{
+				_DenyExtending = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private byte[] _Descriptor;
 		[CProperty(ColumnPath ="Descriptor")]
-		public byte[] Descriptor { get; set; }
+		public byte[] Descriptor
+		{
+			get{return _Descriptor;}
+			set
+			{
+				_Descriptor = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _ExtendParent;
 		[CProperty(ColumnPath ="ExtendParent")]
-		public bool ExtendParent { get; set; }
+		public bool ExtendParent
+		{
+			get{return _ExtendParent;}
+			set
+			{
+				_ExtendParent = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IncludeDependenciesSource;
 		[CProperty(ColumnPath ="IncludeDependenciesSource")]
-		public bool IncludeDependenciesSource { get; set; }
+		public bool IncludeDependenciesSource
+		{
+			get{return _IncludeDependenciesSource;}
+			set
+			{
+				_IncludeDependenciesSource = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsChanged;
 		[CProperty(ColumnPath ="IsChanged")]
-		public bool IsChanged { get; set; }
+		public bool IsChanged
+		{
+			get{return _IsChanged;}
+			set
+			{
+				_IsChanged = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsLocked;
 		[CProperty(ColumnPath ="IsLocked")]
-		public bool IsLocked { get; set; }
+		public bool IsLocked
+		{
+			get{return _IsLocked;}
+			set
+			{
+				_IsLocked = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsNetStandard;
 		[CProperty(ColumnPath ="IsNetStandard")]
-		public bool IsNetStandard { get; set; }
+		public bool IsNetStandard
+		{
+			get{return _IsNetStandard;}
+			set
+			{
+				_IsNetStandard = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _LastError;
 		[CProperty(ColumnPath ="LastError")]
-		public string LastError { get; set; }
+		public string LastError
+		{
+			get{return _LastError;}
+			set
+			{
+				_LastError = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LockedById;
 		[CProperty(ColumnPath ="LockedById")]
-		public Guid LockedById { get; set; }
+		public Guid LockedById
+		{
+			get{return _LockedById;}
+			set
+			{
+				_LockedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ManagerName;
 		[CProperty(ColumnPath ="ManagerName")]
-		public string ManagerName { get; set; }
+		public string ManagerName
+		{
+			get{return _ManagerName;}
+			set
+			{
+				_ManagerName = value;
+				OnPropertyChanged();
+			}
+		}
+		private byte[] _MetaData;
 		[CProperty(ColumnPath ="MetaData")]
-		public byte[] MetaData { get; set; }
+		public byte[] MetaData
+		{
+			get{return _MetaData;}
+			set
+			{
+				_MetaData = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _MetaDataModifiedOn;
 		[CProperty(ColumnPath ="MetaDataModifiedOn")]
-		public DateTime MetaDataModifiedOn { get; set; }
+		public DateTime MetaDataModifiedOn
+		{
+			get{return _MetaDataModifiedOn;}
+			set
+			{
+				_MetaDataModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ParentId;
 		[CProperty(ColumnPath ="ParentId")]
-		public Guid ParentId { get; set; }
+		public Guid ParentId
+		{
+			get{return _ParentId;}
+			set
+			{
+				_ParentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _StructureModifiedOn;
 		[CProperty(ColumnPath ="StructureModifiedOn")]
-		public DateTime StructureModifiedOn { get; set; }
+		public DateTime StructureModifiedOn
+		{
+			get{return _StructureModifiedOn;}
+			set
+			{
+				_StructureModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SysPackageId;
 		[CProperty(ColumnPath ="SysPackageId")]
-		public Guid SysPackageId { get; set; }
+		public Guid SysPackageId
+		{
+			get{return _SysPackageId;}
+			set
+			{
+				_SysPackageId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _UId;
 		[CProperty(ColumnPath ="UId")]
-		public Guid UId { get; set; }
+		public Guid UId
+		{
+			get{return _UId;}
+			set
+			{
+				_UId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

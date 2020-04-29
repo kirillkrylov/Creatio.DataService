@@ -7,88 +7,457 @@ namespace Creatio.DataService.Models
 	public class InteractionWithManager : BaseEntity
 	{
 		#region Values
+		private string _CommonComment;
 		[CProperty(ColumnPath ="CommonComment")]
-		public string CommonComment { get; set; }
+		public string CommonComment
+		{
+			get{return _CommonComment;}
+			set
+			{
+				_CommonComment = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _Date;
 		[CProperty(ColumnPath ="Date")]
-		public DateTime Date { get; set; }
+		public DateTime Date
+		{
+			get{return _Date;}
+			set
+			{
+				_Date = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DepartmentId;
 		[CProperty(ColumnPath ="DepartmentId")]
-		public Guid DepartmentId { get; set; }
+		public Guid DepartmentId
+		{
+			get{return _DepartmentId;}
+			set
+			{
+				_DepartmentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DevelopmentId;
 		[CProperty(ColumnPath ="DevelopmentId")]
-		public Guid DevelopmentId { get; set; }
+		public Guid DevelopmentId
+		{
+			get{return _DevelopmentId;}
+			set
+			{
+				_DevelopmentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DismissalInitiatorId;
 		[CProperty(ColumnPath ="DismissalInitiatorId")]
-		public Guid DismissalInitiatorId { get; set; }
+		public Guid DismissalInitiatorId
+		{
+			get{return _DismissalInitiatorId;}
+			set
+			{
+				_DismissalInitiatorId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DissatisfactionReasonsId;
 		[CProperty(ColumnPath ="DissatisfactionReasonsId")]
-		public Guid DissatisfactionReasonsId { get; set; }
+		public Guid DissatisfactionReasonsId
+		{
+			get{return _DissatisfactionReasonsId;}
+			set
+			{
+				_DissatisfactionReasonsId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EmployeeId;
 		[CProperty(ColumnPath ="EmployeeId")]
-		public Guid EmployeeId { get; set; }
+		public Guid EmployeeId
+		{
+			get{return _EmployeeId;}
+			set
+			{
+				_EmployeeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _ExpectedWage;
 		[CProperty(ColumnPath ="ExpectedWage")]
-		public decimal ExpectedWage { get; set; }
+		public decimal ExpectedWage
+		{
+			get{return _ExpectedWage;}
+			set
+			{
+				_ExpectedWage = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ExpertiseLevelId;
 		[CProperty(ColumnPath ="ExpertiseLevelId")]
-		public Guid ExpertiseLevelId { get; set; }
+		public Guid ExpertiseLevelId
+		{
+			get{return _ExpertiseLevelId;}
+			set
+			{
+				_ExpertiseLevelId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _FurtherActions;
 		[CProperty(ColumnPath ="FurtherActions")]
-		public string FurtherActions { get; set; }
+		public string FurtherActions
+		{
+			get{return _FurtherActions;}
+			set
+			{
+				_FurtherActions = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _HardSkills;
 		[CProperty(ColumnPath ="HardSkills")]
-		public string HardSkills { get; set; }
+		public string HardSkills
+		{
+			get{return _HardSkills;}
+			set
+			{
+				_HardSkills = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _IncomeId;
 		[CProperty(ColumnPath ="IncomeId")]
-		public Guid IncomeId { get; set; }
+		public Guid IncomeId
+		{
+			get{return _IncomeId;}
+			set
+			{
+				_IncomeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _InteractionWithTeamId;
 		[CProperty(ColumnPath ="InteractionWithTeamId")]
-		public Guid InteractionWithTeamId { get; set; }
+		public Guid InteractionWithTeamId
+		{
+			get{return _InteractionWithTeamId;}
+			set
+			{
+				_InteractionWithTeamId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsFollowUpInterviewRequired;
 		[CProperty(ColumnPath ="IsFollowUpInterviewRequired")]
-		public bool IsFollowUpInterviewRequired { get; set; }
+		public bool IsFollowUpInterviewRequired
+		{
+			get{return _IsFollowUpInterviewRequired;}
+			set
+			{
+				_IsFollowUpInterviewRequired = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _JobTitleId;
 		[CProperty(ColumnPath ="JobTitleId")]
-		public Guid JobTitleId { get; set; }
+		public Guid JobTitleId
+		{
+			get{return _JobTitleId;}
+			set
+			{
+				_JobTitleId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ManagerId;
 		[CProperty(ColumnPath ="ManagerId")]
-		public Guid ManagerId { get; set; }
+		public Guid ManagerId
+		{
+			get{return _ManagerId;}
+			set
+			{
+				_ManagerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _NextMeeting;
 		[CProperty(ColumnPath ="NextMeeting")]
-		public DateTime NextMeeting { get; set; }
+		public DateTime NextMeeting
+		{
+			get{return _NextMeeting;}
+			set
+			{
+				_NextMeeting = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OverallContentmentLevelId;
 		[CProperty(ColumnPath ="OverallContentmentLevelId")]
-		public Guid OverallContentmentLevelId { get; set; }
+		public Guid OverallContentmentLevelId
+		{
+			get{return _OverallContentmentLevelId;}
+			set
+			{
+				_OverallContentmentLevelId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _PersonalGoals;
 		[CProperty(ColumnPath ="PersonalGoals")]
-		public string PersonalGoals { get; set; }
+		public string PersonalGoals
+		{
+			get{return _PersonalGoals;}
+			set
+			{
+				_PersonalGoals = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Plans;
 		[CProperty(ColumnPath ="Plans")]
-		public string Plans { get; set; }
+		public string Plans
+		{
+			get{return _Plans;}
+			set
+			{
+				_Plans = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Reason;
 		[CProperty(ColumnPath ="Reason")]
-		public string Reason { get; set; }
+		public string Reason
+		{
+			get{return _Reason;}
+			set
+			{
+				_Reason = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ReasonForDismissalId;
 		[CProperty(ColumnPath ="ReasonForDismissalId")]
-		public Guid ReasonForDismissalId { get; set; }
+		public Guid ReasonForDismissalId
+		{
+			get{return _ReasonForDismissalId;}
+			set
+			{
+				_ReasonForDismissalId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Result;
 		[CProperty(ColumnPath ="Result")]
-		public string Result { get; set; }
+		public string Result
+		{
+			get{return _Result;}
+			set
+			{
+				_Result = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ReviewTypeId;
 		[CProperty(ColumnPath ="ReviewTypeId")]
-		public Guid ReviewTypeId { get; set; }
+		public Guid ReviewTypeId
+		{
+			get{return _ReviewTypeId;}
+			set
+			{
+				_ReviewTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _RoleInCompanyId;
 		[CProperty(ColumnPath ="RoleInCompanyId")]
-		public Guid RoleInCompanyId { get; set; }
+		public Guid RoleInCompanyId
+		{
+			get{return _RoleInCompanyId;}
+			set
+			{
+				_RoleInCompanyId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SatisfactionOfInteractionWithManagerId;
 		[CProperty(ColumnPath ="SatisfactionOfInteractionWithManagerId")]
-		public Guid SatisfactionOfInteractionWithManagerId { get; set; }
+		public Guid SatisfactionOfInteractionWithManagerId
+		{
+			get{return _SatisfactionOfInteractionWithManagerId;}
+			set
+			{
+				_SatisfactionOfInteractionWithManagerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _SoftSkills;
 		[CProperty(ColumnPath ="SoftSkills")]
-		public string SoftSkills { get; set; }
+		public string SoftSkills
+		{
+			get{return _SoftSkills;}
+			set
+			{
+				_SoftSkills = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StatusId;
 		[CProperty(ColumnPath ="StatusId")]
-		public Guid StatusId { get; set; }
+		public Guid StatusId
+		{
+			get{return _StatusId;}
+			set
+			{
+				_StatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Suggestion;
 		[CProperty(ColumnPath ="Suggestion")]
-		public string Suggestion { get; set; }
+		public string Suggestion
+		{
+			get{return _Suggestion;}
+			set
+			{
+				_Suggestion = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TasksAndTargetsId;
 		[CProperty(ColumnPath ="TasksAndTargetsId")]
-		public Guid TasksAndTargetsId { get; set; }
+		public Guid TasksAndTargetsId
+		{
+			get{return _TasksAndTargetsId;}
+			set
+			{
+				_TasksAndTargetsId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TasksId;
 		[CProperty(ColumnPath ="TasksId")]
-		public Guid TasksId { get; set; }
+		public Guid TasksId
+		{
+			get{return _TasksId;}
+			set
+			{
+				_TasksId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Title;
 		[CProperty(ColumnPath ="Title")]
-		public string Title { get; set; }
+		public string Title
+		{
+			get{return _Title;}
+			set
+			{
+				_Title = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TrainingQualityId;
 		[CProperty(ColumnPath ="TrainingQualityId")]
-		public Guid TrainingQualityId { get; set; }
+		public Guid TrainingQualityId
+		{
+			get{return _TrainingQualityId;}
+			set
+			{
+				_TrainingQualityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TypeId;
 		[CProperty(ColumnPath ="TypeId")]
-		public Guid TypeId { get; set; }
+		public Guid TypeId
+		{
+			get{return _TypeId;}
+			set
+			{
+				_TypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Wishes;
 		[CProperty(ColumnPath ="Wishes")]
-		public string Wishes { get; set; }
+		public string Wishes
+		{
+			get{return _Wishes;}
+			set
+			{
+				_Wishes = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,46 +7,226 @@ namespace Creatio.DataService.Models
 	public class PsProjectEnvironment : BaseEntity
 	{
 		#region Values
+		private string _BranchKey;
 		[CProperty(ColumnPath ="BranchKey")]
-		public string BranchKey { get; set; }
+		public string BranchKey
+		{
+			get{return _BranchKey;}
+			set
+			{
+				_BranchKey = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DbProjectServerId;
 		[CProperty(ColumnPath ="DbProjectServerId")]
-		public Guid DbProjectServerId { get; set; }
+		public Guid DbProjectServerId
+		{
+			get{return _DbProjectServerId;}
+			set
+			{
+				_DbProjectServerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _JiraComponent;
 		[CProperty(ColumnPath ="JiraComponent")]
-		public string JiraComponent { get; set; }
+		public string JiraComponent
+		{
+			get{return _JiraComponent;}
+			set
+			{
+				_JiraComponent = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _KindId;
 		[CProperty(ColumnPath ="KindId")]
-		public Guid KindId { get; set; }
+		public Guid KindId
+		{
+			get{return _KindId;}
+			set
+			{
+				_KindId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _PackagePrefix;
 		[CProperty(ColumnPath ="PackagePrefix")]
-		public string PackagePrefix { get; set; }
+		public string PackagePrefix
+		{
+			get{return _PackagePrefix;}
+			set
+			{
+				_PackagePrefix = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ProjectSolutionId;
 		[CProperty(ColumnPath ="ProjectSolutionId")]
-		public Guid ProjectSolutionId { get; set; }
+		public Guid ProjectSolutionId
+		{
+			get{return _ProjectSolutionId;}
+			set
+			{
+				_ProjectSolutionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _RedisDBNumber;
 		[CProperty(ColumnPath ="RedisDBNumber")]
-		public int RedisDBNumber { get; set; }
+		public int RedisDBNumber
+		{
+			get{return _RedisDBNumber;}
+			set
+			{
+				_RedisDBNumber = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _RedisProjectServerId;
 		[CProperty(ColumnPath ="RedisProjectServerId")]
-		public Guid RedisProjectServerId { get; set; }
+		public Guid RedisProjectServerId
+		{
+			get{return _RedisProjectServerId;}
+			set
+			{
+				_RedisProjectServerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _SvnBranch;
 		[CProperty(ColumnPath ="SvnBranch")]
-		public string SvnBranch { get; set; }
+		public string SvnBranch
+		{
+			get{return _SvnBranch;}
+			set
+			{
+				_SvnBranch = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _TeamCityMakeBuildConfigurationID;
 		[CProperty(ColumnPath ="TeamCityMakeBuildConfigurationID")]
-		public string TeamCityMakeBuildConfigurationID { get; set; }
+		public string TeamCityMakeBuildConfigurationID
+		{
+			get{return _TeamCityMakeBuildConfigurationID;}
+			set
+			{
+				_TeamCityMakeBuildConfigurationID = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TsTeamCityServerId;
 		[CProperty(ColumnPath ="TsTeamCityServerId")]
-		public Guid TsTeamCityServerId { get; set; }
+		public Guid TsTeamCityServerId
+		{
+			get{return _TsTeamCityServerId;}
+			set
+			{
+				_TsTeamCityServerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TypeId;
 		[CProperty(ColumnPath ="TypeId")]
-		public Guid TypeId { get; set; }
+		public Guid TypeId
+		{
+			get{return _TypeId;}
+			set
+			{
+				_TypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _WebProjectServerId;
 		[CProperty(ColumnPath ="WebProjectServerId")]
-		public Guid WebProjectServerId { get; set; }
+		public Guid WebProjectServerId
+		{
+			get{return _WebProjectServerId;}
+			set
+			{
+				_WebProjectServerId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,30 +7,138 @@ namespace Creatio.DataService.Models
 	public class GlbCustomerGift : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbGiftAccountId;
 		[CProperty(ColumnPath ="GlbGiftAccountId")]
-		public Guid GlbGiftAccountId { get; set; }
+		public Guid GlbGiftAccountId
+		{
+			get{return _GlbGiftAccountId;}
+			set
+			{
+				_GlbGiftAccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbGiftContactId;
 		[CProperty(ColumnPath ="GlbGiftContactId")]
-		public Guid GlbGiftContactId { get; set; }
+		public Guid GlbGiftContactId
+		{
+			get{return _GlbGiftContactId;}
+			set
+			{
+				_GlbGiftContactId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbGiftName;
 		[CProperty(ColumnPath ="GlbGiftName")]
-		public string GlbGiftName { get; set; }
+		public string GlbGiftName
+		{
+			get{return _GlbGiftName;}
+			set
+			{
+				_GlbGiftName = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbGiftNote;
 		[CProperty(ColumnPath ="GlbGiftNote")]
-		public string GlbGiftNote { get; set; }
+		public string GlbGiftNote
+		{
+			get{return _GlbGiftNote;}
+			set
+			{
+				_GlbGiftNote = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbNotes;
 		[CProperty(ColumnPath ="GlbNotes")]
-		public string GlbNotes { get; set; }
+		public string GlbNotes
+		{
+			get{return _GlbNotes;}
+			set
+			{
+				_GlbNotes = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbNoteworthyEventId;
 		[CProperty(ColumnPath ="GlbNoteworthyEventId")]
-		public Guid GlbNoteworthyEventId { get; set; }
+		public Guid GlbNoteworthyEventId
+		{
+			get{return _GlbNoteworthyEventId;}
+			set
+			{
+				_GlbNoteworthyEventId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

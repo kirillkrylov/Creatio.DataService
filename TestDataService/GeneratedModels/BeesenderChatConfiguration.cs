@@ -7,32 +7,149 @@ namespace Creatio.DataService.Models
 	public class BeesenderChatConfiguration : BaseEntity
 	{
 		#region Values
+		private bool _CloseChat;
 		[CProperty(ColumnPath ="CloseChat")]
-		public bool CloseChat { get; set; }
+		public bool CloseChat
+		{
+			get{return _CloseChat;}
+			set
+			{
+				_CloseChat = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _CloseChatTimeout;
 		[CProperty(ColumnPath ="CloseChatTimeout")]
-		public int CloseChatTimeout { get; set; }
+		public int CloseChatTimeout
+		{
+			get{return _CloseChatTimeout;}
+			set
+			{
+				_CloseChatTimeout = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Login;
 		[CProperty(ColumnPath ="Login")]
-		public string Login { get; set; }
+		public string Login
+		{
+			get{return _Login;}
+			set
+			{
+				_Login = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Password;
 		[CProperty(ColumnPath ="Password")]
-		public string Password { get; set; }
+		public string Password
+		{
+			get{return _Password;}
+			set
+			{
+				_Password = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _SaveAfkChats;
 		[CProperty(ColumnPath ="SaveAfkChats")]
-		public bool SaveAfkChats { get; set; }
+		public bool SaveAfkChats
+		{
+			get{return _SaveAfkChats;}
+			set
+			{
+				_SaveAfkChats = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _SaveAfkChatTimeout;
 		[CProperty(ColumnPath ="SaveAfkChatTimeout")]
-		public int SaveAfkChatTimeout { get; set; }
+		public int SaveAfkChatTimeout
+		{
+			get{return _SaveAfkChatTimeout;}
+			set
+			{
+				_SaveAfkChatTimeout = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

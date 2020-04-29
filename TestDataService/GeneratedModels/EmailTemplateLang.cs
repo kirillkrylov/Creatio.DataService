@@ -7,30 +7,138 @@ namespace Creatio.DataService.Models
 	public class EmailTemplateLang : BaseEntity
 	{
 		#region Values
+		private string _Body;
 		[CProperty(ColumnPath ="Body")]
-		public string Body { get; set; }
+		public string Body
+		{
+			get{return _Body;}
+			set
+			{
+				_Body = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EmailTemplateId;
 		[CProperty(ColumnPath ="EmailTemplateId")]
-		public Guid EmailTemplateId { get; set; }
+		public Guid EmailTemplateId
+		{
+			get{return _EmailTemplateId;}
+			set
+			{
+				_EmailTemplateId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsHtmlBody;
 		[CProperty(ColumnPath ="IsHtmlBody")]
-		public bool IsHtmlBody { get; set; }
+		public bool IsHtmlBody
+		{
+			get{return _IsHtmlBody;}
+			set
+			{
+				_IsHtmlBody = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LanguageId;
 		[CProperty(ColumnPath ="LanguageId")]
-		public Guid LanguageId { get; set; }
+		public Guid LanguageId
+		{
+			get{return _LanguageId;}
+			set
+			{
+				_LanguageId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Subject;
 		[CProperty(ColumnPath ="Subject")]
-		public string Subject { get; set; }
+		public string Subject
+		{
+			get{return _Subject;}
+			set
+			{
+				_Subject = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _TemplateConfig;
 		[CProperty(ColumnPath ="TemplateConfig")]
-		public string TemplateConfig { get; set; }
+		public string TemplateConfig
+		{
+			get{return _TemplateConfig;}
+			set
+			{
+				_TemplateConfig = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

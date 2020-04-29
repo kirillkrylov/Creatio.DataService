@@ -7,28 +7,127 @@ namespace Creatio.DataService.Models
 	public class AccountCompleteness : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ActualizationDate;
 		[CProperty(ColumnPath ="ActualizationDate")]
-		public DateTime ActualizationDate { get; set; }
+		public DateTime ActualizationDate
+		{
+			get{return _ActualizationDate;}
+			set
+			{
+				_ActualizationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _AuthorId;
 		[CProperty(ColumnPath ="AuthorId")]
-		public Guid AuthorId { get; set; }
+		public Guid AuthorId
+		{
+			get{return _AuthorId;}
+			set
+			{
+				_AuthorId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Completeness;
 		[CProperty(ColumnPath ="Completeness")]
-		public int Completeness { get; set; }
+		public int Completeness
+		{
+			get{return _Completeness;}
+			set
+			{
+				_Completeness = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Delta;
 		[CProperty(ColumnPath ="Delta")]
-		public int Delta { get; set; }
+		public int Delta
+		{
+			get{return _Delta;}
+			set
+			{
+				_Delta = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

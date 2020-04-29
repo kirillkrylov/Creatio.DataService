@@ -7,40 +7,193 @@ namespace Creatio.DataService.Models
 	public class GlbCustomerKeyPlayerList : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbAccountInCustomerId;
 		[CProperty(ColumnPath ="GlbAccountInCustomerId")]
-		public Guid GlbAccountInCustomerId { get; set; }
+		public Guid GlbAccountInCustomerId
+		{
+			get{return _GlbAccountInCustomerId;}
+			set
+			{
+				_GlbAccountInCustomerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbContactId;
 		[CProperty(ColumnPath ="GlbContactId")]
-		public Guid GlbContactId { get; set; }
+		public Guid GlbContactId
+		{
+			get{return _GlbContactId;}
+			set
+			{
+				_GlbContactId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbDescription;
 		[CProperty(ColumnPath ="GlbDescription")]
-		public string GlbDescription { get; set; }
+		public string GlbDescription
+		{
+			get{return _GlbDescription;}
+			set
+			{
+				_GlbDescription = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbInfluenceId;
 		[CProperty(ColumnPath ="GlbInfluenceId")]
-		public Guid GlbInfluenceId { get; set; }
+		public Guid GlbInfluenceId
+		{
+			get{return _GlbInfluenceId;}
+			set
+			{
+				_GlbInfluenceId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbJobId;
 		[CProperty(ColumnPath ="GlbJobId")]
-		public Guid GlbJobId { get; set; }
+		public Guid GlbJobId
+		{
+			get{return _GlbJobId;}
+			set
+			{
+				_GlbJobId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbJobTitle;
 		[CProperty(ColumnPath ="GlbJobTitle")]
-		public string GlbJobTitle { get; set; }
+		public string GlbJobTitle
+		{
+			get{return _GlbJobTitle;}
+			set
+			{
+				_GlbJobTitle = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbLoyaltyId;
 		[CProperty(ColumnPath ="GlbLoyaltyId")]
-		public Guid GlbLoyaltyId { get; set; }
+		public Guid GlbLoyaltyId
+		{
+			get{return _GlbLoyaltyId;}
+			set
+			{
+				_GlbLoyaltyId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbName;
 		[CProperty(ColumnPath ="GlbName")]
-		public string GlbName { get; set; }
+		public string GlbName
+		{
+			get{return _GlbName;}
+			set
+			{
+				_GlbName = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbNotes;
 		[CProperty(ColumnPath ="GlbNotes")]
-		public string GlbNotes { get; set; }
+		public string GlbNotes
+		{
+			get{return _GlbNotes;}
+			set
+			{
+				_GlbNotes = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbPain;
 		[CProperty(ColumnPath ="GlbPain")]
-		public string GlbPain { get; set; }
+		public string GlbPain
+		{
+			get{return _GlbPain;}
+			set
+			{
+				_GlbPain = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbRoleId;
 		[CProperty(ColumnPath ="GlbRoleId")]
-		public Guid GlbRoleId { get; set; }
+		public Guid GlbRoleId
+		{
+			get{return _GlbRoleId;}
+			set
+			{
+				_GlbRoleId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,14 +7,50 @@ namespace Creatio.DataService.Models
 	public class VwTSLicenseProduct : BaseEntity
 	{
 		#region Values
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsCompetitive;
 		[CProperty(ColumnPath ="IsCompetitive")]
-		public bool IsCompetitive { get; set; }
+		public bool IsCompetitive
+		{
+			get{return _IsCompetitive;}
+			set
+			{
+				_IsCompetitive = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ReadOnlyProductId;
 		[CProperty(ColumnPath ="ReadOnlyProductId")]
-		public string ReadOnlyProductId { get; set; }
+		public string ReadOnlyProductId
+		{
+			get{return _ReadOnlyProductId;}
+			set
+			{
+				_ReadOnlyProductId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

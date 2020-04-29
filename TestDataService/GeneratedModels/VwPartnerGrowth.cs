@@ -7,34 +7,160 @@ namespace Creatio.DataService.Models
 	public class VwPartnerGrowth : BaseEntity
 	{
 		#region Values
+		private decimal _ChurnFrom010418To300319;
 		[CProperty(ColumnPath ="ChurnFrom010418To300319")]
-		public decimal ChurnFrom010418To300319 { get; set; }
+		public decimal ChurnFrom010418To300319
+		{
+			get{return _ChurnFrom010418To300319;}
+			set
+			{
+				_ChurnFrom010418To300319 = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _ChurnFrom010419TillNow;
 		[CProperty(ColumnPath ="ChurnFrom010419TillNow")]
-		public decimal ChurnFrom010419TillNow { get; set; }
+		public decimal ChurnFrom010419TillNow
+		{
+			get{return _ChurnFrom010419TillNow;}
+			set
+			{
+				_ChurnFrom010419TillNow = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _NewCustomersFrom010418TillNow;
 		[CProperty(ColumnPath ="NewCustomersFrom010418TillNow")]
-		public decimal NewCustomersFrom010418TillNow { get; set; }
+		public decimal NewCustomersFrom010418TillNow
+		{
+			get{return _NewCustomersFrom010418TillNow;}
+			set
+			{
+				_NewCustomersFrom010418TillNow = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _NewCustomersFrom010418To310319;
 		[CProperty(ColumnPath ="NewCustomersFrom010418To310319")]
-		public decimal NewCustomersFrom010418To310319 { get; set; }
+		public decimal NewCustomersFrom010418To310319
+		{
+			get{return _NewCustomersFrom010418To310319;}
+			set
+			{
+				_NewCustomersFrom010418To310319 = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _TotalCustomersForCurrentDate;
 		[CProperty(ColumnPath ="TotalCustomersForCurrentDate")]
-		public decimal TotalCustomersForCurrentDate { get; set; }
+		public decimal TotalCustomersForCurrentDate
+		{
+			get{return _TotalCustomersForCurrentDate;}
+			set
+			{
+				_TotalCustomersForCurrentDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _TotalCustomersOn010418;
 		[CProperty(ColumnPath ="TotalCustomersOn010418")]
-		public decimal TotalCustomersOn010418 { get; set; }
+		public decimal TotalCustomersOn010418
+		{
+			get{return _TotalCustomersOn010418;}
+			set
+			{
+				_TotalCustomersOn010418 = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _TotalCustomersOn010419;
 		[CProperty(ColumnPath ="TotalCustomersOn010419")]
-		public decimal TotalCustomersOn010419 { get; set; }
+		public decimal TotalCustomersOn010419
+		{
+			get{return _TotalCustomersOn010419;}
+			set
+			{
+				_TotalCustomersOn010419 = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

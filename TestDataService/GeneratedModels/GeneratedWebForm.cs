@@ -7,44 +7,215 @@ namespace Creatio.DataService.Models
 	public class GeneratedWebForm : BaseEntity
 	{
 		#region Values
+		private string _Body;
 		[CProperty(ColumnPath ="Body")]
-		public string Body { get; set; }
+		public string Body
+		{
+			get{return _Body;}
+			set
+			{
+				_Body = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _CreateContact;
 		[CProperty(ColumnPath ="CreateContact")]
-		public bool CreateContact { get; set; }
+		public bool CreateContact
+		{
+			get{return _CreateContact;}
+			set
+			{
+				_CreateContact = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _EntityDefaultValues;
 		[CProperty(ColumnPath ="EntityDefaultValues")]
-		public string EntityDefaultValues { get; set; }
+		public string EntityDefaultValues
+		{
+			get{return _EntityDefaultValues;}
+			set
+			{
+				_EntityDefaultValues = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ExternalURL;
 		[CProperty(ColumnPath ="ExternalURL")]
-		public string ExternalURL { get; set; }
+		public string ExternalURL
+		{
+			get{return _ExternalURL;}
+			set
+			{
+				_ExternalURL = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _FormFields;
 		[CProperty(ColumnPath ="FormFields")]
-		public string FormFields { get; set; }
+		public string FormFields
+		{
+			get{return _FormFields;}
+			set
+			{
+				_FormFields = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LendingCategoryId;
 		[CProperty(ColumnPath ="LendingCategoryId")]
-		public Guid LendingCategoryId { get; set; }
+		public Guid LendingCategoryId
+		{
+			get{return _LendingCategoryId;}
+			set
+			{
+				_LendingCategoryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Notes;
 		[CProperty(ColumnPath ="Notes")]
-		public string Notes { get; set; }
+		public string Notes
+		{
+			get{return _Notes;}
+			set
+			{
+				_Notes = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ReturnURL;
 		[CProperty(ColumnPath ="ReturnURL")]
-		public string ReturnURL { get; set; }
+		public string ReturnURL
+		{
+			get{return _ReturnURL;}
+			set
+			{
+				_ReturnURL = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StateId;
 		[CProperty(ColumnPath ="StateId")]
-		public Guid StateId { get; set; }
+		public Guid StateId
+		{
+			get{return _StateId;}
+			set
+			{
+				_StateId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TypeId;
 		[CProperty(ColumnPath ="TypeId")]
-		public Guid TypeId { get; set; }
+		public Guid TypeId
+		{
+			get{return _TypeId;}
+			set
+			{
+				_TypeId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

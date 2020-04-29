@@ -7,40 +7,193 @@ namespace Creatio.DataService.Models
 	public class Budget : BaseEntity
 	{
 		#region Values
+		private decimal _ActualAmount;
 		[CProperty(ColumnPath ="ActualAmount")]
-		public decimal ActualAmount { get; set; }
+		public decimal ActualAmount
+		{
+			get{return _ActualAmount;}
+			set
+			{
+				_ActualAmount = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _ApprovalAmount;
 		[CProperty(ColumnPath ="ApprovalAmount")]
-		public decimal ApprovalAmount { get; set; }
+		public decimal ApprovalAmount
+		{
+			get{return _ApprovalAmount;}
+			set
+			{
+				_ApprovalAmount = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Balance;
 		[CProperty(ColumnPath ="Balance")]
-		public decimal Balance { get; set; }
+		public decimal Balance
+		{
+			get{return _Balance;}
+			set
+			{
+				_Balance = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CostCenterId;
 		[CProperty(ColumnPath ="CostCenterId")]
-		public Guid CostCenterId { get; set; }
+		public Guid CostCenterId
+		{
+			get{return _CostCenterId;}
+			set
+			{
+				_CostCenterId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _FullYearBalance;
 		[CProperty(ColumnPath ="FullYearBalance")]
-		public decimal FullYearBalance { get; set; }
+		public decimal FullYearBalance
+		{
+			get{return _FullYearBalance;}
+			set
+			{
+				_FullYearBalance = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Notes;
 		[CProperty(ColumnPath ="Notes")]
-		public string Notes { get; set; }
+		public string Notes
+		{
+			get{return _Notes;}
+			set
+			{
+				_Notes = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PeriodId;
 		[CProperty(ColumnPath ="PeriodId")]
-		public Guid PeriodId { get; set; }
+		public Guid PeriodId
+		{
+			get{return _PeriodId;}
+			set
+			{
+				_PeriodId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _PlannedAmount;
 		[CProperty(ColumnPath ="PlannedAmount")]
-		public decimal PlannedAmount { get; set; }
+		public decimal PlannedAmount
+		{
+			get{return _PlannedAmount;}
+			set
+			{
+				_PlannedAmount = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _YTDBalance;
 		[CProperty(ColumnPath ="YTDBalance")]
-		public decimal YTDBalance { get; set; }
+		public decimal YTDBalance
+		{
+			get{return _YTDBalance;}
+			set
+			{
+				_YTDBalance = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

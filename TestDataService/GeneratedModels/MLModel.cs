@@ -7,78 +7,402 @@ namespace Creatio.DataService.Models
 	public class MLModel : BaseEntity
 	{
 		#region Values
+		private DateTime _BatchPredictedOn;
 		[CProperty(ColumnPath ="BatchPredictedOn")]
-		public DateTime BatchPredictedOn { get; set; }
+		public DateTime BatchPredictedOn
+		{
+			get{return _BatchPredictedOn;}
+			set
+			{
+				_BatchPredictedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private byte[] _BatchPredictionFilterData;
 		[CProperty(ColumnPath ="BatchPredictionFilterData")]
-		public byte[] BatchPredictionFilterData { get; set; }
+		public byte[] BatchPredictionFilterData
+		{
+			get{return _BatchPredictionFilterData;}
+			set
+			{
+				_BatchPredictionFilterData = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _BatchPredictionQuery;
 		[CProperty(ColumnPath ="BatchPredictionQuery")]
-		public string BatchPredictionQuery { get; set; }
+		public string BatchPredictionQuery
+		{
+			get{return _BatchPredictionQuery;}
+			set
+			{
+				_BatchPredictionQuery = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _BatchPredictionStartMethodId;
 		[CProperty(ColumnPath ="BatchPredictionStartMethodId")]
-		public Guid BatchPredictionStartMethodId { get; set; }
+		public Guid BatchPredictionStartMethodId
+		{
+			get{return _BatchPredictionStartMethodId;}
+			set
+			{
+				_BatchPredictionStartMethodId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _ConfidentValueLowEdge;
 		[CProperty(ColumnPath ="ConfidentValueLowEdge")]
-		public decimal ConfidentValueLowEdge { get; set; }
+		public decimal ConfidentValueLowEdge
+		{
+			get{return _ConfidentValueLowEdge;}
+			set
+			{
+				_ConfidentValueLowEdge = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _InstanceMetric;
 		[CProperty(ColumnPath ="InstanceMetric")]
-		public decimal InstanceMetric { get; set; }
+		public decimal InstanceMetric
+		{
+			get{return _InstanceMetric;}
+			set
+			{
+				_InstanceMetric = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _LastError;
 		[CProperty(ColumnPath ="LastError")]
-		public string LastError { get; set; }
+		public string LastError
+		{
+			get{return _LastError;}
+			set
+			{
+				_LastError = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _MetaData;
 		[CProperty(ColumnPath ="MetaData")]
-		public string MetaData { get; set; }
+		public string MetaData
+		{
+			get{return _MetaData;}
+			set
+			{
+				_MetaData = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _MetaDataLcz;
 		[CProperty(ColumnPath ="MetaDataLcz")]
-		public string MetaDataLcz { get; set; }
+		public string MetaDataLcz
+		{
+			get{return _MetaDataLcz;}
+			set
+			{
+				_MetaDataLcz = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _MetricThreshold;
 		[CProperty(ColumnPath ="MetricThreshold")]
-		public decimal MetricThreshold { get; set; }
+		public decimal MetricThreshold
+		{
+			get{return _MetricThreshold;}
+			set
+			{
+				_MetricThreshold = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _MLConfidentValueMethodId;
 		[CProperty(ColumnPath ="MLConfidentValueMethodId")]
-		public Guid MLConfidentValueMethodId { get; set; }
+		public Guid MLConfidentValueMethodId
+		{
+			get{return _MLConfidentValueMethodId;}
+			set
+			{
+				_MLConfidentValueMethodId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _MLProblemTypeId;
 		[CProperty(ColumnPath ="MLProblemTypeId")]
-		public Guid MLProblemTypeId { get; set; }
+		public Guid MLProblemTypeId
+		{
+			get{return _MLProblemTypeId;}
+			set
+			{
+				_MLProblemTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ModelInstanceUId;
 		[CProperty(ColumnPath ="ModelInstanceUId")]
-		public string ModelInstanceUId { get; set; }
+		public string ModelInstanceUId
+		{
+			get{return _ModelInstanceUId;}
+			set
+			{
+				_ModelInstanceUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Notes;
 		[CProperty(ColumnPath ="Notes")]
-		public string Notes { get; set; }
+		public string Notes
+		{
+			get{return _Notes;}
+			set
+			{
+				_Notes = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PredictedResultColumnUId;
 		[CProperty(ColumnPath ="PredictedResultColumnUId")]
-		public Guid PredictedResultColumnUId { get; set; }
+		public Guid PredictedResultColumnUId
+		{
+			get{return _PredictedResultColumnUId;}
+			set
+			{
+				_PredictedResultColumnUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PredictionEnabled;
 		[CProperty(ColumnPath ="PredictionEnabled")]
-		public bool PredictionEnabled { get; set; }
+		public bool PredictionEnabled
+		{
+			get{return _PredictionEnabled;}
+			set
+			{
+				_PredictionEnabled = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _RootSchemaUId;
 		[CProperty(ColumnPath ="RootSchemaUId")]
-		public Guid RootSchemaUId { get; set; }
+		public Guid RootSchemaUId
+		{
+			get{return _RootSchemaUId;}
+			set
+			{
+				_RootSchemaUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StateId;
 		[CProperty(ColumnPath ="StateId")]
-		public Guid StateId { get; set; }
+		public Guid StateId
+		{
+			get{return _StateId;}
+			set
+			{
+				_StateId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TargetColumnUId;
 		[CProperty(ColumnPath ="TargetColumnUId")]
-		public Guid TargetColumnUId { get; set; }
+		public Guid TargetColumnUId
+		{
+			get{return _TargetColumnUId;}
+			set
+			{
+				_TargetColumnUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _TrainedOn;
 		[CProperty(ColumnPath ="TrainedOn")]
-		public DateTime TrainedOn { get; set; }
+		public DateTime TrainedOn
+		{
+			get{return _TrainedOn;}
+			set
+			{
+				_TrainedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _TrainFrequency;
 		[CProperty(ColumnPath ="TrainFrequency")]
-		public int TrainFrequency { get; set; }
+		public int TrainFrequency
+		{
+			get{return _TrainFrequency;}
+			set
+			{
+				_TrainFrequency = value;
+				OnPropertyChanged();
+			}
+		}
+		private byte[] _TrainingFilterData;
 		[CProperty(ColumnPath ="TrainingFilterData")]
-		public byte[] TrainingFilterData { get; set; }
+		public byte[] TrainingFilterData
+		{
+			get{return _TrainingFilterData;}
+			set
+			{
+				_TrainingFilterData = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _TrainingMaxRecordsCount;
 		[CProperty(ColumnPath ="TrainingMaxRecordsCount")]
-		public int TrainingMaxRecordsCount { get; set; }
+		public int TrainingMaxRecordsCount
+		{
+			get{return _TrainingMaxRecordsCount;}
+			set
+			{
+				_TrainingMaxRecordsCount = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _TrainingMinimumRecordsCount;
 		[CProperty(ColumnPath ="TrainingMinimumRecordsCount")]
-		public int TrainingMinimumRecordsCount { get; set; }
+		public int TrainingMinimumRecordsCount
+		{
+			get{return _TrainingMinimumRecordsCount;}
+			set
+			{
+				_TrainingMinimumRecordsCount = value;
+				OnPropertyChanged();
+			}
+		}
+		private byte[] _TrainingOutputFilterData;
 		[CProperty(ColumnPath ="TrainingOutputFilterData")]
-		public byte[] TrainingOutputFilterData { get; set; }
+		public byte[] TrainingOutputFilterData
+		{
+			get{return _TrainingOutputFilterData;}
+			set
+			{
+				_TrainingOutputFilterData = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _TrainingSetQuery;
 		[CProperty(ColumnPath ="TrainingSetQuery")]
-		public string TrainingSetQuery { get; set; }
+		public string TrainingSetQuery
+		{
+			get{return _TrainingSetQuery;}
+			set
+			{
+				_TrainingSetQuery = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TrainSessionId;
 		[CProperty(ColumnPath ="TrainSessionId")]
-		public Guid TrainSessionId { get; set; }
+		public Guid TrainSessionId
+		{
+			get{return _TrainSessionId;}
+			set
+			{
+				_TrainSessionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _TriedToTrainOn;
 		[CProperty(ColumnPath ="TriedToTrainOn")]
-		public DateTime TriedToTrainOn { get; set; }
+		public DateTime TriedToTrainOn
+		{
+			get{return _TriedToTrainOn;}
+			set
+			{
+				_TriedToTrainOn = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

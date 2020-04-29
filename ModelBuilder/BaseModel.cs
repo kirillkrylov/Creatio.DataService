@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -46,15 +47,27 @@ namespace ModelBuilder
                 sb.AppendLine("\t\t#region Values");
                 foreach (ModelBuilderClassProperty prop in valueList)
                 {
+                    sb.AppendLine($"\t\tprivate {prop.Type} _{prop.Name};");
                     sb.AppendLine($"\t\t{prop.PropAttribute}");
                     if (prop.Name == "Id") 
                     {
-                        sb.AppendLine($"\t\tpublic override {prop.Type} {prop.Name} {{ get; set; }}");
+                        sb.AppendLine($"\t\tpublic override {prop.Type} {prop.Name}");
                     }
                     else
                     {
-                        sb.AppendLine($"\t\tpublic {prop.Type} {prop.Name} {{ get; set; }}");
+                        sb.AppendLine($"\t\tpublic {prop.Type} {prop.Name}");
                     }
+
+                    sb.AppendLine($"\t\t{{");
+                    sb.AppendLine($"\t\t\tget{{return _{prop.Name};}}");
+
+                    sb.AppendLine($"\t\t\tset");
+                    sb.AppendLine($"\t\t\t{{");
+                    sb.AppendLine($"\t\t\t\t_{prop.Name} = value;");
+                    sb.AppendLine($"\t\t\t\tOnPropertyChanged();");
+                    sb.AppendLine($"\t\t\t}}");
+
+                    sb.AppendLine($"\t\t}}");
 
                 }
                 sb.AppendLine("\t\t#endregion");
@@ -94,7 +107,6 @@ namespace ModelBuilder
                 }
             }
             sb.AppendLine("\t\t#endregion");
-
 
             //Close Class
             sb.AppendLine("\t}");

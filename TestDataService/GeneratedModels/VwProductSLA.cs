@@ -7,20 +7,83 @@ namespace Creatio.DataService.Models
 	public class VwProductSLA : BaseEntity
 	{
 		#region Values
+		private Guid _CalendarId;
 		[CProperty(ColumnPath ="CalendarId")]
-		public Guid CalendarId { get; set; }
+		public Guid CalendarId
+		{
+			get{return _CalendarId;}
+			set
+			{
+				_CalendarId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ProductId;
 		[CProperty(ColumnPath ="ProductId")]
-		public Guid ProductId { get; set; }
+		public Guid ProductId
+		{
+			get{return _ProductId;}
+			set
+			{
+				_ProductId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ServicePactTypeId;
 		[CProperty(ColumnPath ="ServicePactTypeId")]
-		public Guid ServicePactTypeId { get; set; }
+		public Guid ServicePactTypeId
+		{
+			get{return _ServicePactTypeId;}
+			set
+			{
+				_ServicePactTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SupportLevelId;
 		[CProperty(ColumnPath ="SupportLevelId")]
-		public Guid SupportLevelId { get; set; }
+		public Guid SupportLevelId
+		{
+			get{return _SupportLevelId;}
+			set
+			{
+				_SupportLevelId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TSOfficeId;
 		[CProperty(ColumnPath ="TSOfficeId")]
-		public Guid TSOfficeId { get; set; }
+		public Guid TSOfficeId
+		{
+			get{return _TSOfficeId;}
+			set
+			{
+				_TSOfficeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _TypeName;
 		[CProperty(ColumnPath ="TypeName")]
-		public string TypeName { get; set; }
+		public string TypeName
+		{
+			get{return _TypeName;}
+			set
+			{
+				_TypeName = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

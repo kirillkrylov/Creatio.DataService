@@ -7,64 +7,325 @@ namespace Creatio.DataService.Models
 	public class Problem : BaseEntity
 	{
 		#region Values
+		private Guid _AuthorId;
 		[CProperty(ColumnPath ="AuthorId")]
-		public Guid AuthorId { get; set; }
+		public Guid AuthorId
+		{
+			get{return _AuthorId;}
+			set
+			{
+				_AuthorId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CaseSubtypeId;
 		[CProperty(ColumnPath ="CaseSubtypeId")]
-		public Guid CaseSubtypeId { get; set; }
+		public Guid CaseSubtypeId
+		{
+			get{return _CaseSubtypeId;}
+			set
+			{
+				_CaseSubtypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CaseTypeId;
 		[CProperty(ColumnPath ="CaseTypeId")]
-		public Guid CaseTypeId { get; set; }
+		public Guid CaseTypeId
+		{
+			get{return _CaseTypeId;}
+			set
+			{
+				_CaseTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ChangeId;
 		[CProperty(ColumnPath ="ChangeId")]
-		public Guid ChangeId { get; set; }
+		public Guid ChangeId
+		{
+			get{return _ChangeId;}
+			set
+			{
+				_ChangeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ClosureDate;
 		[CProperty(ColumnPath ="ClosureDate")]
-		public DateTime ClosureDate { get; set; }
+		public DateTime ClosureDate
+		{
+			get{return _ClosureDate;}
+			set
+			{
+				_ClosureDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ConfItemId;
 		[CProperty(ColumnPath ="ConfItemId")]
-		public Guid ConfItemId { get; set; }
+		public Guid ConfItemId
+		{
+			get{return _ConfItemId;}
+			set
+			{
+				_ConfItemId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _FoundInVersionId;
 		[CProperty(ColumnPath ="FoundInVersionId")]
-		public Guid FoundInVersionId { get; set; }
+		public Guid FoundInVersionId
+		{
+			get{return _FoundInVersionId;}
+			set
+			{
+				_FoundInVersionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GroupId;
 		[CProperty(ColumnPath ="GroupId")]
-		public Guid GroupId { get; set; }
+		public Guid GroupId
+		{
+			get{return _GroupId;}
+			set
+			{
+				_GroupId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _JiraURL;
 		[CProperty(ColumnPath ="JiraURL")]
-		public string JiraURL { get; set; }
+		public string JiraURL
+		{
+			get{return _JiraURL;}
+			set
+			{
+				_JiraURL = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Number;
 		[CProperty(ColumnPath ="Number")]
-		public string Number { get; set; }
+		public string Number
+		{
+			get{return _Number;}
+			set
+			{
+				_Number = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PriorityId;
 		[CProperty(ColumnPath ="PriorityId")]
-		public Guid PriorityId { get; set; }
+		public Guid PriorityId
+		{
+			get{return _PriorityId;}
+			set
+			{
+				_PriorityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _RegisteredOn;
 		[CProperty(ColumnPath ="RegisteredOn")]
-		public DateTime RegisteredOn { get; set; }
+		public DateTime RegisteredOn
+		{
+			get{return _RegisteredOn;}
+			set
+			{
+				_RegisteredOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ResolvedInVersionId;
 		[CProperty(ColumnPath ="ResolvedInVersionId")]
-		public Guid ResolvedInVersionId { get; set; }
+		public Guid ResolvedInVersionId
+		{
+			get{return _ResolvedInVersionId;}
+			set
+			{
+				_ResolvedInVersionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _ResolvedOnCommunity;
 		[CProperty(ColumnPath ="ResolvedOnCommunity")]
-		public bool ResolvedOnCommunity { get; set; }
+		public bool ResolvedOnCommunity
+		{
+			get{return _ResolvedOnCommunity;}
+			set
+			{
+				_ResolvedOnCommunity = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ServiceItemId;
 		[CProperty(ColumnPath ="ServiceItemId")]
-		public Guid ServiceItemId { get; set; }
+		public Guid ServiceItemId
+		{
+			get{return _ServiceItemId;}
+			set
+			{
+				_ServiceItemId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Solution;
 		[CProperty(ColumnPath ="Solution")]
-		public string Solution { get; set; }
+		public string Solution
+		{
+			get{return _Solution;}
+			set
+			{
+				_Solution = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _SolutionPlanedOn;
 		[CProperty(ColumnPath ="SolutionPlanedOn")]
-		public DateTime SolutionPlanedOn { get; set; }
+		public DateTime SolutionPlanedOn
+		{
+			get{return _SolutionPlanedOn;}
+			set
+			{
+				_SolutionPlanedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _SolutionProvidedOn;
 		[CProperty(ColumnPath ="SolutionProvidedOn")]
-		public DateTime SolutionProvidedOn { get; set; }
+		public DateTime SolutionProvidedOn
+		{
+			get{return _SolutionProvidedOn;}
+			set
+			{
+				_SolutionProvidedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StatusId;
 		[CProperty(ColumnPath ="StatusId")]
-		public Guid StatusId { get; set; }
+		public Guid StatusId
+		{
+			get{return _StatusId;}
+			set
+			{
+				_StatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Symptoms;
 		[CProperty(ColumnPath ="Symptoms")]
-		public string Symptoms { get; set; }
+		public string Symptoms
+		{
+			get{return _Symptoms;}
+			set
+			{
+				_Symptoms = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TypeId;
 		[CProperty(ColumnPath ="TypeId")]
-		public Guid TypeId { get; set; }
+		public Guid TypeId
+		{
+			get{return _TypeId;}
+			set
+			{
+				_TypeId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

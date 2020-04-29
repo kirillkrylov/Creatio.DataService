@@ -7,42 +7,204 @@ namespace Creatio.DataService.Models
 	public class VwCommandAction : BaseEntity
 	{
 		#region Values
+		private string _AdditionalParamValue;
 		[CProperty(ColumnPath ="AdditionalParamValue")]
-		public string AdditionalParamValue { get; set; }
+		public string AdditionalParamValue
+		{
+			get{return _AdditionalParamValue;}
+			set
+			{
+				_AdditionalParamValue = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Caption;
 		[CProperty(ColumnPath ="Caption")]
-		public string Caption { get; set; }
+		public string Caption
+		{
+			get{return _Caption;}
+			set
+			{
+				_Caption = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Code;
 		[CProperty(ColumnPath ="Code")]
-		public string Code { get; set; }
+		public string Code
+		{
+			get{return _Code;}
+			set
+			{
+				_Code = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ColumnCaption;
 		[CProperty(ColumnPath ="ColumnCaption")]
-		public string ColumnCaption { get; set; }
+		public string ColumnCaption
+		{
+			get{return _ColumnCaption;}
+			set
+			{
+				_ColumnCaption = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CommandActionId;
 		[CProperty(ColumnPath ="CommandActionId")]
-		public Guid CommandActionId { get; set; }
+		public Guid CommandActionId
+		{
+			get{return _CommandActionId;}
+			set
+			{
+				_CommandActionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsShared;
 		[CProperty(ColumnPath ="IsShared")]
-		public bool IsShared { get; set; }
+		public bool IsShared
+		{
+			get{return _IsShared;}
+			set
+			{
+				_IsShared = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _MainParamCation;
 		[CProperty(ColumnPath ="MainParamCation")]
-		public string MainParamCation { get; set; }
+		public string MainParamCation
+		{
+			get{return _MainParamCation;}
+			set
+			{
+				_MainParamCation = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _OrderColumn;
 		[CProperty(ColumnPath ="OrderColumn")]
-		public int OrderColumn { get; set; }
+		public int OrderColumn
+		{
+			get{return _OrderColumn;}
+			set
+			{
+				_OrderColumn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SubjectColumnUId;
 		[CProperty(ColumnPath ="SubjectColumnUId")]
-		public Guid SubjectColumnUId { get; set; }
+		public Guid SubjectColumnUId
+		{
+			get{return _SubjectColumnUId;}
+			set
+			{
+				_SubjectColumnUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SubjectSchemaUId;
 		[CProperty(ColumnPath ="SubjectSchemaUId")]
-		public Guid SubjectSchemaUId { get; set; }
+		public Guid SubjectSchemaUId
+		{
+			get{return _SubjectSchemaUId;}
+			set
+			{
+				_SubjectSchemaUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _TypeColumnCode;
 		[CProperty(ColumnPath ="TypeColumnCode")]
-		public string TypeColumnCode { get; set; }
+		public string TypeColumnCode
+		{
+			get{return _TypeColumnCode;}
+			set
+			{
+				_TypeColumnCode = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TypeColumnUId;
 		[CProperty(ColumnPath ="TypeColumnUId")]
-		public Guid TypeColumnUId { get; set; }
+		public Guid TypeColumnUId
+		{
+			get{return _TypeColumnUId;}
+			set
+			{
+				_TypeColumnUId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

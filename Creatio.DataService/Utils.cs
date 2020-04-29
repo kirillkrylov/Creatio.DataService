@@ -14,6 +14,7 @@ using System.Reflection;
 using Creatio.DataService.Attributes;
 using Creatio.DataService.Parameters;
 using System.Numerics;
+using System.Linq;
 
 namespace Creatio.DataService
 {
@@ -26,7 +27,7 @@ namespace Creatio.DataService
         private string domain;
         private string userName;
         private string password;
-        private bool _IsLoginSuccess = false;
+        protected CancellationTokenSource cts;
         #endregion
 
         #region Constructors
@@ -35,7 +36,6 @@ namespace Creatio.DataService
 
         #region Properties
         private CookieContainer Auth { get; set; }
-        public bool IsLoginSuccess { get { return _IsLoginSuccess; } }
         public CurrentUser CurrentUser { get; private set; } = null;
         public static Utils Instance
         {
@@ -53,94 +53,41 @@ namespace Creatio.DataService
                 return _instance;
             }
         }
+
+
+        private bool _IsLoginSuccess = false;
+        public bool IsLoginSuccess { get { return _IsLoginSuccess; } }
+
+
+        protected Uri _soketDomain;
+        protected Uri SocketDomain 
+        {
+            get {
+                Uri uri = new Uri(domain);
+                if (uri.Scheme == "https")
+                {
+                    _soketDomain = new Uri($"wss://{uri.Host}/0/Nui/ViewModule.aspx.ashx");
+                }
+                else
+                {
+                    _soketDomain = new Uri($"ws://{uri.Host}/0/Nui/ViewModule.aspx.ashx");
+                }
+                return _soketDomain;
+            }
+        }
+
+
         #endregion
 
         #region Events
+        /// <summary>
+        /// Raised when webSocket message is received and read;
+        /// </summary>
         public event EventHandler<WebSocketMessageReceivedEventArgs> WebSocketMessageReceived;
         #endregion
 
         #region Methods : Private
-        /// <summary>
-        /// Will try to connect 5 times then give up
-        /// </summary>
-        private async void ConectWebSocket()
-        {
-            ClientWebSocket wss = new ClientWebSocket();
-            wss.Options.Cookies = Instance.Auth;
-            foreach (Cookie c in Instance.Auth.GetCookies(new Uri(domain)))
-            {
-                if (c.Name == "BPMCSRF" && !String.IsNullOrEmpty(c.Value))
-                {
-                    wss.Options.SetRequestHeader(c.Name, c.Value);
-                    wss.Options.KeepAliveInterval = TimeSpan.FromSeconds(60);
-                }
-            }
 
-            string socketDomain;
-            if (domain.StartsWith("https://", StringComparison.Ordinal))
-            {
-                socketDomain = domain.Replace("https://", "wss://");
-            }
-            else
-            {
-                socketDomain = domain.Replace("http://", "ws://");
-            }
-
-            int attempts = 0;
-            try
-            {
-                while(wss.State != WebSocketState.Open && wss.State != WebSocketState.Connecting && attempts <5)
-                {
-                    try
-                    {
-                        await wss.ConnectAsync(new Uri($"{socketDomain}/0/Nui/ViewModule.aspx.ashx"), CancellationToken.None).ConfigureAwait(false);
-                    }
-                    catch (WebSocketException ex)
-                    {
-                        attempts++;
-#if DEBUG           
-                        Console.WriteLine(ex.Message);
-#endif
-                    }
-                }
-                while (wss.State == WebSocketState.Open)
-                {
-#if DEBUG
-                    Console.WriteLine("Socket Connected ...");
-#endif
-                    attempts = 0;
-                    ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[8192]);
-                    WebSocketReceiveResult result;
-                    using (var ms = new MemoryStream())
-                    {
-                        do
-                        {
-                            result = await wss.ReceiveAsync(buffer, CancellationToken.None).ConfigureAwait(false);
-                            ms.Write(buffer.Array, buffer.Offset, result.Count);
-                        }
-                        while (!result.EndOfMessage);
-
-                        ms.Seek(0, SeekOrigin.Begin);
-
-                        if (result.MessageType == WebSocketMessageType.Text)
-                        {
-                            using (var reader = new StreamReader(ms, Encoding.UTF8))
-                            {
-                                string txt = reader.ReadToEnd();
-                                WebSocketMessageReceivedEventArgs e = JsonConvert.DeserializeObject<WebSocketMessageReceivedEventArgs>(txt);
-                                Instance.OnWebSocketMessageReceived(e);
-                            }
-                        }
-                    }
-                }
-
-            }
-            catch
-            {
-
-            }
-            wss.Dispose();
-        }
         private void OnWebSocketMessageReceived(WebSocketMessageReceivedEventArgs e)
         {
             EventHandler<WebSocketMessageReceivedEventArgs> handler = WebSocketMessageReceived;
@@ -891,12 +838,15 @@ namespace Creatio.DataService
             if (Instance._IsLoginSuccess)
             {
                 Instance.CurrentUser = await GetSysValuesAsync().ConfigureAwait(false);
-                Instance.ConectWebSocket();
+                
+                cts = new CancellationTokenSource();
+                Instance.ConectWebSocket(cts.Token);
             }
             return Instance._IsLoginSuccess;
         }
         public async Task<bool> LogoutAsync()
         {
+            cts.Cancel();
             var logout = await GetResponseAsync("{}", ActionEnum.LOGOUT).ConfigureAwait(false);
             if (logout.HttpStatusCode == HttpStatusCode.OK)
             {
@@ -1071,6 +1021,65 @@ namespace Creatio.DataService
             }
             return result;
         }
+        /// <summary>
+        /// Connect to webSocket, every message received will Raise WebSocketMessageReceived Event
+        /// </summary>
+        protected async void ConectWebSocket(CancellationToken ct)
+        {
+            while (!ct.IsCancellationRequested)
+            {
+                ClientWebSocket wss = new ClientWebSocket();
+                wss.Options.Cookies = Instance.Auth;
+                foreach (Cookie c in Instance.Auth.GetCookies(new Uri(domain)))
+                {
+                    if (c.Name == "BPMCSRF" && !String.IsNullOrEmpty(c.Value))
+                    {
+                        wss.Options.SetRequestHeader(c.Name, c.Value);
+                        wss.Options.KeepAliveInterval = TimeSpan.FromSeconds(60);
+                    }
+                }
+                try
+                {
+                    await wss.ConnectAsync(SocketDomain, CancellationToken.None).ConfigureAwait(false);
+#if DEBUG       
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Socket Connected ...");
+                    Console.ResetColor();
+#endif              
+                    while (!ct.IsCancellationRequested)
+                    {
+                        ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[8192]);
+                        WebSocketReceiveResult result;
+                        using (var ms = new MemoryStream())
+                        {
+                            do
+                            {
+                                result = await wss.ReceiveAsync(buffer, CancellationToken.None).ConfigureAwait(false);
+                                ms.Write(buffer.Array, buffer.Offset, result.Count);
+                            }
+                            while (!result.EndOfMessage && !ct.IsCancellationRequested);
+                            ms.Seek(0, SeekOrigin.Begin);
+                            if (result.MessageType == WebSocketMessageType.Text)
+                            {
+                                using (var reader = new StreamReader(ms, Encoding.UTF8))
+                                {
+                                    string txt = reader.ReadToEnd();
+                                    WebSocketMessageReceivedEventArgs e = JsonConvert.DeserializeObject<WebSocketMessageReceivedEventArgs>(txt);
+                                    Instance.OnWebSocketMessageReceived(e);
+                                }
+                            }
+                        }
+                    }
+                    await wss.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None);
+                }
+                catch (WebSocketException wse)
+                {
+                    Console.WriteLine($"ErrorCode:{wse.ErrorCode}\nMessage:\n{wse.Message}");
+                }
+                wss.Dispose();
+            }
+        }
+
         #endregion
 
         /// <summary></summary>
@@ -1091,19 +1100,32 @@ namespace Creatio.DataService
             }
 
             string selectQueryJson = JsonConvert.SerializeObject(selectQuery);
-            RequestResponse requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
-            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized) 
+
+            try
             {
-                requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
+                RequestResponse requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT).ConfigureAwait(true);
+
+                if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
+                {
+                    requestResponse = await GetResponseAsync(selectQueryJson, ActionEnum.SELECT);
+                }
+
+                if (!string.IsNullOrEmpty(requestResponse.ErrorMessage))
+                {
+                    return new List<Entity>();
+                }
+
+                List<Entity> result = BuildEntity<Entity>(requestResponse);
+                return result;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
-            if (!string.IsNullOrEmpty(requestResponse.ErrorMessage))
-            {
-                return new List<Entity>();
-            }
-
-            List<Entity> result = BuildEntity<Entity>(requestResponse);
-            return result;
+            
         }
 
         public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName = "") where Entity : BaseEntity, new()
@@ -1222,6 +1244,7 @@ namespace Creatio.DataService
         }
 
         #endregion
+
 
         #region IDisposable
 

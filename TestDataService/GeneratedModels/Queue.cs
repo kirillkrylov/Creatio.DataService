@@ -7,56 +7,281 @@ namespace Creatio.DataService.Models
 	public class Queue : BaseEntity
 	{
 		#region Values
+		private bool _AssignOperatorAutomatically;
 		[CProperty(ColumnPath ="AssignOperatorAutomatically")]
-		public bool AssignOperatorAutomatically { get; set; }
+		public bool AssignOperatorAutomatically
+		{
+			get{return _AssignOperatorAutomatically;}
+			set
+			{
+				_AssignOperatorAutomatically = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _BusinessProcessSchemaId;
 		[CProperty(ColumnPath ="BusinessProcessSchemaId")]
-		public Guid BusinessProcessSchemaId { get; set; }
+		public Guid BusinessProcessSchemaId
+		{
+			get{return _BusinessProcessSchemaId;}
+			set
+			{
+				_BusinessProcessSchemaId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _EntitySchemaCaption;
 		[CProperty(ColumnPath ="EntitySchemaCaption")]
-		public string EntitySchemaCaption { get; set; }
+		public string EntitySchemaCaption
+		{
+			get{return _EntitySchemaCaption;}
+			set
+			{
+				_EntitySchemaCaption = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EntitySchemaUId;
 		[CProperty(ColumnPath ="EntitySchemaUId")]
-		public Guid EntitySchemaUId { get; set; }
+		public Guid EntitySchemaUId
+		{
+			get{return _EntitySchemaUId;}
+			set
+			{
+				_EntitySchemaUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EventId;
 		[CProperty(ColumnPath ="EventId")]
-		public Guid EventId { get; set; }
+		public Guid EventId
+		{
+			get{return _EventId;}
+			set
+			{
+				_EventId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _FilterData;
 		[CProperty(ColumnPath ="FilterData")]
-		public string FilterData { get; set; }
+		public string FilterData
+		{
+			get{return _FilterData;}
+			set
+			{
+				_FilterData = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _FilterEditData;
 		[CProperty(ColumnPath ="FilterEditData")]
-		public string FilterEditData { get; set; }
+		public string FilterEditData
+		{
+			get{return _FilterEditData;}
+			set
+			{
+				_FilterEditData = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _IgnorePriorityFilterData;
 		[CProperty(ColumnPath ="IgnorePriorityFilterData")]
-		public string IgnorePriorityFilterData { get; set; }
+		public string IgnorePriorityFilterData
+		{
+			get{return _IgnorePriorityFilterData;}
+			set
+			{
+				_IgnorePriorityFilterData = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsManuallyFilling;
 		[CProperty(ColumnPath ="IsManuallyFilling")]
-		public bool IsManuallyFilling { get; set; }
+		public bool IsManuallyFilling
+		{
+			get{return _IsManuallyFilling;}
+			set
+			{
+				_IsManuallyFilling = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LeadTypeId;
 		[CProperty(ColumnPath ="LeadTypeId")]
-		public Guid LeadTypeId { get; set; }
+		public Guid LeadTypeId
+		{
+			get{return _LeadTypeId;}
+			set
+			{
+				_LeadTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PriorityId;
 		[CProperty(ColumnPath ="PriorityId")]
-		public Guid PriorityId { get; set; }
+		public Guid PriorityId
+		{
+			get{return _PriorityId;}
+			set
+			{
+				_PriorityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ProcessSchemaCaption;
 		[CProperty(ColumnPath ="ProcessSchemaCaption")]
-		public string ProcessSchemaCaption { get; set; }
+		public string ProcessSchemaCaption
+		{
+			get{return _ProcessSchemaCaption;}
+			set
+			{
+				_ProcessSchemaCaption = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ProcessSchemaUId;
 		[CProperty(ColumnPath ="ProcessSchemaUId")]
-		public Guid ProcessSchemaUId { get; set; }
+		public Guid ProcessSchemaUId
+		{
+			get{return _ProcessSchemaUId;}
+			set
+			{
+				_ProcessSchemaUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _QueueEntitySchemaId;
 		[CProperty(ColumnPath ="QueueEntitySchemaId")]
-		public Guid QueueEntitySchemaId { get; set; }
+		public Guid QueueEntitySchemaId
+		{
+			get{return _QueueEntitySchemaId;}
+			set
+			{
+				_QueueEntitySchemaId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _QueueItemAdditionId;
 		[CProperty(ColumnPath ="QueueItemAdditionId")]
-		public Guid QueueItemAdditionId { get; set; }
+		public Guid QueueItemAdditionId
+		{
+			get{return _QueueItemAdditionId;}
+			set
+			{
+				_QueueItemAdditionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _QueueUpdateFrequencyId;
 		[CProperty(ColumnPath ="QueueUpdateFrequencyId")]
-		public Guid QueueUpdateFrequencyId { get; set; }
+		public Guid QueueUpdateFrequencyId
+		{
+			get{return _QueueUpdateFrequencyId;}
+			set
+			{
+				_QueueUpdateFrequencyId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _SentEmailToOperator;
 		[CProperty(ColumnPath ="SentEmailToOperator")]
-		public bool SentEmailToOperator { get; set; }
+		public bool SentEmailToOperator
+		{
+			get{return _SentEmailToOperator;}
+			set
+			{
+				_SentEmailToOperator = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StatusId;
 		[CProperty(ColumnPath ="StatusId")]
-		public Guid StatusId { get; set; }
+		public Guid StatusId
+		{
+			get{return _StatusId;}
+			set
+			{
+				_StatusId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,12 +7,39 @@ namespace Creatio.DataService.Models
 	public class VwUserEmailsCount : BaseEntity
 	{
 		#region Values
+		private int _EmailsCount;
 		[CProperty(ColumnPath ="EmailsCount")]
-		public int EmailsCount { get; set; }
+		public int EmailsCount
+		{
+			get{return _EmailsCount;}
+			set
+			{
+				_EmailsCount = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SysAdminUnitId;
 		[CProperty(ColumnPath ="SysAdminUnitId")]
-		public Guid SysAdminUnitId { get; set; }
+		public Guid SysAdminUnitId
+		{
+			get{return _SysAdminUnitId;}
+			set
+			{
+				_SysAdminUnitId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

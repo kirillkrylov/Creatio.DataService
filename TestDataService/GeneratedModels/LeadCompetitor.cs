@@ -7,40 +7,193 @@ namespace Creatio.DataService.Models
 	public class LeadCompetitor : BaseEntity
 	{
 		#region Values
+		private decimal _CompetitorAmount;
 		[CProperty(ColumnPath ="CompetitorAmount")]
-		public decimal CompetitorAmount { get; set; }
+		public decimal CompetitorAmount
+		{
+			get{return _CompetitorAmount;}
+			set
+			{
+				_CompetitorAmount = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CompetitorId;
 		[CProperty(ColumnPath ="CompetitorId")]
-		public Guid CompetitorId { get; set; }
+		public Guid CompetitorId
+		{
+			get{return _CompetitorId;}
+			set
+			{
+				_CompetitorId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CompetitorProductId;
 		[CProperty(ColumnPath ="CompetitorProductId")]
-		public Guid CompetitorProductId { get; set; }
+		public Guid CompetitorProductId
+		{
+			get{return _CompetitorProductId;}
+			set
+			{
+				_CompetitorProductId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _DateFrom;
 		[CProperty(ColumnPath ="DateFrom")]
-		public DateTime DateFrom { get; set; }
+		public DateTime DateFrom
+		{
+			get{return _DateFrom;}
+			set
+			{
+				_DateFrom = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _DateTo;
 		[CProperty(ColumnPath ="DateTo")]
-		public DateTime DateTo { get; set; }
+		public DateTime DateTo
+		{
+			get{return _DateTo;}
+			set
+			{
+				_DateTo = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsWinner;
 		[CProperty(ColumnPath ="IsWinner")]
-		public bool IsWinner { get; set; }
+		public bool IsWinner
+		{
+			get{return _IsWinner;}
+			set
+			{
+				_IsWinner = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LeadId;
 		[CProperty(ColumnPath ="LeadId")]
-		public Guid LeadId { get; set; }
+		public Guid LeadId
+		{
+			get{return _LeadId;}
+			set
+			{
+				_LeadId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OpportunityId;
 		[CProperty(ColumnPath ="OpportunityId")]
-		public Guid OpportunityId { get; set; }
+		public Guid OpportunityId
+		{
+			get{return _OpportunityId;}
+			set
+			{
+				_OpportunityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Strengths;
 		[CProperty(ColumnPath ="Strengths")]
-		public string Strengths { get; set; }
+		public string Strengths
+		{
+			get{return _Strengths;}
+			set
+			{
+				_Strengths = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SupplierId;
 		[CProperty(ColumnPath ="SupplierId")]
-		public Guid SupplierId { get; set; }
+		public Guid SupplierId
+		{
+			get{return _SupplierId;}
+			set
+			{
+				_SupplierId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Weakness;
 		[CProperty(ColumnPath ="Weakness")]
-		public string Weakness { get; set; }
+		public string Weakness
+		{
+			get{return _Weakness;}
+			set
+			{
+				_Weakness = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,42 +7,204 @@ namespace Creatio.DataService.Models
 	public class Currency : BaseEntity
 	{
 		#region Values
+		private string _Code;
 		[CProperty(ColumnPath ="Code")]
-		public string Code { get; set; }
+		public string Code
+		{
+			get{return _Code;}
+			set
+			{
+				_Code = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _CurrecySymbolPosition;
 		[CProperty(ColumnPath ="CurrecySymbolPosition")]
-		public int CurrecySymbolPosition { get; set; }
+		public int CurrecySymbolPosition
+		{
+			get{return _CurrecySymbolPosition;}
+			set
+			{
+				_CurrecySymbolPosition = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Division;
 		[CProperty(ColumnPath ="Division")]
-		public int Division { get; set; }
+		public int Division
+		{
+			get{return _Division;}
+			set
+			{
+				_Division = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _NameEN;
 		[CProperty(ColumnPath ="NameEN")]
-		public string NameEN { get; set; }
+		public string NameEN
+		{
+			get{return _NameEN;}
+			set
+			{
+				_NameEN = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Rate;
 		[CProperty(ColumnPath ="Rate")]
-		public decimal Rate { get; set; }
+		public decimal Rate
+		{
+			get{return _Rate;}
+			set
+			{
+				_Rate = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _RecalcDirection;
 		[CProperty(ColumnPath ="RecalcDirection")]
-		public int RecalcDirection { get; set; }
+		public int RecalcDirection
+		{
+			get{return _RecalcDirection;}
+			set
+			{
+				_RecalcDirection = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ShortName;
 		[CProperty(ColumnPath ="ShortName")]
-		public string ShortName { get; set; }
+		public string ShortName
+		{
+			get{return _ShortName;}
+			set
+			{
+				_ShortName = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Symbol;
 		[CProperty(ColumnPath ="Symbol")]
-		public string Symbol { get; set; }
+		public string Symbol
+		{
+			get{return _Symbol;}
+			set
+			{
+				_Symbol = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _TsIsBase;
 		[CProperty(ColumnPath ="TsIsBase")]
-		public bool TsIsBase { get; set; }
+		public bool TsIsBase
+		{
+			get{return _TsIsBase;}
+			set
+			{
+				_TsIsBase = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _UsedInFinancialRequests;
 		[CProperty(ColumnPath ="UsedInFinancialRequests")]
-		public bool UsedInFinancialRequests { get; set; }
+		public bool UsedInFinancialRequests
+		{
+			get{return _UsedInFinancialRequests;}
+			set
+			{
+				_UsedInFinancialRequests = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

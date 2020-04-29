@@ -7,42 +7,204 @@ namespace Creatio.DataService.Models
 	public class ContactCareer : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ContactId;
 		[CProperty(ColumnPath ="ContactId")]
-		public Guid ContactId { get; set; }
+		public Guid ContactId
+		{
+			get{return _ContactId;}
+			set
+			{
+				_ContactId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _Current;
 		[CProperty(ColumnPath ="Current")]
-		public bool Current { get; set; }
+		public bool Current
+		{
+			get{return _Current;}
+			set
+			{
+				_Current = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DecisionRoleId;
 		[CProperty(ColumnPath ="DecisionRoleId")]
-		public Guid DecisionRoleId { get; set; }
+		public Guid DecisionRoleId
+		{
+			get{return _DecisionRoleId;}
+			set
+			{
+				_DecisionRoleId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DepartmentId;
 		[CProperty(ColumnPath ="DepartmentId")]
-		public Guid DepartmentId { get; set; }
+		public Guid DepartmentId
+		{
+			get{return _DepartmentId;}
+			set
+			{
+				_DepartmentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _DueDate;
 		[CProperty(ColumnPath ="DueDate")]
-		public DateTime DueDate { get; set; }
+		public DateTime DueDate
+		{
+			get{return _DueDate;}
+			set
+			{
+				_DueDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _JobChangeReasonId;
 		[CProperty(ColumnPath ="JobChangeReasonId")]
-		public Guid JobChangeReasonId { get; set; }
+		public Guid JobChangeReasonId
+		{
+			get{return _JobChangeReasonId;}
+			set
+			{
+				_JobChangeReasonId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _JobId;
 		[CProperty(ColumnPath ="JobId")]
-		public Guid JobId { get; set; }
+		public Guid JobId
+		{
+			get{return _JobId;}
+			set
+			{
+				_JobId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _JobTitle;
 		[CProperty(ColumnPath ="JobTitle")]
-		public string JobTitle { get; set; }
+		public string JobTitle
+		{
+			get{return _JobTitle;}
+			set
+			{
+				_JobTitle = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _Primary;
 		[CProperty(ColumnPath ="Primary")]
-		public bool Primary { get; set; }
+		public bool Primary
+		{
+			get{return _Primary;}
+			set
+			{
+				_Primary = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _StartDate;
 		[CProperty(ColumnPath ="StartDate")]
-		public DateTime StartDate { get; set; }
+		public DateTime StartDate
+		{
+			get{return _StartDate;}
+			set
+			{
+				_StartDate = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

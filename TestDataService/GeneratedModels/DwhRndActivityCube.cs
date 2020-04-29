@@ -7,42 +7,204 @@ namespace Creatio.DataService.Models
 	public class DwhRndActivityCube : BaseEntity
 	{
 		#region Values
+		private decimal _AvgDuration;
 		[CProperty(ColumnPath ="AvgDuration")]
-		public decimal AvgDuration { get; set; }
+		public decimal AvgDuration
+		{
+			get{return _AvgDuration;}
+			set
+			{
+				_AvgDuration = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _BillingJira;
 		[CProperty(ColumnPath ="BillingJira")]
-		public decimal BillingJira { get; set; }
+		public decimal BillingJira
+		{
+			get{return _BillingJira;}
+			set
+			{
+				_BillingJira = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _BillingTotal;
 		[CProperty(ColumnPath ="BillingTotal")]
-		public decimal BillingTotal { get; set; }
+		public decimal BillingTotal
+		{
+			get{return _BillingTotal;}
+			set
+			{
+				_BillingTotal = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EmployeeId;
 		[CProperty(ColumnPath ="EmployeeId")]
-		public Guid EmployeeId { get; set; }
+		public Guid EmployeeId
+		{
+			get{return _EmployeeId;}
+			set
+			{
+				_EmployeeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _IncAvgDuration;
 		[CProperty(ColumnPath ="IncAvgDuration")]
-		public decimal IncAvgDuration { get; set; }
+		public decimal IncAvgDuration
+		{
+			get{return _IncAvgDuration;}
+			set
+			{
+				_IncAvgDuration = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _IncidentCount;
 		[CProperty(ColumnPath ="IncidentCount")]
-		public int IncidentCount { get; set; }
+		public int IncidentCount
+		{
+			get{return _IncidentCount;}
+			set
+			{
+				_IncidentCount = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _IncIncidentCount;
 		[CProperty(ColumnPath ="IncIncidentCount")]
-		public decimal IncIncidentCount { get; set; }
+		public decimal IncIncidentCount
+		{
+			get{return _IncIncidentCount;}
+			set
+			{
+				_IncIncidentCount = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _IncProductivity;
 		[CProperty(ColumnPath ="IncProductivity")]
-		public decimal IncProductivity { get; set; }
+		public decimal IncProductivity
+		{
+			get{return _IncProductivity;}
+			set
+			{
+				_IncProductivity = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _IncSpeed;
 		[CProperty(ColumnPath ="IncSpeed")]
-		public decimal IncSpeed { get; set; }
+		public decimal IncSpeed
+		{
+			get{return _IncSpeed;}
+			set
+			{
+				_IncSpeed = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PeriodId;
 		[CProperty(ColumnPath ="PeriodId")]
-		public Guid PeriodId { get; set; }
+		public Guid PeriodId
+		{
+			get{return _PeriodId;}
+			set
+			{
+				_PeriodId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Productivity;
 		[CProperty(ColumnPath ="Productivity")]
-		public decimal Productivity { get; set; }
+		public decimal Productivity
+		{
+			get{return _Productivity;}
+			set
+			{
+				_Productivity = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Speed;
 		[CProperty(ColumnPath ="Speed")]
-		public decimal Speed { get; set; }
+		public decimal Speed
+		{
+			get{return _Speed;}
+			set
+			{
+				_Speed = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,40 +7,193 @@ namespace Creatio.DataService.Models
 	public class EventTarget : BaseEntity
 	{
 		#region Values
+		private Guid _ContactId;
 		[CProperty(ColumnPath ="ContactId")]
-		public Guid ContactId { get; set; }
+		public Guid ContactId
+		{
+			get{return _ContactId;}
+			set
+			{
+				_ContactId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EventId;
 		[CProperty(ColumnPath ="EventId")]
-		public Guid EventId { get; set; }
+		public Guid EventId
+		{
+			get{return _EventId;}
+			set
+			{
+				_EventId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EventResponseId;
 		[CProperty(ColumnPath ="EventResponseId")]
-		public Guid EventResponseId { get; set; }
+		public Guid EventResponseId
+		{
+			get{return _EventResponseId;}
+			set
+			{
+				_EventResponseId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GeneratedWebFormId;
 		[CProperty(ColumnPath ="GeneratedWebFormId")]
-		public Guid GeneratedWebFormId { get; set; }
+		public Guid GeneratedWebFormId
+		{
+			get{return _GeneratedWebFormId;}
+			set
+			{
+				_GeneratedWebFormId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsFromGroup;
 		[CProperty(ColumnPath ="IsFromGroup")]
-		public bool IsFromGroup { get; set; }
+		public bool IsFromGroup
+		{
+			get{return _IsFromGroup;}
+			set
+			{
+				_IsFromGroup = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _LeadId;
 		[CProperty(ColumnPath ="LeadId")]
-		public Guid LeadId { get; set; }
+		public Guid LeadId
+		{
+			get{return _LeadId;}
+			set
+			{
+				_LeadId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Note;
 		[CProperty(ColumnPath ="Note")]
-		public string Note { get; set; }
+		public string Note
+		{
+			get{return _Note;}
+			set
+			{
+				_Note = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OwnerId;
 		[CProperty(ColumnPath ="OwnerId")]
-		public Guid OwnerId { get; set; }
+		public Guid OwnerId
+		{
+			get{return _OwnerId;}
+			set
+			{
+				_OwnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ParticipantStatusId;
 		[CProperty(ColumnPath ="ParticipantStatusId")]
-		public Guid ParticipantStatusId { get; set; }
+		public Guid ParticipantStatusId
+		{
+			get{return _ParticipantStatusId;}
+			set
+			{
+				_ParticipantStatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PartnerId;
 		[CProperty(ColumnPath ="PartnerId")]
-		public Guid PartnerId { get; set; }
+		public Guid PartnerId
+		{
+			get{return _PartnerId;}
+			set
+			{
+				_PartnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _RegistrationTypeId;
 		[CProperty(ColumnPath ="RegistrationTypeId")]
-		public Guid RegistrationTypeId { get; set; }
+		public Guid RegistrationTypeId
+		{
+			get{return _RegistrationTypeId;}
+			set
+			{
+				_RegistrationTypeId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

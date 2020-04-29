@@ -7,32 +7,149 @@ namespace Creatio.DataService.Models
 	public class PDESuitableCustomerInOpportunity : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PDECountryFilter;
 		[CProperty(ColumnPath ="PDECountryFilter")]
-		public bool PDECountryFilter { get; set; }
+		public bool PDECountryFilter
+		{
+			get{return _PDECountryFilter;}
+			set
+			{
+				_PDECountryFilter = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PDECustomerId;
 		[CProperty(ColumnPath ="PDECustomerId")]
-		public Guid PDECustomerId { get; set; }
+		public Guid PDECustomerId
+		{
+			get{return _PDECustomerId;}
+			set
+			{
+				_PDECustomerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PDEIndustryFilter;
 		[CProperty(ColumnPath ="PDEIndustryFilter")]
-		public bool PDEIndustryFilter { get; set; }
+		public bool PDEIndustryFilter
+		{
+			get{return _PDEIndustryFilter;}
+			set
+			{
+				_PDEIndustryFilter = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PDENeedCombinationFilter;
 		[CProperty(ColumnPath ="PDENeedCombinationFilter")]
-		public bool PDENeedCombinationFilter { get; set; }
+		public bool PDENeedCombinationFilter
+		{
+			get{return _PDENeedCombinationFilter;}
+			set
+			{
+				_PDENeedCombinationFilter = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PDENeedFilter;
 		[CProperty(ColumnPath ="PDENeedFilter")]
-		public bool PDENeedFilter { get; set; }
+		public bool PDENeedFilter
+		{
+			get{return _PDENeedFilter;}
+			set
+			{
+				_PDENeedFilter = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PDEOpportunityId;
 		[CProperty(ColumnPath ="PDEOpportunityId")]
-		public Guid PDEOpportunityId { get; set; }
+		public Guid PDEOpportunityId
+		{
+			get{return _PDEOpportunityId;}
+			set
+			{
+				_PDEOpportunityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PDETerritoryFilter;
 		[CProperty(ColumnPath ="PDETerritoryFilter")]
-		public bool PDETerritoryFilter { get; set; }
+		public bool PDETerritoryFilter
+		{
+			get{return _PDETerritoryFilter;}
+			set
+			{
+				_PDETerritoryFilter = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

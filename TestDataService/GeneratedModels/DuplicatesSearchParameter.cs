@@ -7,34 +7,160 @@ namespace Creatio.DataService.Models
 	public class DuplicatesSearchParameter : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Days;
 		[CProperty(ColumnPath ="Days")]
-		public int Days { get; set; }
+		public int Days
+		{
+			get{return _Days;}
+			set
+			{
+				_Days = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PerformSearchOnSave;
 		[CProperty(ColumnPath ="PerformSearchOnSave")]
-		public bool PerformSearchOnSave { get; set; }
+		public bool PerformSearchOnSave
+		{
+			get{return _PerformSearchOnSave;}
+			set
+			{
+				_PerformSearchOnSave = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _PerformSheduledSearch;
 		[CProperty(ColumnPath ="PerformSheduledSearch")]
-		public bool PerformSheduledSearch { get; set; }
+		public bool PerformSheduledSearch
+		{
+			get{return _PerformSheduledSearch;}
+			set
+			{
+				_PerformSheduledSearch = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SchemaToSearch;
 		[CProperty(ColumnPath ="SchemaToSearch")]
-		public Guid SchemaToSearch { get; set; }
+		public Guid SchemaToSearch
+		{
+			get{return _SchemaToSearch;}
+			set
+			{
+				_SchemaToSearch = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _SchemaToSearchName;
 		[CProperty(ColumnPath ="SchemaToSearchName")]
-		public string SchemaToSearchName { get; set; }
+		public string SchemaToSearchName
+		{
+			get{return _SchemaToSearchName;}
+			set
+			{
+				_SchemaToSearchName = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _SearchByAll;
 		[CProperty(ColumnPath ="SearchByAll")]
-		public bool SearchByAll { get; set; }
+		public bool SearchByAll
+		{
+			get{return _SearchByAll;}
+			set
+			{
+				_SearchByAll = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _SearchByModifiedOnly;
 		[CProperty(ColumnPath ="SearchByModifiedOnly")]
-		public bool SearchByModifiedOnly { get; set; }
+		public bool SearchByModifiedOnly
+		{
+			get{return _SearchByModifiedOnly;}
+			set
+			{
+				_SearchByModifiedOnly = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _SearchTime;
 		[CProperty(ColumnPath ="SearchTime")]
-		public DateTime SearchTime { get; set; }
+		public DateTime SearchTime
+		{
+			get{return _SearchTime;}
+			set
+			{
+				_SearchTime = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

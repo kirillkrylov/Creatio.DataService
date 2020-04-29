@@ -7,74 +7,380 @@ namespace Creatio.DataService.Models
 	public class GlbCustomer : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _GlbAnnualRevenueBC;
 		[CProperty(ColumnPath ="GlbAnnualRevenueBC")]
-		public decimal GlbAnnualRevenueBC { get; set; }
+		public decimal GlbAnnualRevenueBC
+		{
+			get{return _GlbAnnualRevenueBC;}
+			set
+			{
+				_GlbAnnualRevenueBC = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbAnnualRevenueRangeId;
 		[CProperty(ColumnPath ="GlbAnnualRevenueRangeId")]
-		public Guid GlbAnnualRevenueRangeId { get; set; }
+		public Guid GlbAnnualRevenueRangeId
+		{
+			get{return _GlbAnnualRevenueRangeId;}
+			set
+			{
+				_GlbAnnualRevenueRangeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbAssignedPartnerId;
 		[CProperty(ColumnPath ="GlbAssignedPartnerId")]
-		public Guid GlbAssignedPartnerId { get; set; }
+		public Guid GlbAssignedPartnerId
+		{
+			get{return _GlbAssignedPartnerId;}
+			set
+			{
+				_GlbAssignedPartnerId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbCountryId;
 		[CProperty(ColumnPath ="GlbCountryId")]
-		public Guid GlbCountryId { get; set; }
+		public Guid GlbCountryId
+		{
+			get{return _GlbCountryId;}
+			set
+			{
+				_GlbCountryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbCSEId;
 		[CProperty(ColumnPath ="GlbCSEId")]
-		public Guid GlbCSEId { get; set; }
+		public Guid GlbCSEId
+		{
+			get{return _GlbCSEId;}
+			set
+			{
+				_GlbCSEId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbCSMId;
 		[CProperty(ColumnPath ="GlbCSMId")]
-		public Guid GlbCSMId { get; set; }
+		public Guid GlbCSMId
+		{
+			get{return _GlbCSMId;}
+			set
+			{
+				_GlbCSMId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbCustomerAccountId;
 		[CProperty(ColumnPath ="GlbCustomerAccountId")]
-		public Guid GlbCustomerAccountId { get; set; }
+		public Guid GlbCustomerAccountId
+		{
+			get{return _GlbCustomerAccountId;}
+			set
+			{
+				_GlbCustomerAccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbCustomerStatusId;
 		[CProperty(ColumnPath ="GlbCustomerStatusId")]
-		public Guid GlbCustomerStatusId { get; set; }
+		public Guid GlbCustomerStatusId
+		{
+			get{return _GlbCustomerStatusId;}
+			set
+			{
+				_GlbCustomerStatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbDepartmentId;
 		[CProperty(ColumnPath ="GlbDepartmentId")]
-		public Guid GlbDepartmentId { get; set; }
+		public Guid GlbDepartmentId
+		{
+			get{return _GlbDepartmentId;}
+			set
+			{
+				_GlbDepartmentId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbDeploymentTypeId;
 		[CProperty(ColumnPath ="GlbDeploymentTypeId")]
-		public Guid GlbDeploymentTypeId { get; set; }
+		public Guid GlbDeploymentTypeId
+		{
+			get{return _GlbDeploymentTypeId;}
+			set
+			{
+				_GlbDeploymentTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbEmployeesNumberRangeId;
 		[CProperty(ColumnPath ="GlbEmployeesNumberRangeId")]
-		public Guid GlbEmployeesNumberRangeId { get; set; }
+		public Guid GlbEmployeesNumberRangeId
+		{
+			get{return _GlbEmployeesNumberRangeId;}
+			set
+			{
+				_GlbEmployeesNumberRangeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _GlbExactNoOfEmployees;
 		[CProperty(ColumnPath ="GlbExactNoOfEmployees")]
-		public int GlbExactNoOfEmployees { get; set; }
+		public int GlbExactNoOfEmployees
+		{
+			get{return _GlbExactNoOfEmployees;}
+			set
+			{
+				_GlbExactNoOfEmployees = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _GlbFirstActivationDate;
 		[CProperty(ColumnPath ="GlbFirstActivationDate")]
-		public DateTime GlbFirstActivationDate { get; set; }
+		public DateTime GlbFirstActivationDate
+		{
+			get{return _GlbFirstActivationDate;}
+			set
+			{
+				_GlbFirstActivationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbFirstOpportunityId;
 		[CProperty(ColumnPath ="GlbFirstOpportunityId")]
-		public Guid GlbFirstOpportunityId { get; set; }
+		public Guid GlbFirstOpportunityId
+		{
+			get{return _GlbFirstOpportunityId;}
+			set
+			{
+				_GlbFirstOpportunityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _GlbLastLoginDate;
 		[CProperty(ColumnPath ="GlbLastLoginDate")]
-		public DateTime GlbLastLoginDate { get; set; }
+		public DateTime GlbLastLoginDate
+		{
+			get{return _GlbLastLoginDate;}
+			set
+			{
+				_GlbLastLoginDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbName;
 		[CProperty(ColumnPath ="GlbName")]
-		public string GlbName { get; set; }
+		public string GlbName
+		{
+			get{return _GlbName;}
+			set
+			{
+				_GlbName = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbNotes;
 		[CProperty(ColumnPath ="GlbNotes")]
-		public string GlbNotes { get; set; }
+		public string GlbNotes
+		{
+			get{return _GlbNotes;}
+			set
+			{
+				_GlbNotes = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbOpportunities;
 		[CProperty(ColumnPath ="GlbOpportunities")]
-		public string GlbOpportunities { get; set; }
+		public string GlbOpportunities
+		{
+			get{return _GlbOpportunities;}
+			set
+			{
+				_GlbOpportunities = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbProductPlatformId;
 		[CProperty(ColumnPath ="GlbProductPlatformId")]
-		public Guid GlbProductPlatformId { get; set; }
+		public Guid GlbProductPlatformId
+		{
+			get{return _GlbProductPlatformId;}
+			set
+			{
+				_GlbProductPlatformId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbProductPlatformT;
 		[CProperty(ColumnPath ="GlbProductPlatformT")]
-		public string GlbProductPlatformT { get; set; }
+		public string GlbProductPlatformT
+		{
+			get{return _GlbProductPlatformT;}
+			set
+			{
+				_GlbProductPlatformT = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _GlbRenewalDate;
 		[CProperty(ColumnPath ="GlbRenewalDate")]
-		public DateTime GlbRenewalDate { get; set; }
+		public DateTime GlbRenewalDate
+		{
+			get{return _GlbRenewalDate;}
+			set
+			{
+				_GlbRenewalDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbSalesExecutiveId;
 		[CProperty(ColumnPath ="GlbSalesExecutiveId")]
-		public Guid GlbSalesExecutiveId { get; set; }
+		public Guid GlbSalesExecutiveId
+		{
+			get{return _GlbSalesExecutiveId;}
+			set
+			{
+				_GlbSalesExecutiveId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbStageId;
 		[CProperty(ColumnPath ="GlbStageId")]
-		public Guid GlbStageId { get; set; }
+		public Guid GlbStageId
+		{
+			get{return _GlbStageId;}
+			set
+			{
+				_GlbStageId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbStrengths;
 		[CProperty(ColumnPath ="GlbStrengths")]
-		public string GlbStrengths { get; set; }
+		public string GlbStrengths
+		{
+			get{return _GlbStrengths;}
+			set
+			{
+				_GlbStrengths = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbSystemUsageId;
 		[CProperty(ColumnPath ="GlbSystemUsageId")]
-		public Guid GlbSystemUsageId { get; set; }
+		public Guid GlbSystemUsageId
+		{
+			get{return _GlbSystemUsageId;}
+			set
+			{
+				_GlbSystemUsageId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _GlbTerritoryId;
 		[CProperty(ColumnPath ="GlbTerritoryId")]
-		public Guid GlbTerritoryId { get; set; }
+		public Guid GlbTerritoryId
+		{
+			get{return _GlbTerritoryId;}
+			set
+			{
+				_GlbTerritoryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbThreats;
 		[CProperty(ColumnPath ="GlbThreats")]
-		public string GlbThreats { get; set; }
+		public string GlbThreats
+		{
+			get{return _GlbThreats;}
+			set
+			{
+				_GlbThreats = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _GlbWeaknesses;
 		[CProperty(ColumnPath ="GlbWeaknesses")]
-		public string GlbWeaknesses { get; set; }
+		public string GlbWeaknesses
+		{
+			get{return _GlbWeaknesses;}
+			set
+			{
+				_GlbWeaknesses = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

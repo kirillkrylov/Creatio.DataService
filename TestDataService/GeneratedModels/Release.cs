@@ -7,62 +7,314 @@ namespace Creatio.DataService.Models
 	public class Release : BaseEntity
 	{
 		#region Values
+		private int _ActualDeploymentLabor;
 		[CProperty(ColumnPath ="ActualDeploymentLabor")]
-		public int ActualDeploymentLabor { get; set; }
+		public int ActualDeploymentLabor
+		{
+			get{return _ActualDeploymentLabor;}
+			set
+			{
+				_ActualDeploymentLabor = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ActualDevelopmentLabor;
 		[CProperty(ColumnPath ="ActualDevelopmentLabor")]
-		public int ActualDevelopmentLabor { get; set; }
+		public int ActualDevelopmentLabor
+		{
+			get{return _ActualDevelopmentLabor;}
+			set
+			{
+				_ActualDevelopmentLabor = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ActualLabor;
 		[CProperty(ColumnPath ="ActualLabor")]
-		public int ActualLabor { get; set; }
+		public int ActualLabor
+		{
+			get{return _ActualLabor;}
+			set
+			{
+				_ActualLabor = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ActualTestingLabor;
 		[CProperty(ColumnPath ="ActualTestingLabor")]
-		public int ActualTestingLabor { get; set; }
+		public int ActualTestingLabor
+		{
+			get{return _ActualTestingLabor;}
+			set
+			{
+				_ActualTestingLabor = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _BPMInstallationPackageId;
 		[CProperty(ColumnPath ="BPMInstallationPackageId")]
-		public Guid BPMInstallationPackageId { get; set; }
+		public Guid BPMInstallationPackageId
+		{
+			get{return _BPMInstallationPackageId;}
+			set
+			{
+				_BPMInstallationPackageId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _BpmonlineBuildId;
 		[CProperty(ColumnPath ="BpmonlineBuildId")]
-		public Guid BpmonlineBuildId { get; set; }
+		public Guid BpmonlineBuildId
+		{
+			get{return _BpmonlineBuildId;}
+			set
+			{
+				_BpmonlineBuildId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _BpmonlineLczId;
 		[CProperty(ColumnPath ="BpmonlineLczId")]
-		public Guid BpmonlineLczId { get; set; }
+		public Guid BpmonlineLczId
+		{
+			get{return _BpmonlineLczId;}
+			set
+			{
+				_BpmonlineLczId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _BpmonlineProductId;
 		[CProperty(ColumnPath ="BpmonlineProductId")]
-		public Guid BpmonlineProductId { get; set; }
+		public Guid BpmonlineProductId
+		{
+			get{return _BpmonlineProductId;}
+			set
+			{
+				_BpmonlineProductId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _BpmonlineVersionId;
 		[CProperty(ColumnPath ="BpmonlineVersionId")]
-		public Guid BpmonlineVersionId { get; set; }
+		public Guid BpmonlineVersionId
+		{
+			get{return _BpmonlineVersionId;}
+			set
+			{
+				_BpmonlineVersionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _DeploymentFinishedOn;
 		[CProperty(ColumnPath ="DeploymentFinishedOn")]
-		public DateTime DeploymentFinishedOn { get; set; }
+		public DateTime DeploymentFinishedOn
+		{
+			get{return _DeploymentFinishedOn;}
+			set
+			{
+				_DeploymentFinishedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _DevelopmentFinishedOn;
 		[CProperty(ColumnPath ="DevelopmentFinishedOn")]
-		public DateTime DevelopmentFinishedOn { get; set; }
+		public DateTime DevelopmentFinishedOn
+		{
+			get{return _DevelopmentFinishedOn;}
+			set
+			{
+				_DevelopmentFinishedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Notes;
 		[CProperty(ColumnPath ="Notes")]
-		public string Notes { get; set; }
+		public string Notes
+		{
+			get{return _Notes;}
+			set
+			{
+				_Notes = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Number;
 		[CProperty(ColumnPath ="Number")]
-		public string Number { get; set; }
+		public string Number
+		{
+			get{return _Number;}
+			set
+			{
+				_Number = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _PlannedLabor;
 		[CProperty(ColumnPath ="PlannedLabor")]
-		public int PlannedLabor { get; set; }
+		public int PlannedLabor
+		{
+			get{return _PlannedLabor;}
+			set
+			{
+				_PlannedLabor = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PriorityId;
 		[CProperty(ColumnPath ="PriorityId")]
-		public Guid PriorityId { get; set; }
+		public Guid PriorityId
+		{
+			get{return _PriorityId;}
+			set
+			{
+				_PriorityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ReleasedOn;
 		[CProperty(ColumnPath ="ReleasedOn")]
-		public DateTime ReleasedOn { get; set; }
+		public DateTime ReleasedOn
+		{
+			get{return _ReleasedOn;}
+			set
+			{
+				_ReleasedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ScheduledReleaseDate;
 		[CProperty(ColumnPath ="ScheduledReleaseDate")]
-		public DateTime ScheduledReleaseDate { get; set; }
+		public DateTime ScheduledReleaseDate
+		{
+			get{return _ScheduledReleaseDate;}
+			set
+			{
+				_ScheduledReleaseDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _StatusId;
 		[CProperty(ColumnPath ="StatusId")]
-		public Guid StatusId { get; set; }
+		public Guid StatusId
+		{
+			get{return _StatusId;}
+			set
+			{
+				_StatusId = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _TestingFinishedOn;
 		[CProperty(ColumnPath ="TestingFinishedOn")]
-		public DateTime TestingFinishedOn { get; set; }
+		public DateTime TestingFinishedOn
+		{
+			get{return _TestingFinishedOn;}
+			set
+			{
+				_TestingFinishedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TypeId;
 		[CProperty(ColumnPath ="TypeId")]
-		public Guid TypeId { get; set; }
+		public Guid TypeId
+		{
+			get{return _TypeId;}
+			set
+			{
+				_TypeId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

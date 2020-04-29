@@ -7,42 +7,204 @@ namespace Creatio.DataService.Models
 	public class Payments : BaseEntity
 	{
 		#region Values
+		private decimal _AmountWithOutTax;
 		[CProperty(ColumnPath ="AmountWithOutTax")]
-		public decimal AmountWithOutTax { get; set; }
+		public decimal AmountWithOutTax
+		{
+			get{return _AmountWithOutTax;}
+			set
+			{
+				_AmountWithOutTax = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _AmountWithTax;
 		[CProperty(ColumnPath ="AmountWithTax")]
-		public decimal AmountWithTax { get; set; }
+		public decimal AmountWithTax
+		{
+			get{return _AmountWithTax;}
+			set
+			{
+				_AmountWithTax = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _CheckingAccount;
 		[CProperty(ColumnPath ="CheckingAccount")]
-		public string CheckingAccount { get; set; }
+		public string CheckingAccount
+		{
+			get{return _CheckingAccount;}
+			set
+			{
+				_CheckingAccount = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _ContractNumber;
 		[CProperty(ColumnPath ="ContractNumber")]
-		public string ContractNumber { get; set; }
+		public string ContractNumber
+		{
+			get{return _ContractNumber;}
+			set
+			{
+				_ContractNumber = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CurrencyId;
 		[CProperty(ColumnPath ="CurrencyId")]
-		public Guid CurrencyId { get; set; }
+		public Guid CurrencyId
+		{
+			get{return _CurrencyId;}
+			set
+			{
+				_CurrencyId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _OperationDate;
 		[CProperty(ColumnPath ="OperationDate")]
-		public DateTime OperationDate { get; set; }
+		public DateTime OperationDate
+		{
+			get{return _OperationDate;}
+			set
+			{
+				_OperationDate = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Payer;
 		[CProperty(ColumnPath ="Payer")]
-		public string Payer { get; set; }
+		public string Payer
+		{
+			get{return _Payer;}
+			set
+			{
+				_Payer = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _PayerAccount;
 		[CProperty(ColumnPath ="PayerAccount")]
-		public string PayerAccount { get; set; }
+		public string PayerAccount
+		{
+			get{return _PayerAccount;}
+			set
+			{
+				_PayerAccount = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _PurposeOfPayment;
 		[CProperty(ColumnPath ="PurposeOfPayment")]
-		public string PurposeOfPayment { get; set; }
+		public string PurposeOfPayment
+		{
+			get{return _PurposeOfPayment;}
+			set
+			{
+				_PurposeOfPayment = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Recipient;
 		[CProperty(ColumnPath ="Recipient")]
-		public string Recipient { get; set; }
+		public string Recipient
+		{
+			get{return _Recipient;}
+			set
+			{
+				_Recipient = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _TaxPercent;
 		[CProperty(ColumnPath ="TaxPercent")]
-		public decimal TaxPercent { get; set; }
+		public decimal TaxPercent
+		{
+			get{return _TaxPercent;}
+			set
+			{
+				_TaxPercent = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

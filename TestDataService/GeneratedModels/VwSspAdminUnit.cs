@@ -7,40 +7,193 @@ namespace Creatio.DataService.Models
 	public class VwSspAdminUnit : BaseEntity
 	{
 		#region Values
+		private Guid _AccountId;
 		[CProperty(ColumnPath ="AccountId")]
-		public Guid AccountId { get; set; }
+		public Guid AccountId
+		{
+			get{return _AccountId;}
+			set
+			{
+				_AccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _Active;
 		[CProperty(ColumnPath ="Active")]
-		public bool Active { get; set; }
+		public bool Active
+		{
+			get{return _Active;}
+			set
+			{
+				_Active = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ConnectionType;
 		[CProperty(ColumnPath ="ConnectionType")]
-		public int ConnectionType { get; set; }
+		public int ConnectionType
+		{
+			get{return _ConnectionType;}
+			set
+			{
+				_ConnectionType = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ContactId;
 		[CProperty(ColumnPath ="ContactId")]
-		public Guid ContactId { get; set; }
+		public Guid ContactId
+		{
+			get{return _ContactId;}
+			set
+			{
+				_ContactId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _LicenseName;
 		[CProperty(ColumnPath ="LicenseName")]
-		public string LicenseName { get; set; }
+		public string LicenseName
+		{
+			get{return _LicenseName;}
+			set
+			{
+				_LicenseName = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ParentRoleId;
 		[CProperty(ColumnPath ="ParentRoleId")]
-		public Guid ParentRoleId { get; set; }
+		public Guid ParentRoleId
+		{
+			get{return _ParentRoleId;}
+			set
+			{
+				_ParentRoleId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PortalAccountId;
 		[CProperty(ColumnPath ="PortalAccountId")]
-		public Guid PortalAccountId { get; set; }
+		public Guid PortalAccountId
+		{
+			get{return _PortalAccountId;}
+			set
+			{
+				_PortalAccountId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SysAdminUnitTypeId;
 		[CProperty(ColumnPath ="SysAdminUnitTypeId")]
-		public Guid SysAdminUnitTypeId { get; set; }
+		public Guid SysAdminUnitTypeId
+		{
+			get{return _SysAdminUnitTypeId;}
+			set
+			{
+				_SysAdminUnitTypeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SysCultureId;
 		[CProperty(ColumnPath ="SysCultureId")]
-		public Guid SysCultureId { get; set; }
+		public Guid SysCultureId
+		{
+			get{return _SysCultureId;}
+			set
+			{
+				_SysCultureId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

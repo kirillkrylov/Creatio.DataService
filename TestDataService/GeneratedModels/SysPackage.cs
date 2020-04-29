@@ -7,44 +7,215 @@ namespace Creatio.DataService.Models
 	public class SysPackage : BaseEntity
 	{
 		#region Values
+		private string _Annotation;
 		[CProperty(ColumnPath ="Annotation")]
-		public string Annotation { get; set; }
+		public string Annotation
+		{
+			get{return _Annotation;}
+			set
+			{
+				_Annotation = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _Essential;
 		[CProperty(ColumnPath ="Essential")]
-		public bool Essential { get; set; }
+		public bool Essential
+		{
+			get{return _Essential;}
+			set
+			{
+				_Essential = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _InstallType;
 		[CProperty(ColumnPath ="InstallType")]
-		public int InstallType { get; set; }
+		public int InstallType
+		{
+			get{return _InstallType;}
+			set
+			{
+				_InstallType = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsChanged;
 		[CProperty(ColumnPath ="IsChanged")]
-		public bool IsChanged { get; set; }
+		public bool IsChanged
+		{
+			get{return _IsChanged;}
+			set
+			{
+				_IsChanged = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsLocked;
 		[CProperty(ColumnPath ="IsLocked")]
-		public bool IsLocked { get; set; }
+		public bool IsLocked
+		{
+			get{return _IsLocked;}
+			set
+			{
+				_IsLocked = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Maintainer;
 		[CProperty(ColumnPath ="Maintainer")]
-		public string Maintainer { get; set; }
+		public string Maintainer
+		{
+			get{return _Maintainer;}
+			set
+			{
+				_Maintainer = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Position;
 		[CProperty(ColumnPath ="Position")]
-		public int Position { get; set; }
+		public int Position
+		{
+			get{return _Position;}
+			set
+			{
+				_Position = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _RepositoryRevisionNumber;
 		[CProperty(ColumnPath ="RepositoryRevisionNumber")]
-		public int RepositoryRevisionNumber { get; set; }
+		public int RepositoryRevisionNumber
+		{
+			get{return _RepositoryRevisionNumber;}
+			set
+			{
+				_RepositoryRevisionNumber = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _SysWorkspaceId;
 		[CProperty(ColumnPath ="SysWorkspaceId")]
-		public Guid SysWorkspaceId { get; set; }
+		public Guid SysWorkspaceId
+		{
+			get{return _SysWorkspaceId;}
+			set
+			{
+				_SysWorkspaceId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _UId;
 		[CProperty(ColumnPath ="UId")]
-		public Guid UId { get; set; }
+		public Guid UId
+		{
+			get{return _UId;}
+			set
+			{
+				_UId = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Version;
 		[CProperty(ColumnPath ="Version")]
-		public string Version { get; set; }
+		public string Version
+		{
+			get{return _Version;}
+			set
+			{
+				_Version = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

@@ -7,36 +7,171 @@ namespace Creatio.DataService.Models
 	public class TripsDailyAllowance : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CurrencyId;
 		[CProperty(ColumnPath ="CurrencyId")]
-		public Guid CurrencyId { get; set; }
+		public Guid CurrencyId
+		{
+			get{return _CurrencyId;}
+			set
+			{
+				_CurrencyId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _DailyAllowance;
 		[CProperty(ColumnPath ="DailyAllowance")]
-		public decimal DailyAllowance { get; set; }
+		public decimal DailyAllowance
+		{
+			get{return _DailyAllowance;}
+			set
+			{
+				_DailyAllowance = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _DirectionId;
 		[CProperty(ColumnPath ="DirectionId")]
-		public Guid DirectionId { get; set; }
+		public Guid DirectionId
+		{
+			get{return _DirectionId;}
+			set
+			{
+				_DirectionId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EmployeeOfficeId;
 		[CProperty(ColumnPath ="EmployeeOfficeId")]
-		public Guid EmployeeOfficeId { get; set; }
+		public Guid EmployeeOfficeId
+		{
+			get{return _EmployeeOfficeId;}
+			set
+			{
+				_EmployeeOfficeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _RecordInactive;
 		[CProperty(ColumnPath ="RecordInactive")]
-		public bool RecordInactive { get; set; }
+		public bool RecordInactive
+		{
+			get{return _RecordInactive;}
+			set
+			{
+				_RecordInactive = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TerritoryId;
 		[CProperty(ColumnPath ="TerritoryId")]
-		public Guid TerritoryId { get; set; }
+		public Guid TerritoryId
+		{
+			get{return _TerritoryId;}
+			set
+			{
+				_TerritoryId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _TripTypeId;
 		[CProperty(ColumnPath ="TripTypeId")]
-		public Guid TripTypeId { get; set; }
+		public Guid TripTypeId
+		{
+			get{return _TripTypeId;}
+			set
+			{
+				_TripTypeId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

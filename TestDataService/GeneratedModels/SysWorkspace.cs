@@ -7,36 +7,171 @@ namespace Creatio.DataService.Models
 	public class SysWorkspace : BaseEntity
 	{
 		#region Values
+		private byte[] _AssemblyData;
 		[CProperty(ColumnPath ="AssemblyData")]
-		public byte[] AssemblyData { get; set; }
+		public byte[] AssemblyData
+		{
+			get{return _AssemblyData;}
+			set
+			{
+				_AssemblyData = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Description;
 		[CProperty(ColumnPath ="Description")]
-		public string Description { get; set; }
+		public string Description
+		{
+			get{return _Description;}
+			set
+			{
+				_Description = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsDefault;
 		[CProperty(ColumnPath ="IsDefault")]
-		public bool IsDefault { get; set; }
+		public bool IsDefault
+		{
+			get{return _IsDefault;}
+			set
+			{
+				_IsDefault = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _Name;
 		[CProperty(ColumnPath ="Name")]
-		public string Name { get; set; }
+		public string Name
+		{
+			get{return _Name;}
+			set
+			{
+				_Name = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Number;
 		[CProperty(ColumnPath ="Number")]
-		public int Number { get; set; }
+		public int Number
+		{
+			get{return _Number;}
+			set
+			{
+				_Number = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _RepositoryRevisionNumber;
 		[CProperty(ColumnPath ="RepositoryRevisionNumber")]
-		public int RepositoryRevisionNumber { get; set; }
+		public int RepositoryRevisionNumber
+		{
+			get{return _RepositoryRevisionNumber;}
+			set
+			{
+				_RepositoryRevisionNumber = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _RepositoryUri;
 		[CProperty(ColumnPath ="RepositoryUri")]
-		public string RepositoryUri { get; set; }
+		public string RepositoryUri
+		{
+			get{return _RepositoryUri;}
+			set
+			{
+				_RepositoryUri = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _Version;
 		[CProperty(ColumnPath ="Version")]
-		public int Version { get; set; }
+		public int Version
+		{
+			get{return _Version;}
+			set
+			{
+				_Version = value;
+				OnPropertyChanged();
+			}
+		}
+		private string _WorkingCopyPath;
 		[CProperty(ColumnPath ="WorkingCopyPath")]
-		public string WorkingCopyPath { get; set; }
+		public string WorkingCopyPath
+		{
+			get{return _WorkingCopyPath;}
+			set
+			{
+				_WorkingCopyPath = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

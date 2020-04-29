@@ -7,12 +7,39 @@ namespace Creatio.DataService.Models
 	public class VwLastActivityByQueue : BaseEntity
 	{
 		#region Values
+		private Guid _ActivityId;
 		[CProperty(ColumnPath ="ActivityId")]
-		public Guid ActivityId { get; set; }
+		public Guid ActivityId
+		{
+			get{return _ActivityId;}
+			set
+			{
+				_ActivityId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _QueueItemId;
 		[CProperty(ColumnPath ="QueueItemId")]
-		public Guid QueueItemId { get; set; }
+		public Guid QueueItemId
+		{
+			get{return _QueueItemId;}
+			set
+			{
+				_QueueItemId = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation

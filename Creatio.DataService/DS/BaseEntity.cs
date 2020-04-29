@@ -6,12 +6,41 @@ using System.Threading.Tasks;
 using Creatio.DataService.Attributes;
 using System.Linq;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 
 namespace Creatio.DataService
 {
-    public class BaseEntity
+    public class BaseEntity : INotifyPropertyChanged
     {
-        public virtual Guid Id{ get; set; }
+        #region Fields
+        public bool HasChanges = false;
+        public List<string> ChangedColumns;
+        #endregion
+
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+        private Guid _Id;
+        public virtual Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                _Id = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public BaseEntity()
+        {
+            ChangedColumns = new List<string>();
+        }
+
 
         /// <summary>
         /// Expands navigational properties of the object
@@ -23,9 +52,10 @@ namespace Creatio.DataService
         {
             Utils utils = Utils.Instance;
             List<Entity> baseEntity = await utils.Select<Entity>(Id.ToString());
+            baseEntity[0].HasChanges = false;
+            baseEntity[0].ChangedColumns.Clear();
             return baseEntity[0];
         }
-
         public async Task<RequestResponse> Delete<Entity>(Guid Id) where Entity : BaseEntity, new()
         {
             Utils utils = Utils.Instance;
@@ -33,7 +63,6 @@ namespace Creatio.DataService
         }
 
         public void ExpandValues() {
-
             PropertyInfo[] props = this.GetType().GetProperties();
             foreach (PropertyInfo prop in props) 
             {
@@ -76,9 +105,21 @@ namespace Creatio.DataService
                     prop.SetValue(this, value);
                 }
             }
+
+            //List<FieldInfo> fields = element.GetType().GetFields().ToList();
+            //foreach (FieldInfo field in fields)
+            //{
+            //    int index = fields.FindIndex(i => i.Name == field.Name);
+            //    if (index >= 0)
+            //    {
+            //        var value = fields[index].GetValue(element);
+            //        field.SetValue(this, value);
+            //    }
+            //}
+            this.HasChanges = false;
+            this.ChangedColumns.Clear();
+
         }
-
-
 
         /// <summary>
         /// Expands Navigational properties of the object
@@ -119,7 +160,6 @@ namespace Creatio.DataService
             Console.WriteLine();
             Console.ResetColor();
 #endif            
-            //Assembly assembly = Assembly.GetCallingAssembly();
             MethodInfo select = typeof(Utils).GetMethod("Select");
             Type tThis = this.GetType();
             
@@ -177,7 +217,6 @@ namespace Creatio.DataService
                 Type entityType = tThis.GetProperty(prop.Name).PropertyType;
                 //Type entityType = assembly.GetType(typeName);
                 
-
                 string[] navigationAttribute = tThis.GetProperty(prop.Name).GetCustomAttribute<CPropertyAttribute>().Navigation?.Split(':');
 
                 string key = (navigationAttribute?.Length == 2) ? navigationAttribute[1] : string.Empty;
@@ -375,9 +414,6 @@ namespace Creatio.DataService
             Console.ResetColor();
 #endif
         }
-
-
-
         public RequestResponse DeleteEntity()
         {
             PropertyInfo[] props = this.GetType().GetProperties();
@@ -404,6 +440,21 @@ namespace Creatio.DataService
             RequestResponse response = (RequestResponse)taskResult;
             return response;
         }
+        
+        public void Update()
+        {
+            Console.WriteLine(string.Join(",", ChangedColumns));
+        }
+                
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
+            if (!ChangedColumns.Contains(name))
+            {
+                ChangedColumns.Add(name);
+                HasChanges = true;
+            }
+        }
     }
 }

@@ -7,36 +7,171 @@ namespace Creatio.DataService.Models
 	public class BonusQueue : BaseEntity
 	{
 		#region Values
+		private Guid _CreatedById;
 		[CProperty(ColumnPath ="CreatedById")]
-		public Guid CreatedById { get; set; }
+		public Guid CreatedById
+		{
+			get{return _CreatedById;}
+			set
+			{
+				_CreatedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
-		public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn
+		{
+			get{return _CreatedOn;}
+			set
+			{
+				_CreatedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _CurrencyId;
 		[CProperty(ColumnPath ="CurrencyId")]
-		public Guid CurrencyId { get; set; }
+		public Guid CurrencyId
+		{
+			get{return _CurrencyId;}
+			set
+			{
+				_CurrencyId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _CurrencyRate;
 		[CProperty(ColumnPath ="CurrencyRate")]
-		public decimal CurrencyRate { get; set; }
+		public decimal CurrencyRate
+		{
+			get{return _CurrencyRate;}
+			set
+			{
+				_CurrencyRate = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EmployeeId;
 		[CProperty(ColumnPath ="EmployeeId")]
-		public Guid EmployeeId { get; set; }
+		public Guid EmployeeId
+		{
+			get{return _EmployeeId;}
+			set
+			{
+				_EmployeeId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _EntitySchemaUId;
 		[CProperty(ColumnPath ="EntitySchemaUId")]
-		public Guid EntitySchemaUId { get; set; }
+		public Guid EntitySchemaUId
+		{
+			get{return _EntitySchemaUId;}
+			set
+			{
+				_EntitySchemaUId = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
-		public override Guid Id { get; set; }
+		public override Guid Id
+		{
+			get{return _Id;}
+			set
+			{
+				_Id = value;
+				OnPropertyChanged();
+			}
+		}
+		private bool _IsProcessed;
 		[CProperty(ColumnPath ="IsProcessed")]
-		public bool IsProcessed { get; set; }
+		public bool IsProcessed
+		{
+			get{return _IsProcessed;}
+			set
+			{
+				_IsProcessed = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
-		public Guid ModifiedById { get; set; }
+		public Guid ModifiedById
+		{
+			get{return _ModifiedById;}
+			set
+			{
+				_ModifiedById = value;
+				OnPropertyChanged();
+			}
+		}
+		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
-		public DateTime ModifiedOn { get; set; }
+		public DateTime ModifiedOn
+		{
+			get{return _ModifiedOn;}
+			set
+			{
+				_ModifiedOn = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _OperationKey;
 		[CProperty(ColumnPath ="OperationKey")]
-		public Guid OperationKey { get; set; }
+		public Guid OperationKey
+		{
+			get{return _OperationKey;}
+			set
+			{
+				_OperationKey = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _PaymentRuleId;
 		[CProperty(ColumnPath ="PaymentRuleId")]
-		public Guid PaymentRuleId { get; set; }
+		public Guid PaymentRuleId
+		{
+			get{return _PaymentRuleId;}
+			set
+			{
+				_PaymentRuleId = value;
+				OnPropertyChanged();
+			}
+		}
+		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
-		public int ProcessListeners { get; set; }
+		public int ProcessListeners
+		{
+			get{return _ProcessListeners;}
+			set
+			{
+				_ProcessListeners = value;
+				OnPropertyChanged();
+			}
+		}
+		private Guid _RecordId;
 		[CProperty(ColumnPath ="RecordId")]
-		public Guid RecordId { get; set; }
+		public Guid RecordId
+		{
+			get{return _RecordId;}
+			set
+			{
+				_RecordId = value;
+				OnPropertyChanged();
+			}
+		}
+		private decimal _Value;
 		[CProperty(ColumnPath ="Value")]
-		public decimal Value { get; set; }
+		public decimal Value
+		{
+			get{return _Value;}
+			set
+			{
+				_Value = value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		#region Navigation
