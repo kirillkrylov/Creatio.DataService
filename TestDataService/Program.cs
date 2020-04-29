@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using TestDataService.Properties;
 using static Creatio.DataService.Enums;
@@ -15,40 +16,59 @@ namespace TestDataService
     public sealed class Program
     {
         public static async Task Main(string[] args)
-        {
-
-            //Contact c = new Contact() { Id = Guid.NewGuid() };
-            //c.Notes = "Testing Update";         
-
+        {            
             Utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
             Utils utils = Utils.Instance;
             if (await utils.LoginAsync())
             {
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
 
-                //Guid.TryParse(utils.CurrentUser.Contact.Value, out Guid contactId);
-                //Contact c = new Contact() { Id = contactId };
-            
 
-                //await c.ExpandValuesAsync();
-                //await c.ExpandNavAsync(nameof(c.Type));
-                //await c.ExpandAssociationsAsync(nameof(c.ContactAddressByContact));
+                //Guid.TryParse("d7ab0704-9dbf-4363-a208-1fa64a7c04e3", out Guid contactId);
 
-                
-                //Console.WriteLine(c.HasChanges);
-                //Console.WriteLine(string.Join(",", c.ChangedColumns));
+                //Contact contact = new Contact() { 
 
-                //Console.WriteLine(c.Type.ToString());
-                //Guid.TryParse("8d45b7a8-844b-44f1-b689-a11bf80986e0", out Guid contactId);
-                //Creatio.DataService.RequestResponse res = await utils.DeleteAsyc<Contact>(contactId);
+                //    Name = "Test Insert new record 4- Kirill",
+                //    Dear = "Recepient name here",
+                //    MobilePhone = "+380950661405",
+                //    Email = "yetanother.random@email.com"                 
+                //};
+                //contact.Name = "UPDATE DS LIB";
+                //contact.MobilePhone = "+380950661405";
+                //contact.Email = "random@doesnotexist.com";
+                //contact.Dear = "Recepient name here";
+                //contact.DearUkr = "Recepient name here";
 
-                //Console.WriteLine(res.ErrorMessage);
-                //Console.WriteLine(res.HttpStatusCode);
-                //Console.WriteLine(res.Result);
+                //RequestResponse r = await contact.InsertAsync();
+                //RequestResponse r = await contact.UpdateAsync();
+
+                Contact contact = new Contact() { Id = Guid.Parse("d7ab0704-9dbf-4363-a208-1fa64a7c04e3") };
+                await contact.ExpandNavAsync();
+                await contact.ExpandNavAsync(nameof(contact.Account));
+                await contact.ExpandAssociationsAsync(nameof(contact.ContactCompletenessByContact));
+                if (contact.ContactCompletenessByContact?.Count > 0)
+                {
+                    foreach (var i in contact.ContactCompletenessByContact)
+                    {
+                        var rr = await i.DeleteEntityAsync();
+                        Console.WriteLine( $"Deleted { rr.Result.RowsAffected} rows from ContactCompleteness"); 
+                    }
+                }
+
+                var r = await contact.DeleteEntityAsync();
+
+                Console.WriteLine(r.Result.RowsAffected);
+                Console.WriteLine(r.ErrorMessage ?? r.ResultString);
+                if(r.Result.Id != Guid.Empty)
+                {
+                    Console.WriteLine($"New Record Id:{r.Result.Id.ToString()}");
+                }
+                                
+                //var rr = await contact.DeleteEntityAsync();
+
 
                 //ContactById(utils.CurrentUser.Contact.Value);
             }
-            Console.WriteLine("Waiting for messages... Press Enter to exit");
             Console.ReadLine();
             await utils.LogoutAsync();
             utils.Dispose();
@@ -64,12 +84,11 @@ namespace TestDataService
         private static async Task InvoiceById(Guid invoiceId)
         {
             Invoice invoice = new Invoice() { Id = invoiceId };
-            invoice = await invoice.Expnad<Invoice>(invoice.Id);
-            invoice.ExpandAllNav(nameof(invoice.CustomerBillingInfo), nameof(invoice.SupplierBillingInfo));
-
+            await invoice.ExpandValuesAsync();
+            await invoice.ExpandNavAsync(nameof(invoice.CustomerBillingInfo), nameof(invoice.SupplierBillingInfo));
             
             AccountBillingInfo customerBillingInfo = invoice.CustomerBillingInfo;
-            customerBillingInfo.ExpandAllNav(nameof(customerBillingInfo.Country), nameof(customerBillingInfo.Region), nameof(customerBillingInfo.City));
+            await customerBillingInfo.ExpandNavAsync(nameof(customerBillingInfo.Country), nameof(customerBillingInfo.Region), nameof(customerBillingInfo.City));
 
             string ZipCode = await ValidateZipCodeAsync(invoice.CustomerBillingInfo.Name, "", invoice.CustomerBillingInfo.Street, invoice.CustomerBillingInfo.City.Name,
                 invoice.CustomerBillingInfo.Region.Name, invoice.CustomerBillingInfo.ZipCode);
@@ -83,7 +102,7 @@ namespace TestDataService
             Console.WriteLine(Environment.NewLine);
 
             AccountBillingInfo supplierBillingInfo = invoice.SupplierBillingInfo;
-            supplierBillingInfo.ExpandAllNav(nameof(supplierBillingInfo.Country), nameof(supplierBillingInfo.Region), nameof(supplierBillingInfo.City));
+            await supplierBillingInfo.ExpandNavAsync(nameof(supplierBillingInfo.Country), nameof(supplierBillingInfo.Region), nameof(supplierBillingInfo.City));
             string sAddress = $"Supplier: {invoice.SupplierBillingInfo.Name}" +
                 $"{Environment.NewLine}\tSupplier Billing Info Id: {invoice.SupplierBillingInfoId.ToString()}" +
                 $"{Environment.NewLine}\t{invoice.SupplierBillingInfo.Street}" +
@@ -105,7 +124,7 @@ namespace TestDataService
                 currencyCode = "USD"
             };
 
-            invoice.ExpandAllAssociations(nameof(invoice.InvoiceProductByInvoice));
+            await invoice.ExpandAssociationsAsync(nameof(invoice.InvoiceProductByInvoice));
             ICollection<InvoiceProduct> invoiceProducts = invoice.InvoiceProductByInvoice;
 
             Console.WriteLine(Environment.NewLine);
@@ -114,10 +133,10 @@ namespace TestDataService
             int i = 1;
             foreach (InvoiceProduct invoiceProduct in invoiceProducts)
             {
-                invoiceProduct.ExpandAllNav(nameof(invoiceProduct.Product));
+                await invoiceProduct.ExpandNavAsync(nameof(invoiceProduct.Product));
 
                 Product product = invoiceProduct.Product;
-                product.ExpandAllNav(nameof(product.Type), nameof(product.Category), nameof(product.DeliveryType), nameof(product.Kind), nameof(product.DeploymentType));
+                await product.ExpandNavAsync(nameof(product.Type), nameof(product.Category), nameof(product.DeliveryType), nameof(product.Kind), nameof(product.DeploymentType));
 
                 string line = $"{Environment.NewLine}Line #:{i.ToString("#")}" +
                     $"{Environment.NewLine}{invoiceProduct.Product.NameENU}\tQty: {invoiceProduct.Quantity.ToString()}, Price: {invoiceProduct.Price.ToString("C2")}, Total: {invoiceProduct.PrimaryAmount.ToString("C2")}" +
@@ -237,10 +256,11 @@ namespace TestDataService
 
             return ZipCode;
         }
-        private static void ContactById(string ContactId) {
+        private static async void ContactById(string ContactId) {
             Contact currentUser = new Contact() { Id = Guid.Parse(ContactId) };
             
-            currentUser.ExpandValues();
+
+            //currentUser.ExpandValues();
             
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
@@ -252,7 +272,7 @@ namespace TestDataService
             Console.ResetColor();
             Console.WriteLine();
 
-            currentUser.ExpandAllAssociations(nameof(currentUser.ContactAddressByContact));
+            await currentUser.ExpandAssociationsAsync(nameof(currentUser.ContactAddressByContact));
 
             foreach (ContactAddress address in currentUser.ContactAddressByContact) 
             {
@@ -292,13 +312,12 @@ namespace TestDataService
             }
             await AdHocQuery();
         }
-
         private static async Task<int> SearchByEmail(string email) {
             Utils utils = Utils.Instance;
             SelectQuery select = BuildContactQuery("Contact", "Email", email, "Name");
             string jsonRequest = JsonConvert.SerializeObject(select);
             RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
-            DataTable dt = Utils.ConvertResponseToDataTable(result.Result);
+            DataTable dt = utils.ConvertResponseToDataTable(result.ResultString);
 
             if (dt.Rows.Count == 0)
             {
@@ -320,14 +339,13 @@ namespace TestDataService
                 return dt.Rows.Count;
             }
         }
-
         private static async Task<int> SearchComOptEmail(string email)
         {
             Utils utils = Utils.Instance;
             SelectQuery select = BuildContactQuery("ContactCommunication", "Number", email, "Contact.Name");
             string jsonRequest = JsonConvert.SerializeObject(select);
             RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
-            DataTable dt = Utils.ConvertResponseToDataTable(result.Result);
+            DataTable dt = utils.ConvertResponseToDataTable(result.ResultString);
 
             if (dt.Rows.Count == 0)
             {

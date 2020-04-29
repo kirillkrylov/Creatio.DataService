@@ -42,26 +42,7 @@ namespace Creatio.DataService
         }
 
 
-        /// <summary>
-        /// Expands navigational properties of the object
-        /// </summary>
-        /// <typeparam name="Entity">Entity Type</typeparam>
-        /// <param name="Id">Entity Id</param>
-        /// <returns></returns>
-        public async Task<Entity> Expnad<Entity>(Guid Id) where Entity : BaseEntity, new()
-        {
-            Utils utils = Utils.Instance;
-            List<Entity> baseEntity = await utils.Select<Entity>(Id.ToString());
-            baseEntity[0].HasChanges = false;
-            baseEntity[0].ChangedColumns.Clear();
-            return baseEntity[0];
-        }
-        public async Task<RequestResponse> Delete<Entity>(Guid Id) where Entity : BaseEntity, new()
-        {
-            Utils utils = Utils.Instance;
-            return await utils.DeleteAsyc<Entity>(Id);
-        }
-
+        /* Unused ExpandValues
         public void ExpandValues() {
             PropertyInfo[] props = this.GetType().GetProperties();
             foreach (PropertyInfo prop in props) 
@@ -106,25 +87,14 @@ namespace Creatio.DataService
                 }
             }
 
-            //List<FieldInfo> fields = element.GetType().GetFields().ToList();
-            //foreach (FieldInfo field in fields)
-            //{
-            //    int index = fields.FindIndex(i => i.Name == field.Name);
-            //    if (index >= 0)
-            //    {
-            //        var value = fields[index].GetValue(element);
-            //        field.SetValue(this, value);
-            //    }
-            //}
+            
             this.HasChanges = false;
             this.ChangedColumns.Clear();
 
         }
+        /*
 
-        /// <summary>
-        /// Expands Navigational properties of the object
-        /// </summary>
-        /// <param name="properties">Optional parameters, if empty expands all properties</param>
+        /* Unused ExpandAllNav
         public void ExpandAllNav(params string[] properties) {
 
             List<PropertyInfo> props = new List<PropertyInfo>();
@@ -148,7 +118,7 @@ namespace Creatio.DataService
                 }
             }
 
-#if DEBUG
+            #if DEBUG
             Console.ForegroundColor = ConsoleColor.Green;
             string propsList = string.Join(", ", properties);
 
@@ -159,59 +129,15 @@ namespace Creatio.DataService
             Console.WriteLine($"I will attempt to execute requests in parallel ... Total to Expand: {props.Count}");
             Console.WriteLine();
             Console.ResetColor();
-#endif            
+            #endif            
             MethodInfo select = typeof(Utils).GetMethod("Select");
             Type tThis = this.GetType();
             
-            /**
-            foreach (var prop in props)
-            {
-                string typeName = tThis.GetProperty(prop.Name).PropertyType.FullName;
-                Type entityType = assembly.GetType(typeName);
-                
-                string[] navigationAttribute = tThis.GetProperty(prop.Name).GetCustomAttribute<CPropertyAttribute>().Navigation?.Split(':');
-                
-                string key = (navigationAttribute?.Length == 2) ? navigationAttribute[1] : string.Empty;
-                if (string.IsNullOrEmpty(key))
-                    continue;
-
-                string id = tThis.GetProperty(key).GetValue(this, null)?.ToString();
-                if (id == Guid.Empty.ToString())
-                    continue;
-
-                //I want to invoke Select method
-                //Select<Entity>(string id = "")
-                
-                MethodInfo generic = select.MakeGenericMethod(entityType);
-                object[] args = { id };
-
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"\tExpanding {prop.Name} of Type {entityType} by Id: {id}");
-                Stopwatch propStopWatch = new Stopwatch();
-
-                propStopWatch.Start();
-                //select return List<Entity>
-                //Invoking Select Method on Utils.Instance with args as arguments
-                object selectReturn = generic.Invoke(Utils.Instance, args);
-
-                //Select method returns TASK.Resut,  thus "a" is a Task.Result or List<Entity>
-                var taskResult = selectReturn.GetType().GetProperty("Result").GetValue(selectReturn); //a is a Task.Result or List<Entity>
-                propStopWatch.Stop();
-
-                IList elements = (IList)taskResult;
-                if (elements.Count > 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"\tSetting value for {prop.Name}, it took me: {propStopWatch.Elapsed.TotalSeconds} seconds.");
-                    Console.ResetColor();
-                    prop.SetValue(this, elements[0]);
-                }
-            }
-            */
+           
 
 
-            
-            Parallel.ForEach(props, (prop) => {
+
+        Parallel.ForEach(props, (prop) => {
 
                 //string typeName = tThis.GetProperty(prop.Name).PropertyType.FullName;
                 Type entityType = tThis.GetProperty(prop.Name).PropertyType;
@@ -314,6 +240,10 @@ namespace Creatio.DataService
 
         }
 
+        */
+
+        /* Unused ExpandAllAssociations
+
         /// <summary>
         /// Expands association properties of the object
         /// </summary>
@@ -414,6 +344,9 @@ namespace Creatio.DataService
             Console.ResetColor();
 #endif
         }
+        */
+
+        /* Unused Delete
         public RequestResponse DeleteEntity()
         {
             PropertyInfo[] props = this.GetType().GetProperties();
@@ -440,12 +373,8 @@ namespace Creatio.DataService
             RequestResponse response = (RequestResponse)taskResult;
             return response;
         }
-        
-        public void Update()
-        {
-            Console.WriteLine(string.Join(",", ChangedColumns));
-        }
-                
+        */
+
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

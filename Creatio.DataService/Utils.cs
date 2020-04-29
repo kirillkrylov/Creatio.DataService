@@ -332,7 +332,7 @@ namespace Creatio.DataService
         private List<Entity> BuildEntity<Entity>(RequestResponse requestResponse) where Entity : BaseEntity, new()
         {
             List<Entity> result = new List<Entity>();
-            DataTable dt = ConvertResponseToDataTable(requestResponse.Result);
+            DataTable dt = ConvertResponseToDataTable(requestResponse.ResultString);
             foreach (DataRow dr in dt.Rows)
             {
                 Entity entity = EntityFacotry.Create<Entity>();
@@ -471,7 +471,6 @@ namespace Creatio.DataService
             }
             return queryColumns;
         }
-
         private List<UpdateQueryColumn> BuildQueryColumnsForUpdate<Entity>(Entity entity) where Entity : BaseEntity, new()
         {           
             List<UpdateQueryColumn> queryColumns = new List<UpdateQueryColumn>();
@@ -480,7 +479,7 @@ namespace Creatio.DataService
                 string caption = propInfo.Name;
                 
                 CPropertyAttribute propertyAttribute = propInfo.GetCustomAttribute<CPropertyAttribute>(true);
-                if (propertyAttribute != null && propertyAttribute.ColumnPath != null)
+                if (propertyAttribute != null && propertyAttribute.ColumnPath != null && propertyAttribute.IsKey==false && entity.ChangedColumns.IndexOf(caption) > -1 )
                 {
                     Enums.DataValueType dtv = Enums.DataValueType.Text;
                     switch (propInfo.PropertyType.Name)
@@ -518,7 +517,7 @@ namespace Creatio.DataService
 
                     UpdateQueryColumn updateColumn = new UpdateQueryColumn()
                     {
-                        ColumnPath = propInfo.Name,
+                        ColumnPath = caption,
                         ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
                         Parameter = new Parameter() { 
                             DataValueType = dtv,
@@ -530,7 +529,6 @@ namespace Creatio.DataService
             }
             return queryColumns;
         }
-
         private DeleteQuery BuildDeleteQuery(QueryParameters queryParameters, Guid id)
         {
             DeleteQuery deleteQuery = new DeleteQuery()
@@ -540,7 +538,6 @@ namespace Creatio.DataService
             deleteQuery.Filters = BuildFilterById(id);
             return deleteQuery;
         }
-
         private UpdateQuery BuildUpdateQuery<Entity>(QueryParameters queryParameters, Entity entity) where Entity : BaseEntity, new()
         {
             UpdateQuery updateQuery = new UpdateQuery()
@@ -549,10 +546,9 @@ namespace Creatio.DataService
             };
             List<UpdateQueryColumn> columnsToUpdate = BuildQueryColumnsForUpdate(entity);
             
+            Dictionary<string, ColumnExpression> items = new Dictionary<string, ColumnExpression>();
             foreach(UpdateQueryColumn column in columnsToUpdate)
             {
-
-                Dictionary<string, ColumnExpression> items = new Dictionary<string, ColumnExpression>();
                 if (column.Parameter.Value != null) { 
                     ColumnExpression ex = new ColumnExpression()
                     {
@@ -561,14 +557,39 @@ namespace Creatio.DataService
                     
                     };
                     items.Add(column.ColumnPath, ex);               
-                    updateQuery.ColumnValues.Items = items;
                 }
             }
+            updateQuery.ColumnValues.Items = items;
             updateQuery.Filters = BuildFilterById(entity.Id);
             return updateQuery;
         }
 
+        private UpdateQuery BuildInsertQuery<Entity>(QueryParameters queryParameters, Entity entity) where Entity : BaseEntity, new()
+        {
+            UpdateQuery updateQuery = new UpdateQuery()
+            {
+                RootSchemaName = queryParameters.RootSchemaName
+            };
+            List<UpdateQueryColumn> columnsToUpdate = BuildQueryColumnsForUpdate(entity);
 
+            Dictionary<string, ColumnExpression> items = new Dictionary<string, ColumnExpression>();
+            foreach (UpdateQueryColumn column in columnsToUpdate)
+            {
+                if (column.Parameter.Value != null)
+                {
+                    ColumnExpression ex = new ColumnExpression()
+                    {
+                        Parameter = column.Parameter,
+                        ExpressionType = column.ExpressionType
+
+                    };
+                    items.Add(column.ColumnPath, ex);
+                }
+            }
+            updateQuery.ColumnValues.Items = items;
+            //updateQuery.Filters = BuildFilterById(entity.Id);
+            return updateQuery;
+        }
 
         /// <summary>
         /// Returns new columns path if column is found in navigational property 
@@ -603,10 +624,8 @@ namespace Creatio.DataService
             }
             return oldColumnPath;
         }
-        #endregion
-
-        #region Methods : Public
-        public static DataTable ConvertResponseToDataTable(string json)
+        #endregion    
+        public DataTable ConvertResponseToDataTable(string json)
         {
             DataServiceSelectResponseTemplate myResponse = JsonConvert.DeserializeObject<DataServiceSelectResponseTemplate>(json);
             DataTable dt = new DataTable();
@@ -825,9 +844,7 @@ namespace Creatio.DataService
             Instance.password = (!string.IsNullOrEmpty(Password)) ? Password : "Supervisor";
             Instance.domain = (!string.IsNullOrEmpty(Domain)) ? Domain : "https://work.creatio.com";
         }
-
-
-        #region Methods: Public : OverTheWire        
+                      
         /// <summary>
         /// Logs in and requests Current User info
         /// </summary>
@@ -921,7 +938,7 @@ namespace Creatio.DataService
                         RequestResponse ir = new RequestResponse()
                         {
                             HttpStatusCode = Code,
-                            Result = PhotoData,
+                            ResultString = PhotoData,
                             ErrorMessage = null
                         };
                         return ir;
@@ -996,7 +1013,7 @@ namespace Creatio.DataService
                     using (StreamReader MyStreamReader = new StreamReader(myHttpWebResponse.GetResponseStream(), true))
                     {
                         result.HttpStatusCode = Code;
-                        result.Result = MyStreamReader.ReadToEnd();
+                        result.ResultString = MyStreamReader.ReadToEnd();
                         result.ErrorMessage = null;
                     }
                 }
@@ -1080,8 +1097,6 @@ namespace Creatio.DataService
             }
         }
 
-        #endregion
-
         /// <summary></summary>
         /// <code>List<Contact> CurrentUser = await utils.Select<Contact>(ContactId)</code>
         /// <typeparam name="Entity">Entity Model</typeparam>
@@ -1128,6 +1143,54 @@ namespace Creatio.DataService
             
         }
 
+        /// <summary>
+        /// Dletes an entity
+        /// </summary>
+        /// <typeparam name="Entity"></typeparam>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<RequestResponse> DeleteAsyc<Entity>(Entity entity) where Entity : BaseEntity, new()
+        {
+            QueryParameters queryParameters = BuildQueryParameters<Entity>();
+            DeleteQuery deleteQuery = BuildDeleteQuery(queryParameters, entity.Id);
+            string deleteQueryJson = JsonConvert.SerializeObject(deleteQuery);
+            RequestResponse requestResponse = await GetResponseAsync(deleteQueryJson, ActionEnum.DELETE);
+            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
+            {
+                requestResponse = await GetResponseAsync(deleteQueryJson, ActionEnum.DELETE);
+            }
+            return requestResponse;
+        }
+        public async Task<RequestResponse> UpdateAsync<Entity>(Entity entity, params string[] properties) where Entity : BaseEntity, new()
+        {
+            QueryParameters queryParameters = BuildQueryParameters<Entity>();
+            UpdateQuery updateQuery = BuildUpdateQuery(queryParameters, entity);
+
+            string updateQueryJson = JsonConvert.SerializeObject(updateQuery);
+            
+            RequestResponse requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.UPDATE);
+            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
+            {
+                requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.UPDATE);
+            }
+            return requestResponse;
+        }
+
+        public async Task<RequestResponse> InsertAsync<Entity>(Entity entity, params string[] properties) where Entity : BaseEntity, new()
+        {
+            QueryParameters queryParameters = BuildQueryParameters<Entity>();
+            UpdateQuery updateQuery = BuildUpdateQuery(queryParameters, entity);
+
+            string updateQueryJson = JsonConvert.SerializeObject(updateQuery);
+
+            RequestResponse requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.INSERT);
+            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
+            {
+                requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.UPDATE);
+            }
+            return requestResponse;
+        }
+       
         public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName = "") where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
@@ -1156,12 +1219,14 @@ namespace Creatio.DataService
             return result;
         }
         
+
+        /* Unused SelectList
         public async Task<List<Entity>> SelectList<Entity>(string childColumnName, Guid parentId = new Guid()) where Entity : BaseEntity, new()
         {
             Entity entity = EntityFacotry.Create<Entity>();
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
 
-#region QueryColumns
+            #region QueryColumns
 
 
 
@@ -1197,7 +1262,7 @@ namespace Creatio.DataService
                     QueryColumns.Add(qc);
                 }
             }
-#endregion
+              #endregion
 
             SelectQuery selectQuery = BuildSelectRequest(queryParameters, QueryColumns);
             if (parentId != Guid.Empty)
@@ -1214,39 +1279,9 @@ namespace Creatio.DataService
             List<Entity> result = BuildEntity<Entity>(requestResponse);
             return result;
         }
+        */
 
-        public async Task<RequestResponse> DeleteAsyc<Entity>(Guid Id) where Entity : BaseEntity, new()
-        {
-            QueryParameters queryParameters = BuildQueryParameters<Entity>();
-            DeleteQuery deleteQuery = BuildDeleteQuery(queryParameters, Id);
-            string deleteQueryJson = JsonConvert.SerializeObject(deleteQuery);
-            RequestResponse requestResponse = await GetResponseAsync(deleteQueryJson, ActionEnum.DELETE);
-            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
-            {
-                requestResponse = await GetResponseAsync(deleteQueryJson, ActionEnum.DELETE);
-            }
-            return requestResponse;
-        }
-
-        public async Task<RequestResponse> UpdateAsync<Entity>(Entity entity) where Entity : BaseEntity, new()
-        {
-            QueryParameters queryParameters = BuildQueryParameters<Entity>();
-            UpdateQuery updateQuery = BuildUpdateQuery(queryParameters, entity);
-
-            string updateQueryJson = JsonConvert.SerializeObject(updateQuery);
-            
-            RequestResponse requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.UPDATE);
-            if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
-            {
-                requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.UPDATE);
-            }
-            return requestResponse;
-        }
-
-        #endregion
-
-
-        #region IDisposable
+        #region Disposable
 
         // Flag: Has Dispose already been called?
         bool disposed = false;
@@ -1297,3 +1332,4 @@ namespace Creatio.DataService
         #endregion
     }
 }
+ 

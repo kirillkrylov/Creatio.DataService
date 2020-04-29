@@ -21,6 +21,9 @@ namespace Creatio.DataService
             {
                 prop.SetValue(entity, prop.GetValue(r[0]));
             }
+            Reset(entity);
+
+
         }
         public static async Task ExpandNavAsync<Entity>(this Entity entity, params string[] properties) where Entity : BaseEntity, new()
         {
@@ -130,6 +133,24 @@ namespace Creatio.DataService
                     prop.SetValue(entity, elements);
                 }
             });
+        }
+        public static async Task<RequestResponse> DeleteEntityAsync<Entity>(this Entity entity) where Entity : BaseEntity, new()
+        {
+            return await Utils.Instance.DeleteAsyc(entity);
+        }
+        public static async Task<RequestResponse> UpdateAsync<Entity>(this Entity entity, params string[] properties) where Entity : BaseEntity, new()
+        {
+           return await Utils.Instance.UpdateAsync(entity, properties);
+        }
+        public static async Task<RequestResponse> InsertAsync<Entity>(this Entity entity, params string[] properties) where Entity : BaseEntity, new()
+        {
+           return await Utils.Instance.InsertAsync(entity, properties);
+        }
+
+        private static void Reset<Entity>(Entity entity) where Entity : BaseEntity, new()
+        {
+            entity.HasChanges = false;
+            entity.ChangedColumns.Clear();
         }
     }
 }
