@@ -12,6 +12,8 @@
             else if (action == ActionEnum.INSERT) { return InsertUrl; }
             else if (action == ActionEnum.SYSIMAGE) { return ImageUrl; }
             else if (action == ActionEnum.LOGOUT) { return LogoutUrl; }
+            else if (action == ActionEnum.UPLOADFILE) { return FileUploadtUrl; }
+            else if (action == ActionEnum.UPLOADIMAGE) { return ImageUploadtUrl; }
             return null;
         }
         private static string SelectUrl
@@ -57,5 +59,21 @@
                 return Domain + @"/0/rest/MainMenuService/Logout";
             }
         }
+        private static string FileUploadtUrl
+        {
+            get
+            {
+                return Domain + @"/0/rest/FileApiService/Upload";
+            }
+        }
+        private static string ImageUploadtUrl
+        {
+            get
+            {
+                return Domain + @"/0/ImageAPIService/upload";
+            }
+        }
+
+
     }
 }

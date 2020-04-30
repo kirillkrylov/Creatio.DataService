@@ -18,6 +18,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private DateTime _CreatedOn;
 		[CProperty(ColumnPath ="CreatedOn")]
 		public DateTime CreatedOn
@@ -29,6 +30,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private byte[] _Data;
 		[CProperty(ColumnPath ="Data")]
 		public byte[] Data
@@ -40,6 +42,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private bool _HasRef;
 		[CProperty(ColumnPath ="HasRef")]
 		public bool HasRef
@@ -51,6 +54,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private Guid _Id;
 		[CProperty(ColumnPath="Id", IsKey=true)]
 		public override Guid Id
@@ -62,6 +66,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private string _MimeType;
 		[CProperty(ColumnPath ="MimeType")]
 		public string MimeType
@@ -73,6 +78,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private Guid _ModifiedById;
 		[CProperty(ColumnPath ="ModifiedById")]
 		public Guid ModifiedById
@@ -84,6 +90,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private DateTime _ModifiedOn;
 		[CProperty(ColumnPath ="ModifiedOn")]
 		public DateTime ModifiedOn
@@ -95,6 +102,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private string _Name;
 		[CProperty(ColumnPath ="Name")]
 		public string Name
@@ -106,6 +114,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private byte[] _PreviewData;
 		[CProperty(ColumnPath ="PreviewData")]
 		public byte[] PreviewData
@@ -117,6 +126,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private int _ProcessListeners;
 		[CProperty(ColumnPath ="ProcessListeners")]
 		public int ProcessListeners
@@ -128,6 +138,7 @@ namespace Creatio.DataService.Models
 				OnPropertyChanged();
 			}
 		}
+		
 		private DateTime _UploadedOn;
 		[CProperty(ColumnPath ="UploadedOn")]
 		public DateTime UploadedOn
@@ -159,8 +170,10 @@ namespace Creatio.DataService.Models
 		public virtual ICollection<CasePriority> CasePriorityByImage { get; set; }
 		[CProperty(Association ="CaseStatus:ImageId")]
 		public virtual ICollection<CaseStatus> CaseStatusByImage { get; set; }
+		
 		[CProperty(Association ="Contact:PhotoId")]
 		public virtual ICollection<Contact> ContactByPhoto { get; set; }
+		
 		[CProperty(Association ="ContentBlock:ImageId")]
 		public virtual ICollection<ContentBlock> ContentBlockByImage { get; set; }
 		[CProperty(Association ="ContentUserBlock:ImageId")]

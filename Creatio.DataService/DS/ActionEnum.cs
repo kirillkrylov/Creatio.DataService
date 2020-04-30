@@ -7,6 +7,8 @@
         DELETE,
         INSERT,
         SYSIMAGE,
-        LOGOUT
+        LOGOUT,
+        UPLOADFILE,
+        UPLOADIMAGE
     }
 }

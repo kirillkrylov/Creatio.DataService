@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Threading.Tasks;
 using TestDataService.Properties;
 using static Creatio.DataService.Enums;
@@ -15,14 +16,44 @@ namespace TestDataService
     public sealed class Program
     {
         public static async Task Main(string[] args)
-        {            
+        {
             Utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
             Utils utils = Utils.Instance;
-            if (await utils.LoginAsync())
+
+            try
+            {
+                await utils.LoginAsync();
+            }
+            catch (CreationException ex)
+            {
+                Console.WriteLine(ex.Message); 
+            }
+            
+            if (utils.IsLoginSuccess)
             {
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
 
-                Guid.TryParse(utils.CurrentUser.Contact.Value, out Guid contactToUpdate);
+                Contact contact = new Contact() { Id = Guid.Parse(utils.CurrentUser.Contact.Value) };
+                contact.Phone = "2134";
+                //await contact.ExpandValuesAsync();
+
+                string filePath = @"C:\Users\k.krylov\Pictures\Logos\63b3c7e2-25ee-4c08-9b91-d3e2416ee90d.gif";
+                FileInfo fileInfo = new FileInfo(filePath);
+                var f = await System.IO.File.ReadAllBytesAsync(fileInfo.FullName);
+
+                //Upload Notes and Appachments
+                //var r = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", 
+                //    fileInfo.Name, nameof(Contact), contact.Id.ToString(), "ContactFile", "Data");
+
+                //var rr = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", fileInfo.Name, null, null, null, null);
+
+                //contact.PhotoId = rr.Result.Id;
+                await contact.UpdateAsync();
+                
+                //Console.WriteLine(rr.Result.Id.ToString());
+
+                //http://k_krylov_nb:6010/0/rest/FileService/GetFile/e9eafee9-c4e4-4793-ad0a-003bd2c6a9b4/aee5dffb-a2a0-40ba-be9b-54650539517c
+                //https://work.creatio.com/0/ImageAPIService/upload?fileapi&totalFileLength=26799&fileId=45817f16-6874-40f1-9abf-ee2f20bca4e7&mimeType=image%2Fpng
             }
             Console.ReadLine();
             await utils.LogoutAsync();

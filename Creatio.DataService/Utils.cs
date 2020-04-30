@@ -13,8 +13,6 @@ using System.Net.WebSockets;
 using System.Reflection;
 using Creatio.DataService.Attributes;
 using Creatio.DataService.Parameters;
-using System.Numerics;
-using System.Linq;
 
 namespace Creatio.DataService
 {
@@ -66,11 +64,11 @@ namespace Creatio.DataService
                 Uri uri = new Uri(domain);
                 if (uri.Scheme == "https")
                 {
-                    _soketDomain = new Uri($"wss://{uri.Host}/0/Nui/ViewModule.aspx.ashx");
+                    _soketDomain = new Uri($"wss://{uri.Host}:{uri.Port}/0/Nui/ViewModule.aspx.ashx");
                 }
                 else
                 {
-                    _soketDomain = new Uri($"ws://{uri.Host}/0/Nui/ViewModule.aspx.ashx");
+                    _soketDomain = new Uri($"ws://{uri.Host}:{uri.Port}/0/Nui/ViewModule.aspx.ashx");
                 }
                 return _soketDomain;
             }
@@ -265,6 +263,7 @@ namespace Creatio.DataService
             {
                 // Filter type is group.
                 FilterType = Enums.FilterType.FilterGroup,
+                ComparisonType = Enums.FilterComparisonType.Equal,
                 // Filters collection.
                 LogicalOperation = Enums.LogicalOperationStrict.And,
                 Items = new Dictionary<string, Filter>()
@@ -472,49 +471,77 @@ namespace Creatio.DataService
             return queryColumns;
         }
         private List<UpdateQueryColumn> BuildQueryColumnsForUpdate<Entity>(Entity entity) where Entity : BaseEntity, new()
-        {           
-            List<UpdateQueryColumn> queryColumns = new List<UpdateQueryColumn>();
+        {
+            var SysImageProps = new Dictionary<string, string>();
             foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
             {
-                string caption = propInfo.Name;
-                
-                CPropertyAttribute propertyAttribute = propInfo.GetCustomAttribute<CPropertyAttribute>(true);
-                if (propertyAttribute != null && propertyAttribute.ColumnPath != null && propertyAttribute.IsKey==false && entity.ChangedColumns.IndexOf(caption) > -1 )
+                string navProp = propInfo.GetCustomAttribute<CPropertyAttribute>().Navigation?.ToString() ?? "";
+                if(!string.IsNullOrEmpty(navProp) && navProp.Contains(":", StringComparison.OrdinalIgnoreCase))
                 {
-                    Enums.DataValueType dtv = Enums.DataValueType.Text;
-                    switch (propInfo.PropertyType.Name)
+                    if (navProp.Split(':')[0] == "SysImage")
                     {
-                        case nameof(String):
-                            dtv = Enums.DataValueType.Text;
-                            break;
-
-                        case nameof(Int64):
-                        case nameof(Int32):
-                        case nameof(Int16):
-                            dtv = Enums.DataValueType.Integer;
-                            break;
-
-                        case nameof(Decimal):
-                            dtv = Enums.DataValueType.Float;
-                            break;
-                       
-                        case nameof(DateTime):
-                            dtv = Enums.DataValueType.DateTime;
-                            break;
-
-                        case nameof(Guid):
-                            dtv = Enums.DataValueType.Guid;
-                            break;
-
-                        case nameof(Boolean):
-                            dtv = Enums.DataValueType.Boolean;
-                            break;
-
-                        default:
-                            dtv = Enums.DataValueType.Text;
-                            break;
+                        SysImageProps.Add(navProp.Split(':')[1], navProp.Split(':')[0]); //PhotoId, SysImage
                     }
+                }
+            }
+            List<UpdateQueryColumn> queryColumns = new List<UpdateQueryColumn>();
+            
+            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
+            {
+                string caption = propInfo.Name;//PhotoId
+                Enums.DataValueType dtv = Enums.DataValueType.Text;
+                CPropertyAttribute propertyAttribute = propInfo.GetCustomAttribute<CPropertyAttribute>(true);
+                
+                if (entity.ChangedColumns.IndexOf(caption) > -1 && propertyAttribute.IsKey == false)
+                {
+                    if (SysImageProps.ContainsKey(propInfo.Name))
+                    {
+                        dtv = Enums.DataValueType.ImageLookup;
+                        caption = caption.Substring(0, caption.Length - 2);
+                    }
+                    else
+                    {
+                        //CPropertyAttribute propertyAttribute = propInfo.GetCustomAttribute<CPropertyAttribute>(true);
+                        if (propertyAttribute != null && propertyAttribute.ColumnPath != null && propertyAttribute.IsKey == false)
+                        {
+                            switch (propInfo.PropertyType.Name)
+                            {
+                                case nameof(String):
+                                    dtv = Enums.DataValueType.Text;
+                                    break;
 
+                                case nameof(Int64):
+                                case nameof(Int32):
+                                case nameof(Int16):
+                                    dtv = Enums.DataValueType.Integer;
+                                    break;
+
+                                case nameof(Decimal):
+                                    dtv = Enums.DataValueType.Float;
+                                    break;
+
+                                case nameof(DateTime):
+                                    dtv = Enums.DataValueType.DateTime;
+                                    break;
+
+                                case nameof(Guid):
+                                    dtv = Enums.DataValueType.Guid;
+                                    break;
+
+                                case nameof(Boolean):
+                                    dtv = Enums.DataValueType.Boolean;
+                                    break;
+
+                                default:
+                                    dtv = Enums.DataValueType.Text;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            dtv = Enums.DataValueType.Guid;
+                        }
+                    }
                     UpdateQueryColumn updateColumn = new UpdateQueryColumn()
                     {
                         ColumnPath = caption,
@@ -525,6 +552,7 @@ namespace Creatio.DataService
                         }                        
                     };
                     queryColumns.Add(updateColumn);
+
                 }
             }
             return queryColumns;
@@ -563,7 +591,6 @@ namespace Creatio.DataService
             updateQuery.Filters = BuildFilterById(entity.Id);
             return updateQuery;
         }
-
         private UpdateQuery BuildInsertQuery<Entity>(QueryParameters queryParameters, Entity entity) where Entity : BaseEntity, new()
         {
             UpdateQuery updateQuery = new UpdateQuery()
@@ -1091,7 +1118,7 @@ namespace Creatio.DataService
                 }
                 catch (WebSocketException wse)
                 {
-                    Console.WriteLine($"ErrorCode:{wse.ErrorCode}\nMessage:\n{wse.Message}");
+                    Console.WriteLine($"ErrorCode:{wse.ErrorCode}:{wse.WebSocketErrorCode}\nMessage:\n{wse.Message}");
                 }
                 wss.Dispose();
             }
@@ -1143,12 +1170,6 @@ namespace Creatio.DataService
             
         }
 
-        /// <summary>
-        /// Dletes an entity
-        /// </summary>
-        /// <typeparam name="Entity"></typeparam>
-        /// <param name="Id"></param>
-        /// <returns></returns>
         public async Task<RequestResponse> DeleteAsyc<Entity>(Entity entity) where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
@@ -1161,6 +1182,7 @@ namespace Creatio.DataService
             }
             return requestResponse;
         }
+
         public async Task<RequestResponse> UpdateAsync<Entity>(Entity entity, params string[] properties) where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
@@ -1219,6 +1241,128 @@ namespace Creatio.DataService
             return result;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="postBytes">file bytes</param>
+        /// <param name="mimeType">file mimeType</param>
+        /// <param name="fileName">filename</param>
+        /// <param name="parentColumnName"></param>
+        /// <param name="parentColumnValue"></param>
+        /// <param name="entitySchemaName">table where to insert file to</param>
+        /// <param name="columnName">column name where to insert datta to</param>
+        /// <returns></returns>
+        public async Task<RequestResponse> UploadFileAsync(byte[] postBytes, string mimeType, string fileName, string parentColumnName,
+            string parentColumnValue, string entitySchemaName, string columnName)
+        {
+
+            if (!IsLoginSuccess) await LoginAsync();
+            Guid id = Guid.NewGuid();
+
+            bool IsFile = false;
+            if (!string.IsNullOrEmpty(parentColumnName) && !string.IsNullOrEmpty(parentColumnName) &&
+                !string.IsNullOrEmpty(parentColumnName) && !string.IsNullOrEmpty(parentColumnName))
+            {
+                IsFile = true;
+            }
+
+            string transportUrl = string.Empty;
+            if (IsFile)
+            {
+                transportUrl = Url.TransportUrl(ActionEnum.UPLOADFILE, Instance.domain) + "?fileapi";
+
+                transportUrl = transportUrl + "&totalFileLength=" + postBytes.Length.ToString();
+                transportUrl = transportUrl + "&fileId=" + id.ToString();
+                transportUrl = transportUrl + "&mimeType=" + mimeType;
+                transportUrl = transportUrl + "&fileName=" + fileName;
+
+                transportUrl = transportUrl + "&columnName="+columnName;
+                transportUrl = transportUrl + "&parentColumnName="+ parentColumnName;
+                transportUrl = transportUrl + "&parentColumnValue="+ parentColumnValue;
+                transportUrl = transportUrl + "&entitySchemaName="+entitySchemaName;
+            }
+            else
+            {
+                transportUrl = Url.TransportUrl(ActionEnum.UPLOADIMAGE, Instance.domain)+"?fileapi";
+                transportUrl = transportUrl + "&totalFileLength=" + postBytes.Length.ToString();
+                transportUrl = transportUrl + "&fileId=" + id.ToString();
+                transportUrl = transportUrl + "&mimeType=" + mimeType;
+                transportUrl = transportUrl + "&fileName=" + fileName;
+            }
+         
+
+            RequestResponse result = new RequestResponse();
+            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(transportUrl);
+            myHttpWebRequest.Method = "POST";
+            myHttpWebRequest.ContentType = "image/png";
+            myHttpWebRequest.CookieContainer = Instance.Auth;
+            myHttpWebRequest.Headers.Add("Content-Length", postBytes.Length.ToString());
+
+            string crange = $"bytes 0-{(postBytes.Length - 1)}/{postBytes.Length}";
+            myHttpWebRequest.Headers.Add("Content-Range", crange);
+
+            if (!IsFile)
+            {
+                myHttpWebRequest.Headers.Add("Content-Disposition", $"attachment; filename={fileName}");
+            }
+
+            Uri siteUri = new Uri(transportUrl);
+            foreach (Cookie cookie in Instance.Auth.GetCookies(siteUri))
+            {
+                if (cookie.Name == "BPMCSRF" || cookie.Name == "BPMSESSIONID")
+                {
+                    myHttpWebRequest.Headers.Add(cookie.Name, cookie.Value);
+                }
+            }
+
+            //Prepare Request Stream
+            using (Stream requestStream = myHttpWebRequest.GetRequestStream())
+            {
+                requestStream.Write(postBytes, 0, postBytes.Length);
+            }
+            //Send Request
+            try
+            {
+                using (HttpWebResponse myHttpWebResponse = (HttpWebResponse)await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false))
+                {
+                    
+                    HttpStatusCode Code = myHttpWebResponse.StatusCode;
+                    if (Instance.BpmSessionId == false)
+                    {
+                        string val = myHttpWebResponse.Cookies["BPMSESSIONID"].Value;
+                        Cookie C = new Cookie("BPMSESSIONID", val);
+                        Instance.Auth.Add(new Uri(Instance.domain), C);
+                        Instance.BpmSessionId = true;
+                    }
+                    using (StreamReader MyStreamReader = new StreamReader(myHttpWebResponse.GetResponseStream(), true))
+                    {
+                        result.HttpStatusCode = Code;
+                        result.ResultString = MyStreamReader.ReadToEnd();
+                        result.Result.Id = id;
+                        result.ErrorMessage = null;
+                    }
+                }
+            }
+            catch (WebException we)
+            {
+                HttpStatusCode Code = ((HttpWebResponse)(we).Response).StatusCode;
+                if (Code == HttpStatusCode.Unauthorized)
+                {
+                    Auth = null;
+                    Instance.BpmSessionId = false;
+                    Instance.CurrentUser = null;
+                    Instance._IsLoginSuccess = false;
+                }
+
+                using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
+                {
+                    result.HttpStatusCode = Code;
+                    result.Result = null;
+                    result.ErrorMessage = MyStreamReader.ReadToEnd();
+                }
+            }
+            return result;
+        }
 
         /* Unused SelectList
         public async Task<List<Entity>> SelectList<Entity>(string childColumnName, Guid parentId = new Guid()) where Entity : BaseEntity, new()
@@ -1281,7 +1425,7 @@ namespace Creatio.DataService
         }
         */
 
-        #region Disposable
+        
 
         // Flag: Has Dispose already been called?
         bool disposed = false;
@@ -1328,8 +1472,6 @@ namespace Creatio.DataService
         {
             Dispose(false);
         }
-
-        #endregion
     }
 }
  

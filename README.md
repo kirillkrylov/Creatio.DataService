@@ -12,7 +12,10 @@ To use this package you need to first generate models. use [CLIO][clio] tool to 
 ```PowerShell
 $ clio modes -e ENV -d C:\Models;
 ```
-## Insert new record
+
+<details>
+<summary>Insert new record</summary>
+
 ```C#
     namespace TestDataService
     {
@@ -48,8 +51,11 @@ $ clio modes -e ENV -d C:\Models;
         }
     }
 ```
+</details>
 
-## Update record
+<details>
+<summary>Update record</summary>
+
 ```C#
     namespace TestDataService
     {
@@ -84,8 +90,10 @@ $ clio modes -e ENV -d C:\Models;
         }
     }
 ```
+<>/details
 
-## Delete record
+<details>
+<summary>Delete record</summary>
 ```C#
     namespace TestDataService
     {
@@ -117,8 +125,12 @@ $ clio modes -e ENV -d C:\Models;
         }
     }
 ```
+<details>
 
-## View Record
+
+<details>
+<summary>View Record</summary>
+
 ```C#
     namespace TestDataService
     {
@@ -153,8 +165,93 @@ $ clio modes -e ENV -d C:\Models;
         }
     }
 ```
+</details>
 
 
+<details>
+<summary>Upload Attachment</summary>
+
+```C#
+    namespace TestDataService
+    {
+        public sealed class Program
+        {
+            public static async Task Main(string[] args)
+            {            
+                Utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
+                Utils utils = Utils.Instance;
+                if (await utils.LoginAsync())
+                {
+                    utils.WebSocketMessageReceived += WebSocketMessageReceived;
+                    
+                    string filePath = @"C:\myImage.gif";
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    var fileBytes = await System.IO.File.ReadAllBytesAsync(fileInfo.FullName);
+
+                    var r = await utils.UploadFileAsync(fileBytes, $"image/{fileInfo.Extension}", 
+                    fileInfo.Name, nameof(Contact), contact.Id.ToString(), "ContactFile", "Data");
+                }
+                Console.ReadLine();
+                await utils.LogoutAsync();
+                utils.Dispose();
+            }
+            private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"You've got message: {e.MessageId}\n{e.MessageHeader.Sender}\n{ e.MessageBody}");
+                Console.ResetColor();
+            }
+        }
+    }
+```
+</details>
+
+
+<details>
+<summary>Update Contact Photo</summary>
+
+```C#
+    namespace TestDataService
+    {
+        public sealed class Program
+        {
+            public static async Task Main(string[] args)
+            {            
+                Utils.SetCredentials(Resources.UserName, Resources.Password, Resources.Domain);
+                Utils utils = Utils.Instance;
+                if (await utils.LoginAsync())
+                {
+                    utils.WebSocketMessageReceived += WebSocketMessageReceived;
+                    
+                    string filePath = @"C:\myImage.gif";
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    var fileBytes = await System.IO.File.ReadAllBytesAsync(fileInfo.FullName);
+                    
+                    // Step 1: Upload Image to use
+                    var rr = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", fileInfo.Name, null, null, null, null);
+
+                    //Step 2: Set PhotoId
+                    contact.PhotoId = rr.Result.Id;
+
+                    //Step3: Update contact
+                    await contact.UpdateAsync();
+                }
+                Console.ReadLine();
+                await utils.LogoutAsync();
+                utils.Dispose();
+            }
+            private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"You've got message: {e.MessageId}\n{e.MessageHeader.Sender}\n{ e.MessageBody}");
+                Console.ResetColor();
+            }
+        }
+    }
+```
+</details>
 
 
 [clio]: https://github.com/Advance-Technologies-Foundation/clio

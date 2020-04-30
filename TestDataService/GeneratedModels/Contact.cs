@@ -844,8 +844,10 @@ namespace Creatio.DataService.Models
 		public SocialAccount FacebookAFDA { get; set; }
 		[CProperty(Navigation ="SocialAccount:LinkedInAFDAId")]
 		public SocialAccount LinkedInAFDA { get; set; }
+		
 		[CProperty(Navigation ="SysImage:PhotoId")]
 		public SysImage Photo { get; set; }
+
 		[CProperty(Navigation ="SysLanguage:LanguageId")]
 		public SysLanguage Language { get; set; }
 		#endregion
