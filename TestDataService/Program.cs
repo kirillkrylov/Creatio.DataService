@@ -51,9 +51,6 @@ namespace TestDataService
                 await contact.UpdateAsync();
                 
                 //Console.WriteLine(rr.Result.Id.ToString());
-
-                //http://k_krylov_nb:6010/0/rest/FileService/GetFile/e9eafee9-c4e4-4793-ad0a-003bd2c6a9b4/aee5dffb-a2a0-40ba-be9b-54650539517c
-                //https://work.creatio.com/0/ImageAPIService/upload?fileapi&totalFileLength=26799&fileId=45817f16-6874-40f1-9abf-ee2f20bca4e7&mimeType=image%2Fpng
             }
             Console.ReadLine();
             await utils.LogoutAsync();
