@@ -14,6 +14,15 @@ namespace Creatio.DataService
         [JsonProperty("Body")]
         public string MessageBody { get; set; }
     }
+
+
+    public class DisconnectedEventArgs
+    {
+        public int ErrorCode { get; set; }
+
+        public string Message { get; set; }
+    }
+
     public class Header
     {
         [JsonProperty("Sender")]
@@ -22,4 +31,6 @@ namespace Creatio.DataService
         [JsonProperty("BodyTypeName")]
         public string BodyTypeName { get; set; }
     }
+
+
 }

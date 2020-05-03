@@ -32,24 +32,43 @@ namespace TestDataService
             if (utils.IsLoginSuccess)
             {
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
+                utils.Disconnected += OnDisconnected;
 
-                Contact contact = new Contact() { Id = Guid.Parse(utils.CurrentUser.Contact.Value) };
-                contact.Phone = "2134";
+                //const string email = "kirill.krylov@gmail.com";
+                //await SearchByEmail(email);
+                //var r = await SearchComOptEmail(email);
+
+                //Contact contact = new Contact() { Id = r[0] };
                 //await contact.ExpandValuesAsync();
+                //await contact.ExpandNavAsync(nameof(contact.Account), nameof(contact.Photo));
 
-                string filePath = @"C:\Users\k.krylov\Pictures\Logos\63b3c7e2-25ee-4c08-9b91-d3e2416ee90d.gif";
-                FileInfo fileInfo = new FileInfo(filePath);
-                var f = await System.IO.File.ReadAllBytesAsync(fileInfo.FullName);
+                //await contact.Photo.ExpandValuesAsync();
 
-                //Upload Notes and Appachments
-                //var r = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", 
-                //    fileInfo.Name, nameof(Contact), contact.Id.ToString(), "ContactFile", "Data");
+                //string photoDataBase64 = (await utils.GetImageAsync(contact.Photo.Id.ToString()).ConfigureAwait(false)).ResultString;
+                //byte[] imageBytes = Convert.FromBase64String(photoDataBase64);
 
-                //var rr = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", fileInfo.Name, null, null, null, null);
+                //FileStream fs = new FileStream(@"C:\"+contact.Photo.Name, FileMode.OpenOrCreate);
+                //await fs.WriteAsync(imageBytes);
 
-                //contact.PhotoId = rr.Result.Id;
-                await contact.UpdateAsync();
-                
+
+                //var a = "";
+                //Contact contact = new Contact() { Id = Guid.Parse(utils.CurrentUser.Contact.Value) };
+                //contact.Phone = "2134";
+                ////await contact.ExpandValuesAsync();
+
+                //string filePath = @"C:\Users\k.krylov\Pictures\Logos\63b3c7e2-25ee-4c08-9b91-d3e2416ee90d.gif";
+                //FileInfo fileInfo = new FileInfo(filePath);
+                //var f = await System.IO.File.ReadAllBytesAsync(fileInfo.FullName);
+
+                ////Upload Notes and Appachments
+                ////var r = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", 
+                ////    fileInfo.Name, nameof(Contact), contact.Id.ToString(), "ContactFile", "Data");
+
+                ////var rr = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", fileInfo.Name, null, null, null, null);
+
+                ////contact.PhotoId = rr.Result.Id;
+                //await contact.UpdateAsync();
+
                 //Console.WriteLine(rr.Result.Id.ToString());
             }
             Console.ReadLine();
@@ -62,6 +81,14 @@ namespace TestDataService
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"You've got message: {e.MessageId}\n{e.MessageHeader.Sender}\n{ e.MessageBody}");
+            Console.ResetColor();
+        }
+        private static void OnDisconnected(object sender, DisconnectedEventArgs e)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("*************************");
+            Console.WriteLine($"Disconnected from Creatio due to ErrorCode:{e.ErrorCode}:\n\t{e.Message}");
             Console.ResetColor();
         }
         private static async Task InvoiceById(Guid invoiceId)
@@ -289,15 +316,17 @@ namespace TestDataService
             string email = Console.ReadLine().Trim();
             Console.ResetColor();
             
-            if (await SearchByEmail(email) == 0) 
+            if ((await SearchByEmail(email)).Count == 0) 
             {
                 await SearchComOptEmail(email);
             }
             await AdHocQuery();
         }
+        /*
         private static async Task<int> SearchByEmail(string email) {
+            
             Utils utils = Utils.Instance;
-            SelectQuery select = BuildContactQuery("Contact", "Email", email, "Name");
+            SelectQuery select = BuildContactQuery(nameof(Contact), nameof(Contact.Email), email, nameof(Contact.Name));
             string jsonRequest = JsonConvert.SerializeObject(select);
             RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
             DataTable dt = utils.ConvertResponseToDataTable(result.ResultString);
@@ -325,7 +354,7 @@ namespace TestDataService
         private static async Task<int> SearchComOptEmail(string email)
         {
             Utils utils = Utils.Instance;
-            SelectQuery select = BuildContactQuery("ContactCommunication", "Number", email, "Contact.Name");
+            SelectQuery select = BuildContactQuery(nameof(ContactCommunication), nameof(ContactCommunication.Number), email, nameof(ContactCommunication.Contact));
             string jsonRequest = JsonConvert.SerializeObject(select);
             RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
             DataTable dt = utils.ConvertResponseToDataTable(result.ResultString);
@@ -351,7 +380,51 @@ namespace TestDataService
             }
 
         }
+        */
+        private static async Task<List<Guid>> SearchByEmail(string email)
+        {
+            Utils utils = Utils.Instance;
+            SelectQuery select = BuildContactQuery("Contact", "Email", email, "Name");
+            string jsonRequest = JsonConvert.SerializeObject(select);
+            RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
 
+            List<Guid> results = new List<Guid>();
+            DataTable dt = utils.ConvertResponseToDataTable(result.ResultString);
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (Guid.TryParse(dr["Id"].ToString(), out Guid recordId))
+                    {
+                        results.Add(recordId);
+                    }
+                }
+            }
+            return results;
+        }
+        private static async Task<List<Guid>> SearchComOptEmail(string email)
+        {
+            Utils utils = Utils.Instance;
+            SelectQuery select = BuildContactQuery("ContactCommunication", "Number", email, "Contact");
+            string jsonRequest = JsonConvert.SerializeObject(select);
+            RequestResponse result = await utils.GetResponseAsync(jsonRequest, ActionEnum.SELECT).ConfigureAwait(false);
+            DataTable dt = utils.ConvertResponseToDataTable(result.ResultString);
+
+            List<Guid> results = new List<Guid>();
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (Guid.TryParse(dr["Contact"].ToString(), out Guid recordId))
+                    {
+                        results.Add(recordId);
+                    }
+                }
+
+            }
+            return results;
+        }
         private static SelectQuery BuildContactQuery(string RootSchemaName, string LookupColumn, object LookupValue, string ResultColumn) {
 
             DataValueType dtv = DataValueType.Text;

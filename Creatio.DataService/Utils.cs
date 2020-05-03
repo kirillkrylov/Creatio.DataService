@@ -1,18 +1,19 @@
-﻿using HtmlAgilityPack;
+﻿using Creatio.DataService.Attributes;
+using Creatio.DataService.Parameters;
+using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.WebSockets;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Net.WebSockets;
-using System.Reflection;
-using Creatio.DataService.Attributes;
-using Creatio.DataService.Parameters;
 
 namespace Creatio.DataService
 {
@@ -30,6 +31,31 @@ namespace Creatio.DataService
 
         #region Constructors
         private Utils() { }
+        #endregion
+
+        #region Class
+        protected class PingMessage
+        {
+            [JsonProperty("Header")]
+            protected PingHeader Header => new PingHeader();
+
+            [JsonProperty("Body")]
+            protected string Body => "ping";
+
+            [JsonProperty("Id")]
+            protected Guid Id => Guid.NewGuid();
+
+        }
+
+        [JsonObject]
+        protected class PingHeader
+        {
+            [JsonProperty("BodyTypeName")]
+            protected string BodyTypeName => "System.String";
+
+            [JsonProperty("Sender")]
+            protected string Sender => "ConsoleCommand";
+        }
         #endregion
 
         #region Properties
@@ -58,7 +84,7 @@ namespace Creatio.DataService
 
 
         protected Uri _soketDomain;
-        protected Uri SocketDomain 
+        protected Uri SocketDomain
         {
             get {
                 Uri uri = new Uri(domain);
@@ -82,15 +108,23 @@ namespace Creatio.DataService
         /// Raised when webSocket message is received and read;
         /// </summary>
         public event EventHandler<WebSocketMessageReceivedEventArgs> WebSocketMessageReceived;
+        public event EventHandler<DisconnectedEventArgs> Disconnected;
         #endregion
 
         #region Methods : Private
+
+        private void OnDisconected(DisconnectedEventArgs e)
+        {
+            EventHandler<DisconnectedEventArgs> handler = Disconnected;
+            handler?.Invoke(this, e);
+        }
 
         private void OnWebSocketMessageReceived(WebSocketMessageReceivedEventArgs e)
         {
             EventHandler<WebSocketMessageReceivedEventArgs> handler = WebSocketMessageReceived;
             handler?.Invoke(this, e);
         }
+        
         /// <summary>
         /// Logs in with username and passowrd to the application and stores cookies in the container to use in the following requests
         /// <see cref="https://academy.creatio.com/documents/technic-sdk/7-15/authservicesvc-authentication-service"/>
@@ -122,6 +156,7 @@ namespace Creatio.DataService
                     }");
                     }
                 }
+               
                 using (HttpWebResponse myHttpWebResponse = (HttpWebResponse)authRequest.GetResponse())
                 {
                     HttpStatusCode status = myHttpWebResponse.StatusCode;
@@ -135,6 +170,7 @@ namespace Creatio.DataService
                         {
                             results.Add(item.Key, item.Value.ToString());
                         }
+
                         if (results["Code"] == "0")
                         {
                             AuthCookie.Add(myHttpWebResponse.Cookies);
@@ -476,7 +512,7 @@ namespace Creatio.DataService
             foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
             {
                 string navProp = propInfo.GetCustomAttribute<CPropertyAttribute>().Navigation?.ToString() ?? "";
-                if(!string.IsNullOrEmpty(navProp) && navProp.Contains(":", StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrEmpty(navProp) && navProp.Contains(":"))
                 {
                     if (navProp.Split(':')[0] == "SysImage")
                     {
@@ -485,13 +521,13 @@ namespace Creatio.DataService
                 }
             }
             List<UpdateQueryColumn> queryColumns = new List<UpdateQueryColumn>();
-            
+
             foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
             {
                 string caption = propInfo.Name;//PhotoId
                 Enums.DataValueType dtv = Enums.DataValueType.Text;
                 CPropertyAttribute propertyAttribute = propInfo.GetCustomAttribute<CPropertyAttribute>(true);
-                
+
                 if (entity.ChangedColumns.IndexOf(caption) > -1 && propertyAttribute.IsKey == false)
                 {
                     if (SysImageProps.ContainsKey(propInfo.Name))
@@ -546,10 +582,10 @@ namespace Creatio.DataService
                     {
                         ColumnPath = caption,
                         ExpressionType = Enums.EntitySchemaQueryExpressionType.Parameter,
-                        Parameter = new Parameter() { 
+                        Parameter = new Parameter() {
                             DataValueType = dtv,
                             Value = propInfo.GetValue(entity)
-                        }                        
+                        }
                     };
                     queryColumns.Add(updateColumn);
 
@@ -573,18 +609,18 @@ namespace Creatio.DataService
                 RootSchemaName = queryParameters.RootSchemaName
             };
             List<UpdateQueryColumn> columnsToUpdate = BuildQueryColumnsForUpdate(entity);
-            
+
             Dictionary<string, ColumnExpression> items = new Dictionary<string, ColumnExpression>();
-            foreach(UpdateQueryColumn column in columnsToUpdate)
+            foreach (UpdateQueryColumn column in columnsToUpdate)
             {
-                if (column.Parameter.Value != null) { 
+                if (column.Parameter.Value != null) {
                     ColumnExpression ex = new ColumnExpression()
                     {
                         Parameter = column.Parameter,
-                        ExpressionType= column.ExpressionType
-                    
+                        ExpressionType = column.ExpressionType
+
                     };
-                    items.Add(column.ColumnPath, ex);               
+                    items.Add(column.ColumnPath, ex);
                 }
             }
             updateQuery.ColumnValues.Items = items;
@@ -871,18 +907,25 @@ namespace Creatio.DataService
             Instance.password = (!string.IsNullOrEmpty(Password)) ? Password : "Supervisor";
             Instance.domain = (!string.IsNullOrEmpty(Domain)) ? Domain : "https://work.creatio.com";
         }
-                      
+
         /// <summary>
         /// Logs in and requests Current User info
         /// </summary>
         /// <returns>Authentication result</returns>
         public async Task<bool> LoginAsync()
         {
-            Auth = AuthRequest(Instance.userName, Instance.password, Instance.domain);
+            try
+            {
+                Auth = AuthRequest(Instance.userName, Instance.password, Instance.domain);
+            }
+            catch (WebException)
+            {
+                throw new CreationException("Service Unavailable");
+            }
+            
             if (Instance._IsLoginSuccess)
             {
                 Instance.CurrentUser = await GetSysValuesAsync().ConfigureAwait(false);
-                
                 cts = new CancellationTokenSource();
                 Instance.ConectWebSocket(cts.Token);
             }
@@ -890,20 +933,45 @@ namespace Creatio.DataService
         }
         public async Task<bool> LogoutAsync()
         {
-            cts.Cancel();
-            var logout = await GetResponseAsync("{}", ActionEnum.LOGOUT).ConfigureAwait(false);
-            if (logout.HttpStatusCode == HttpStatusCode.OK)
+            cts?.Cancel();
+
+            if (IsLoginSuccess)
             {
-                Auth = null;
-                Instance.BpmSessionId = false;
-                Instance.CurrentUser = null;
-                Instance._IsLoginSuccess = false;
-                return true;
+                try
+                {
+                    var logout = await GetResponseAsync("{}", ActionEnum.LOGOUT).ConfigureAwait(false);
+                    if (logout.HttpStatusCode == HttpStatusCode.OK)
+                    {
+                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+                        {
+                            ErrorCode = -1,
+                            Message = "Graceful Disconnects"
+                        };
+                        ClearAuth(e);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (WebException we)
+                {
+                    HttpStatusCode Code = ((HttpWebResponse)(we).Response).StatusCode;
+                    using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
+                    {
+                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+                        {
+                            ErrorCode = (int)Code,
+                            Message = MyStreamReader.ReadToEnd()
+                        };
+
+                        ClearAuth(e);
+                        return true;
+                    }
+                }
             }
-            else
-            {
-                return false;
-            }
+            else return true;
         }
 
         /// <summary>
@@ -917,7 +985,7 @@ namespace Creatio.DataService
 
             string transportUrl = Url.TransportUrl(ActionEnum.SYSIMAGE, Instance.domain) + id;
             HttpStatusCode Code;
-            
+
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(transportUrl);
             myHttpWebRequest.Method = "GET";
             myHttpWebRequest.ContentType = "application/octet-stream";
@@ -975,21 +1043,27 @@ namespace Creatio.DataService
             catch (WebException we)
             {
                 Code = ((HttpWebResponse)(we).Response).StatusCode;
-                if (Code == HttpStatusCode.Unauthorized)
-                {
-                    Auth = null;
-                    Instance.BpmSessionId = false;
-                    Instance.CurrentUser = null;
-                    Instance._IsLoginSuccess = false;
-                }
+                                
 
                 using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
                 {
+
+                    string msg = MyStreamReader.ReadToEnd();
+                    if (Code == HttpStatusCode.Unauthorized)
+                    {
+                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+                        {
+                            ErrorCode = (int)Code,
+                            Message = msg
+                        };
+                        ClearAuth(e);
+                    }
+
                     return new RequestResponse()
                     {
                         HttpStatusCode = Code,
                         Result = null,
-                        ErrorMessage = MyStreamReader.ReadToEnd()
+                        ErrorMessage = msg
 
                     };
                 }
@@ -1048,20 +1122,23 @@ namespace Creatio.DataService
             catch (WebException we)
             {
                 Code = ((HttpWebResponse)(we).Response).StatusCode;
-                if (Code == HttpStatusCode.Unauthorized) 
-                {
-                    Auth = null;
-                    Instance.BpmSessionId = false;
-                    Instance.CurrentUser = null;
-                    Instance._IsLoginSuccess = false;
-                }
-
                 using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
                 {
+                    string msg = MyStreamReader.ReadToEnd();
+                    if (Code == HttpStatusCode.Unauthorized)
+                    {
+                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+                        {
+                            ErrorCode = (int)Code,
+                            Message = msg
+                        };
+                        ClearAuth(e);
+                    }
                     result.HttpStatusCode = Code;
                     result.Result = null;
-                    result.ErrorMessage = MyStreamReader.ReadToEnd();
+                    result.ErrorMessage = msg;
                 }
+
             }
             return result;
         }
@@ -1085,6 +1162,9 @@ namespace Creatio.DataService
                 try
                 {
                     await wss.ConnectAsync(SocketDomain, CancellationToken.None).ConfigureAwait(false);
+
+                    //Task.Run(async ()=>SendPing(ref wss, ct));
+                    
 #if DEBUG       
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Socket Connected ...");
@@ -1094,6 +1174,8 @@ namespace Creatio.DataService
                     {
                         ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[8192]);
                         WebSocketReceiveResult result;
+
+
                         using (var ms = new MemoryStream())
                         {
                             do
@@ -1101,6 +1183,7 @@ namespace Creatio.DataService
                                 result = await wss.ReceiveAsync(buffer, CancellationToken.None).ConfigureAwait(false);
                                 ms.Write(buffer.Array, buffer.Offset, result.Count);
                             }
+
                             while (!result.EndOfMessage && !ct.IsCancellationRequested);
                             ms.Seek(0, SeekOrigin.Begin);
                             if (result.MessageType == WebSocketMessageType.Text)
@@ -1118,9 +1201,49 @@ namespace Creatio.DataService
                 }
                 catch (WebSocketException wse)
                 {
-                    Console.WriteLine($"ErrorCode:{wse.ErrorCode}:{wse.WebSocketErrorCode}\nMessage:\n{wse.Message}");
+                    //Console.WriteLine($"ErrorCode:{wse.ErrorCode}:{wse.WebSocketErrorCode}\nMessage:\n{wse.Message}");
+                    if (wse.ErrorCode == 997) 
+                    {
+                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+                        {
+                            ErrorCode = wse.ErrorCode,
+                            Message = wse.Message
+                        };
+                        ClearAuth(e);
+                    }
                 }
                 wss.Dispose();
+            }
+        }
+
+        private void ClearAuth(DisconnectedEventArgs e)
+        {
+            cts?.Cancel();
+            CurrentUser = null;
+            Auth = null;
+            Instance.BpmSessionId = false;
+            Instance.CurrentUser = null;
+            Instance._IsLoginSuccess = false;
+            Instance.OnDisconected(e);
+        }
+
+        private void SendPing(ref ClientWebSocket wss, CancellationToken ct)
+        {
+            string message = JsonConvert.SerializeObject(new PingMessage());
+            byte[] sendBytes = Encoding.UTF8.GetBytes(message);
+
+            ArraySegment<Byte> t = new ArraySegment<Byte>(sendBytes, 0, sendBytes.Length);
+           
+            var timer = new Stopwatch();
+            timer.Start();
+            while (!ct.IsCancellationRequested)
+            {
+                if (timer.Elapsed > new TimeSpan(5*10000000))
+                {
+                    wss.SendAsync(t, WebSocketMessageType.Text, true, ct);
+                    timer.Reset();
+                    timer.Start();
+                }
             }
         }
 
@@ -1167,7 +1290,7 @@ namespace Creatio.DataService
                 throw;
             }
 
-            
+
         }
 
         public async Task<RequestResponse> DeleteAsyc<Entity>(Entity entity) where Entity : BaseEntity, new()
@@ -1189,7 +1312,7 @@ namespace Creatio.DataService
             UpdateQuery updateQuery = BuildUpdateQuery(queryParameters, entity);
 
             string updateQueryJson = JsonConvert.SerializeObject(updateQuery);
-            
+
             RequestResponse requestResponse = await GetResponseAsync(updateQueryJson, ActionEnum.UPDATE);
             if (requestResponse.HttpStatusCode == HttpStatusCode.Unauthorized)
             {
@@ -1212,7 +1335,7 @@ namespace Creatio.DataService
             }
             return requestResponse;
         }
-       
+
         public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName = "") where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
@@ -1240,7 +1363,7 @@ namespace Creatio.DataService
             List<Entity> result = BuildEntity<Entity>(requestResponse);
             return result;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1276,20 +1399,20 @@ namespace Creatio.DataService
                 transportUrl = transportUrl + "&mimeType=" + mimeType;
                 transportUrl = transportUrl + "&fileName=" + fileName;
 
-                transportUrl = transportUrl + "&columnName="+columnName;
-                transportUrl = transportUrl + "&parentColumnName="+ parentColumnName;
-                transportUrl = transportUrl + "&parentColumnValue="+ parentColumnValue;
-                transportUrl = transportUrl + "&entitySchemaName="+entitySchemaName;
+                transportUrl = transportUrl + "&columnName=" + columnName;
+                transportUrl = transportUrl + "&parentColumnName=" + parentColumnName;
+                transportUrl = transportUrl + "&parentColumnValue=" + parentColumnValue;
+                transportUrl = transportUrl + "&entitySchemaName=" + entitySchemaName;
             }
             else
             {
-                transportUrl = Url.TransportUrl(ActionEnum.UPLOADIMAGE, Instance.domain)+"?fileapi";
+                transportUrl = Url.TransportUrl(ActionEnum.UPLOADIMAGE, Instance.domain) + "?fileapi";
                 transportUrl = transportUrl + "&totalFileLength=" + postBytes.Length.ToString();
                 transportUrl = transportUrl + "&fileId=" + id.ToString();
                 transportUrl = transportUrl + "&mimeType=" + mimeType;
                 transportUrl = transportUrl + "&fileName=" + fileName;
             }
-         
+
 
             RequestResponse result = new RequestResponse();
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(transportUrl);
@@ -1325,7 +1448,7 @@ namespace Creatio.DataService
             {
                 using (HttpWebResponse myHttpWebResponse = (HttpWebResponse)await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false))
                 {
-                    
+
                     HttpStatusCode Code = myHttpWebResponse.StatusCode;
                     if (Instance.BpmSessionId == false)
                     {
@@ -1346,19 +1469,22 @@ namespace Creatio.DataService
             catch (WebException we)
             {
                 HttpStatusCode Code = ((HttpWebResponse)(we).Response).StatusCode;
-                if (Code == HttpStatusCode.Unauthorized)
-                {
-                    Auth = null;
-                    Instance.BpmSessionId = false;
-                    Instance.CurrentUser = null;
-                    Instance._IsLoginSuccess = false;
-                }
-
                 using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
                 {
+                    string msg = MyStreamReader.ReadToEnd();
                     result.HttpStatusCode = Code;
                     result.Result = null;
-                    result.ErrorMessage = MyStreamReader.ReadToEnd();
+                    result.ErrorMessage = msg;
+
+                    if (Code == HttpStatusCode.Unauthorized)
+                    {
+                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+                        {
+                            ErrorCode = (int)Code,
+                            Message = msg
+                        };
+                        ClearAuth(e);
+                    }
                 }
             }
             return result;
@@ -1424,7 +1550,6 @@ namespace Creatio.DataService
             return result;
         }
         */
-
         
 
         // Flag: Has Dispose already been called?
@@ -1450,7 +1575,6 @@ namespace Creatio.DataService
                     await LogoutAsync();
                 });
 
-                CurrentUser = null;
                 _instance = null;
                 disposed = true;
             }
@@ -1462,8 +1586,6 @@ namespace Creatio.DataService
                 await LogoutAsync();
             });
 
-            Auth = null;
-            CurrentUser = null;
             _instance = null;
             disposed = true;
         }
