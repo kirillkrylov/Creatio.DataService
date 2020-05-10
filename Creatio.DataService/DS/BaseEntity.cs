@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
-using Creatio.DataService.Attributes;
-using System.Linq;
-using System.Diagnostics;
 using System.ComponentModel;
-using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
 
 namespace Creatio.DataService
@@ -16,6 +9,7 @@ namespace Creatio.DataService
     {
         #region Fields
         public bool HasChanges = false;
+        public bool RecordFound = false;
         public List<string> ChangedColumns;
         #endregion
 
@@ -35,7 +29,6 @@ namespace Creatio.DataService
                 OnPropertyChanged();
             }
         }
-
         public BaseEntity()
         {
             ChangedColumns = new List<string>();

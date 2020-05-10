@@ -471,7 +471,7 @@ namespace Creatio.DataService
             }
             return result;
         }
-        private QueryParameters BuildQueryParameters<Entity>() where Entity : BaseEntity, new()
+        private QueryParameters BuildQueryParameters<Entity>(bool useLoc=false) where Entity : BaseEntity, new()
         {
             Entity entity = EntityFacotry.Create<Entity>();
             CObjectAttribute rootSchemaNameAttribute = entity.GetType().GetCustomAttribute<CObjectAttribute>(true);
@@ -479,7 +479,7 @@ namespace Creatio.DataService
             {
                 RootSchemaName = rootSchemaNameAttribute.RootSchemaName,
                 AllColumns = false,
-                UseLocalization = false
+                UseLocalization = useLoc
             };
             return queryParameters;
         }
@@ -1042,34 +1042,46 @@ namespace Creatio.DataService
             }
             catch (WebException we)
             {
-                Code = ((HttpWebResponse)(we).Response).StatusCode;
-                                
-
-                using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
+                if (we.Response != null)
                 {
-
-                    string msg = MyStreamReader.ReadToEnd();
-                    if (Code == HttpStatusCode.Unauthorized)
+                    Code = ((HttpWebResponse)(we).Response).StatusCode;
+                    using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
                     {
-                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+
+                        string msg = MyStreamReader.ReadToEnd();
+                        if (Code == HttpStatusCode.Unauthorized)
                         {
-                            ErrorCode = (int)Code,
-                            Message = msg
+                            DisconnectedEventArgs e = new DisconnectedEventArgs()
+                            {
+                                ErrorCode = (int)Code,
+                                Message = msg
+                            };
+                            ClearAuth(e);
+                        }
+
+                        return new RequestResponse()
+                        {
+                            HttpStatusCode = Code,
+                            Result = null,
+                            ErrorMessage = msg
+
                         };
-                        ClearAuth(e);
                     }
-
-                    return new RequestResponse()
+                }
+                else
+                {
+                    //No Response, probably network Failure
+                    DisconnectedEventArgs e = new DisconnectedEventArgs()
                     {
-                        HttpStatusCode = Code,
-                        Result = null,
-                        ErrorMessage = msg
-
+                        ErrorCode = -2,
+                        Message = we.Status.ToString()
                     };
+                    ClearAuth(e);
+                    RequestResponse ir = new RequestResponse();
+                    return ir;
                 }
             }
         }
-
         public async Task<RequestResponse> GetResponseAsync(string json, ActionEnum method)
         {
             if (!IsLoginSuccess) await LoginAsync();
@@ -1121,23 +1133,37 @@ namespace Creatio.DataService
             }
             catch (WebException we)
             {
-                Code = ((HttpWebResponse)(we).Response).StatusCode;
-                using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
+                if (we.Response!=null)
                 {
-                    string msg = MyStreamReader.ReadToEnd();
-                    if (Code == HttpStatusCode.Unauthorized)
+                    Code = ((HttpWebResponse)(we).Response).StatusCode;
+                    using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
                     {
-                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+                        string msg = MyStreamReader.ReadToEnd();
+                        if (Code == HttpStatusCode.Unauthorized)
                         {
-                            ErrorCode = (int)Code,
-                            Message = msg
-                        };
-                        ClearAuth(e);
+                            DisconnectedEventArgs e = new DisconnectedEventArgs()
+                            {
+                                ErrorCode = (int)Code,
+                                Message = msg
+                            };
+                            ClearAuth(e);
+                        }
+                        result.HttpStatusCode = Code;
+                        result.Result = null;
+                        result.ErrorMessage = msg;
                     }
-                    result.HttpStatusCode = Code;
-                    result.Result = null;
-                    result.ErrorMessage = msg;
                 }
+                else 
+                {
+                    //No Response, probably network Failure
+                    DisconnectedEventArgs e = new DisconnectedEventArgs()
+                    {
+                        ErrorCode = -2,
+                        Message = we.Status.ToString()
+                    };
+                    ClearAuth(e);
+                }
+
 
             }
             return result;
@@ -1200,7 +1226,7 @@ namespace Creatio.DataService
                     await wss.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None);
                 }
                 catch (WebSocketException wse)
-                {
+                { 
                     //Console.WriteLine($"ErrorCode:{wse.ErrorCode}:{wse.WebSocketErrorCode}\nMessage:\n{wse.Message}");
                     if (wse.ErrorCode == 997) 
                     {
@@ -1252,9 +1278,9 @@ namespace Creatio.DataService
         /// <typeparam name="Entity">Entity Model</typeparam>
         /// <param name="id">Entity.Id</param>
         /// <returns>List of entities</returns>
-        public async Task<List<Entity>> Select<Entity>(string id = "") where Entity : BaseEntity, new()
+        public async Task<List<Entity>> Select<Entity>(string id = "", bool useLoc = false) where Entity : BaseEntity, new()
         {
-            QueryParameters queryParameters = BuildQueryParameters<Entity>();
+            QueryParameters queryParameters = BuildQueryParameters<Entity>(useLoc);
             List<QueryColumn> queryColumns = BuildQueryColumns<Entity>();
             SelectQuery selectQuery = BuildSelectRequest(queryParameters, queryColumns);
 
@@ -1289,8 +1315,6 @@ namespace Creatio.DataService
 
                 throw;
             }
-
-
         }
 
         public async Task<RequestResponse> DeleteAsyc<Entity>(Entity entity) where Entity : BaseEntity, new()
@@ -1336,9 +1360,9 @@ namespace Creatio.DataService
             return requestResponse;
         }
 
-        public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName = "") where Entity : BaseEntity, new()
+        public async Task<List<Entity>> SelectAssociation<Entity>(string parentId = "", string childColumnName = "", bool useLoc = false) where Entity : BaseEntity, new()
         {
-            QueryParameters queryParameters = BuildQueryParameters<Entity>();
+            QueryParameters queryParameters = BuildQueryParameters<Entity>(useLoc);
             List<QueryColumn> queryColumns = BuildQueryColumns<Entity>();
             SelectQuery selectQuery = BuildSelectRequest(queryParameters, queryColumns);
 
@@ -1468,24 +1492,38 @@ namespace Creatio.DataService
             }
             catch (WebException we)
             {
-                HttpStatusCode Code = ((HttpWebResponse)(we).Response).StatusCode;
-                using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
+                if (we.Response != null)
                 {
-                    string msg = MyStreamReader.ReadToEnd();
-                    result.HttpStatusCode = Code;
-                    result.Result = null;
-                    result.ErrorMessage = msg;
-
-                    if (Code == HttpStatusCode.Unauthorized)
+                    HttpStatusCode Code = ((HttpWebResponse)(we).Response).StatusCode;
+                    using (StreamReader MyStreamReader = new StreamReader(((HttpWebResponse)(we).Response).GetResponseStream(), true))
                     {
-                        DisconnectedEventArgs e = new DisconnectedEventArgs()
+                        string msg = MyStreamReader.ReadToEnd();
+                        result.HttpStatusCode = Code;
+                        result.Result = null;
+                        result.ErrorMessage = msg;
+
+                        if (Code == HttpStatusCode.Unauthorized)
                         {
-                            ErrorCode = (int)Code,
-                            Message = msg
-                        };
-                        ClearAuth(e);
+                            DisconnectedEventArgs e = new DisconnectedEventArgs()
+                            {
+                                ErrorCode = (int)Code,
+                                Message = msg
+                            };
+                            ClearAuth(e);
+                        }
                     }
                 }
+                else
+                {
+                    //No Response, probably network Failure
+                    DisconnectedEventArgs e = new DisconnectedEventArgs()
+                    {
+                        ErrorCode = -2,
+                        Message = we.Status.ToString()
+                    };
+                    ClearAuth(e);
+                }
+
             }
             return result;
         }

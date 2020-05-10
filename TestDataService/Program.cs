@@ -34,11 +34,16 @@ namespace TestDataService
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
                 utils.Disconnected += OnDisconnected;
 
-                //const string email = "kirill.krylov@gmail.com";
-                //await SearchByEmail(email);
-                //var r = await SearchComOptEmail(email);
+                const string email = "d.gamora@creatio.com";
+                await SearchByEmail(email);
+                var r = await SearchComOptEmail(email);
 
-                //Contact contact = new Contact() { Id = r[0] };
+                Contact contact = new Contact() { Id = r[0] };
+                await contact.ExpandValuesAsync(true);
+                await contact.ExpandNavAsync(false, nameof(contact.City), nameof(contact.Photo));
+
+                var a = "";
+                
                 //await contact.ExpandValuesAsync();
                 //await contact.ExpandNavAsync(nameof(contact.Account), nameof(contact.Photo));
 
@@ -79,7 +84,7 @@ namespace TestDataService
         private static void WebSocketMessageReceived(object sender, WebSocketMessageReceivedEventArgs e)
         {
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"You've got message: {e.MessageId}\n{e.MessageHeader.Sender}\n{ e.MessageBody}");
             Console.ResetColor();
         }
@@ -95,10 +100,10 @@ namespace TestDataService
         {
             Invoice invoice = new Invoice() { Id = invoiceId };
             await invoice.ExpandValuesAsync();
-            await invoice.ExpandNavAsync(nameof(invoice.CustomerBillingInfo), nameof(invoice.SupplierBillingInfo));
+            await invoice.ExpandNavAsync(false, nameof(invoice.CustomerBillingInfo), nameof(invoice.SupplierBillingInfo));
             
             AccountBillingInfo customerBillingInfo = invoice.CustomerBillingInfo;
-            await customerBillingInfo.ExpandNavAsync(nameof(customerBillingInfo.Country), nameof(customerBillingInfo.Region), nameof(customerBillingInfo.City));
+            await customerBillingInfo.ExpandNavAsync(false, nameof(customerBillingInfo.Country), nameof(customerBillingInfo.Region), nameof(customerBillingInfo.City));
 
             string ZipCode = await ValidateZipCodeAsync(invoice.CustomerBillingInfo.Name, "", invoice.CustomerBillingInfo.Street, invoice.CustomerBillingInfo.City.Name,
                 invoice.CustomerBillingInfo.Region.Name, invoice.CustomerBillingInfo.ZipCode);
@@ -112,7 +117,7 @@ namespace TestDataService
             Console.WriteLine(Environment.NewLine);
 
             AccountBillingInfo supplierBillingInfo = invoice.SupplierBillingInfo;
-            await supplierBillingInfo.ExpandNavAsync(nameof(supplierBillingInfo.Country), nameof(supplierBillingInfo.Region), nameof(supplierBillingInfo.City));
+            await supplierBillingInfo.ExpandNavAsync(false, nameof(supplierBillingInfo.Country), nameof(supplierBillingInfo.Region), nameof(supplierBillingInfo.City));
             string sAddress = $"Supplier: {invoice.SupplierBillingInfo.Name}" +
                 $"{Environment.NewLine}\tSupplier Billing Info Id: {invoice.SupplierBillingInfoId.ToString()}" +
                 $"{Environment.NewLine}\t{invoice.SupplierBillingInfo.Street}" +
@@ -134,7 +139,7 @@ namespace TestDataService
                 currencyCode = "USD"
             };
 
-            await invoice.ExpandAssociationsAsync(nameof(invoice.InvoiceProductByInvoice));
+            await invoice.ExpandAssociationsAsync(false, nameof(invoice.InvoiceProductByInvoice));
             ICollection<InvoiceProduct> invoiceProducts = invoice.InvoiceProductByInvoice;
 
             Console.WriteLine(Environment.NewLine);
@@ -143,10 +148,10 @@ namespace TestDataService
             int i = 1;
             foreach (InvoiceProduct invoiceProduct in invoiceProducts)
             {
-                await invoiceProduct.ExpandNavAsync(nameof(invoiceProduct.Product));
+                await invoiceProduct.ExpandNavAsync(false, nameof(invoiceProduct.Product));
 
                 Product product = invoiceProduct.Product;
-                await product.ExpandNavAsync(nameof(product.Type), nameof(product.Category), nameof(product.DeliveryType), nameof(product.Kind), nameof(product.DeploymentType));
+                await product.ExpandNavAsync(false, nameof(product.Type), nameof(product.Category), nameof(product.DeliveryType), nameof(product.Kind), nameof(product.DeploymentType));
 
                 string line = $"{Environment.NewLine}Line #:{i.ToString("#")}" +
                     $"{Environment.NewLine}{invoiceProduct.Product.NameENU}\tQty: {invoiceProduct.Quantity.ToString()}, Price: {invoiceProduct.Price.ToString("C2")}, Total: {invoiceProduct.PrimaryAmount.ToString("C2")}" +
@@ -282,7 +287,7 @@ namespace TestDataService
             Console.ResetColor();
             Console.WriteLine();
 
-            await currentUser.ExpandAssociationsAsync(nameof(currentUser.ContactAddressByContact));
+            await currentUser.ExpandAssociationsAsync(false, nameof(currentUser.ContactAddressByContact));
 
             foreach (ContactAddress address in currentUser.ContactAddressByContact) 
             {

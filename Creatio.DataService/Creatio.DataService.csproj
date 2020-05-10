@@ -26,7 +26,7 @@ Active development will change almost daily for now</Description>
 
   <ItemGroup>
     <None Remove="README.md" />
-    <None Include="..\..\..\..\Pictures\Creatio\accelerateLogo.png">
+    <None Include="..\..\..\..\Pictures\Logos\accelerateLogo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

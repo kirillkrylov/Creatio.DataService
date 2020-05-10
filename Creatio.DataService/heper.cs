@@ -13,9 +13,9 @@ namespace Creatio.DataService
 {
     public static class Helper
     {
-        public static async Task ExpandValuesAsync<Entity>(this Entity entity) where Entity : BaseEntity, new()
+        public static async Task ExpandValuesAsync<Entity>(this Entity entity, bool useLoc = false) where Entity : BaseEntity, new()
         {
-            var r = await Utils.Instance.Select<Entity>(entity.Id.ToString());
+            var r = await Utils.Instance.Select<Entity>(entity.Id.ToString(), useLoc);
             if (r.Count != 1) return;
             List<PropertyInfo> props = entity.GetType().GetProperties().ToList<PropertyInfo>();
 
@@ -27,7 +27,7 @@ namespace Creatio.DataService
 
 
         }
-        public static async Task ExpandNavAsync<Entity>(this Entity entity, params string[] properties) where Entity : BaseEntity, new()
+        public static async Task ExpandNavAsync<Entity>(this Entity entity, bool useLoc = false ,params string[] properties) where Entity : BaseEntity, new()
         {
             List<PropertyInfo> props = new List<PropertyInfo>();
             if (properties?.Length > 0)
@@ -63,9 +63,9 @@ namespace Creatio.DataService
                     return;
 
                 Type entityType = entity.GetType().GetProperty(prop.Name).PropertyType;
-                //I want to invoke Select method: await Select<Entity>(string id = "")
+                //I want to invoke Select method: await Select<Entity>(string id = "", useLoc = false)
                 MethodInfo generic = select.MakeGenericMethod(entityType);
-                object[] args = { id };
+                object[] args = { id, useLoc };
                 object selectReturn = generic.Invoke(Utils.Instance, args);
 
                 //Select method returns TASK.Resut,  thus "a" is a Task.Result or List<Entity>
@@ -74,11 +74,23 @@ namespace Creatio.DataService
                 IList elements = (IList)taskResult;
                 if (elements.Count > 0)
                 {
-                    prop.SetValue(entity, elements[0]); 
+                    var el = elements[0];
+                    
+                    var rf = el.GetType().GetField("RecordFound");
+                    rf.SetValue(el, true);
+
+                    var hc = el.GetType().GetField("HasChanges");
+                    rf.SetValue(el, false);
+
+                    var cc = el.GetType().GetField("ChangedColumns");
+                    rf.SetValue(el, new List<string>());
+
+                    prop.SetValue(entity, el);
                 }
+
             });
         }
-        public static async Task ExpandAssociationsAsync<Entity>(this Entity entity, params string[] properties) where Entity : BaseEntity, new()
+        public static async Task ExpandAssociationsAsync<Entity>(this Entity entity, bool useLoc = false, params string[] properties) where Entity : BaseEntity, new()
         {
             List<PropertyInfo> props = new List<PropertyInfo>();
             if (properties?.Length > 0)
@@ -125,13 +137,25 @@ namespace Creatio.DataService
                 //Select<Entity>(string id = "")
                 MethodInfo generic = select.MakeGenericMethod(entityType);
 
-                object[] args = { id, parentColumnName };
+                object[] args = { id, useLoc, parentColumnName };
                 object selectReturn = generic.Invoke(Utils.Instance, args);
                 var taskResult = selectReturn?.GetType().GetProperty("Result")?.GetValue(selectReturn); //a is a Task.Result or List<Entity>
                 IList elements = (IList)taskResult;
 
                 if (elements.Count > 0) 
                 {
+                    foreach(var el in elements)
+                    {
+                        var rf = el.GetType().GetField("RecordFound");
+                        rf.SetValue(el, true);
+                        
+                        var hc = el.GetType().GetField("HasChanges");
+                        rf.SetValue(el, false);
+                        
+                        var cc = el.GetType().GetField("ChangedColumns");
+                        rf.SetValue(el, new List<string>());
+
+                    }
                     prop.SetValue(entity, elements);
                 }
             });
@@ -149,12 +173,9 @@ namespace Creatio.DataService
            return await Utils.Instance.InsertAsync(entity, properties);
         }
 
-
-
-
-
         private static void Reset<Entity>(Entity entity) where Entity : BaseEntity, new()
         {
+            entity.RecordFound = true;
             entity.HasChanges = false;
             entity.ChangedColumns.Clear();
         }

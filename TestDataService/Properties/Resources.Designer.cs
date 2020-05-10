@@ -61,7 +61,7 @@ namespace TestDataService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://k_krylov_nb:6010.
+        ///   Looks up a localized string similar to https://work.creatio.com.
         /// </summary>
         internal static string Domain {
             get {
@@ -70,7 +70,7 @@ namespace TestDataService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Supervisor.
+        ///   Looks up a localized string similar to Zarelon22.
         /// </summary>
         internal static string Password {
             get {
@@ -79,7 +79,7 @@ namespace TestDataService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Supervisor.
+        ///   Looks up a localized string similar to K.Krylov.
         /// </summary>
         internal static string UserName {
             get {
