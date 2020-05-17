@@ -34,16 +34,19 @@ namespace TestDataService
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
                 utils.Disconnected += OnDisconnected;
 
-                const string email = "d.gamora@creatio.com";
-                await SearchByEmail(email);
-                var r = await SearchComOptEmail(email);
+                
+                Account account = new Account() { Id = Guid.Parse("9086535B-53D3-4824-94DB-BDE98B009C79") };
+                await account.ExpandValuesAsync(true);
 
-                Contact contact = new Contact() { Id = r[0] };
-                await contact.ExpandValuesAsync(true);
-                await contact.ExpandNavAsync(false, nameof(contact.City), nameof(contact.Photo));
+                await account.ExpandNavAsync(true, nameof(Account.Owner));
 
+                Console.WriteLine($"Name:{account.Owner.Name}\t\tNameEng:{account.Owner.NameEng}");
+                Console.ReadLine();
                 var a = "";
                 
+                
+                
+
                 //await contact.ExpandValuesAsync();
                 //await contact.ExpandNavAsync(nameof(contact.Account), nameof(contact.Photo));
 
@@ -51,7 +54,6 @@ namespace TestDataService
 
                 //string photoDataBase64 = (await utils.GetImageAsync(contact.Photo.Id.ToString()).ConfigureAwait(false)).ResultString;
                 //byte[] imageBytes = Convert.FromBase64String(photoDataBase64);
-
                 //FileStream fs = new FileStream(@"C:\"+contact.Photo.Name, FileMode.OpenOrCreate);
                 //await fs.WriteAsync(imageBytes);
 
@@ -67,7 +69,7 @@ namespace TestDataService
 
                 ////Upload Notes and Appachments
                 ////var r = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", 
-                ////    fileInfo.Name, nameof(Contact), contact.Id.ToString(), "ContactFile", "Data");
+                ////fileInfo.Name, nameof(Contact), contact.Id.ToString(), "ContactFile", "Data");
 
                 ////var rr = await utils.UploadFileAsync(f, $"image/{fileInfo.Extension}", fileInfo.Name, null, null, null, null);
 

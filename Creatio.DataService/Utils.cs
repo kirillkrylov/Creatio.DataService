@@ -1187,21 +1187,11 @@ namespace Creatio.DataService
                 }
                 try
                 {
-                    await wss.ConnectAsync(SocketDomain, CancellationToken.None).ConfigureAwait(false);
-
-                    //Task.Run(async ()=>SendPing(ref wss, ct));
-                    
-#if DEBUG       
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Socket Connected ...");
-                    Console.ResetColor();
-#endif              
+                    await wss.ConnectAsync(SocketDomain, CancellationToken.None).ConfigureAwait(false);             
                     while (!ct.IsCancellationRequested)
                     {
                         ArraySegment<Byte> buffer = new ArraySegment<byte>(new Byte[8192]);
                         WebSocketReceiveResult result;
-
-
                         using (var ms = new MemoryStream())
                         {
                             do
@@ -1227,7 +1217,6 @@ namespace Creatio.DataService
                 }
                 catch (WebSocketException wse)
                 { 
-                    //Console.WriteLine($"ErrorCode:{wse.ErrorCode}:{wse.WebSocketErrorCode}\nMessage:\n{wse.Message}");
                     if (wse.ErrorCode == 997) 
                     {
                         DisconnectedEventArgs e = new DisconnectedEventArgs()

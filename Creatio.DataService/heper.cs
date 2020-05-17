@@ -80,10 +80,10 @@ namespace Creatio.DataService
                     rf.SetValue(el, true);
 
                     var hc = el.GetType().GetField("HasChanges");
-                    rf.SetValue(el, false);
+                    hc.SetValue(el, false);
 
                     var cc = el.GetType().GetField("ChangedColumns");
-                    rf.SetValue(el, new List<string>());
+                    cc.SetValue(el, new List<string>());
 
                     prop.SetValue(entity, el);
                 }
@@ -150,10 +150,10 @@ namespace Creatio.DataService
                         rf.SetValue(el, true);
                         
                         var hc = el.GetType().GetField("HasChanges");
-                        rf.SetValue(el, false);
+                        hc.SetValue(el, false);
                         
                         var cc = el.GetType().GetField("ChangedColumns");
-                        rf.SetValue(el, new List<string>());
+                        cc.SetValue(el, new List<string>());
 
                     }
                     prop.SetValue(entity, elements);
@@ -172,7 +172,6 @@ namespace Creatio.DataService
         {
            return await Utils.Instance.InsertAsync(entity, properties);
         }
-
         private static void Reset<Entity>(Entity entity) where Entity : BaseEntity, new()
         {
             entity.RecordFound = true;
