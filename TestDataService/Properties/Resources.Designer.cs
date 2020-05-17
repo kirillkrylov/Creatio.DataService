@@ -70,7 +70,7 @@ namespace TestDataService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to J6YzrR94MSvBaKnzkWf8hef6.
+        ///   Looks up a localized string similar to Zarelon22.
         /// </summary>
         internal static string Password {
             get {
@@ -79,7 +79,7 @@ namespace TestDataService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AcademyServiceUser.
+        ///   Looks up a localized string similar to K.Krylov.
         /// </summary>
         internal static string UserName {
             get {

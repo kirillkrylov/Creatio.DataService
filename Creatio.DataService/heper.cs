@@ -133,11 +133,11 @@ namespace Creatio.DataService
                 string parentColumnName = attr.Split(':')[1];
                 parentColumnName = parentColumnName.Substring(0, parentColumnName.Length - 2);
 
-                //I want to invoke Select method
-                //Select<Entity>(string id = "")
+                //I want to invoke SelectAssociation method
+                //SelectAssociation<Entity>(string parentId = "", string childColumnName = "", bool useLoc = false)
                 MethodInfo generic = select.MakeGenericMethod(entityType);
 
-                object[] args = { id, useLoc, parentColumnName };
+                object[] args = { id, parentColumnName, useLoc } ;
                 object selectReturn = generic.Invoke(Utils.Instance, args);
                 var taskResult = selectReturn?.GetType().GetProperty("Result")?.GetValue(selectReturn); //a is a Task.Result or List<Entity>
                 IList elements = (IList)taskResult;

@@ -33,22 +33,44 @@ namespace TestDataService
             {
                 utils.WebSocketMessageReceived += WebSocketMessageReceived;
                 utils.Disconnected += OnDisconnected;
+                Guid.TryParse(utils.CurrentUser.Contact.Value, out Guid contactId);
+                Contact contact = new Contact() { Id = contactId };
 
-                
-                Account account = new Account() { Id = Guid.Parse("9086535B-53D3-4824-94DB-BDE98B009C79") };
-                await account.ExpandValuesAsync(true);
+                await contact.ExpandValuesAsync();
+                Console.WriteLine(contact.Name);
+                await contact.ExpandNavAsync(true, nameof(contact.Account), nameof(contact.Photo));
 
-                await account.ExpandNavAsync(true, nameof(Account.Owner));
+                //await contact.ExpandAssociationsAsync(true, nameof(contact.ContactCommunicationByContact));
+                //Console.WriteLine("I can be best reach at");
+                //foreach(var comOpt in contact.ContactCommunicationByContact)
+                //{
+                //    await comOpt.ExpandNavAsync(true, nameof(comOpt.CommunicationType));
+                //    Console.WriteLine($"\t{comOpt.CommunicationType.Name}: {comOpt.Number}");
+                //}
 
-                Console.WriteLine($"Name:{account.Owner.Name}\t\tNameEng:{account.Owner.NameEng}");
-                Console.ReadLine();
-                var a = "";
-                
-                
+
+                Contact newFriend = new Contact()
+                {
+
+                    Name = "My new friend2",
+                    Email = "newfriend2@creatio.com",
+                    AccountId = contact.AccountId
+                };
+                var insertResult = await utils.InsertAsync(newFriend);
+
+                var updateResult = await newFriend.UpdateAsync();
+                Console.WriteLine(updateResult.Result.RowsAffected);
                 
 
-                //await contact.ExpandValuesAsync();
-                //await contact.ExpandNavAsync(nameof(contact.Account), nameof(contact.Photo));
+                //Account account = new Account() { Id = Guid.Parse("9086535B-53D3-4824-94DB-BDE98B009C79") };
+                //await account.ExpandValuesAsync(true);
+
+                //await account.ExpandNavAsync(true, nameof(Account.Owner));
+
+                //Console.WriteLine($"Name:{account.Owner.Name}\t\tNameEng:{account.Owner.NameEng}");
+                //Console.ReadLine();
+                //var a = "";
+
 
                 //await contact.Photo.ExpandValuesAsync();
 

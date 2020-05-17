@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.WebSockets;
 using System.Reflection;
@@ -602,7 +603,7 @@ namespace Creatio.DataService
             deleteQuery.Filters = BuildFilterById(id);
             return deleteQuery;
         }
-        private UpdateQuery BuildUpdateQuery<Entity>(QueryParameters queryParameters, Entity entity) where Entity : BaseEntity, new()
+        private UpdateQuery BuildUpdateQuery<Entity>(QueryParameters queryParameters, Entity entity, bool IgnoreFilter=false) where Entity : BaseEntity, new()
         {
             UpdateQuery updateQuery = new UpdateQuery()
             {
@@ -620,13 +621,39 @@ namespace Creatio.DataService
                         ExpressionType = column.ExpressionType
 
                     };
-                    items.Add(column.ColumnPath, ex);
+                    items.Add(CheckIfLookup<Entity>(entity, column.ColumnPath), ex);
                 }
             }
             updateQuery.ColumnValues.Items = items;
-            updateQuery.Filters = BuildFilterById(entity.Id);
+
+            if (!IgnoreFilter)
+            {
+                updateQuery.Filters = BuildFilterById(entity.Id);
+            }
             return updateQuery;
         }
+
+        private string CheckIfLookup<Entity>(Entity entity, string columnName) where Entity : BaseEntity, new()
+        {
+            var props = entity.GetType().GetProperties().Where(p =>
+                p.GetCustomAttribute<CPropertyAttribute>().Navigation !=null
+                && p.GetCustomAttribute<CPropertyAttribute>().Navigation.EndsWith($":{columnName}")
+                && p.Name != "SysImage"
+            );
+
+
+            if (props.Count() != 0)
+            {
+                return props.FirstOrDefault().Name;
+            }
+            else
+            {
+                return columnName;
+            }
+
+        }
+
+
         private UpdateQuery BuildInsertQuery<Entity>(QueryParameters queryParameters, Entity entity) where Entity : BaseEntity, new()
         {
             UpdateQuery updateQuery = new UpdateQuery()
@@ -1230,7 +1257,6 @@ namespace Creatio.DataService
                 wss.Dispose();
             }
         }
-
         private void ClearAuth(DisconnectedEventArgs e)
         {
             cts?.Cancel();
@@ -1241,7 +1267,6 @@ namespace Creatio.DataService
             Instance._IsLoginSuccess = false;
             Instance.OnDisconected(e);
         }
-
         private void SendPing(ref ClientWebSocket wss, CancellationToken ct)
         {
             string message = JsonConvert.SerializeObject(new PingMessage());
@@ -1337,7 +1362,7 @@ namespace Creatio.DataService
         public async Task<RequestResponse> InsertAsync<Entity>(Entity entity, params string[] properties) where Entity : BaseEntity, new()
         {
             QueryParameters queryParameters = BuildQueryParameters<Entity>();
-            UpdateQuery updateQuery = BuildUpdateQuery(queryParameters, entity);
+            UpdateQuery updateQuery = BuildUpdateQuery(queryParameters, entity, true);
 
             string updateQueryJson = JsonConvert.SerializeObject(updateQuery);
 
@@ -1578,7 +1603,6 @@ namespace Creatio.DataService
         }
         */
         
-
         // Flag: Has Dispose already been called?
         bool disposed = false;
 
