@@ -70,7 +70,7 @@ namespace TestDataService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zarelon22.
+        ///   Looks up a localized string similar to $Zarelon24!.
         /// </summary>
         internal static string Password {
             get {

@@ -19,7 +19,7 @@ Active development will change almost daily for now</Description>
     <AssemblyVersion>1.0.12.0</AssemblyVersion>
     <FileVersion>1.0.12.0</FileVersion>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>1.0.15</Version>
+    <Version>1.0.16</Version>
     <ApplicationIcon>acceleratelogo_SQK_icon.ico</ApplicationIcon>
     <Copyright></Copyright>
   </PropertyGroup>
