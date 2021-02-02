@@ -338,8 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-Creatio.DataService/readme.txt
-TestDataService/Properties/Resources.resx
 
 # Ignore Generated Models
-**/GeneratedModels
+CreatioModels/
+TestDataService/

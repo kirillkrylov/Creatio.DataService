@@ -16,7 +16,7 @@ $ clio modes -e ENV -d C:\Models;
 <details>
 <summary>Insert new record</summary>
 
-```C#
+```csharp
     namespace TestDataService
     {
         public sealed class Program
@@ -56,7 +56,7 @@ $ clio modes -e ENV -d C:\Models;
 <details>
 <summary>Update record</summary>
 
-```C#
+```csharp
     namespace TestDataService
     {
         public sealed class Program
@@ -94,7 +94,7 @@ $ clio modes -e ENV -d C:\Models;
 
 <details>
 <summary>Delete record</summary>
-```C#
+```csharp
     namespace TestDataService
     {
         public sealed class Program
@@ -131,7 +131,7 @@ $ clio modes -e ENV -d C:\Models;
 <details>
 <summary>View Record</summary>
 
-```C#
+```csharp
     namespace TestDataService
     {
         public sealed class Program
@@ -171,7 +171,7 @@ $ clio modes -e ENV -d C:\Models;
 <details>
 <summary>Upload Attachment</summary>
 
-```C#
+```csharp
     namespace TestDataService
     {
         public sealed class Program
@@ -211,7 +211,7 @@ $ clio modes -e ENV -d C:\Models;
 <details>
 <summary>Update Contact Photo</summary>
 
-```C#
+```csharp
     namespace TestDataService
     {
         public sealed class Program
